@@ -22,7 +22,6 @@
 		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
 		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
-		E75E908019F7439F000F2CE9 /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */; };
 		E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E908519F743B1000F2CE9 /* BaseViewController.m */; };
 		E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90AA19F743E5000F2CE9 /* MBProgressHUD.m */; };
 		E75E90AF19F743E5000F2CE9 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E75E90AB19F743E5000F2CE9 /* ProgressHUD.bundle */; };
@@ -39,6 +38,8 @@
 		E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90D119F746D1000F2CE9 /* NoticeAlertView.m */; };
 		E75E90E119F74718000F2CE9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90DE19F74718000F2CE9 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90E619F7479C000F2CE9 /* NetStatusManager.m */; };
+		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
+		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,8 +79,6 @@
 		E75E907719F74389000F2CE9 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		E75E907A19F7438F000F2CE9 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
 		E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
-		E75E907E19F7439F000F2CE9 /* BaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
-		E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
 		E75E908419F743B1000F2CE9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		E75E908519F743B1000F2CE9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		E75E90A919F743E5000F2CE9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
@@ -108,6 +107,10 @@
 		E75E90E319F7479C000F2CE9 /* SingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonManager.h; sourceTree = "<group>"; };
 		E75E90E519F7479C000F2CE9 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
 		E75E90E619F7479C000F2CE9 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
+		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
+		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
+		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
+		E7CF629219F7A359009A9A20 /* MainTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainTabBarController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,7 @@
 		E7063F7E19E67A6A00CC3CE0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7CF629019F7A33D009A9A20 /* MainViewControllers */,
 				E7063F7F19E67A6A00CC3CE0 /* StartViewController.h */,
 				E7063F8019E67A6A00CC3CE0 /* StartViewController.m */,
 			);
@@ -241,6 +245,7 @@
 		E7261BAD19F0B2E700492D98 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7CF628C19F79F91009A9A20 /* BaseTabbarController */,
 				E75E908119F743B1000F2CE9 /* BaseViewController */,
 				E75E907D19F7439F000F2CE9 /* BaseTabBarViewController */,
 				E75E907919F7438F000F2CE9 /* BaseTableViewCell */,
@@ -322,8 +327,8 @@
 		E75E907D19F7439F000F2CE9 /* BaseTabBarViewController */ = {
 			isa = PBXGroup;
 			children = (
-				E75E907E19F7439F000F2CE9 /* BaseTabBarViewController.h */,
-				E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */,
+				E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */,
+				E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */,
 			);
 			path = BaseTabBarViewController;
 			sourceTree = "<group>";
@@ -429,6 +434,22 @@
 				E75E90E619F7479C000F2CE9 /* NetStatusManager.m */,
 			);
 			path = CheckNetStatusTools;
+			sourceTree = "<group>";
+		};
+		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = BaseTabbarController;
+			sourceTree = "<group>";
+		};
+		E7CF629019F7A33D009A9A20 /* MainViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7CF629119F7A359009A9A20 /* MainTabBarController.h */,
+				E7CF629219F7A359009A9A20 /* MainTabBarController.m */,
+			);
+			path = MainViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -539,15 +560,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
+				E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */,
 				E7063F8919E67A6A00CC3CE0 /* StartViewController.m in Sources */,
 				E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */,
 				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
-				E75E908019F7439F000F2CE9 /* BaseTabBarViewController.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
