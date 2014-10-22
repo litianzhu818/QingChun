@@ -20,6 +20,25 @@
 		E7261BAC19F0B27400492D98 /* welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7261BAB19F0B27400492D98 /* welcome.storyboard */; };
 		E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7261BAF19F0B33100492D98 /* QingChunApp.xcdatamodeld */; };
 		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
+		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
+		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
+		E75E908019F7439F000F2CE9 /* BaseTabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */; };
+		E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E908519F743B1000F2CE9 /* BaseViewController.m */; };
+		E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90AA19F743E5000F2CE9 /* MBProgressHUD.m */; };
+		E75E90AF19F743E5000F2CE9 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E75E90AB19F743E5000F2CE9 /* ProgressHUD.bundle */; };
+		E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90AD19F743E5000F2CE9 /* ProgressHUD.m */; };
+		E75E90C219F74643000F2CE9 /* GradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90BD19F74643000F2CE9 /* GradientView.m */; };
+		E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90BF19F74643000F2CE9 /* NotificationView.m */; };
+		E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90C119F74643000F2CE9 /* StatusBar.m */; };
+		E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90C819F746D1000F2CE9 /* UICustomAlertView.m */; };
+		E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90CB19F746D1000F2CE9 /* AlertView.m */; };
+		E75E90D419F746D1000F2CE9 /* btn_close_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = E75E90CC19F746D1000F2CE9 /* btn_close_normal.png */; };
+		E75E90D519F746D1000F2CE9 /* btn_close_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E75E90CD19F746D1000F2CE9 /* btn_close_normal@2x.png */; };
+		E75E90D619F746D1000F2CE9 /* btn_close_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = E75E90CE19F746D1000F2CE9 /* btn_close_selected.png */; };
+		E75E90D719F746D1000F2CE9 /* btn_close_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E75E90CF19F746D1000F2CE9 /* btn_close_selected@2x.png */; };
+		E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90D119F746D1000F2CE9 /* NoticeAlertView.m */; };
+		E75E90E119F74718000F2CE9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90DE19F74718000F2CE9 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90E619F7479C000F2CE9 /* NetStatusManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +74,40 @@
 		E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QingChunAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7419F0619E675DA00B5B764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7419F0719E675DA00B5B764 /* QingChunAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QingChunAppTests.m; sourceTree = "<group>"; };
+		E75E907619F74389000F2CE9 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
+		E75E907719F74389000F2CE9 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
+		E75E907A19F7438F000F2CE9 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
+		E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCell.m; sourceTree = "<group>"; };
+		E75E907E19F7439F000F2CE9 /* BaseTabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarViewController.h; sourceTree = "<group>"; };
+		E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarViewController.m; sourceTree = "<group>"; };
+		E75E908419F743B1000F2CE9 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		E75E908519F743B1000F2CE9 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		E75E90A919F743E5000F2CE9 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		E75E90AA19F743E5000F2CE9 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E75E90AB19F743E5000F2CE9 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
+		E75E90AC19F743E5000F2CE9 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
+		E75E90AD19F743E5000F2CE9 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
+		E75E90BC19F74643000F2CE9 /* GradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientView.h; sourceTree = "<group>"; };
+		E75E90BD19F74643000F2CE9 /* GradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientView.m; sourceTree = "<group>"; };
+		E75E90BE19F74643000F2CE9 /* NotificationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationView.h; sourceTree = "<group>"; };
+		E75E90BF19F74643000F2CE9 /* NotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationView.m; sourceTree = "<group>"; };
+		E75E90C019F74643000F2CE9 /* StatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusBar.h; sourceTree = "<group>"; };
+		E75E90C119F74643000F2CE9 /* StatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusBar.m; sourceTree = "<group>"; };
+		E75E90C719F746D1000F2CE9 /* UICustomAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICustomAlertView.h; sourceTree = "<group>"; };
+		E75E90C819F746D1000F2CE9 /* UICustomAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICustomAlertView.m; sourceTree = "<group>"; };
+		E75E90CA19F746D1000F2CE9 /* AlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertView.h; sourceTree = "<group>"; };
+		E75E90CB19F746D1000F2CE9 /* AlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertView.m; sourceTree = "<group>"; };
+		E75E90CC19F746D1000F2CE9 /* btn_close_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close_normal.png; sourceTree = "<group>"; };
+		E75E90CD19F746D1000F2CE9 /* btn_close_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_normal@2x.png"; sourceTree = "<group>"; };
+		E75E90CE19F746D1000F2CE9 /* btn_close_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_close_selected.png; sourceTree = "<group>"; };
+		E75E90CF19F746D1000F2CE9 /* btn_close_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_close_selected@2x.png"; sourceTree = "<group>"; };
+		E75E90D019F746D1000F2CE9 /* NoticeAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeAlertView.h; sourceTree = "<group>"; };
+		E75E90D119F746D1000F2CE9 /* NoticeAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeAlertView.m; sourceTree = "<group>"; };
+		E75E90DD19F74718000F2CE9 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		E75E90DE19F74718000F2CE9 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		E75E90E319F7479C000F2CE9 /* SingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonManager.h; sourceTree = "<group>"; };
+		E75E90E519F7479C000F2CE9 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
+		E75E90E619F7479C000F2CE9 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +132,7 @@
 		E7063F7919E67A6A00CC3CE0 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				E75E90D919F74718000F2CE9 /* UtilityHelpers */,
 				E7261BAD19F0B2E700492D98 /* BaseClasses */,
 				E7063F9A19E68B6400CC3CE0 /* DataModel */,
 				E7063F9719E68A3F00CC3CE0 /* UtilityHeaderFiles */,
@@ -112,6 +166,9 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E75E90C519F746D1000F2CE9 /* AlertViews */,
+				E75E90BB19F74643000F2CE9 /* StatusBarNoticeViews */,
+				E75E90A819F743E5000F2CE9 /* ProgreassHUD */,
 				E7063F8219E67A6A00CC3CE0 /* Storyboard Files */,
 			);
 			path = Views;
@@ -184,6 +241,10 @@
 		E7261BAD19F0B2E700492D98 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E75E908119F743B1000F2CE9 /* BaseViewController */,
+				E75E907D19F7439F000F2CE9 /* BaseTabBarViewController */,
+				E75E907919F7438F000F2CE9 /* BaseTableViewCell */,
+				E75E907519F74389000F2CE9 /* BaseNavigationController */,
 			);
 			path = BaseClasses;
 			sourceTree = "<group>";
@@ -238,6 +299,136 @@
 				E7419F0619E675DA00B5B764 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E75E907519F74389000F2CE9 /* BaseNavigationController */ = {
+			isa = PBXGroup;
+			children = (
+				E75E907619F74389000F2CE9 /* BaseNavigationController.h */,
+				E75E907719F74389000F2CE9 /* BaseNavigationController.m */,
+			);
+			path = BaseNavigationController;
+			sourceTree = "<group>";
+		};
+		E75E907919F7438F000F2CE9 /* BaseTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E75E907A19F7438F000F2CE9 /* BaseTableViewCell.h */,
+				E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */,
+			);
+			path = BaseTableViewCell;
+			sourceTree = "<group>";
+		};
+		E75E907D19F7439F000F2CE9 /* BaseTabBarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E75E907E19F7439F000F2CE9 /* BaseTabBarViewController.h */,
+				E75E907F19F7439F000F2CE9 /* BaseTabBarViewController.m */,
+			);
+			path = BaseTabBarViewController;
+			sourceTree = "<group>";
+		};
+		E75E908119F743B1000F2CE9 /* BaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E75E908419F743B1000F2CE9 /* BaseViewController.h */,
+				E75E908519F743B1000F2CE9 /* BaseViewController.m */,
+			);
+			path = BaseViewController;
+			sourceTree = "<group>";
+		};
+		E75E90A819F743E5000F2CE9 /* ProgreassHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90A919F743E5000F2CE9 /* MBProgressHUD.h */,
+				E75E90AA19F743E5000F2CE9 /* MBProgressHUD.m */,
+				E75E90AB19F743E5000F2CE9 /* ProgressHUD.bundle */,
+				E75E90AC19F743E5000F2CE9 /* ProgressHUD.h */,
+				E75E90AD19F743E5000F2CE9 /* ProgressHUD.m */,
+			);
+			path = ProgreassHUD;
+			sourceTree = "<group>";
+		};
+		E75E90BB19F74643000F2CE9 /* StatusBarNoticeViews */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90BC19F74643000F2CE9 /* GradientView.h */,
+				E75E90BD19F74643000F2CE9 /* GradientView.m */,
+				E75E90BE19F74643000F2CE9 /* NotificationView.h */,
+				E75E90BF19F74643000F2CE9 /* NotificationView.m */,
+				E75E90C019F74643000F2CE9 /* StatusBar.h */,
+				E75E90C119F74643000F2CE9 /* StatusBar.m */,
+			);
+			path = StatusBarNoticeViews;
+			sourceTree = "<group>";
+		};
+		E75E90C519F746D1000F2CE9 /* AlertViews */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90C619F746D1000F2CE9 /* CustomAlertView */,
+				E75E90C919F746D1000F2CE9 /* OtherAlertViews */,
+			);
+			path = AlertViews;
+			sourceTree = "<group>";
+		};
+		E75E90C619F746D1000F2CE9 /* CustomAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90C719F746D1000F2CE9 /* UICustomAlertView.h */,
+				E75E90C819F746D1000F2CE9 /* UICustomAlertView.m */,
+			);
+			path = CustomAlertView;
+			sourceTree = "<group>";
+		};
+		E75E90C919F746D1000F2CE9 /* OtherAlertViews */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90CA19F746D1000F2CE9 /* AlertView.h */,
+				E75E90CB19F746D1000F2CE9 /* AlertView.m */,
+				E75E90CC19F746D1000F2CE9 /* btn_close_normal.png */,
+				E75E90CD19F746D1000F2CE9 /* btn_close_normal@2x.png */,
+				E75E90CE19F746D1000F2CE9 /* btn_close_selected.png */,
+				E75E90CF19F746D1000F2CE9 /* btn_close_selected@2x.png */,
+				E75E90D019F746D1000F2CE9 /* NoticeAlertView.h */,
+				E75E90D119F746D1000F2CE9 /* NoticeAlertView.m */,
+			);
+			path = OtherAlertViews;
+			sourceTree = "<group>";
+		};
+		E75E90D919F74718000F2CE9 /* UtilityHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90E219F7479C000F2CE9 /* SingletonManager */,
+				E75E90E419F7479C000F2CE9 /* CheckNetStatusTools */,
+				E75E90DA19F74718000F2CE9 /* Reachability */,
+			);
+			path = UtilityHelpers;
+			sourceTree = "<group>";
+		};
+		E75E90DA19F74718000F2CE9 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90DD19F74718000F2CE9 /* Reachability.h */,
+				E75E90DE19F74718000F2CE9 /* Reachability.m */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
+		E75E90E219F7479C000F2CE9 /* SingletonManager */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90E319F7479C000F2CE9 /* SingletonManager.h */,
+			);
+			path = SingletonManager;
+			sourceTree = "<group>";
+		};
+		E75E90E419F7479C000F2CE9 /* CheckNetStatusTools */ = {
+			isa = PBXGroup;
+			children = (
+				E75E90E519F7479C000F2CE9 /* NetStatusManager.h */,
+				E75E90E619F7479C000F2CE9 /* NetStatusManager.m */,
+			);
+			path = CheckNetStatusTools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,11 +511,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E75E90D419F746D1000F2CE9 /* btn_close_normal.png in Resources */,
+				E75E90AF19F743E5000F2CE9 /* ProgressHUD.bundle in Resources */,
 				E7063F8A19E67A6A00CC3CE0 /* Main.storyboard in Resources */,
 				E7261BA819F0B1D500492D98 /* login_register.storyboard in Resources */,
+				E75E90D619F746D1000F2CE9 /* btn_close_selected.png in Resources */,
 				E7261BAA19F0B1E300492D98 /* start.storyboard in Resources */,
 				E7261BAC19F0B27400492D98 /* welcome.storyboard in Resources */,
 				E7063F8B19E67A6A00CC3CE0 /* Images.xcassets in Resources */,
+				E75E90D519F746D1000F2CE9 /* btn_close_normal@2x.png in Resources */,
+				E75E90D719F746D1000F2CE9 /* btn_close_selected@2x.png in Resources */,
 				E7063F9219E67BFC00CC3CE0 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,10 +539,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
+				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
+				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
+				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
 				E7063F8919E67A6A00CC3CE0 /* StartViewController.m in Sources */,
+				E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */,
+				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
+				E75E908019F7439F000F2CE9 /* BaseTabBarViewController.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
+				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
+				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
+				E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */,
+				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,
+				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
+				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
+				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,
 				E7063F9E19E68EAE00CC3CE0 /* JSONKit.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,6 +660,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp.pch";
 				INFOPLIST_FILE = QingChunApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -462,6 +673,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp.pch";
 				INFOPLIST_FILE = QingChunApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
