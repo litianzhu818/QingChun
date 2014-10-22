@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E7063F8919E67A6A00CC3CE0 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7063F8019E67A6A00CC3CE0 /* StartViewController.m */; };
 		E7063F8A19E67A6A00CC3CE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7063F8319E67A6A00CC3CE0 /* Main.storyboard */; };
 		E7063F8B19E67A6A00CC3CE0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7063F8519E67A6A00CC3CE0 /* Images.xcassets */; };
 		E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7063F8719E67A6A00CC3CE0 /* main.m */; };
@@ -38,6 +37,11 @@
 		E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90D119F746D1000F2CE9 /* NoticeAlertView.m */; };
 		E75E90E119F74718000F2CE9 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90DE19F74718000F2CE9 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E90E619F7479C000F2CE9 /* NetStatusManager.m */; };
+		E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F599C19F7F40D001CB6F2 /* StartViewController.m */; };
+		E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F59A019F7F63E001CB6F2 /* SystemConfig.m */; };
+		E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F59A319F7F78D001CB6F2 /* UserConfig.m */; };
+		E79F59A719F7FACE001CB6F2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A619F7FACE001CB6F2 /* Security.framework */; };
+		E79F59A919F7FADD001CB6F2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 /* End PBXBuildFile section */
@@ -53,8 +57,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E7063F7F19E67A6A00CC3CE0 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
-		E7063F8019E67A6A00CC3CE0 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		E7063F8319E67A6A00CC3CE0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E7063F8519E67A6A00CC3CE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E7063F8719E67A6A00CC3CE0 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 		E75E90E319F7479C000F2CE9 /* SingletonManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingletonManager.h; sourceTree = "<group>"; };
 		E75E90E519F7479C000F2CE9 /* NetStatusManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetStatusManager.h; sourceTree = "<group>"; };
 		E75E90E619F7479C000F2CE9 /* NetStatusManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetStatusManager.m; sourceTree = "<group>"; };
+		E79F599B19F7F40D001CB6F2 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		E79F599C19F7F40D001CB6F2 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+		E79F599F19F7F63E001CB6F2 /* SystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConfig.h; sourceTree = "<group>"; };
+		E79F59A019F7F63E001CB6F2 /* SystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemConfig.m; sourceTree = "<group>"; };
+		E79F59A219F7F78D001CB6F2 /* UserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConfig.h; sourceTree = "<group>"; };
+		E79F59A319F7F78D001CB6F2 /* UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfig.m; sourceTree = "<group>"; };
+		E79F59A619F7FACE001CB6F2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -118,6 +128,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E79F59A919F7FADD001CB6F2 /* CFNetwork.framework in Frameworks */,
+				E79F59A719F7FACE001CB6F2 /* Security.framework in Frameworks */,
 				E7063FA219E6907000CC3CE0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,9 +147,9 @@
 		E7063F7919E67A6A00CC3CE0 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				E79F599E19F7F621001CB6F2 /* DataModel */,
 				E75E90D919F74718000F2CE9 /* UtilityHelpers */,
 				E7261BAD19F0B2E700492D98 /* BaseClasses */,
-				E7063F9A19E68B6400CC3CE0 /* DataModel */,
 				E7063F9719E68A3F00CC3CE0 /* UtilityHeaderFiles */,
 				E7063F9419E67CA300CC3CE0 /* Libraries */,
 				E7063F7A19E67A6A00CC3CE0 /* Database */,
@@ -160,9 +172,8 @@
 		E7063F7E19E67A6A00CC3CE0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E79F599A19F7F40D001CB6F2 /* StartViewControllers */,
 				E7CF629019F7A33D009A9A20 /* MainViewControllers */,
-				E7063F7F19E67A6A00CC3CE0 /* StartViewController.h */,
-				E7063F8019E67A6A00CC3CE0 /* StartViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -226,13 +237,6 @@
 			path = UtilityHeaderFiles;
 			sourceTree = "<group>";
 		};
-		E7063F9A19E68B6400CC3CE0 /* DataModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataModel;
-			sourceTree = "<group>";
-		};
 		E7063F9B19E68EAE00CC3CE0 /* JSONKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +269,8 @@
 		E7419EDC19E675D900B5B764 = {
 			isa = PBXGroup;
 			children = (
+				E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */,
+				E79F59A619F7FACE001CB6F2 /* Security.framework */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
 				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,
@@ -403,6 +409,7 @@
 		E75E90D919F74718000F2CE9 /* UtilityHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				E79F59A519F7F823001CB6F2 /* SecurityTools */,
 				E75E90E219F7479C000F2CE9 /* SingletonManager */,
 				E75E90E419F7479C000F2CE9 /* CheckNetStatusTools */,
 				E75E90DA19F74718000F2CE9 /* Reachability */,
@@ -434,6 +441,33 @@
 				E75E90E619F7479C000F2CE9 /* NetStatusManager.m */,
 			);
 			path = CheckNetStatusTools;
+			sourceTree = "<group>";
+		};
+		E79F599A19F7F40D001CB6F2 /* StartViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E79F599B19F7F40D001CB6F2 /* StartViewController.h */,
+				E79F599C19F7F40D001CB6F2 /* StartViewController.m */,
+			);
+			path = StartViewControllers;
+			sourceTree = "<group>";
+		};
+		E79F599E19F7F621001CB6F2 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				E79F599F19F7F63E001CB6F2 /* SystemConfig.h */,
+				E79F59A019F7F63E001CB6F2 /* SystemConfig.m */,
+				E79F59A219F7F78D001CB6F2 /* UserConfig.h */,
+				E79F59A319F7F78D001CB6F2 /* UserConfig.m */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		E79F59A519F7F823001CB6F2 /* SecurityTools */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SecurityTools;
 			sourceTree = "<group>";
 		};
 		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
@@ -563,13 +597,14 @@
 				E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
+				E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
 				E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */,
-				E7063F8919E67A6A00CC3CE0 /* StartViewController.m in Sources */,
 				E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */,
 				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
+				E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
@@ -577,6 +612,7 @@
 				E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */,
 				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,
 				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
+				E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */,
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
 				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,
 				E7063F9E19E68EAE00CC3CE0 /* JSONKit.m in Sources */,
