@@ -79,16 +79,16 @@
 {
     //Load TabBarImage
     NSArray *tabBarSelectedImages = [[NSArray alloc] initWithObjects:
-                                     PNG_NAME(@"qingchunba_normal.png"),
-                                     PNG_NAME(@"qingchunqiang_normal.png"),
-                                     PNG_NAME(@"qingchunmeng_normal.png"),
-                                     PNG_NAME(@"me_normal.png"),
+                                     PNG_NAME(@"qingchunba_selected.png"),
+                                     PNG_NAME(@"qingchunmeng_selected.png"),
+                                     PNG_NAME(@"qingchunqiang_selected.png"),
+                                     PNG_NAME(@"me_selected.png"),
                                      nil];
     NSArray *tabBarUnselectedImages = [[NSArray alloc] initWithObjects:
-                                       PNG_NAME(@"qingchunba_selected.png"),
-                                       PNG_NAME(@"qingchunqiang_selected.png"),
-                                       PNG_NAME(@"qingchunmeng_selected.png"),
-                                       PNG_NAME(@"me_selected.png"),
+                                       PNG_NAME(@"qingchunba_normal.png"),
+                                       PNG_NAME(@"qingchunqiang_normal.png"),
+                                       PNG_NAME(@"qingchunmeng_normal.png"),
+                                       PNG_NAME(@"me_normal.png"),
                                        nil];
     NSAssert((self.tabBar.items.count == tabBarSelectedImages.count), @"The UITabBar Which In The MainTabBarViewController Selected Images Count Must Been Equal To The Count of The TabBar Items Count");
     NSAssert((self.tabBar.items.count == tabBarSelectedImages.count), @"The UITabBar Which In The MainTabBarViewController Unselected Images Count Must Been Equal To The Count of The TabBar Items Count");
