@@ -80,8 +80,8 @@
     //Load TabBarImage
     NSArray *tabBarSelectedImages = [[NSArray alloc] initWithObjects:
                                      PNG_NAME(@"qingchunba_selected.png"),
-                                     PNG_NAME(@"qingchunmeng_selected.png"),
                                      PNG_NAME(@"qingchunqiang_selected.png"),
+                                     PNG_NAME(@"qingchunmeng_selected.png"),
                                      PNG_NAME(@"me_selected.png"),
                                      nil];
     NSArray *tabBarUnselectedImages = [[NSArray alloc] initWithObjects:
