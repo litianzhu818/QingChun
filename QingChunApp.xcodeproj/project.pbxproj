@@ -203,7 +203,7 @@
 		E7063F8419E67A6A00CC3CE0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E7063F9319E67C7100CC3CE0 /* Images */,
+				E7CF62D219F89616009A9A20 /* Images */,
 				E7063F9619E680E500CC3CE0 /* QingChunApp.pch */,
 				E7063F9119E67BFC00CC3CE0 /* Info.plist */,
 				E7063F8519E67A6A00CC3CE0 /* Images.xcassets */,
@@ -211,13 +211,6 @@
 				E7063FA119E6907000CC3CE0 /* Foundation.framework */,
 			);
 			path = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E7063F9319E67C7100CC3CE0 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
 			sourceTree = "<group>";
 		};
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
@@ -484,6 +477,13 @@
 				E7CF629219F7A359009A9A20 /* MainTabBarController.m */,
 			);
 			path = MainViewControllers;
+			sourceTree = "<group>";
+		};
+		E7CF62D219F89616009A9A20 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
