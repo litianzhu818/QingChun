@@ -15,6 +15,7 @@ Single_implementation(SystemConfig);
 -(void)SetFistLoading:(BOOL)value;
 {
     [[NSUserDefaults standardUserDefaults] setBool:value forKey:FIRST_LOADING];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(BOOL)GetFistLoading
 {
