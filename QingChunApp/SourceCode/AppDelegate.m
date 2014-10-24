@@ -20,14 +20,14 @@
 {
     // Override point for customization after application launch.
     //获取启动信息
-    [self registerRemoteNotificationWith:application];
-    [self launchWitchRemoteNotification:launchOptions];
-    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
-    application.applicationIconBadgeNumber = 0;
-    [self startCheckNetwork];
-//    [self startEngine];
-    [self startReadPlistFiles];
-    [self initData];
+//    [self registerRemoteNotificationWith:application];
+//    [self launchWitchRemoteNotification:launchOptions];
+//    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
+//    application.applicationIconBadgeNumber = 0;
+//    [self startCheckNetwork];
+////    [self startEngine];
+//    [self startReadPlistFiles];
+//    [self initData];
     return YES;
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

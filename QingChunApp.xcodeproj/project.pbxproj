@@ -42,6 +42,12 @@
 		E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F59A319F7F78D001CB6F2 /* UserConfig.m */; };
 		E79F59A719F7FACE001CB6F2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A619F7FACE001CB6F2 /* Security.framework */; };
 		E79F59A919F7FADD001CB6F2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */; };
+		E7AE66EE19F9E9F4008546EA /* NavigationBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66ED19F9E9F4008546EA /* NavigationBarItem.m */; };
+		E7AE66F019F9F7EA008546EA /* test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7AE66EF19F9F7EA008546EA /* test.storyboard */; };
+		E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66F319F9F84C008546EA /* TestViewController.m */; };
+		E7AE66F819FA083C008546EA /* MainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66F719FA083C008546EA /* MainHeaderView.m */; };
+		E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66FA19FA090C008546EA /* MainHeaderViewItem.m */; };
+		E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66FD19FA0B04008546EA /* MainHeaderViewCell.m */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 		E7CF62DC19F8980E009A9A20 /* me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D419F8980E009A9A20 /* me_selected@2x.png */; };
@@ -53,6 +59,7 @@
 		E7CF62E219F8980E009A9A20 /* qingchunqiang_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62DA19F8980E009A9A20 /* qingchunqiang_normal@2x.png */; };
 		E7CF62E319F8980E009A9A20 /* qingchunqiang_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62DB19F8980E009A9A20 /* qingchunqiang_selected@2x.png */; };
 		E7CF62E719F8BAC6009A9A20 /* BaseTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF62E619F8BAC6009A9A20 /* BaseTabBarItem.m */; };
+		E7CF62EE19F91F2A009A9A20 /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF62ED19F91F2A009A9A20 /* BaseNavigationBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +133,17 @@
 		E79F59A319F7F78D001CB6F2 /* UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfig.m; sourceTree = "<group>"; };
 		E79F59A619F7FACE001CB6F2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E7AE66EC19F9E9F4008546EA /* NavigationBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationBarItem.h; sourceTree = "<group>"; };
+		E7AE66ED19F9E9F4008546EA /* NavigationBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationBarItem.m; sourceTree = "<group>"; };
+		E7AE66EF19F9F7EA008546EA /* test.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = test.storyboard; sourceTree = "<group>"; };
+		E7AE66F219F9F84C008546EA /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		E7AE66F319F9F84C008546EA /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		E7AE66F619FA083C008546EA /* MainHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHeaderView.h; sourceTree = "<group>"; };
+		E7AE66F719FA083C008546EA /* MainHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHeaderView.m; sourceTree = "<group>"; };
+		E7AE66F919FA090C008546EA /* MainHeaderViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHeaderViewItem.h; sourceTree = "<group>"; };
+		E7AE66FA19FA090C008546EA /* MainHeaderViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHeaderViewItem.m; sourceTree = "<group>"; };
+		E7AE66FC19FA0B04008546EA /* MainHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHeaderViewCell.h; sourceTree = "<group>"; };
+		E7AE66FD19FA0B04008546EA /* MainHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHeaderViewCell.m; sourceTree = "<group>"; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -140,6 +158,8 @@
 		E7CF62DB19F8980E009A9A20 /* qingchunqiang_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchunqiang_selected@2x.png"; sourceTree = "<group>"; };
 		E7CF62E519F8BAC6009A9A20 /* BaseTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarItem.h; sourceTree = "<group>"; };
 		E7CF62E619F8BAC6009A9A20 /* BaseTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarItem.m; sourceTree = "<group>"; };
+		E7CF62EC19F91F2A009A9A20 /* BaseNavigationBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationBar.h; sourceTree = "<group>"; };
+		E7CF62ED19F91F2A009A9A20 /* BaseNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +186,7 @@
 		E7063F7919E67A6A00CC3CE0 /* SourceCode */ = {
 			isa = PBXGroup;
 			children = (
+				E7AE66F119F9F830008546EA /* TestClasses */,
 				E79F599E19F7F621001CB6F2 /* DataModel */,
 				E75E90D919F74718000F2CE9 /* UtilityHelpers */,
 				E7261BAD19F0B2E700492D98 /* BaseClasses */,
@@ -200,6 +221,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7AE66F519FA07EC008546EA /* MainHeaderView */,
 				E75E90C519F746D1000F2CE9 /* AlertViews */,
 				E75E90BB19F74643000F2CE9 /* StatusBarNoticeViews */,
 				E75E90A819F743E5000F2CE9 /* ProgreassHUD */,
@@ -215,6 +237,7 @@
 				E7261BA719F0B1D500492D98 /* login_register.storyboard */,
 				E7261BA919F0B1E300492D98 /* start.storyboard */,
 				E7261BAB19F0B27400492D98 /* welcome.storyboard */,
+				E7AE66EF19F9F7EA008546EA /* test.storyboard */,
 			);
 			path = "Storyboard Files";
 			sourceTree = "<group>";
@@ -261,6 +284,7 @@
 		E7261BAD19F0B2E700492D98 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7CF62EB19F91F2A009A9A20 /* BaseNavigationBar */,
 				E7CF62E419F8BAA8009A9A20 /* BaseTabBarItem */,
 				E7CF628C19F79F91009A9A20 /* BaseTabbarController */,
 				E75E908119F743B1000F2CE9 /* BaseViewController */,
@@ -483,6 +507,28 @@
 			path = SecurityTools;
 			sourceTree = "<group>";
 		};
+		E7AE66F119F9F830008546EA /* TestClasses */ = {
+			isa = PBXGroup;
+			children = (
+				E7AE66F219F9F84C008546EA /* TestViewController.h */,
+				E7AE66F319F9F84C008546EA /* TestViewController.m */,
+			);
+			path = TestClasses;
+			sourceTree = "<group>";
+		};
+		E7AE66F519FA07EC008546EA /* MainHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				E7AE66F619FA083C008546EA /* MainHeaderView.h */,
+				E7AE66F719FA083C008546EA /* MainHeaderView.m */,
+				E7AE66F919FA090C008546EA /* MainHeaderViewItem.h */,
+				E7AE66FA19FA090C008546EA /* MainHeaderViewItem.m */,
+				E7AE66FC19FA0B04008546EA /* MainHeaderViewCell.h */,
+				E7AE66FD19FA0B04008546EA /* MainHeaderViewCell.m */,
+			);
+			path = MainHeaderView;
+			sourceTree = "<group>";
+		};
 		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -529,6 +575,17 @@
 				E7CF62E619F8BAC6009A9A20 /* BaseTabBarItem.m */,
 			);
 			path = BaseTabBarItem;
+			sourceTree = "<group>";
+		};
+		E7CF62EB19F91F2A009A9A20 /* BaseNavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				E7CF62EC19F91F2A009A9A20 /* BaseNavigationBar.h */,
+				E7CF62ED19F91F2A009A9A20 /* BaseNavigationBar.m */,
+				E7AE66EC19F9E9F4008546EA /* NavigationBarItem.h */,
+				E7AE66ED19F9E9F4008546EA /* NavigationBarItem.m */,
+			);
+			path = BaseNavigationBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -621,6 +678,7 @@
 				E75E90D619F746D1000F2CE9 /* btn_close_selected.png in Resources */,
 				E7CF62DD19F8980E009A9A20 /* me_normal@2x.png in Resources */,
 				E7CF62E119F8980E009A9A20 /* qingchunmeng_normal@2x.png in Resources */,
+				E7AE66F019F9F7EA008546EA /* test.storyboard in Resources */,
 				E7CF62E219F8980E009A9A20 /* qingchunqiang_normal@2x.png in Resources */,
 				E7261BAA19F0B1E300492D98 /* start.storyboard in Resources */,
 				E7261BAC19F0B27400492D98 /* welcome.storyboard in Resources */,
@@ -652,6 +710,7 @@
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */,
+				E7CF62EE19F91F2A009A9A20 /* BaseNavigationBar.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
@@ -661,13 +720,18 @@
 				E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
+				E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */,
+				E7AE66F819FA083C008546EA /* MainHeaderView.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
 				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
+				E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */,
 				E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */,
 				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,
 				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
 				E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */,
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
+				E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */,
+				E7AE66EE19F9E9F4008546EA /* NavigationBarItem.m in Sources */,
 				E7CF62E719F8BAC6009A9A20 /* BaseTabBarItem.m in Sources */,
 				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,
 				E7063F9E19E68EAE00CC3CE0 /* JSONKit.m in Sources */,
