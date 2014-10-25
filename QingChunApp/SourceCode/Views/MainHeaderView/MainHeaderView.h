@@ -8,15 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol MainHeaderViewDelegate <NSObject>
-
-@optional
-
-@end
+@protocol MainHeaderViewDelegate;
 
 @interface MainHeaderView : UIView
 
 - (instancetype)initWithItems:(NSArray *)items frame:(CGRect)frame delegate:(id)delegate;
 - (void)removeDelegate:(id)delegate;
 
+- (void)setSelectedAtIndex:(NSUInteger)index;
+
+@end
+
+
+@protocol MainHeaderViewDelegate <NSObject>
+
+@optional
+- (void)MainHeaderView:(MainHeaderView *)mainHeaderView didSelectedAtIndex:(NSUInteger)index;
 @end

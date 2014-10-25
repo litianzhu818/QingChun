@@ -7,11 +7,11 @@
 //
 
 #import "TestViewController.h"
-#import "MainHeaderViewCell.h"
+//#import "MainHeaderViewCell.h"
 #import "MainHeaderViewItem.h"
 #import "MainHeaderView.h"
 
-@interface TestViewController ()
+@interface TestViewController ()<MainHeaderViewDelegate>
 
 @end
 
@@ -95,6 +95,11 @@
 -(IBAction)ClikedOnOkButton:(id)sender
 {
     [self performSegueWithIdentifier:@"test1" sender:nil];
+}
+
+- (void)MainHeaderView:(MainHeaderView *)mainHeaderView didSelectedAtIndex:(NSUInteger)index
+{
+    LOG(@"选中的是:%ld",index);
 }
 
 /*

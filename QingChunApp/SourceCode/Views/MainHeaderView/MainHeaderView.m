@@ -13,7 +13,7 @@
 #define MARGIN_TOP_WIDTH 20.0f
 #define MAIN_CELL_HEIGHT 44.0f
 
-@interface MainHeaderView ()
+@interface MainHeaderView ()<MainHeaderViewCellDelegate>
 {
     NSMutableArray *viewArray;
     id<MainHeaderViewDelegate> _delegate;
@@ -46,6 +46,11 @@
     return self;
 }
 
+- (void)removeDelegate:(id)delegate
+{
+    _delegate = nil;
+}
+
 - (void)initData
 {
     viewArray = [NSMutableArray array];
@@ -64,14 +69,15 @@
     
     [_items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         MainHeaderViewItem *item = obj;
-        MainHeaderViewCell *cell = [[MainHeaderViewCell alloc] initWithCell:item frame:CGRectMake(0, MARGIN_TOP_WIDTH, MAIN_CELL_HEIGHT, MAIN_CELL_HEIGHT)];
+        MainHeaderViewCell *cell = [[MainHeaderViewCell alloc] initWithCell:item frame:CGRectMake(0, MARGIN_TOP_WIDTH, MAIN_CELL_HEIGHT, MAIN_CELL_HEIGHT) delegate:self];
         [cell setTranslatesAutoresizingMaskIntoConstraints:NO];
         [cell setSelectedTextColor:[UIColor whiteColor]];
         [cell setNormalTextColor:[UIColor lightGrayColor]];
         [cell setUserInteractionEnabled:YES];
+        [cell setTag:idx];
         [self addSubview:cell];
         [viewArray addObject:cell];
-        [viewDic setObject:cell forKey:[NSString stringWithFormat:@"%@%d",@"cell",idx]];
+        [viewDic setObject:cell forKey:[NSString stringWithFormat:@"%@%ld",@"cell",idx]];
         
         [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[cell]-MARGIN2-|"
                                                                                  options:0
@@ -79,7 +85,7 @@
                                                                                            @"MARGIN1":[NSNumber numberWithFloat:MARGIN_TOP_WIDTH],@"MARGIN2":@0.0
                                                                                            }
                                                                                    views:NSDictionaryOfVariableBindings(cell)]];
-        [constrainString appendFormat:@"-MARGIN1-[cell%d(==MARGIN2)]",idx];
+        [constrainString appendFormat:@"-MARGIN1-[cell%ld(==MARGIN2)]",idx];
         
     }];
     [constrainString appendString:@"-MARGIN1-|"];
@@ -93,6 +99,30 @@
 
     
     [self addConstraints:Constraints];
+}
+
+- (void)MainHeaderViewCell:(MainHeaderViewCell *)mainHeaderViewCell didSelected:(BOOL)selected
+{
+    if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderView:didSelectedAtIndex:)]) {
+        [_delegate MainHeaderView:self didSelectedAtIndex:mainHeaderViewCell.tag];
+    }
+    
+    [viewArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MainHeaderViewCell *cell = obj;
+        if (cell.tag != mainHeaderViewCell.tag) {
+            [cell setIsSelected:!selected];
+        }
+    }];
+}
+
+- (void)setSelectedAtIndex:(NSUInteger)index
+{
+    [viewArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        MainHeaderViewCell *cell = obj;
+        if (cell.tag == index) {
+            [cell setIsSelected:YES];
+        }
+    }];
 }
 
 /*

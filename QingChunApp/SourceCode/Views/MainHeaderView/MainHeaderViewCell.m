@@ -19,6 +19,8 @@
     
     UIColor *normalColor;
     UIColor *selectedColor;
+    
+    id<MainHeaderViewCellDelegate> _delegate;
 }
 @end
 
@@ -35,7 +37,7 @@
     return self;
 }
 
-- (instancetype)initWithCell:(MainHeaderViewItem *)item frame:(CGRect)frame;
+- (instancetype)initWithCell:(MainHeaderViewItem *)item frame:(CGRect)frame delegate:(id)delegate;
 {
     if (FRAME_H(frame) < 44.0) frame = CGRectMake(FRAME_TX(frame), FRAME_TY(frame), FRAME_W(frame), 44.0);
     self = [super initWithFrame:frame];
@@ -43,10 +45,16 @@
         // Initialization code
         _item = item;
         isSelected = NO;
+        _delegate = delegate;
         [self initUI];
         [self setUpUI];
     }
     return self;
+}
+
+- (void)removeDelegate:(id)delegate
+{
+    _delegate = nil;
 }
 
 - (void)initUI
@@ -124,6 +132,16 @@
     isSelected = _isSelected;
     [imageView setImage:(isSelected ? _item.selectedImage:_item.normalImage)];
     [titleLabel setTextColor:(isSelected ? selectedColor:normalColor)];
+    
+    if (isSelected) {
+        if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderViewCell:didSelected:)]) {
+            [_delegate MainHeaderViewCell:self didSelected:isSelected];
+        }
+    }
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderViewCell:didChangedSelected:)]) {
+        [_delegate MainHeaderViewCell:self didChangedSelected:isSelected];
+    }
 }
 
 
