@@ -16,6 +16,7 @@
 - (void)removeDelegate:(id)delegate;
 
 - (void)setSelectedAtIndex:(NSUInteger)index;
+- (NSUInteger)selectedItem;
 
 @end
 
@@ -23,5 +24,7 @@
 @protocol MainHeaderViewDelegate <NSObject>
 
 @optional
+- (void)didClikedAtFirstIndex;
+- (void)didClikedAtLastIndex;
 - (void)MainHeaderView:(MainHeaderView *)mainHeaderView didSelectedAtIndex:(NSUInteger)index;
 @end

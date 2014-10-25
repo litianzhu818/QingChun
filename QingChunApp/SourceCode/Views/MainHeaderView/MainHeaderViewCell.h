@@ -18,6 +18,8 @@
 - (instancetype)initWithCell:(MainHeaderViewItem *)item frame:(CGRect)frame delegate:(id)delegate;
 - (void)removeDelegate:(id)delegate;
 
+- (void)setSelectedStyle:(BOOL)canSelected;
+
 - (void)setFont:(UIFont *)font;
 - (void)setNormalTextColor:(UIColor *)textColor;
 - (void)setSelectedTextColor:(UIColor *)textColor;

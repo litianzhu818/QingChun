@@ -18,6 +18,7 @@
     NSMutableArray *viewArray;
     id<MainHeaderViewDelegate> _delegate;
     NSArray *_items;
+    NSUInteger _selectedItem;
 }
 @end
 
@@ -74,7 +75,11 @@
         [cell setSelectedTextColor:[UIColor whiteColor]];
         [cell setNormalTextColor:[UIColor lightGrayColor]];
         [cell setUserInteractionEnabled:YES];
+        [cell setFont:[UIFont systemFontOfSize:14.0]];
         [cell setTag:idx];
+        if (idx == 0 || idx == ([_items count] - 1)) {
+            [cell setSelectedStyle:NO];
+        }
         [self addSubview:cell];
         [viewArray addObject:cell];
         [viewDic setObject:cell forKey:[NSString stringWithFormat:@"%@%ld",@"cell",idx]];
@@ -101,8 +106,30 @@
     [self addConstraints:Constraints];
 }
 
+- (NSUInteger)selectedItem
+{
+    return _selectedItem;
+}
+
+
 - (void)MainHeaderViewCell:(MainHeaderViewCell *)mainHeaderViewCell didSelected:(BOOL)selected
 {
+    if (mainHeaderViewCell.tag == 0) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didClikedAtFirstIndex)]) {
+            [_delegate didClikedAtFirstIndex];
+        }
+        return;
+    }
+    
+    if (mainHeaderViewCell.tag == [viewArray count] -1) {
+        if (_delegate && [_delegate respondsToSelector:@selector(didClikedAtLastIndex)]) {
+            [_delegate didClikedAtLastIndex];
+        }
+        return;
+    }
+    
+    _selectedItem = mainHeaderViewCell.tag;
+    
     if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderView:didSelectedAtIndex:)]) {
         [_delegate MainHeaderView:self didSelectedAtIndex:mainHeaderViewCell.tag];
     }
@@ -119,7 +146,7 @@
 {
     [viewArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         MainHeaderViewCell *cell = obj;
-        if (cell.tag == index) {
+        if (cell.tag == index && (cell.tag != 0 || cell.tag != [viewArray count]-1)) {
             [cell setIsSelected:YES];
         }
     }];

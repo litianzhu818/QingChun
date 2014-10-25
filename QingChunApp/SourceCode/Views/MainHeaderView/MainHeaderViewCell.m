@@ -20,6 +20,8 @@
     UIColor *normalColor;
     UIColor *selectedColor;
     
+    BOOL _canselected;
+    
     id<MainHeaderViewCellDelegate> _delegate;
 }
 @end
@@ -46,6 +48,7 @@
         _item = item;
         isSelected = NO;
         _delegate = delegate;
+        _canselected = YES;
         [self initUI];
         [self setUpUI];
     }
@@ -89,7 +92,7 @@
     
     [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[imageView(==MARGIN2)]-MARGIN4-[titleLabel(==MARGIN3)]-MARGIN1-|"
                                                                              options:0
-                                                                            metrics:@{@"MARGIN1":[NSNumber numberWithFloat:MARGIN_WIDTH],@"MARGIN2":[NSNumber numberWithFloat:3*labelHeight],@"MARGIN3":[NSNumber numberWithFloat:labelHeight],@"MARGIN4":[NSNumber numberWithFloat:2*MARGIN_WIDTH]}
+                                                                            metrics:@{@"MARGIN1":[NSNumber numberWithFloat:MARGIN_WIDTH],@"MARGIN2":[NSNumber numberWithFloat:2.5*labelHeight],@"MARGIN3":[NSNumber numberWithFloat:1.5*labelHeight],@"MARGIN4":[NSNumber numberWithFloat:2*MARGIN_WIDTH]}
                                                                                views:NSDictionaryOfVariableBindings(imageView,titleLabel)]];
     
     [self addConstraints:Constraints];
@@ -103,6 +106,11 @@
     }
     [imageView setImage:_item.normalImage];
     [titleLabel setText:_item.title];
+}
+
+- (void)setSelectedStyle:(BOOL)canSelected
+{
+    _canselected = canSelected;
 }
 
 - (void)setFont:(UIFont *)font
@@ -130,8 +138,11 @@
 - (void)setIsSelected:(BOOL)_isSelected
 {
     isSelected = _isSelected;
-    [imageView setImage:(isSelected ? _item.selectedImage:_item.normalImage)];
-    [titleLabel setTextColor:(isSelected ? selectedColor:normalColor)];
+    
+    if (_canselected) {
+        [imageView setImage:(isSelected ? _item.selectedImage:_item.normalImage)];
+        [titleLabel setTextColor:(isSelected ? selectedColor:normalColor)];
+    }
     
     if (isSelected) {
         if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderViewCell:didSelected:)]) {
@@ -160,7 +171,13 @@
         if (CGRectContainsPoint(validTouchArea, point)) {
             //your code here
             self.alpha = 0.7;
-            [self setIsSelected:!isSelected];
+            if (!isSelected && _canselected){
+                [self setIsSelected:!isSelected];
+            }else if(!_canselected){
+                if (_delegate && [_delegate respondsToSelector:@selector(MainHeaderViewCell:didSelected:)]) {
+                    [_delegate MainHeaderViewCell:self didSelected:isSelected];
+                }
+            }
         }
     }
 
