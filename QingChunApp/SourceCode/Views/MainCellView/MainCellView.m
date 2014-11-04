@@ -103,10 +103,19 @@
     _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(_textLabel), TEXT_WIDTH, TEXT_WIDTH * 0.5)];
     [self addSubview:_imageView];
     
-    horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, MARGIN_WIDTH, SELF_WIDTH, LINE_WIDTH)];
+    horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0,VIEW_BY(_imageView) + MARGIN_WIDTH, SELF_WIDTH, LINE_WIDTH)];
     [horizontalLine setBackgroundColor:LINE_COLOR];
     horizontalLine.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
     [self addSubview:horizontalLine];
+    
+    _praiseButton = [[UIButton alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(horizontalLine) + MARGIN_WIDTH, BUTTON_WIDTH, BUTTON_HEIGHT)];
+    [_praiseButton.titleLabel setFont:BUTTON_FONT];
+    [_praiseButton.titleLabel setTextColor:LINE_COLOR];
+    [_praiseButton setImage:PNG_NAME(@"zhan_normal.png") forState:UIControlStateNormal];
+    [self addSubview:_praiseButton];
+    
+    verticalLine1 = [[UIView alloc] initWithFrame:CGRectMake(VIEW_BX(_praiseButton)+BUTTON_LINE_MARGIN_WIDTH, VIEW_BY(horizontalLine) + MARGIN_WIDTH, LINE_WIDTH, LINE_HEIGHT)];
+    
 }
 
 - (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
