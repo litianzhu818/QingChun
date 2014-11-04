@@ -21,10 +21,14 @@
 #define MARGIN_WIDTH 8.0f
 #define PHOTO_BUTTON_WIDTH 40.0f
 
-#define NAME_WIDTH 200.0f
+#define NAME_WIDTH (SELF_WIDTH - 4 * MARGIN_WIDTH - 2 * PHOTO_BUTTON_WIDTH)
 #define NAME_HEIGHT 22.0f
-#define TIME_WIDTH 200.0f
+#define TIME_WIDTH NAME_WIDTH
 #define TIME_HEIGHT 18.0f
+
+#define NAME_MORE_MARGIN MARGIN_WIDTH
+
+#define TEXT_WIDTH (SELF_WIDTH - 2 * MARGIN_WIDTH)
 
 #define LINE_WIDTH 1.0f
 #define LINE_HEIGHT 36.0f
@@ -60,12 +64,65 @@
 - (void)loadViews
 {
     _photoButton = [[UIButton alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, MARGIN_WIDTH, PHOTO_BUTTON_WIDTH, PHOTO_BUTTON_WIDTH)];
-    _photoButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleTopMargin;
+    _photoButton.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
     [_photoButton addTarget:self action:@selector(photoButtonCliked:) forControlEvents:UIControlEventTouchUpInside];
     [_photoButton setTag:1];
     [self addSubview:_photoButton];
     
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(VIEW_BX(_photoButton) + MARGIN_WIDTH, MARGIN_WIDTH, NAME_WIDTH, NAME_HEIGHT)];
+    [_nameLabel setFont:NAME_FONT];
+    _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+    [_nameLabel setTag:2];
+    [self addSubview:_nameLabel];
     
+    _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(VIEW_BX(_photoButton) + MARGIN_WIDTH, VIEW_BY(_nameLabel), TIME_WIDTH, TIME_HEIGHT)];
+    [_timeLabel setFont:TIME_FONT];
+    [_timeLabel setTextColor:TIME_COLOR];
+    [_timeLabel setTag:3];
+    _timeLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+    [self addSubview:_timeLabel];
+    
+    _moreInfoButton = [[UIButton alloc] initWithFrame:CGRectMake(VIEW_BX(_nameLabel) + MARGIN_WIDTH, MARGIN_WIDTH, PHOTO_BUTTON_WIDTH, PHOTO_BUTTON_WIDTH)];
+    _moreInfoButton.autoresizingMask = UIViewAutoresizingNone;
+    [_moreInfoButton addTarget:self action:@selector(photoButtonCliked:) forControlEvents:UIControlEventTouchUpInside];
+    [_moreInfoButton setTag:4];
+    [self addSubview:_moreInfoButton];
+    
+    //TODO:将文字信息，图片信息，视频信息分开
+    //???:如果是文字加图片
+    NSString *str = @"123";
+    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
+
+    _textLabel = [[UILabel alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(_photoButton) + MARGIN_WIDTH,TEXT_WIDTH, textSize.height)];
+    [_textLabel setNumberOfLines:0];
+    [_textLabel setFont:TEXT_FONT];
+    [_textLabel setTag:5];
+    _textLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
+    [self addSubview:_textLabel];
+    
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(_textLabel), TEXT_WIDTH, TEXT_WIDTH * 0.5)];
+    [self addSubview:_imageView];
+    
+    horizontalLine = [[UIView alloc] initWithFrame:CGRectMake(0, MARGIN_WIDTH, SELF_WIDTH, LINE_WIDTH)];
+    [horizontalLine setBackgroundColor:LINE_COLOR];
+    horizontalLine.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleLeftMargin;
+    [self addSubview:horizontalLine];
+}
+
+- (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    //  //该方法已经弃用
+    //    CGSize size = [sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    paragraphStyle.lineBreakMode = lineBreakMode;
+    
+    NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
+    
+    return  [string boundingRectWithSize:CGSizeMake(TEXT_WIDTH, CGFLOAT_MAX)
+                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:attributes
+                                        context:nil].size;
 }
 
 - (IBAction)photoButtonCliked:(id)sender
