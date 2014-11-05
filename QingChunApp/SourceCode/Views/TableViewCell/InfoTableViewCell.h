@@ -20,7 +20,7 @@
     IBOutlet UILabel *nameLabel;
     IBOutlet UILabel *timeLabel;
     IBOutlet UILabel *textlabel;
-    IBOutlet UIImageView *imageview;
+    IBOutlet UIImageView *photoView;
 }
 
 @property (weak, nonatomic) IBOutlet UIButton *photoButton;
@@ -32,6 +32,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *textlabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageview;
+@property (weak, nonatomic) IBOutlet UIImageView *photoView;
 
 @end

@@ -42,14 +42,17 @@
 
 - (void)awakeFromNib {
     // Initialization code
-    NSString *str = @"123";
-    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
+   
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    NSString *str = @"123";
+    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
+    _textlabel.frame = CGRectMake(2*MARGIN_WIDTH, _textlabel.frame.origin.y, TEXT_WIDTH, textSize.height);
+    
 }
 
 - (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
@@ -66,6 +69,11 @@
                                  options:NSStringDrawingUsesLineFragmentOrigin
                               attributes:attributes
                                  context:nil].size;
+}
+
+- (void)loadView
+{
+    
 }
 
 
