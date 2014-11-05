@@ -34,4 +34,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *textlabel;
 @property (weak, nonatomic) IBOutlet UIImageView *photoView;
 
++ (instancetype)instanceFromNib;
+
 @end

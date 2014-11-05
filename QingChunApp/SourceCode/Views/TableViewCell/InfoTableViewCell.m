@@ -11,7 +11,7 @@
 #define NAME_FONT [UIFont systemFontOfSize:14.0]
 #define TIME_FONT [UIFont systemFontOfSize:11.0]
 #define TEXT_FONT [UIFont systemFontOfSize:17.0]
-#define BUTTON_FONT [UIFont systemFontOfSize:12.0]
+#define BUTTON_FONT [UIFont systemFontOfSize:10.0]
 
 #define TIME_COLOR [UIColor darkGrayColor]
 #define LINE_COLOR [UIColor lightGrayColor]
@@ -40,6 +40,11 @@
 
 @implementation InfoTableViewCell
 
++ (instancetype)instanceFromNib
+{
+    return [[[NSBundle mainBundle]loadNibNamed:@"InfoTableViewCell" owner:nil options:nil]lastObject];
+}
+
 - (void)awakeFromNib {
     // Initialization code
    
@@ -49,9 +54,9 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
-    NSString *str = @"123";
-    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
-    _textlabel.frame = CGRectMake(2*MARGIN_WIDTH, _textlabel.frame.origin.y, TEXT_WIDTH, textSize.height);
+//    NSString *str = @"123";
+//    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
+//    _textlabel.frame = CGRectMake(2*MARGIN_WIDTH, _textlabel.frame.origin.y, TEXT_WIDTH, textSize.height);
     
 }
 

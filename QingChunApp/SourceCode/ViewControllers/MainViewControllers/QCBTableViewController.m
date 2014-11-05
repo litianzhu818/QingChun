@@ -9,6 +9,7 @@
 #import "QCBTableViewController.h"
 #import "MainHeaderView.h"
 #import "MainHeaderViewItem.h"
+#import "InfoTableViewCell.h"
 
 #define MAIN_HEADER_VIEW_HEIGHT 64.0f
 
@@ -121,6 +122,8 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
+//    [tableView setBackgroundView:[UIColor clearColor]];
+//    self.view.backgroundColor = [UIColor darkGrayColor];
 }
 - (void)didClikedAtFirstIndex
 {
@@ -141,27 +144,38 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return 10;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *cellIdentifier = @"cell";
+    InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    if (cell == nil) {
+        cell = cell = [InfoTableViewCell instanceFromNib];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     
-    // Configure the cell...
+    // Configure the cell...x
+    for (UIView *view in cell.contentView.subviews) {
+        [view removeFromSuperview];
+    }
     
     return cell;
 }
-*/
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 500;
+}
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
