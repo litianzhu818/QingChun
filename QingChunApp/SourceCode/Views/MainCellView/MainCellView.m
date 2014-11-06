@@ -115,6 +115,15 @@
     [self addSubview:_praiseButton];
     
     verticalLine1 = [[UIView alloc] initWithFrame:CGRectMake(VIEW_BX(_praiseButton)+BUTTON_LINE_MARGIN_WIDTH, VIEW_BY(horizontalLine) + MARGIN_WIDTH, LINE_WIDTH, LINE_HEIGHT)];
+    [verticalLine1 setBackgroundColor:[UIColor lightGrayColor]];
+    [self addSubview:verticalLine1];
+    
+    _shitButton = [[UIButton alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(horizontalLine) + MARGIN_WIDTH, BUTTON_WIDTH, BUTTON_HEIGHT)];
+    [_shitButton.titleLabel setFont:BUTTON_FONT];
+    [_shitButton.titleLabel setTextColor:LINE_COLOR];
+    [_shitButton setImage:PNG_NAME(@"zhan_normal.png") forState:UIControlStateNormal];
+    [self addSubview:_shitButton];
+    
     
 }
 
