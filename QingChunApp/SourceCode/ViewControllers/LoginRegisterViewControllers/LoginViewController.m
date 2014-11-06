@@ -73,6 +73,9 @@
     
     [_QQButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_QQButton setBackgroundImage:[UIImage imageNamed:@"QQ_se"] forState:UIControlStateHighlighted];
+    [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_se"] forState:UIControlStateHighlighted];
+    [_backPwdButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+    [_registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
     [_nameTextField setDelegate:self];
     [_pwdTextField setDelegate:self];
 }
@@ -216,7 +219,11 @@
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if ([textField isEqual:_nameTextField]) {
+        [_pwdTextField becomeFirstResponder];
+    }else{
+        [textField resignFirstResponder];
+    }
     return YES;
 }
 
