@@ -8,17 +8,23 @@
 
 #import "MeViewController.h"
 #import "NAMenuView.h"
+#import "UserHeaderView.h"
 #import "MyPostsViewController.h"
+
+#define MARGIN_WIDTH 8.0f
 
 @interface MeViewController ()
 
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NAMenuView *menuView;
+@property (nonatomic, strong) UserHeaderView *userHeaderView;
+
 @end
 
 @implementation MeViewController
 @synthesize menuView;
 @synthesize menuItems;
+@synthesize userHeaderView;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +59,10 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
+    [self.view setBackgroundColor:[UIColor lightGrayColor]];
+    userHeaderView = [[UserHeaderView alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
+    [self.view addSubview:userHeaderView];
+    
     menuView = [[NAMenuView alloc] init];
     [menuView setFrame:CGRectMake(20, 128, 280, 280)];
     menuView.menuDelegate = self;

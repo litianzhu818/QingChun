@@ -112,10 +112,32 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bE0-Zi-tnB"/>
+                    <connections>
+                        <segue destination="2YB-Sj-qzD" kind="push" id="c5A-4p-hLD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gsB-EB-JNu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="980" y="1395"/>
+        </scene>
+        <!--My Posts View Controller-->
+        <scene sceneID="l15-ok-Aan">
+            <objects>
+                <viewController id="2YB-Sj-qzD" customClass="MyPostsViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SBe-DH-R8t"/>
+                        <viewControllerLayoutGuide type="bottom" id="n2r-VZ-BRl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Ozd-4v-IHL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ejy-nh-pl0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfb-Gg-53d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1332" y="1397"/>
         </scene>
         <!--青春梦-->
         <scene sceneID="QKi-WY-oYb">
