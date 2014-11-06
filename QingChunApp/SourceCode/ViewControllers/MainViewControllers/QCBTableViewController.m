@@ -122,8 +122,8 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
-//    [tableView setBackgroundView:[UIColor clearColor]];
-//    self.view.backgroundColor = [UIColor darkGrayColor];
+   // [tableView setBackgroundView:[UIColor clearColor]];
+   // self.view.backgroundColor = [UIColor lightGrayColor];
 }
 - (void)didClikedAtFirstIndex
 {
@@ -162,12 +162,17 @@
     if (cell == nil) {
         cell = cell = [InfoTableViewCell instanceFromNib];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIImage *backgroundImage = [UIImage imageNamed:@"cell_bg"];
+        backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
+        [cell setBackgroundView:imageView];
     }
     
     // Configure the cell...x
-    for (UIView *view in cell.contentView.subviews) {
-        [view removeFromSuperview];
-    }
+//    for (UIView *view in cell.contentView.subviews) {
+//        [view removeFromSuperview];
+//    }
     
     return cell;
 }

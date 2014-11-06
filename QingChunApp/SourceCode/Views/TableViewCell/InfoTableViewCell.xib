@@ -128,12 +128,13 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="comment_normal.png" width="15" height="13"/>
-        <image name="me_normal.png" width="41" height="31"/>
-        <image name="qingchunba_normal.png" width="41" height="31"/>
-        <image name="share_normal.png" width="15" height="13"/>
-        <image name="tu_normal.png" width="15" height="13"/>
-        <image name="zhan_normal.png" width="15" height="13"/>
+        <image name="comment_normal.png" width="23" height="21"/>
+        <image name="default.png" width="40" height="40"/>
+        <image name="more_btn_nor.png" width="34" height="27"/>
+        <image name="share_normal.png" width="23" height="21"/>
+        <image name="test.png" width="600" height="350"/>
+        <image name="tu_normal.png" width="23" height="21"/>
+        <image name="zhan_normal.png" width="23" height="21"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
