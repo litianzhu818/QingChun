@@ -57,6 +57,7 @@
 //    NSString *str = @"123";
 //    CGSize textSize = [self sizeWithString:str font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping];
 //    _textlabel.frame = CGRectMake(2*MARGIN_WIDTH, _textlabel.frame.origin.y, TEXT_WIDTH, textSize.height);
+   
     
 }
 

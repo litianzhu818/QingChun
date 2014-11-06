@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
@@ -14,204 +14,113 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DQm-dO-jZs">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="DQm-dO-jZs">
                         <rect key="frame" x="8" y="312" width="304" height="1"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="320" id="jhk-2P-Kpl"/>
-                            <constraint firstAttribute="height" constant="1" id="v1Z-u9-98z"/>
-                        </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdH-aY-BV5">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="TdH-aY-BV5">
                         <rect key="frame" x="18" y="325" width="63" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="yKe-gi-LoE"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="352" image="zhan_normal.png">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmL-HC-FQV">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="vmL-HC-FQV">
                         <rect key="frame" x="84" y="327" width="78" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="oUN-YQ-qki"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="352" image="tu_normal.png">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GT3-8u-NrZ">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="GT3-8u-NrZ">
                         <rect key="frame" x="161" y="325" width="79" height="22"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="rlX-Lw-hZN"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="352" image="share_normal.png">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4gz-oM-6Qg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4gz-oM-6Qg">
                         <rect key="frame" x="161" y="320" width="1" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="LFW-cn-Vlo"/>
-                            <constraint firstAttribute="width" constant="1" id="uE4-MX-FsS"/>
-                        </constraints>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5jW-34-UcH">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="5jW-34-UcH">
                         <rect key="frame" x="239" y="320" width="1" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="avl-vU-yec"/>
-                            <constraint firstAttribute="width" constant="1" id="jsw-4a-kez"/>
-                        </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yRU-0f-CNW">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="yRU-0f-CNW">
                         <rect key="frame" x="241" y="320" width="72" height="31"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="brr-lz-jTY"/>
-                        </constraints>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <state key="normal" title="352" image="comment_normal.png">
                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x5k-r9-V2A">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="x5k-r9-V2A">
                         <rect key="frame" x="84" y="320" width="1" height="37"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="37" id="4vy-ZG-1P3"/>
-                            <constraint firstAttribute="width" constant="1" id="kL1-ta-j7m"/>
-                        </constraints>
                     </imageView>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w7X-rn-ghR">
-                        <rect key="frame" x="8" y="9" width="304" height="354"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1m-c8-psG">
-                                <rect key="frame" x="8" y="9" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="ED7-6H-6U7"/>
-                                    <constraint firstAttribute="width" constant="40" id="Exg-Wu-HqP"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="me_normal.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="李天柱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nky-nE-kNR">
-                                <rect key="frame" x="56" y="9" width="208" height="23"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="23" id="yq0-gp-0hm"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2014-10-25 17:06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vGC-Zu-cah">
-                                <rect key="frame" x="56" y="31" width="208" height="18"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="18" id="GIN-iT-Hty"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VIH-lq-dCo">
-                                <rect key="frame" x="256" y="9" width="40" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="40" id="TfX-gQ-miq"/>
-                                    <constraint firstAttribute="height" constant="40" id="hbN-G7-zPr"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="qingchunba_normal.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="这里是一个测试例子，怎么样！！！！哈哈哈哈......" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RJa-xk-s6V">
-                                <rect key="frame" x="8" y="64" width="288" height="56"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="288" id="02J-rz-D3g"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mA6-EC-HgE">
-                                <rect key="frame" x="8" y="312" width="288" height="1"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E3g-qe-dbk">
-                                <rect key="frame" x="11" y="323" width="57" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="362" image="zhan_normal.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XJl-7r-FKb">
-                                <rect key="frame" x="76" y="320" width="1" height="27"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4b-Fk-GIS">
-                                <rect key="frame" x="85" y="323" width="59" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="362" image="tu_normal.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kYF-e1-tMy">
-                                <rect key="frame" x="152" y="320" width="1" height="28"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HQS-rU-ceI">
-                                <rect key="frame" x="161" y="323" width="54" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="36200" image="share_normal.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H6h-wG-FCA">
-                                <rect key="frame" x="223" y="320" width="1" height="27"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2yp-4d-vpX">
-                                <rect key="frame" x="232" y="323" width="64" height="22"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                <state key="normal" title="36200" image="comment_normal.png">
-                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0GC-cj-DU4">
-                                <rect key="frame" x="11" y="127" width="285" height="175"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="285" id="ObD-BO-dRs"/>
-                                </constraints>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uQU-rf-h2F">
+                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" backgroundImage="default.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="李天柱" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hUg-bG-BlZ">
+                        <rect key="frame" x="58" y="11" width="180" height="23"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014-10-25 17:06" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="b95-QT-EXr">
+                        <rect key="frame" x="58" y="30" width="180" height="20"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3kv-5H-4ry">
+                        <rect key="frame" x="270" y="10" width="43" height="40"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <state key="normal" backgroundImage="more_btn_nor.png">
+                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这里是一个测试例子，怎么样！！！！哈哈哈哈......" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BNy-SL-Ycj">
+                        <rect key="frame" x="10" y="66" width="302" height="56"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="test.png" id="9dI-FZ-KHu">
+                        <rect key="frame" x="8" y="129" width="304" height="175"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                <constraints>
-                    <constraint firstAttribute="trailing" secondItem="w7X-rn-ghR" secondAttribute="trailing" constant="8" id="4qH-cV-uLs"/>
-                    <constraint firstAttribute="bottom" secondItem="w7X-rn-ghR" secondAttribute="bottom" constant="5" id="gbu-Zc-tYl"/>
-                    <constraint firstItem="w7X-rn-ghR" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="obQ-X4-DpA"/>
-                    <constraint firstItem="w7X-rn-ghR" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="ps4-gA-002"/>
-                </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="backgroundView" destination="w7X-rn-ghR" id="XUa-c8-MCr"/>
                 <outlet property="commentButton" destination="yRU-0f-CNW" id="FtL-E7-SpX"/>
-                <outlet property="detailButton" destination="VIH-lq-dCo" id="Bgg-P0-wq1"/>
-                <outlet property="nameLabel" destination="Nky-nE-kNR" id="V9d-FI-87J"/>
-                <outlet property="photoButton" destination="Y1m-c8-psG" id="bLb-ax-tFt"/>
-                <outlet property="photoView" destination="0GC-cj-DU4" id="13T-6W-jnN"/>
+                <outlet property="detailButton" destination="3kv-5H-4ry" id="Pfe-fX-mse"/>
+                <outlet property="nameLabel" destination="hUg-bG-BlZ" id="knr-cQ-h0l"/>
+                <outlet property="photoButton" destination="uQU-rf-h2F" id="dxS-HR-7Qr"/>
+                <outlet property="photoView" destination="9dI-FZ-KHu" id="lGC-6U-xmP"/>
                 <outlet property="shareButton" destination="GT3-8u-NrZ" id="Ds7-Vq-Ts4"/>
-                <outlet property="textlabel" destination="RJa-xk-s6V" id="lSu-7u-bhQ"/>
-                <outlet property="timeLabel" destination="vGC-Zu-cah" id="K7e-jd-Zcl"/>
+                <outlet property="textlabel" destination="BNy-SL-Ycj" id="2AU-Gu-5Di"/>
+                <outlet property="timeLabel" destination="b95-QT-EXr" id="z7C-43-t9J"/>
                 <outlet property="tuButton" destination="vmL-HC-FQV" id="pzp-c2-vkW"/>
                 <outlet property="zhanButton" destination="TdH-aY-BV5" id="h6T-6u-BTb"/>
             </connections>
@@ -220,10 +129,16 @@
     </objects>
     <resources>
         <image name="comment_normal.png" width="15" height="13"/>
-        <image name="me_normal.png" width="41" height="31"/>
-        <image name="qingchunba_normal.png" width="41" height="31"/>
+        <image name="default.png" width="40" height="40"/>
+        <image name="more_btn_nor.png" width="34" height="27"/>
         <image name="share_normal.png" width="15" height="13"/>
+        <image name="test.png" width="600" height="350"/>
         <image name="tu_normal.png" width="15" height="13"/>
         <image name="zhan_normal.png" width="15" height="13"/>
     </resources>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
 </document>
