@@ -79,12 +79,13 @@
 }
 - (BOOL)shouldAutorotate
 {
-    return YES;
+    return NO;
 }
 - (NSUInteger)supportedInterfaceOrientations
 {
     return UIInterfaceOrientationMaskPortrait;
 }
+
 
 /**
  *  添加消息监听
