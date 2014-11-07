@@ -16,8 +16,10 @@
 @interface QCBTableViewController ()<MainHeaderViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     MainHeaderView *headerView;
-    UITableView *tableView;
+    
 }
+@property (nonatomic, strong) UITableView *tableView;
+
 @end
 
 @implementation QCBTableViewController
@@ -90,12 +92,13 @@
     [headerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:headerView];
     
-    tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(headerView), VIEW_W(self.view), VIEW_H(self.view)) style:UITableViewStylePlain];
-    [tableView setDelegate:self];
-    [tableView setDataSource:self];
-    [tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [self.view addSubview:tableView];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(headerView), VIEW_W(self.view), VIEW_H(self.view)) style:UITableViewStylePlain];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    [self.tableView setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:self.tableView];
     
     NSMutableArray *Constraints = [NSMutableArray array];
     
@@ -104,26 +107,24 @@
                                                                              metrics:@{
                                                                                        @"MARGIN1":@0.0}
                                                                                views:NSDictionaryOfVariableBindings(headerView)]];
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[tableView]-MARGIN1-|"
+    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[_tableView]-MARGIN1-|"
                                                                              options:0
                                                                              metrics:@{
                                                                                        @"MARGIN1":@0.0}
-                                                                               views:NSDictionaryOfVariableBindings(tableView)]];
+                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
     
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[headerView(==MARGIN2)]-MARGIN1-[tableView]-MARGIN1-|"
+    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[headerView(==MARGIN2)]-MARGIN1-[_tableView]-MARGIN1-|"
                                                                              options:0
                                                                              metrics:@{
                                                                                        @"MARGIN1":@0.0,
                                                                                        @"MARGIN2":[NSNumber numberWithFloat:MAIN_HEADER_VIEW_HEIGHT]}
-                                                                               views:NSDictionaryOfVariableBindings(headerView,tableView)]];
+                                                                               views:NSDictionaryOfVariableBindings(headerView,_tableView)]];
     [self.view addConstraints:Constraints];
 }
 
 -(void)initializationData
 {
     //Here initialization your data parameters
-   // [tableView setBackgroundView:[UIColor clearColor]];
-   // self.view.backgroundColor = [UIColor lightGrayColor];
 }
 - (void)didClikedAtFirstIndex
 {
@@ -167,6 +168,7 @@
         backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
         UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
         [cell setBackgroundView:imageView];
+        [cell setBackgroundColor:[UIColor clearColor]];
     }
     
     // Configure the cell...x

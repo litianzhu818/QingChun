@@ -43,6 +43,8 @@
     [tmpConstraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[_defaultImageView]-0-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(_defaultImageView)]];
     [self.view addConstraints:tmpConstraints];
     
+    [_defaultImageView setImage:[UIImage imageNamed:@"background"]];
+    
 #if !__has_feature(objc_arc)
     
 #endif
