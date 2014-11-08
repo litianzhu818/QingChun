@@ -21,12 +21,14 @@
  */
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface TTUITableViewZoomController : UITableViewController{
+@interface TTUITableViewZoomController : BaseViewController
+{
     int currentMaxDisplayedCell; //keep track of the maximum cell index that has been displayed (for the animation, so as we move down the table the cells are animated when they're viewed for the first time - if index is greated than currentMaxDisplayedCell - but then as you scroll back up they're not re-animated.
     int currentMaxDisplayedSection;
 }
-
+@property (strong, nonatomic) UITableView *tableView;
 /**  @property cellZoomXScaleFactor
  *   @brief The X Zoom Factor
  *   How much to scale to x axis of the cell before it is animated back to normal size. 1 is normal size. >1 is bigger, <1 is smaller. Default if not set is 1.25 **/

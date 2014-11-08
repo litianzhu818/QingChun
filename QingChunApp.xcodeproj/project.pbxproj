@@ -140,6 +140,7 @@
 		E7AF3D551A0C838A0073116D /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AF3D541A0C838A0073116D /* background@2x.png */; };
 		E7B725691A09212700882998 /* DisplayMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* DisplayMessage.m */; };
 		E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */; };
+		E7BAD14F1A0DE5E700D27F4B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 		E7CF62DC19F8980E009A9A20 /* me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D419F8980E009A9A20 /* me_selected@2x.png */; };
@@ -358,6 +359,7 @@
 		E7B725681A09212700882998 /* DisplayMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayMessage.m; sourceTree = "<group>"; };
 		E7BAD14B1A0DE53B00D27F4B /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
 		E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
+		E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7BAD14F1A0DE5E700D27F4B /* QuartzCore.framework in Frameworks */,
 				E725A2671A07CD7000FCE03D /* CoreGraphics.framework in Frameworks */,
 				E79F59A919F7FADD001CB6F2 /* CFNetwork.framework in Frameworks */,
 				E79F59A719F7FACE001CB6F2 /* Security.framework in Frameworks */,
@@ -616,6 +619,7 @@
 		E7419EDC19E675D900B5B764 = {
 			isa = PBXGroup;
 			children = (
+				E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
 				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,
@@ -1382,7 +1386,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp.pch";
 				INFOPLIST_FILE = QingChunApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1398,7 +1402,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp.pch";
 				INFOPLIST_FILE = QingChunApp/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "TTUITableViewZoomController.h"
 
-@interface QCBTableViewController : BaseViewController
+@interface QCBTableViewController : TTUITableViewZoomController
 
 @end

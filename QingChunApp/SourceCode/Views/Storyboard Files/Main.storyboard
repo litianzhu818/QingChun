@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bBW-EJ-IF6">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5100" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
@@ -192,6 +193,7 @@
         <!--Table View Controller-->
         <scene sceneID="VIg-gp-LNB">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YV0-hM-SdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="FEt-wA-7Ar" customClass="QCBTableViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="w8K-Sm-GAS"/>
@@ -204,7 +206,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="HDq-dx-iWG"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YV0-hM-SdU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="990" y="-619"/>
         </scene>

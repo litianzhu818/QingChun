@@ -16,13 +16,12 @@
 @interface QCBTableViewController ()<MainHeaderViewDelegate,UITableViewDataSource,UITableViewDelegate>
 {
     MainHeaderView *headerView;
-    
 }
-@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
 @implementation QCBTableViewController
+@synthesize tableView = _tableView;
 
 - (void)dealloc
 {
@@ -92,13 +91,9 @@
     [headerView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.view addSubview:headerView];
     
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(headerView), VIEW_W(self.view), VIEW_H(self.view)) style:UITableViewStylePlain];
-    [self.tableView setDelegate:self];
-    [self.tableView setDataSource:self];
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:self.tableView];
     
     NSMutableArray *Constraints = [NSMutableArray array];
     

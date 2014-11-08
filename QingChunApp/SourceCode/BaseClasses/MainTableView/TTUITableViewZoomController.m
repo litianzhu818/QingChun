@@ -28,8 +28,24 @@
 @synthesize cellZoomYScaleFactor = _yZoomFactor;
 @synthesize cellZoomAnimationDuration = _animationDuration;
 @synthesize cellZoomInitialAlpha = _initialAlpha;
+//@synthesize tableView = _tableView;
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    [self initTableView];
+}
 
+#pragma mark - init the UITableView
+- (void)initTableView
+{
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+    [self.tableView setDelegate:self];
+    [self.tableView setDataSource:self];
+    [self.view addSubview:self.tableView];
+}
+
+#pragma mark - UITableViewDelegate methods below
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if ((indexPath.section == 0 && currentMaxDisplayedCell == 0) || indexPath.section > currentMaxDisplayedSection){ //first item in a new section, reset the max row count
