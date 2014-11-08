@@ -139,6 +139,7 @@
 		E7AF3D521A0BA17A0073116D /* 青春梦选中.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AF3D391A0BA17A0073116D /* 青春梦选中.png */; };
 		E7AF3D551A0C838A0073116D /* background@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7AF3D541A0C838A0073116D /* background@2x.png */; };
 		E7B725691A09212700882998 /* DisplayMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* DisplayMessage.m */; };
+		E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 		E7CF62DC19F8980E009A9A20 /* me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D419F8980E009A9A20 /* me_selected@2x.png */; };
@@ -355,6 +356,8 @@
 		E7AF3D541A0C838A0073116D /* background@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background@2x.png"; sourceTree = "<group>"; };
 		E7B725671A09212700882998 /* DisplayMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMessage.h; sourceTree = "<group>"; };
 		E7B725681A09212700882998 /* DisplayMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayMessage.m; sourceTree = "<group>"; };
+		E7BAD14B1A0DE53B00D27F4B /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
+		E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -590,6 +593,7 @@
 		E7261BAD19F0B2E700492D98 /* BaseClasses */ = {
 			isa = PBXGroup;
 			children = (
+				E7BAD14A1A0DE53B00D27F4B /* MainTableView */,
 				E7CF62EB19F91F2A009A9A20 /* BaseNavigationBar */,
 				E7CF62E419F8BAA8009A9A20 /* BaseTabBarItem */,
 				E7CF628C19F79F91009A9A20 /* BaseTabbarController */,
@@ -953,6 +957,15 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E7BAD14A1A0DE53B00D27F4B /* MainTableView */ = {
+			isa = PBXGroup;
+			children = (
+				E7BAD14B1A0DE53B00D27F4B /* TTUITableViewZoomController.h */,
+				E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */,
+			);
+			path = MainTableView;
+			sourceTree = "<group>";
+		};
 		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1218,6 +1231,7 @@
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
 				E725A2931A07CDA900FCE03D /* UIButton+WebCache.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
+				E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */,
 				E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */,
 				E725A2651A07C52A00FCE03D /* MainCellView.m in Sources */,
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
