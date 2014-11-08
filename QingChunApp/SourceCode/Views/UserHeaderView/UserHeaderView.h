@@ -8,18 +8,27 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UserHeaderView : UIView
+@protocol UserHeaderViewDelegate;
 
-@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@interface UserHeaderView : UIView
+{
+    id<UserHeaderViewDelegate> delegate;
+}
+@property (assign, nonatomic) id<UserHeaderViewDelegate> delegate;
+@property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *accessoryButton;
-//@property (weak, nonatomic) IBOutlet *<#name#>;
-//@property (weak, nonatomic) IBOutlet *<#name#>;
-//@property (weak, nonatomic) IBOutlet *<#name#>;
-//@property (weak, nonatomic) IBOutlet *<#name#>;
-//@property (weak, nonatomic) IBOutlet *<#name#>;
 
 -(IBAction)clikedOnHeaderView:(id)sender;
 -(IBAction)clikedOnAccessroyView:(id)sender;
+
+@end
+
+@protocol UserHeaderViewDelegate <NSObject>
+
+@optional
+
+- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button;
+
 @end

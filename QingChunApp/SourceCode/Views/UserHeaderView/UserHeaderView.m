@@ -20,7 +20,6 @@
         
         // customize the view a bit
         [self initUI];
-
     }
     return self;
 }
@@ -33,17 +32,28 @@
 - (void)loadViews
 {
     [_accessoryButton setBackgroundImage:[UIImage imageNamed:@"header_ac_nor"] forState:UIControlStateNormal];
-    [_accessoryButton setBackgroundImage:[UIImage imageNamed:@"header_ac_se"] forState:UIControlStateHighlighted];
+    [_accessoryButton setBackgroundImage:[UIImage imageNamed:@"header_ac_se"] forState:UIControlStateSelected];
 }
 
 -(IBAction)clikedOnHeaderView:(id)sender
 {
-    
+    LOG(NSStringFromClass([_delegate class]));
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:didClikedOnButton:)]) {
+        [self.delegate userHeaderView:self didClikedOnButton:sender];
+    }
+}
+- (void)cliked:(id)sender
+{
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:didClikedOnButton:)]) {
+        [self.delegate userHeaderView:self didClikedOnButton:sender];
+    }
 }
 
 -(IBAction)clikedOnAccessroyView:(id)sender
 {
-    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(userHeaderView:didClikedOnButton:)]) {
+        [self.delegate userHeaderView:self didClikedOnButton:sender];
+    }
 }
 /*
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

@@ -10,10 +10,11 @@
 #import "NAMenuView.h"
 #import "UserHeaderView.h"
 #import "MyPostsViewController.h"
+#import "LoginViewController.h"
 
 #define MARGIN_WIDTH 8.0f
 
-@interface MeViewController ()
+@interface MeViewController ()<UserHeaderViewDelegate>
 
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NAMenuView *menuView;
@@ -59,8 +60,9 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    [self.view setBackgroundColor:[UIColor lightGrayColor]];
     userHeaderView = [[UserHeaderView alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
+    [userHeaderView setDelegate:self];
+    [userHeaderView setUserInteractionEnabled:YES];
     [self.view addSubview:userHeaderView];
     
     menuView = [[NAMenuView alloc] init];
@@ -162,6 +164,14 @@
         viewController = [[class alloc] init];
     }
     [self.navigationController pushViewController:viewController animated:YES];
+}
+
+#pragma mark - UserHeaderViewDelegate methods below
+- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button
+{
+    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"login_register" bundle:nil];
+    LoginViewController *loginViewController = [loginStory instantiateInitialViewController];
+    [self.navigationController pushViewController:loginViewController animated:YES];
 }
 
 /*

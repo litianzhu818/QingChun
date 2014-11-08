@@ -141,6 +141,7 @@
 		E7B725691A09212700882998 /* DisplayMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* DisplayMessage.m */; };
 		E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */; };
 		E7BAD14F1A0DE5E700D27F4B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */; };
+		E7BAD1531A0DECEA00D27F4B /* PullingRefreshTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BAD1521A0DECEA00D27F4B /* PullingRefreshTableView.m */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 		E7CF62DC19F8980E009A9A20 /* me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D419F8980E009A9A20 /* me_selected@2x.png */; };
@@ -360,6 +361,8 @@
 		E7BAD14B1A0DE53B00D27F4B /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
 		E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTUITableViewZoomController.m; sourceTree = "<group>"; };
 		E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E7BAD1511A0DECEA00D27F4B /* PullingRefreshTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PullingRefreshTableView.h; sourceTree = "<group>"; };
+		E7BAD1521A0DECEA00D27F4B /* PullingRefreshTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PullingRefreshTableView.m; sourceTree = "<group>"; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -441,6 +444,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7BAD1501A0DECEA00D27F4B /* PullRefreshTableView */,
 				E712AA411A0BC164000648C4 /* UserHeaderView */,
 				E7AF3D0A1A0B9EFE0073116D /* NAMenu */,
 				E725A2621A07C4FB00FCE03D /* MainCellView */,
@@ -970,6 +974,15 @@
 			path = MainTableView;
 			sourceTree = "<group>";
 		};
+		E7BAD1501A0DECEA00D27F4B /* PullRefreshTableView */ = {
+			isa = PBXGroup;
+			children = (
+				E7BAD1511A0DECEA00D27F4B /* PullingRefreshTableView.h */,
+				E7BAD1521A0DECEA00D27F4B /* PullingRefreshTableView.m */,
+			);
+			path = PullRefreshTableView;
+			sourceTree = "<group>";
+		};
 		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1257,6 +1270,7 @@
 				E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */,
 				E7AE66F819FA083C008546EA /* MainHeaderView.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
+				E7BAD1531A0DECEA00D27F4B /* PullingRefreshTableView.m in Sources */,
 				E725A2991A07CDA900FCE03D /* UIView+WebCacheOperation.m in Sources */,
 				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
 				E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */,

@@ -69,13 +69,13 @@
 {
     //Here initialization your UI parameters
     [_weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [_weiboButton setBackgroundImage:[UIImage imageNamed:@"weibo_se"] forState:UIControlStateHighlighted];
+    [_weiboButton setBackgroundImage:[UIImage imageNamed:@"weibo_se"] forState:UIControlStateSelected];
     
-    [_QQButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
-    [_QQButton setBackgroundImage:[UIImage imageNamed:@"QQ_se"] forState:UIControlStateHighlighted];
-    [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_se"] forState:UIControlStateHighlighted];
-    [_backPwdButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
-    [_registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateHighlighted];
+    [_QQButton setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    [_QQButton setBackgroundImage:[UIImage imageNamed:@"QQ_se"] forState:UIControlStateSelected];
+    [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_se"] forState:UIControlStateSelected];
+    [_backPwdButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
+    [_registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     [_nameTextField setDelegate:self];
     [_pwdTextField setDelegate:self];
 }
