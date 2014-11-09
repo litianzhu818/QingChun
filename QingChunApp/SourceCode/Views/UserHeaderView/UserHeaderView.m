@@ -10,20 +10,6 @@
 
 @implementation UserHeaderView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-        NSArray *views = [[NSBundle mainBundle] loadNibNamed:@"UserHeaderView" owner:self options:nil];
-        [self addSubview:[views objectAtIndex:0]];
-        
-        // customize the view a bit
-        [self initUI];
-    }
-    return self;
-}
-
 + (instancetype)instanceFromNib
 {
     return [[[NSBundle mainBundle] loadNibNamed:@"UserHeaderView" owner:self options:nil]firstObject];
