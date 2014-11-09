@@ -479,6 +479,7 @@
 				E7063F9119E67BFC00CC3CE0 /* Info.plist */,
 				E7063F8519E67A6A00CC3CE0 /* Images.xcassets */,
 				E7063F8719E67A6A00CC3CE0 /* main.m */,
+				E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */,
 				E7063FA119E6907000CC3CE0 /* Foundation.framework */,
 			);
 			path = "Supporting Files";
@@ -623,7 +624,6 @@
 		E7419EDC19E675D900B5B764 = {
 			isa = PBXGroup;
 			children = (
-				E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
 				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,

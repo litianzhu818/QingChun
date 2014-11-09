@@ -24,6 +24,18 @@
     return self;
 }
 
++ (instancetype)instanceFromNib
+{
+    return [[[NSBundle mainBundle] loadNibNamed:@"UserHeaderView" owner:self options:nil]firstObject];
+}
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+    
+    [self initUI];
+}
+
 - (void)initUI
 {
     [self loadViews];

@@ -20,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 @property (weak, nonatomic) IBOutlet UIButton *accessoryButton;
 
++ (instancetype)instanceFromNib;
+
 -(IBAction)clikedOnHeaderView:(id)sender;
 -(IBAction)clikedOnAccessroyView:(id)sender;
 

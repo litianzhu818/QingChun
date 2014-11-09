@@ -60,7 +60,10 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    userHeaderView = [[UserHeaderView alloc] initWithFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
+    self.title = NSLocalizedString(@"我的", @"me");
+    
+    userHeaderView = [UserHeaderView instanceFromNib];
+    [userHeaderView setFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
     [userHeaderView setDelegate:self];
     [userHeaderView setUserInteractionEnabled:YES];
     [self.view addSubview:userHeaderView];

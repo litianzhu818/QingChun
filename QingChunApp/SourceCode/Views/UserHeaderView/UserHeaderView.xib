@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -20,33 +19,47 @@
                         <action selector="clikedOnHeaderView:" destination="HqH-I0-vW4" eventType="touchUpInside" id="Hkn-gS-KcH"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="headerImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="X3A-lH-qGq">
+                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="X3A-lH-qGq">
                     <rect key="frame" x="4" y="4" width="36" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="36" id="V5g-2M-bJC"/>
+                        <constraint firstAttribute="height" constant="36" id="bnc-tF-5Au"/>
+                    </constraints>
                 </imageView>
-                <button opaque="NO" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDh-c7-1Nb">
-                    <rect key="frame" x="264" y="4" width="36" height="36"/>
-                    <state key="normal" backgroundImage="header_ac_nor.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="注册/登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HA0-S6-9gk">
                     <rect key="frame" x="48" y="4" width="145" height="36"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="36" id="SMq-HE-0y4"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gDh-c7-1Nb">
+                    <rect key="frame" x="276" y="12" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="crD-0C-sDv"/>
+                        <constraint firstAttribute="height" constant="20" id="fvR-P1-bb9"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="header_ac_nor.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="clikedOnAccessroyView:" destination="HqH-I0-vW4" eventType="touchUpInside" id="T7n-or-UKG"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="zoa-0z-R2P" secondAttribute="trailing" id="0Wj-if-HfH"/>
-                <constraint firstItem="gDh-c7-1Nb" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="4" id="2fz-ha-ALC"/>
+                <constraint firstItem="gDh-c7-1Nb" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="12" id="0ip-SQ-CUS"/>
                 <constraint firstAttribute="bottom" secondItem="HA0-S6-9gk" secondAttribute="bottom" constant="4" id="7q7-x7-CQP"/>
                 <constraint firstItem="HA0-S6-9gk" firstAttribute="leading" secondItem="X3A-lH-qGq" secondAttribute="trailing" constant="8" id="F5w-wS-nI0"/>
                 <constraint firstAttribute="bottom" secondItem="X3A-lH-qGq" secondAttribute="bottom" constant="4" id="G24-bk-d84"/>
-                <constraint firstAttribute="trailing" secondItem="gDh-c7-1Nb" secondAttribute="trailing" constant="4" id="LTB-lc-i9D"/>
-                <constraint firstAttribute="bottom" secondItem="gDh-c7-1Nb" secondAttribute="bottom" constant="4" id="Mfg-JV-eFM"/>
+                <constraint firstAttribute="bottom" secondItem="gDh-c7-1Nb" secondAttribute="bottom" constant="12" id="PMf-Dc-hgF"/>
                 <constraint firstItem="zoa-0z-R2P" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" id="RLw-SS-98y"/>
                 <constraint firstItem="HA0-S6-9gk" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="4" id="Vsq-Si-6TH"/>
+                <constraint firstAttribute="trailing" secondItem="gDh-c7-1Nb" secondAttribute="trailing" constant="8" id="W5k-9c-Qb5"/>
                 <constraint firstAttribute="bottom" secondItem="zoa-0z-R2P" secondAttribute="bottom" id="cce-nk-7ji"/>
                 <constraint firstItem="X3A-lH-qGq" firstAttribute="leading" secondItem="HqH-I0-vW4" secondAttribute="leading" constant="4" id="nvp-mb-fDc"/>
                 <constraint firstItem="X3A-lH-qGq" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="4" id="w8D-zl-AeO"/>
