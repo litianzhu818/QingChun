@@ -47,7 +47,7 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    [self.tabBar setTintColor:[UIColor whiteColor]];
+    [self setBagroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"tabBar"]]];
     self.tabBar.opaque = YES;
     
     [self initTabBarImage];
@@ -64,12 +64,18 @@
 
 - (void)initTabBarText
 {
+    //get the selected picture color
+    UIColor *selectedColor = [UIColor colorWithPatternImage:PNG_NAME(@"qingchunba_selected.png")];
+    UIColor *normalColor = [UIColor colorWithPatternImage:PNG_NAME(@"qingchunba_normal.png")];
+    
+    [self.tabBar setTintColor:selectedColor];
+    
     //Load TabBarText
     [self.tabBar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UITabBarItem *item = obj;
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateSelected];
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor lightGrayColor],NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateNormal];
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:selectedColor,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateSelected];
+        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:normalColor,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateNormal];
         [item setTitlePositionAdjustment:UIOffsetMake(0, -2)];
         
     }];
@@ -80,14 +86,14 @@
     //Load TabBarImage
     NSArray *tabBarSelectedImages = [[NSArray alloc] initWithObjects:
                                      PNG_NAME(@"qingchunba_selected.png"),
-                                     PNG_NAME(@"qingchunqiang_selected.png"),
-                                     PNG_NAME(@"qingchunmeng_selected.png"),
+                                     PNG_NAME(@"qingchunbell_selected.png"),
+                                     PNG_NAME(@"qingchungroup_selected.png"),
                                      PNG_NAME(@"me_selected.png"),
                                      nil];
     NSArray *tabBarUnselectedImages = [[NSArray alloc] initWithObjects:
                                        PNG_NAME(@"qingchunba_normal.png"),
-                                       PNG_NAME(@"qingchunqiang_normal.png"),
-                                       PNG_NAME(@"qingchunmeng_normal.png"),
+                                       PNG_NAME(@"qingchunbell_normal.png"),
+                                       PNG_NAME(@"qingchungroup_normal.png"),
                                        PNG_NAME(@"me_normal.png"),
                                        nil];
     NSAssert((self.tabBar.items.count == tabBarSelectedImages.count), @"The UITabBar Which In The MainTabBarViewController Selected Images Count Must Been Equal To The Count of The TabBar Items Count");

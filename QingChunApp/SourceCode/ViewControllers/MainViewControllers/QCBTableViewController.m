@@ -7,15 +7,12 @@
 //
 
 #import "QCBTableViewController.h"
-#import "MainHeaderView.h"
-#import "MainHeaderViewItem.h"
 #import "InfoTableViewCell.h"
+#import "UINavigationItem+Offset.h"
 
-#define MAIN_HEADER_VIEW_HEIGHT 64.0f
 
-@interface QCBTableViewController ()<MainHeaderViewDelegate,UITableViewDataSource,UITableViewDelegate>
+@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
-    MainHeaderView *headerView;
 }
 
 @end
@@ -25,16 +22,15 @@
 
 - (void)dealloc
 {
-    [headerView removeDelegate:self];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-    [self.navigationController.navigationBar setHidden:YES];
+//    [self.navigationController.navigationBar setHidden:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    [self.navigationController.navigationBar setHidden:NO];
+//    [self.navigationController.navigationBar setHidden:NO];
 }
 
 - (void)viewDidLoad
@@ -65,73 +61,38 @@
 {
     //Here initialization your UI parameters
     
-    NSArray *mainHeaderSelectedImages = [[NSArray alloc] initWithObjects:
-                                     PNG_NAME(@"fabiao_selected.png"),
-                                     PNG_NAME(@"jinghua_selected.png"),
-                                     PNG_NAME(@"zuixin_selected.png"),
-                                     PNG_NAME(@"shuaxin_selected.png"),
-                                     nil];
-    NSArray *mainHeaderUnselectedImages = [[NSArray alloc] initWithObjects:
-                                       PNG_NAME(@"fabiao_normal.png"),
-                                       PNG_NAME(@"jinghua_normal.png"),
-                                       PNG_NAME(@"zuixin_normal.png"),
-                                       PNG_NAME(@"shuaxin_normal.png"),
-                                       nil];
-    NSArray *mainHeaderTitles = [[NSArray alloc] initWithObjects:@"发表",@"精华",@"最新",@"刷新", nil];
-    
-    NSMutableArray *items = [NSMutableArray array];
-    [mainHeaderTitles enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        MainHeaderViewItem *item = [[MainHeaderViewItem alloc] initWithTitle:obj normalImage:[mainHeaderSelectedImages objectAtIndex:idx] selectedImage:[mainHeaderUnselectedImages objectAtIndex:idx]];
-        [items addObject:item];
-    }];
-    
-    headerView = [[MainHeaderView alloc] initWithItems:items frame:CGRectMake(0, 0,VIEW_W(self.view) , MAIN_HEADER_VIEW_HEIGHT) delegate:self];
-    [headerView setSelectedAtIndex:1];
-    [headerView setBackgroundColor:[UIColor colorWithRed:218/255.0 green:2/255.0 blue:2/255.0 alpha:1.0]];
-    [headerView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.view addSubview:headerView];
-    
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
     
     NSMutableArray *Constraints = [NSMutableArray array];
     
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[headerView]-MARGIN1-|"
-                                                                             options:0
-                                                                             metrics:@{
-                                                                                       @"MARGIN1":@0.0}
-                                                                               views:NSDictionaryOfVariableBindings(headerView)]];
     [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[_tableView]-MARGIN1-|"
                                                                              options:0
                                                                              metrics:@{
                                                                                        @"MARGIN1":@0.0}
                                                                                views:NSDictionaryOfVariableBindings(_tableView)]];
     
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[headerView(==MARGIN2)]-MARGIN1-[_tableView]-MARGIN1-|"
+    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[_tableView]-MARGIN2-|"
                                                                              options:0
                                                                              metrics:@{
-                                                                                       @"MARGIN1":@0.0,
-                                                                                       @"MARGIN2":[NSNumber numberWithFloat:MAIN_HEADER_VIEW_HEIGHT]}
-                                                                               views:NSDictionaryOfVariableBindings(headerView,_tableView)]];
+                                                                                       @"MARGIN1":@64.0,
+                                                                                       @"MARGIN2":@44.0}
+                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
     [self.view addConstraints:Constraints];
+    
+    self.title = @"青春吧";
+    [self.navigationItem addLeftBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"fabiao_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(sendMessage:)]];
 }
 
 -(void)initializationData
 {
     //Here initialization your data parameters
 }
-- (void)didClikedAtFirstIndex
+
+- (IBAction)sendMessage:(id)sender
 {
-    LOG(@"FirstIndex");
-}
-- (void)didClikedAtLastIndex
-{
-    LOG(@"LastIndex");
-}
-- (void)MainHeaderView:(MainHeaderView *)mainHeaderView didSelectedAtIndex:(NSUInteger)index
-{
-    LOG(@"????:%d",index);
+
 }
 
 #pragma mark - Table view data source
