@@ -57,6 +57,7 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
+    
 }
 
 #pragma mark -
@@ -102,8 +103,8 @@
     [self.tabBar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
         UITabBarItem *item = obj;
-        [item setImage:nil];
-        [item setFinishedSelectedImage:[tabBarSelectedImages objectAtIndex:idx] withFinishedUnselectedImage:[tabBarUnselectedImages objectAtIndex:idx]];
+        item.image = [[tabBarUnselectedImages objectAtIndex:idx] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];;
+        item.selectedImage = [[tabBarSelectedImages objectAtIndex:idx] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
     }];
 }
 
