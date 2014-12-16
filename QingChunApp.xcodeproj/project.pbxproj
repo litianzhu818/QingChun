@@ -50,6 +50,8 @@
 		E7261BAA19F0B1E300492D98 /* start.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7261BA919F0B1E300492D98 /* start.storyboard */; };
 		E7261BAC19F0B27400492D98 /* welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7261BAB19F0B27400492D98 /* welcome.storyboard */; };
 		E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E7261BAF19F0B33100492D98 /* QingChunApp.xcdatamodeld */; };
+		E7299D0D1A40239B00441290 /* BaseTableViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7299D0C1A40239B00441290 /* BaseTableViewCellView.m */; };
+		E7299D101A402D4400441290 /* BasePictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7299D0F1A402D4400441290 /* BasePictureView.m */; };
 		E72B097C1A0B419000109658 /* cell_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B09781A0B419000109658 /* cell_bg@2x.png */; };
 		E72B097D1A0B419000109658 /* more_btn_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B09791A0B419000109658 /* more_btn_sel@2x.png */; };
 		E72B097F1A0B419000109658 /* more_btn_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B097B1A0B419000109658 /* more_btn_nor@2x.png */; };
@@ -238,6 +240,10 @@
 		E7261BA919F0B1E300492D98 /* start.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = start.storyboard; sourceTree = "<group>"; };
 		E7261BAB19F0B27400492D98 /* welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = welcome.storyboard; sourceTree = "<group>"; };
 		E7261BB019F0B33100492D98 /* QingChunApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = QingChunApp.xcdatamodel; sourceTree = "<group>"; };
+		E7299D0B1A40239B00441290 /* BaseTableViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCellView.h; sourceTree = "<group>"; };
+		E7299D0C1A40239B00441290 /* BaseTableViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCellView.m; sourceTree = "<group>"; };
+		E7299D0E1A402D4400441290 /* BasePictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePictureView.h; sourceTree = "<group>"; };
+		E7299D0F1A402D4400441290 /* BasePictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePictureView.m; sourceTree = "<group>"; };
 		E72B09781A0B419000109658 /* cell_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cell_bg@2x.png"; sourceTree = "<group>"; };
 		E72B09791A0B419000109658 /* more_btn_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_btn_sel@2x.png"; sourceTree = "<group>"; };
 		E72B097B1A0B419000109658 /* more_btn_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_btn_nor@2x.png"; sourceTree = "<group>"; };
@@ -904,6 +910,10 @@
 				E7AE673B19FE1D21008546EA /* InfoTableViewCell.h */,
 				E7AE673C19FE1D21008546EA /* InfoTableViewCell.m */,
 				E7AE673D19FE1D21008546EA /* InfoTableViewCell.xib */,
+				E7299D0B1A40239B00441290 /* BaseTableViewCellView.h */,
+				E7299D0C1A40239B00441290 /* BaseTableViewCellView.m */,
+				E7299D0E1A402D4400441290 /* BasePictureView.h */,
+				E7299D0F1A402D4400441290 /* BasePictureView.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1257,6 +1267,7 @@
 			files = (
 				E7AF3D1B1A0B9FAF0073116D /* MeViewController.m in Sources */,
 				E725A2971A07CDA900FCE03D /* UIImageView+HighlightedWebCache.m in Sources */,
+				E7299D101A402D4400441290 /* BasePictureView.m in Sources */,
 				E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */,
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
@@ -1295,6 +1306,7 @@
 				E7BAD1531A0DECEA00D27F4B /* PullingRefreshTableView.m in Sources */,
 				E725A2991A07CDA900FCE03D /* UIView+WebCacheOperation.m in Sources */,
 				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
+				E7299D0D1A40239B00441290 /* BaseTableViewCellView.m in Sources */,
 				E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */,
 				E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */,
 				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,

@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+typedef NS_ENUM(NSUInteger, InfoCellType) {
+    InfoCellTypeTextOnly = 0,
+    InfoCellTypeSinglePtiture,
+    InfoCellTypeMultiplePicture
+};
+
+typedef NS_ENUM(NSUInteger, InfoPictureType) {
+    InfoPictureTypeLong = 0,
+    InfoPictureTypeWide
+};
+
 @interface InfoTableViewCell : UITableViewCell
 {
     IBOutlet UIButton *photoButton;
