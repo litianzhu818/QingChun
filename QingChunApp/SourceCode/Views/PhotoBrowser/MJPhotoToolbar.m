@@ -15,6 +15,7 @@
     // 显示页码
     UILabel *_indexLabel;
     UIButton *_saveImageBtn;
+    UITextView *_textView;
 }
 @end
 
@@ -36,7 +37,7 @@
     if (_photos.count > 1) {
         _indexLabel = [[UILabel alloc] init];
         _indexLabel.font = [UIFont boldSystemFontOfSize:20];
-        _indexLabel.frame = self.bounds;
+        _indexLabel.frame = CGRectMake(0, 50, 320, 44);
         _indexLabel.backgroundColor = [UIColor clearColor];
         _indexLabel.textColor = [UIColor whiteColor];
         _indexLabel.textAlignment = NSTextAlignmentCenter;
@@ -45,23 +46,23 @@
     }
     
     // 保存图片按钮
-    CGFloat btnWidth = self.bounds.size.height;
+    CGFloat btnWidth = 44;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _saveImageBtn.frame = CGRectMake(20, 0, btnWidth, btnWidth);
+    _saveImageBtn.frame = CGRectMake(20, 50, btnWidth, btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
     [_saveImageBtn addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
-    //[self addSubview:_saveImageBtn];
+    [self addSubview:_saveImageBtn];
     
-    CGFloat btnWidth1 = self.bounds.size.height;
-    UIButton* Btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    Btn.frame = CGRectMake(20, 0, btnWidth1, btnWidth1);
-    Btn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
-    [Btn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
-    [Btn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
-    [Btn addTarget:self action:@selector(saveImage) forControlEvents:UIControlEventTouchUpInside];
-    [self addSubview:Btn];
+    _textView = [[UITextView alloc] init];
+    [_textView setFrame:CGRectMake(0, 0, 320, 50)];
+    _textView.backgroundColor = [UIColor clearColor];
+    _textView.editable = NO;
+    _textView.textAlignment = NSTextAlignmentLeft;
+    _textView.textColor = [UIColor whiteColor];
+    _textView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self addSubview:_textView];
 }
 
 - (void)saveImage
@@ -89,9 +90,10 @@
     _currentPhotoIndex = currentPhotoIndex;
     
     // 更新页码
-    _indexLabel.text = [NSString stringWithFormat:@"%d / %d", _currentPhotoIndex + 1, _photos.count];
+    _indexLabel.text = [NSString stringWithFormat:@"%lu / %lu", _currentPhotoIndex + 1, (unsigned long)_photos.count];
     
     MJPhoto *photo = _photos[_currentPhotoIndex];
+    [_textView setText:photo.photoDescription];
     // 按钮
     _saveImageBtn.enabled = photo.image != nil && !photo.save;
 }

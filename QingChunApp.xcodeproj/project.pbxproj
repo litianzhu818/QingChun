@@ -158,6 +158,8 @@
 		E7CF62E719F8BAC6009A9A20 /* BaseTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF62E619F8BAC6009A9A20 /* BaseTabBarItem.m */; };
 		E7CF62EE19F91F2A009A9A20 /* BaseNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF62ED19F91F2A009A9A20 /* BaseNavigationBar.m */; };
 		E7DD1C1E1A40565100FAA24A /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C1D1A40565100FAA24A /* MBProgressHUD+Add.m */; };
+		E7DD1C231A405A2200FAA24A /* SDWebImageManager+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C201A405A2200FAA24A /* SDWebImageManager+MJ.m */; };
+		E7DD1C241A405A2200FAA24A /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C221A405A2200FAA24A /* UIImageView+MJWebCache.m */; };
 		E7FC67A61A3D2DDF00AF45A6 /* qingchunbell_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67A21A3D2DDF00AF45A6 /* qingchunbell_normal@2x.png */; };
 		E7FC67A71A3D2DDF00AF45A6 /* qingchunbell_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67A31A3D2DDF00AF45A6 /* qingchunbell_selected@2x.png */; };
 		E7FC67A81A3D2DDF00AF45A6 /* qingchungroup_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67A41A3D2DDF00AF45A6 /* qingchungroup_normal@2x.png */; };
@@ -401,6 +403,10 @@
 		E7CF62ED19F91F2A009A9A20 /* BaseNavigationBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationBar.m; sourceTree = "<group>"; };
 		E7DD1C1C1A40565100FAA24A /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		E7DD1C1D1A40565100FAA24A /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
+		E7DD1C1F1A405A2200FAA24A /* SDWebImageManager+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SDWebImageManager+MJ.h"; sourceTree = "<group>"; };
+		E7DD1C201A405A2200FAA24A /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+MJ.m"; sourceTree = "<group>"; };
+		E7DD1C211A405A2200FAA24A /* UIImageView+MJWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MJWebCache.h"; sourceTree = "<group>"; };
+		E7DD1C221A405A2200FAA24A /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
 		E7FC67A21A3D2DDF00AF45A6 /* qingchunbell_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchunbell_normal@2x.png"; sourceTree = "<group>"; };
 		E7FC67A31A3D2DDF00AF45A6 /* qingchunbell_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchunbell_selected@2x.png"; sourceTree = "<group>"; };
 		E7FC67A41A3D2DDF00AF45A6 /* qingchungroup_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchungroup_normal@2x.png"; sourceTree = "<group>"; };
@@ -1002,6 +1008,10 @@
 		E7B73B261A4055970060CA94 /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				E7DD1C1F1A405A2200FAA24A /* SDWebImageManager+MJ.h */,
+				E7DD1C201A405A2200FAA24A /* SDWebImageManager+MJ.m */,
+				E7DD1C211A405A2200FAA24A /* UIImageView+MJWebCache.h */,
+				E7DD1C221A405A2200FAA24A /* UIImageView+MJWebCache.m */,
 				E7B73B271A4055970060CA94 /* MJPhoto.h */,
 				E7B73B281A4055970060CA94 /* MJPhoto.m */,
 				E7B73B291A4055970060CA94 /* MJPhotoBrowser.bundle */,
@@ -1349,6 +1359,7 @@
 				E7B73B361A4055970060CA94 /* MJPhotoBrowser.m in Sources */,
 				E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */,
 				E75E90C419F74643000F2CE9 /* StatusBar.m in Sources */,
+				E7DD1C241A405A2200FAA24A /* UIImageView+MJWebCache.m in Sources */,
 				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,
 				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
 				E725A28A1A07CDA900FCE03D /* MKAnnotationView+WebCache.m in Sources */,
@@ -1360,6 +1371,7 @@
 				E725A2961A07CDA900FCE03D /* UIImage+WebP.m in Sources */,
 				E79FB2D919FB61C100FBC703 /* QCBTableViewController.m in Sources */,
 				E7B73B341A4055970060CA94 /* MJPhoto.m in Sources */,
+				E7DD1C231A405A2200FAA24A /* SDWebImageManager+MJ.m in Sources */,
 				E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */,
 				E7AE66EE19F9E9F4008546EA /* NavigationBarItem.m in Sources */,
 				E7DD1C1E1A40565100FAA24A /* MBProgressHUD+Add.m in Sources */,

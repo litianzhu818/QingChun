@@ -10,6 +10,7 @@
 #import "MJPhotoLoadingView.h"
 #import "UIImageView+WebCache.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SDImageCache.h"
 
 @interface MJPhotoView ()
 {
@@ -72,12 +73,18 @@
         if (![_photo.url.absoluteString hasSuffix:@"gif"]) {
             __unsafe_unretained MJPhotoView *photoView = self;
             __unsafe_unretained MJPhoto *photo = _photo;
-            [_imageView setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+            [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 photo.image = image;
                 
                 // 调整frame参数
                 [photoView adjustFrame];
             }];
+//            [_imageView setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//                photo.image = image;
+//                
+//                // 调整frame参数
+//                [photoView adjustFrame];
+//            }];
         }
     } else {
         [self photoStartLoad];
@@ -101,13 +108,20 @@
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
-        [_imageView setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSUInteger receivedSize, long long expectedSize) {
+        [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
             if (receivedSize > kMinProgress) {
                 loading.progress = (float)receivedSize/expectedSize;
             }
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
             [photoView photoDidFinishLoadWithImage:image];
         }];
+//        [_imageView setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSUInteger receivedSize, long long expectedSize) {
+//            if (receivedSize > kMinProgress) {
+//                loading.progress = (float)receivedSize/expectedSize;
+//            }
+//        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+//            [photoView photoDidFinishLoadWithImage:image];
+//        }];
     }
 }
 
@@ -149,7 +163,7 @@
 	if (minScale > 1) {
 		minScale = 1.0;
 	}
-	CGFloat maxScale = 2.0; 
+	CGFloat maxScale = 3.0;
 	if ([UIScreen instancesRespondToSelector:@selector(scale)]) {
 		maxScale = maxScale / [[UIScreen mainScreen] scale];
 	}
@@ -187,6 +201,17 @@
 #pragma mark - UIScrollViewDelegate
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
 	return _imageView;
+}
+
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+    CGRect imageViewFrame = _imageView.frame;
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    if (imageViewFrame.size.height > screenBounds.size.height) {
+        imageViewFrame.origin.y = 0.0f;
+    } else {
+        imageViewFrame.origin.y = (screenBounds.size.height - imageViewFrame.size.height) / 2.0;
+    }
+    _imageView.frame = imageViewFrame;
 }
 
 #pragma mark - 手势处理
@@ -253,6 +278,6 @@
 - (void)dealloc
 {
     // 取消请求
-    [_imageView setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
+    [_imageView sd_setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
 }
 @end
