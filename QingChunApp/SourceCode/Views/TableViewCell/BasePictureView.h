@@ -8,11 +8,6 @@
 
 @import UIKit;
 
-typedef NS_ENUM(NSUInteger, PictueViewType) {
-    PictueViewTypeSingle = 0,
-    PictueViewTypeMultiple
-};
-
 @protocol BasePictureViewDelegate;
 
 @interface BasePictureView : UIView
@@ -24,6 +19,8 @@ typedef NS_ENUM(NSUInteger, PictueViewType) {
 
 - (instancetype)initWithFrame:(CGRect)frame urls:(NSArray *)urls;
 - (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url;
+- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url aspectRatio:(CGFloat)aspectRatio;
+- (instancetype)initWithFrame:(CGRect)frame multipleUrls:(NSArray *)urls aspectRatio:(CGFloat)aspectRatio;
 
 - (NSString *)urlAtIndex:(NSUInteger)pictureIndex;
 - (UIImage *)imageAtIndex:(NSUInteger)pictureIndex;

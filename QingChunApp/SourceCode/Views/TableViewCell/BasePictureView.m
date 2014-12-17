@@ -30,24 +30,29 @@
     return [self initWithFrame:frame urls:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url aspectRatio:(CGFloat)aspectRatio
-{
-    return [self initWithFrame:frame urls:[NSArray arrayWithObjects:url,nil] aspectRatio:aspectRatio];
-}
 - (instancetype)initWithFrame:(CGRect)frame urls:(NSArray *)urls
 {
-    return [self initWithFrame:frame urls:urls aspectRatio:0.0];
+    return [self initWithFrame:frame multipleUrls:urls aspectRatio:0.0];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame urls:(NSArray *)urls aspectRatio:(CGFloat)aspectRatio
+- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url
+{
+    return [self initWithFrame:frame multipleUrls:[NSArray arrayWithObjects:url,nil] aspectRatio:1.0f];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url aspectRatio:(CGFloat)aspectRatio
+{
+    return [self initWithFrame:frame multipleUrls:[NSArray arrayWithObjects:url,nil] aspectRatio:aspectRatio];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame multipleUrls:(NSArray *)urls aspectRatio:(CGFloat)aspectRatio
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initParameters];
         _urls = urls;
-        [self setupViews];
-        
+        [self initUI];
     }
     return self;
 }
@@ -59,7 +64,7 @@
     _images = [ NSMutableArray array];
 }
 
-- (void)setupViews
+- (void)initUI
 {
     if ([_urls count] == 1) {
         [self setupSinglePictureView];
@@ -81,6 +86,7 @@
         imageWith = imageHeight*_aspectRatio;
     }
     _pictureSize = CGSizeMake(imageWith, imageHeight);
+    self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
     
     BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[_urls firstObject]];
      singleImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -122,6 +128,7 @@
     }
     
     _pictureSize = CGSizeMake(imageWith, imageHeight);
+    self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
     
     CGFloat originX = 0.0f;
     CGFloat originY = 0.0f;
@@ -132,17 +139,20 @@
         
         for (NSInteger item = 1; item <= column; ++item) {
             
+            NSUInteger sumOfViews = (index - 1) * 3 + item;
+            
+            if (sumOfViews > numOfImages) break;
+            
             originX += (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
             
-            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:[_urls firstObject]];
+            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:[_urls objectAtIndex:sumOfViews - 1]];
             singleImageView.contentMode = UIViewContentModeScaleAspectFill;
-            singleImageView.tag = (index - 1)*3+item;
+            singleImageView.tag = sumOfViews - 1;
             
             [self addSubview:singleImageView];
             [_images addObject:singleImageView];
         }
     }
-    
     
 }
 
