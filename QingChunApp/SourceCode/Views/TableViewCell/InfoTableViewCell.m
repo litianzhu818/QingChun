@@ -8,6 +8,12 @@
 
 #import "InfoTableViewCell.h"
 
+#define LAYOUT_WIDTH 8.0f
+#define LAYOUT_HEIGHT 10.0f
+
+#define SINGLE_PICTURE_WIDTH 200.0f
+#define MULTIPLE_PICTURE_WIDTH 80.0f
+
 #define NAME_FONT [UIFont systemFontOfSize:14.0]
 #define TIME_FONT [UIFont systemFontOfSize:11.0]
 #define TEXT_FONT [UIFont systemFontOfSize:17.0]
