@@ -7,14 +7,13 @@
 //
 
 #import "BasePictureView.h"
-#import "UIImage+GIF.h"
-#import "UIImageView+WebCache.h"
+#import "BaseCellImageView.h"
 
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
 #define MULTIPLE_IMAGE_WIDTH 80.0f
 #define SINGLE_IMAGE_WIDTH 200.0f
 
-@interface BasePictureView ()
+@interface BasePictureView ()<BaseCellImageViewDelegate>
 {
     NSArray *_urls;
     NSMutableArray *_images;
@@ -62,13 +61,10 @@
 
 - (void)setupViews
 {
-    switch ([_urls count]) {
-        case 1:
-//            <#statements#>
-            break;
-            
-        default:
-            break;
+    if ([_urls count] == 1) {
+        [self setupSinglePictureView];
+    }else{
+        [self setupMultiplePictureView];
     }
 }
 
@@ -86,10 +82,70 @@
     }
     _pictureSize = CGSizeMake(imageWith, imageHeight);
     
-    UIImageView *singleImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight)];
+    BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[_urls firstObject]];
+     singleImageView.contentMode = UIViewContentModeScaleAspectFit;
+    singleImageView.tag = 0;
     
+    [self addSubview:singleImageView];
     [_images addObject:singleImageView];
 }
+
+- (void)setupMultiplePictureView
+{
+    CGFloat imageWith = 0.0f;
+    CGFloat imageHeight = 0.0f;
+    
+    NSUInteger column       =   0;//列数
+    NSUInteger row          =   0;//行数
+    NSUInteger numOfImages  =   [_urls count];
+    
+    if (numOfImages <= 3) {//一行，三列
+        row = 1;
+        column = numOfImages;
+        imageWith = numOfImages * MULTIPLE_IMAGE_WIDTH + (numOfImages - 1) * MULTIPLE_IMAGE_INTERVAL;
+        imageHeight = MULTIPLE_IMAGE_WIDTH;
+    }else if (numOfImages == 4){//两行，两列
+        row = 2;
+        column = 2;
+        imageWith = 2 * MULTIPLE_IMAGE_WIDTH +  MULTIPLE_IMAGE_INTERVAL;
+        imageHeight = 2 * MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL;
+    }else if (4 < numOfImages && numOfImages <= 6){//两行，三列
+        row = 2;
+        column = 3;
+        imageWith = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
+        imageHeight = 2 * MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL;
+    }else if (6 < numOfImages && numOfImages <= 9){//三行，三列
+        row = 3;
+        column = 3;
+        imageWith = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
+        imageHeight = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
+    }
+    
+    _pictureSize = CGSizeMake(imageWith, imageHeight);
+    
+    CGFloat originX = 0.0f;
+    CGFloat originY = 0.0f;
+    for (NSUInteger index = 1; index <= row; ++index) {
+        
+        originX = 0.0f;
+        originY += (index - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
+        
+        for (NSInteger item = 1; item <= column; ++item) {
+            
+            originX += (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
+            
+            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:[_urls firstObject]];
+            singleImageView.contentMode = UIViewContentModeScaleAspectFill;
+            singleImageView.tag = (index - 1)*3+item;
+            
+            [self addSubview:singleImageView];
+            [_images addObject:singleImageView];
+        }
+    }
+    
+    
+}
+
 
 - (NSString *)urlAtIndex:(NSUInteger)pictureIndex
 {
@@ -100,42 +156,11 @@
     return [_images objectAtIndex:pictureIndex];
 }
 
-/*
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+#pragma mark - BaseCellImageViewDelegate method
+- (void)tapOnImageView:(BaseCellImageView *)baseCellImageView
 {
-    //your code here
-    
-    [super touchesBegan:touches withEvent:event];
-}
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    //your code here
-    
-    // check touch up inside
-    if ([self superview]) {
-        UITouch *touch = [touches anyObject];
-        CGPoint point = [touch locationInView:[self superview]];
-        //TODO:这里可以将触摸范围扩大，便于操作，例如：
-         CGRect validTouchArea = CGRectMake((self.frame.origin.x - 10),
-         (self.frame.origin.y - 10),
-         (self.frame.size.width + 10),
-         (self.frame.size.height + 10));
-        if (CGRectContainsPoint(validTouchArea, point)) {
-            //your code here
-        }
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapedOnImageView:onIndex:)]) {
+        [self.delegate didTapedOnImageView:baseCellImageView onIndex:baseCellImageView.tag];
     }
-    
-    [super touchesEnded:touches withEvent:event];
 }
-*/
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
-
 @end

@@ -13,7 +13,11 @@ typedef NS_ENUM(NSUInteger, PictueViewType) {
     PictueViewTypeMultiple
 };
 
+@protocol BasePictureViewDelegate;
+
 @interface BasePictureView : UIView
+
+@property (assign, nonatomic) id<BasePictureViewDelegate> delegate;
 
 @property (strong, nonatomic, readonly) NSArray *urls;
 @property (assign, nonatomic, readonly) CGSize pictureSize;
@@ -23,5 +27,14 @@ typedef NS_ENUM(NSUInteger, PictueViewType) {
 
 - (NSString *)urlAtIndex:(NSUInteger)pictureIndex;
 - (UIImage *)imageAtIndex:(NSUInteger)pictureIndex;
+
+@end
+
+
+@protocol BasePictureViewDelegate <NSObject>
+
+@optional
+
+- (void)didTapedOnImageView:(UIImageView *)imageView onIndex:(NSUInteger)index;
 
 @end

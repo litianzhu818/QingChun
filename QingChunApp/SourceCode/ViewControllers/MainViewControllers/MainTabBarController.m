@@ -66,8 +66,8 @@
 - (void)initTabBarText
 {
     //get the selected picture color
-    UIColor *selectedColor = [UIColor colorWithPatternImage:PNG_NAME(@"qingchunba_selected.png")];
-    UIColor *normalColor = [UIColor colorWithPatternImage:PNG_NAME(@"qingchunba_normal.png")];
+    UIColor *selectedColor = UIColorFromRGB(0x61a653);
+    UIColor *normalColor = UIColorFromRGB(0x757575);
     
     [self.tabBar setTintColor:selectedColor];
     

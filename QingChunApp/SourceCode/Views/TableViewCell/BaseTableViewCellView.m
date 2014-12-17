@@ -7,6 +7,7 @@
 //
 
 #import "BaseTableViewCellView.h"
+#import "BaseCellHeaderView.h"
 //两种模式：一、平铺，四个按钮都显示  二、缩进，显示两个，隐藏两个，用popupview
 
 @interface  BaseTableViewCellView ()

@@ -30,6 +30,7 @@
     #define GLOBAL_GCD(block) dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block)
     #define MAIN_GCD(block) dispatch_async(dispatch_get_main_queue(),block)
 
+    #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     /*************************************System info***************************************/
     #define FILE_UPLOAD_URL     @"file_upload_url"
     #define IMAGE_COMORESSION   @"ImageCompression"
