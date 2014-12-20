@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BaseCellButtonView : UIView
+@class CellButtonViewModel;
+
+@interface BaseCellButtonView : UIImageView
+
+@property (strong, nonatomic) CellButtonViewModel *cellButtonViewModel;
+
+- (id)initWithFrame:(CGRect)frame  cellButtonViewModel:(CellButtonViewModel *)cellButtonViewModel;
+
+- (UIButton *)addButtonWithImage:(NSString *)imageName backgroundImage:(NSString *)backgroundImageName buttonIndex:(NSInteger)index;
+
+- (void)setButton:(UIButton *)button withTitle:(NSString *)title forCounts:(NSUInteger)number;
 
 @end

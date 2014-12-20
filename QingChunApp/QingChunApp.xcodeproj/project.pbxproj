@@ -177,6 +177,9 @@
 		E7FC67AC1A3D315600AF45A6 /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67AA1A3D315600AF45A6 /* navigationBar@2x.png */; };
 		E7FC67AD1A3D315600AF45A6 /* tabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67AB1A3D315600AF45A6 /* tabBar@2x.png */; };
 		E7FC67B11A3D5A1D00AF45A6 /* UINavigationItem+Offset.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67B01A3D5A1D00AF45A6 /* UINavigationItem+Offset.m */; };
+		E7FC67B51A45386100AF45A6 /* API接口说明.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67B41A45386100AF45A6 /* API接口说明.rtf */; };
+		E7FC67BA1A454D3A00AF45A6 /* CellButtonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67B91A454D3A00AF45A6 /* CellButtonViewModel.m */; };
+		E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67BC1A4556F400AF45A6 /* CellButtonView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -441,6 +444,11 @@
 		E7FC67AB1A3D315600AF45A6 /* tabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar@2x.png"; sourceTree = "<group>"; };
 		E7FC67AF1A3D5A1D00AF45A6 /* UINavigationItem+Offset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Offset.h"; sourceTree = "<group>"; };
 		E7FC67B01A3D5A1D00AF45A6 /* UINavigationItem+Offset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Offset.m"; sourceTree = "<group>"; };
+		E7FC67B41A45386100AF45A6 /* API接口说明.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "API接口说明.rtf"; sourceTree = "<group>"; };
+		E7FC67B81A454D3A00AF45A6 /* CellButtonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellButtonViewModel.h; sourceTree = "<group>"; };
+		E7FC67B91A454D3A00AF45A6 /* CellButtonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellButtonViewModel.m; sourceTree = "<group>"; };
+		E7FC67BB1A4556F400AF45A6 /* CellButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellButtonView.h; sourceTree = "<group>"; };
+		E7FC67BC1A4556F400AF45A6 /* CellButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellButtonView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -686,6 +694,7 @@
 		E7419EDC19E675D900B5B764 = {
 			isa = PBXGroup;
 			children = (
+				E7FC67B41A45386100AF45A6 /* API接口说明.rtf */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
 				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,
@@ -974,6 +983,10 @@
 				E7DD1C4C1A418E6E00FAA24A /* BaseCellImageView.m */,
 				E7DD1C891A41AC3600FAA24A /* BaseCellButtonView.h */,
 				E7DD1C8A1A41AC3600FAA24A /* BaseCellButtonView.m */,
+				E7FC67BB1A4556F400AF45A6 /* CellButtonView.h */,
+				E7FC67BC1A4556F400AF45A6 /* CellButtonView.m */,
+				E7FC67B81A454D3A00AF45A6 /* CellButtonViewModel.h */,
+				E7FC67B91A454D3A00AF45A6 /* CellButtonViewModel.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1311,6 +1324,7 @@
 				E79FD9A419FFE65300625BA8 /* comment_normal@2x.png in Resources */,
 				E7DD1C561A4194ED00FAA24A /* timeline_image_loading@2x.png in Resources */,
 				E7AF3D4A1A0BA17A0073116D /* 设置.png in Resources */,
+				E7FC67B51A45386100AF45A6 /* API接口说明.rtf in Resources */,
 				E72B097C1A0B419000109658 /* cell_bg@2x.png in Resources */,
 				E7AF3D4F1A0BA17A0073116D /* 青春墙.png in Resources */,
 				E7FC67A71A3D2DDF00AF45A6 /* qingchunbell_selected@2x.png in Resources */,
@@ -1426,6 +1440,7 @@
 				E7DD1C471A41333400FAA24A /* BaseCellHeaderView.m in Sources */,
 				E725A2951A07CDA900FCE03D /* UIImage+MultiFormat.m in Sources */,
 				E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */,
+				E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */,
 				E7AE673E19FE1D21008546EA /* InfoTableViewCell.m in Sources */,
 				E725A28B1A07CDA900FCE03D /* NSData+ImageContentType.m in Sources */,
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
@@ -1434,6 +1449,7 @@
 				E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */,
 				E7AE66EE19F9E9F4008546EA /* NavigationBarItem.m in Sources */,
 				E7DD1C1E1A40565100FAA24A /* MBProgressHUD+Add.m in Sources */,
+				E7FC67BA1A454D3A00AF45A6 /* CellButtonViewModel.m in Sources */,
 				E7CF62E719F8BAC6009A9A20 /* BaseTabBarItem.m in Sources */,
 				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,
 				E712AA4A1A0BD30D000648C4 /* LoginViewController.m in Sources */,
