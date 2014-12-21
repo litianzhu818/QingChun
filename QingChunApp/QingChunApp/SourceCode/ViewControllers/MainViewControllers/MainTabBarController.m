@@ -7,6 +7,7 @@
 //
 
 #import "MainTabBarController.h"
+#import "UITabBar+BackgroundImage.h"
 
 @interface MainTabBarController ()
 
@@ -66,20 +67,15 @@
 - (void)initTabBarText
 {
     //get the selected picture color
-    UIColor *selectedColor = UIColorFromRGB(0x61a653);
-    UIColor *normalColor = UIColorFromRGB(0x757575);
+    UIFont  *tabBarFont     =   [UIFont boldSystemFontOfSize:10];
+    UIColor *selectedColor  =   UIColorFromRGB(0x61a653);
+    UIColor *normalColor    =   UIColorFromRGB(0x757575);
     
-    [self.tabBar setTintColor:selectedColor];
-    
-    //Load TabBarText
-    [self.tabBar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        UITabBarItem *item = obj;
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:selectedColor,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateSelected];
-        [item setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:normalColor,NSForegroundColorAttributeName,[UIFont boldSystemFontOfSize:10],NSFontAttributeName, nil] forState:UIControlStateNormal];
-        [item setTitlePositionAdjustment:UIOffsetMake(0, -2)];
-        
-    }];
+    [self.tabBar setTabBarItemsTitleNormalColor:normalColor
+                                     normalFont:tabBarFont
+                                  selectedColor:selectedColor
+                                   selectedFont:tabBarFont
+                             positionAdjustment:UIOffsetMake(0, -2)];
 }
 
 - (void)initTabBarImage
@@ -100,12 +96,7 @@
     NSAssert((self.tabBar.items.count == tabBarSelectedImages.count), @"The UITabBar Which In The MainTabBarViewController Selected Images Count Must Been Equal To The Count of The TabBar Items Count");
     NSAssert((self.tabBar.items.count == tabBarSelectedImages.count), @"The UITabBar Which In The MainTabBarViewController Unselected Images Count Must Been Equal To The Count of The TabBar Items Count");
     
-    [self.tabBar.items enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        
-        UITabBarItem *item = obj;
-        item.image = [[tabBarUnselectedImages objectAtIndex:idx] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];;
-        item.selectedImage = [[tabBarSelectedImages objectAtIndex:idx] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
-    }];
+    [self.tabBar setTabBarItemsNormalImages:tabBarUnselectedImages selectedImages:tabBarSelectedImages];
 }
 
 

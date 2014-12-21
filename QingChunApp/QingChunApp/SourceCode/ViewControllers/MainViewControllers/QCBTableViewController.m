@@ -7,13 +7,23 @@
 //
 
 #import "QCBTableViewController.h"
+#import "EGORefreshTableHeaderView.h"
 #import "InfoTableViewCell.h"
 #import "UINavigationItem+Offset.h"
+#import "UIBarButtonItem+SA.h"
 
 
-@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
 {
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    
+    //  Reloading var should really be your tableviews datasource
+    //  Putting it here for demo purposes
+    BOOL _reloading;
 }
+
+- (void)reloadTableViewDataSource;
+- (void)doneLoadingTableViewData;
 
 @end
 
@@ -22,6 +32,7 @@
 
 - (void)dealloc
 {
+    _refreshHeaderView = nil;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -60,7 +71,7 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    
+
     [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.tableView setBackgroundColor:[UIColor clearColor]];
@@ -82,7 +93,21 @@
     [self.view addConstraints:Constraints];
     
     self.title = @"青春吧";
-    [self.navigationItem addLeftBarButtonItem:[[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"fabiao_normal"] style:UIBarButtonItemStylePlain target:self action:@selector(sendMessage:)]];
+    
+    [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"fabiao_selected" highLightedImageName:@"fabiao_normal" addTarget:self action:@selector(sendMessage:)]];
+    
+    if (_refreshHeaderView == nil) {
+        
+        EGORefreshTableHeaderView *refreshTableHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
+        refreshTableHeaderView.delegate = self;
+        //refreshTableHeaderView.backgroundColor = [UIColor redColor];
+        [self.view insertSubview:refreshTableHeaderView belowSubview:self.tableView];
+        _refreshHeaderView = refreshTableHeaderView;
+    
+    }
+    
+    //  update the last update date
+    [_refreshHeaderView refreshLastUpdatedDate];
 }
 
 -(void)initializationData
@@ -93,6 +118,72 @@
 - (IBAction)sendMessage:(id)sender
 {
 
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+    
+    //  should be calling your tableviews data source model to reload
+    //  put here just for demo
+    _reloading = YES;
+    
+}
+
+- (void)doneLoadingTableViewData{
+    
+    //  model should call this when its done loading
+    _reloading = NO;
+    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+    
+}
+
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [_refreshHeaderView egoRefreshScrollViewWillBeginScroll:scrollView];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+{
+    
+    [self reloadTableViewDataSource];
+    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+    
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
+{
+    
+    return _reloading; // should return if data source model is reloading
+    
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
+{
+    
+    return [NSDate date]; // should return date data source was last changed
+    
 }
 
 #pragma mark - Table view data source

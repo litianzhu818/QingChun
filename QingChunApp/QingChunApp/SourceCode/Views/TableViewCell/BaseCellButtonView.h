@@ -11,6 +11,16 @@
 @class CellButtonViewModel;
 
 @interface BaseCellButtonView : UIImageView
+{
+    UIButton                *_likeButton;
+    UIButton                *_unlikeButton;
+    UIButton                *_shareButton;
+    UIButton                *_commentButton;
+    
+    CellButtonViewModel     *_cellButtonViewModel;
+    CAKeyframeAnimation     *_keyframeAnimation;
+    
+}
 
 @property (strong, nonatomic) CellButtonViewModel *cellButtonViewModel;
 

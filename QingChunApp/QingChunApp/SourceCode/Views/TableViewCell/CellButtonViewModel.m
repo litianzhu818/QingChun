@@ -12,7 +12,7 @@
 
 - (id)initWithDict:(NSDictionary *)dict
 {
-    if (self = [super initWithDict:dict]) {
+    if (self = [super init]) {
         
         self.likeCount      =   [dict[@"likeCount"] integerValue];          // 点赞数
         self.unlikeCount    =   [dict[@"unlikeCount"] integerValue];        // 讨厌数

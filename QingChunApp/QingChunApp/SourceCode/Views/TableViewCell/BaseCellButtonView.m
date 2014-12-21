@@ -10,16 +10,7 @@
 #import "CellButtonViewModel.h"
 
 @interface BaseCellButtonView ()
-{
-    UIButton                *_likeButton;
-    UIButton                *_unlikeButton;
-    UIButton                *_shareButton;
-    UIButton                *_commentButton;
-    
-    CellButtonViewModel     *_cellButtonViewModel;
-    CAKeyframeAnimation     *_keyframeAnimation;
-    
-}
+
 @end
 
 @implementation BaseCellButtonView
@@ -102,7 +93,7 @@
     // 根据模型数据内容设置菜单栏按钮文字
     [self setButton:_likeButton withTitle:@"喜欢" forCounts:cellButtonViewModel.likeCount];
     [self setButton:_unlikeButton withTitle:@"讨厌" forCounts:cellButtonViewModel.unlikeCount];
-    self setButton:_shareButton withTitle:@"转发" forCounts:cellButtonViewModel.shareCount
+    [self setButton:_shareButton withTitle:@"转发" forCounts:cellButtonViewModel.shareCount];
     [self setButton:_commentButton withTitle:@"评论" forCounts:cellButtonViewModel.commentCount];
 }
 /*

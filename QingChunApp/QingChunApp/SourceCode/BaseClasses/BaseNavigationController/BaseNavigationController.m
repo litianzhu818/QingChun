@@ -7,6 +7,7 @@
 //
 
 #import "BaseNavigationController.h"
+#import "UINavigationBar+ImageBackground.h"
 
 @interface BaseNavigationController ()
 
@@ -50,6 +51,9 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
+    [self.navigationBar setVerticalBackgroundImage:[UIImage imageNamed:@"navigationBar"]
+                          landscapeBackgroundImage:nil
+                                    withShadowLine:NO];
 }
 
 -(void)initializationData

@@ -7,6 +7,8 @@
 //
 
 #import "CellButtonView.h"
+#import "UIImage+SA.h"
+#import "NSString+SA.h"
 
 @implementation CellButtonView
 
@@ -24,7 +26,7 @@
         
         _shareButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
                               backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
-        _commentButton = self addButtonWithImage:@"timeline_icon_unlike.png"
+        _commentButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
     backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
         
     }     return self;
@@ -34,17 +36,20 @@
 {
     self = [super initWithFrame:frame cellButtonViewModel:cellButtonViewModel];
     if (self) {
-        // 添加3个按钮
-        _likeButton = [self addButtonWithImage:@"timeline_icon_comment.png"
-                               backgroundImage:@"timeline_card_leftbottom.png" buttonIndex:0];
+        // 添加4个按钮
+        _likeButton = [self addButtonWithImage:@"like.png"
+                               backgroundImage:nil
+                                   buttonIndex:0];
         
-        _unlikeButton = [self addButtonWithImage:@"timeline_icon_retweet.png"
-                                 backgroundImage:@"timeline_card_middlebottom.png" buttonIndex:1];
+        _unlikeButton = [self addButtonWithImage:@"unlike.png"
+                                 backgroundImage:nil
+                                     buttonIndex:1];
         
-        _shareButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
-                                backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
-        _commentButton = self addButtonWithImage:@"timeline_icon_unlike.png"
-    backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
+        _shareButton = [self addButtonWithImage:@"share.png"
+                                backgroundImage:nil
+                                    buttonIndex:2];
+        _commentButton = [self addButtonWithImage:@"comment.png"
+    backgroundImage:nil buttonIndex:2];
     }
     
     return self;
@@ -61,9 +66,9 @@
     
     // 添加按钮间间隔图片
     if (index) {
-        UIImageView *cardButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"timeline_card_bottom_line.png"]];
+        UIImageView *cardButton = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"botton_center_line"]];
         [self addSubview:cardButton];
-        cardButton.center = CGPointMake(button.frame.origin.x, kStatusDockHeight * 0.5);
+        cardButton.center = CGPointMake(button.frame.origin.x, self.frame.size.height * 0.5);
     }
     
     return button;
@@ -72,7 +77,7 @@
 - (void)clikedOnButton:(UIButton *)button
 {
     if (button.tag <= 1) {
-        [button.imageView.layer addAnimation:k forKey:@"SHOW"];
+        [button.imageView.layer addAnimation:_keyframeAnimation forKey:@"SHOW"];
     }
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(cellButtonView:didTouchUpInsideOnButtonIndex:)]) {
