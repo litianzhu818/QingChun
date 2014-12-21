@@ -79,25 +79,23 @@
 {
     //Here initialization your UI parameters
 
-    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [self.tableView setBackgroundColor:[UIColor clearColor]];
+//    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
     
-    NSMutableArray *Constraints = [NSMutableArray array];
-    
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[_tableView]-MARGIN1-|"
-                                                                             options:0
-                                                                             metrics:@{
-                                                                                       @"MARGIN1":@0.0}
-                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
-    
-    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[_tableView]-MARGIN2-|"
-                                                                             options:0
-                                                                             metrics:@{
-                                                                                       @"MARGIN1":@64.0,
-                                                                                       @"MARGIN2":@44.0}
-                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
-    [self.view addConstraints:Constraints];
+//    NSMutableArray *Constraints = [NSMutableArray array];
+//    
+//    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[_tableView]-MARGIN1-|"
+//                                                                             options:0
+//                                                                             metrics:@{
+//                                                                                       @"MARGIN1":@0.0}
+//                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
+//    
+//    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[_tableView]-MARGIN2-|"
+//                                                                             options:0
+//                                                                             metrics:@{
+//                                                                                       @"MARGIN1":@64.0,
+//                                                                                       @"MARGIN2":@44.0}
+//                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
+//    [self.view addConstraints:Constraints];
     
     self.title = @"青春吧";
     
@@ -156,9 +154,27 @@
 
 }
 
+- (void)initTableView
+{
+    
+    _tableView = ({
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
+        [tableView setDelegate:self];
+        [tableView setDataSource:self];
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [tableView setBackgroundColor:[UIColor clearColor]];
+        //[self.view addSubview:self.tableView];
+        
+        tableView;
+    });
+}
+
+
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+    [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
 }
 
 
@@ -246,31 +262,20 @@
 }
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-//    Projects *curPros = [_myProjectsDict objectForKey:[NSNumber numberWithUnsignedInteger:index]];
-//    if (!curPros) {
-//        curPros = [Projects projectsWithType:index];
-//        [_myProjectsDict setObject:curPros forKey:[NSNumber numberWithUnsignedInteger:index]];
-//    }
-//    ProjectListView *listView = (ProjectListView *)view;
-//    if (listView) {
-//        [listView setProjects:curPros];
-//    }else{
-//        __weak Project_RootViewController *weakSelf = self;
-//        listView = [[ProjectListView alloc] initWithFrame:carousel.bounds projects:curPros block:^(Project *project) {
-//            ProjectViewController *vc = [[ProjectViewController alloc] init];
-//            vc.myProject = project;
-//            [weakSelf.navigationController pushViewController:vc animated:YES];
-//            
-//            [[Coding_NetAPIManager sharedManager] request_Project_UpdateVisit_WithObj:project andBlock:^(id data, NSError *error) {
-//                if (data) {
-//                    project.un_read_activities_count = [NSNumber numberWithInteger:0];
-//                    [listView refreshUI];
-//                }
-//            }];
-//            NSLog(@"\n=====%@", project.name);
-//        }];
-//    }
-    return nil;
+    
+    _tableView = ({
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:carousel.bounds style:UITableViewStylePlain];
+        [tableView setDelegate:self];
+        [tableView setDataSource:self];
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [tableView setBackgroundColor:[UIColor clearColor]];
+        //[self.view addSubview:self.tableView];
+        
+        tableView;
+    });
+
+    return _tableView;
 }
 
 #pragma mark - iCarouselDelegate methods
@@ -279,14 +284,14 @@
     if (_segmentControl) {
         float offset = carousel.scrollOffset;
         if (offset > 0) {
-           // [_segmentControl moveIndexWithProgress:offset];
+//           [_segmentControl moveSegmentIndexWithProgress:offset];
         }
     }
 }
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
     if (_segmentControl) {
-        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
+        [_segmentControl endMoveSegmentIndex:carousel.currentItemIndex];
     }
 //    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
 //    [curView refreshToQueryData];

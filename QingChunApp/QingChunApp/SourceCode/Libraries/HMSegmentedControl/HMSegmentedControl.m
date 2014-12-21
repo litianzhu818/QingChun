@@ -677,6 +677,65 @@
 }
 
 #pragma mark - Index change
+/*
+- (void)moveSegmentIndexWithProgress:(float)progress
+{
+    float delta = progress - _selectedSegmentIndex;
+    
+    CGRect origionRect = [_itemFrames[_currentIndex] CGRectValue];;
+    
+    CGRect origionLineRect = CGRectMake(CGRectGetMinX(origionRect) + XTSegmentControlHspace, CGRectGetHeight(origionRect) - XTSegmentControlLineHeight, CGRectGetWidth(origionRect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
+    
+    CGRect rect;
+    
+    if (delta > 0) {
+        //        如果delta大于1的话，不能简单的用相邻item间距的乘法来计算距离
+        if (delta > 1) {
+            self.currentIndex += floorf(delta);
+            delta -= floorf(delta);
+            origionRect = [_itemFrames[_currentIndex] CGRectValue];;
+            origionLineRect = CGRectMake(CGRectGetMinX(origionRect) + XTSegmentControlHspace, CGRectGetHeight(origionRect) - XTSegmentControlLineHeight, CGRectGetWidth(origionRect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
+        }
+        
+        
+        
+        if (_currentIndex == _itemFrames.count - 1) {
+            return;
+        }
+        
+        rect = [_itemFrames[_currentIndex + 1] CGRectValue];
+        
+        CGRect lineRect = CGRectMake(CGRectGetMinX(rect) + XTSegmentControlHspace, CGRectGetHeight(rect) - XTSegmentControlLineHeight, CGRectGetWidth(rect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
+        
+        CGRect moveRect = CGRectZero;
+        
+        moveRect.size = CGSizeMake(CGRectGetWidth(origionLineRect) + delta * (CGRectGetWidth(lineRect) - CGRectGetWidth(origionLineRect)), CGRectGetHeight(lineRect));
+        moveRect.origin = CGPointMake(CGRectGetMidX(origionLineRect) + delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)) - CGRectGetMidX(moveRect), CGRectGetMidY(origionLineRect) - CGRectGetMidY(moveRect));
+        _lineView.frame = moveRect;
+        //        _lineView.center = CGPointMake(CGRectGetMidX(origionLineRect) + delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)), CGRectGetMidY(origionLineRect));
+    }else if (delta < 0){
+        
+        if (_currentIndex == 0) {
+            return;
+        }
+        rect = [_itemFrames[_currentIndex - 1] CGRectValue];
+        CGRect lineRect = CGRectMake(CGRectGetMinX(rect) + XTSegmentControlHspace, CGRectGetHeight(rect) - XTSegmentControlLineHeight, CGRectGetWidth(rect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
+        CGRect moveRect = CGRectZero;
+        moveRect.size = CGSizeMake(CGRectGetWidth(origionLineRect) - delta * (CGRectGetWidth(lineRect) - CGRectGetWidth(origionLineRect)), CGRectGetHeight(lineRect));
+        moveRect.origin = CGPointMake(CGRectGetMidX(origionLineRect) - delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)) - CGRectGetMidX(moveRect), CGRectGetMidY(origionLineRect) - CGRectGetMidY(moveRect));
+        _lineView.frame = moveRect;
+        //        _lineView.center = CGPointMake(CGRectGetMidX(origionLineRect) - delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)), CGRectGetMidY(origionLineRect));
+        if (delta < -1) {
+            self.currentIndex -= 1;
+        }
+    }    
+
+}
+*/
+- (void)endMoveSegmentIndex:(NSInteger)index
+{
+    [self setSelectedSegmentIndex:index animated:YES];
+}
 
 - (void)setSelectedSegmentIndex:(NSInteger)index {
     [self setSelectedSegmentIndex:index animated:NO notify:NO];
