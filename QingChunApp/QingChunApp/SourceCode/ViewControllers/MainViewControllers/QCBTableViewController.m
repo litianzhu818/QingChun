@@ -12,14 +12,21 @@
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
 
+#import "iCarousel.h"
+#import "HMSegmentedControl.h"
 
-@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate>
+
+@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,iCarouselDataSource, iCarouselDelegate>
 {
     EGORefreshTableHeaderView *_refreshHeaderView;
     
     //  Reloading var should really be your tableviews datasource
     //  Putting it here for demo purposes
     BOOL _reloading;
+    
+    iCarousel           *_icarousel;
+    HMSegmentedControl  *_segmentControl;
+    UITableView         *_hotTableView;
 }
 
 - (void)reloadTableViewDataSource;
@@ -94,7 +101,7 @@
     
     self.title = @"青春吧";
     
-    [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"fabiao_selected" highLightedImageName:@"fabiao_normal" addTarget:self action:@selector(sendMessage:)]];
+    [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"send_msg" highLightedImageName:@"send_msg_highlighted" addTarget:self action:@selector(sendMessage:)]];
     
     if (_refreshHeaderView == nil) {
         
@@ -108,7 +115,52 @@
     
     //  update the last update date
     [_refreshHeaderView refreshLastUpdatedDate];
+    
+    _segmentControl = ({
+        // Segmented control with scrolling
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热"]];
+        segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+        segmentedControl.frame = CGRectMake(0, 0, 200, 40);
+        segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+        segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
+        segmentedControl.font = [UIFont systemFontOfSize:17.0];
+        segmentedControl.selectionIndicatorHeight = 2.0f;
+        segmentedControl.backgroundColor = [UIColor clearColor];
+        segmentedControl.textColor = UIColorFromRGB(0x757575);
+        segmentedControl.selectedTextColor = UIColorFromRGB(0x61a653);
+        segmentedControl.selectionIndicatorColor = UIColorFromRGB(0x61a653);
+        /*//The block
+        [segmentedControl setIndexChangeBlock:^(NSInteger index) {
+            NSLog(@"Selected index %ld (via block)", (long)index);
+        }];
+         */
+        [segmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        self.navigationItem.titleView = segmentedControl;
+        segmentedControl;
+    });
+    
+    _icarousel = ({
+        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, 64, 320, 480-64)];
+        icarousel.dataSource = self;
+        icarousel.delegate = self;
+        icarousel.decelerationRate = 1.0;
+        icarousel.scrollSpeed = 1.0;
+        icarousel.type = iCarouselTypeLinear;
+        icarousel.pagingEnabled = YES;
+        icarousel.clipsToBounds = YES;
+        icarousel.bounceDistance = 0.2;
+        [self.view addSubview:icarousel];
+        icarousel;
+    });
+
 }
+
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+{
+    NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+}
+
 
 -(void)initializationData
 {
@@ -185,6 +237,61 @@
     return [NSDate date]; // should return date data source was last changed
     
 }
+
+//#pragma mark - iCarousel
+#pragma mark iCarouselDataSource methods
+- (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
+{
+    return 2;
+}
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+//    Projects *curPros = [_myProjectsDict objectForKey:[NSNumber numberWithUnsignedInteger:index]];
+//    if (!curPros) {
+//        curPros = [Projects projectsWithType:index];
+//        [_myProjectsDict setObject:curPros forKey:[NSNumber numberWithUnsignedInteger:index]];
+//    }
+//    ProjectListView *listView = (ProjectListView *)view;
+//    if (listView) {
+//        [listView setProjects:curPros];
+//    }else{
+//        __weak Project_RootViewController *weakSelf = self;
+//        listView = [[ProjectListView alloc] initWithFrame:carousel.bounds projects:curPros block:^(Project *project) {
+//            ProjectViewController *vc = [[ProjectViewController alloc] init];
+//            vc.myProject = project;
+//            [weakSelf.navigationController pushViewController:vc animated:YES];
+//            
+//            [[Coding_NetAPIManager sharedManager] request_Project_UpdateVisit_WithObj:project andBlock:^(id data, NSError *error) {
+//                if (data) {
+//                    project.un_read_activities_count = [NSNumber numberWithInteger:0];
+//                    [listView refreshUI];
+//                }
+//            }];
+//            NSLog(@"\n=====%@", project.name);
+//        }];
+//    }
+    return nil;
+}
+
+#pragma mark - iCarouselDelegate methods
+- (void)carouselDidScroll:(iCarousel *)carousel
+{
+    if (_segmentControl) {
+        float offset = carousel.scrollOffset;
+        if (offset > 0) {
+           // [_segmentControl moveIndexWithProgress:offset];
+        }
+    }
+}
+- (void)carouselDidEndDecelerating:(iCarousel *)carousel
+{
+    if (_segmentControl) {
+        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
+    }
+//    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
+//    [curView refreshToQueryData];
+}
+
 
 #pragma mark - Table view data source
 

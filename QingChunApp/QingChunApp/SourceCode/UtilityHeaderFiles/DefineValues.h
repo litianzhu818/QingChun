@@ -20,7 +20,7 @@
     #define TEST 1
 
     // block self
-    #define WEAKSELF typeof(self) __weak weakSelf = self;
+    #define WEAKSELF __weak typeof(self) weakSelf = self;
     #define STRONGSELF typeof(weakSelf) __strong strongSelf = weakSelf;
 
     /*************************************常用方法***************************************/

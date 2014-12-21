@@ -11,6 +11,9 @@
 #import "UserHeaderView.h"
 #import "MyPostsViewController.h"
 #import "LoginViewController.h"
+#import "UINavigationItem+Offset.h"
+#import "UIBarButtonItem+SA.h"
+#import <objc/runtime.h>
 
 #define MARGIN_WIDTH 8.0f
 
@@ -60,7 +63,10 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    self.title = NSLocalizedString(@"我的", @"me");
+    self.title = NSLocalizedString(@"我", @"me");
+    [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"send_msg" highLightedImageName:@"send_msg_highlighted" addTarget:self action:@selector(sendMessage:)]];
+    
+    [self.navigationItem addRightBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"me_setting" highLightedImageName:@"send_setting_highlighted" addTarget:self action:@selector(setting:)]];
     
     userHeaderView = [UserHeaderView instanceFromNib];
     [userHeaderView setFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
@@ -72,6 +78,7 @@
     [menuView setFrame:CGRectMake(20, 128, 280, 280)];
     menuView.menuDelegate = self;
     [self.view addSubview:menuView];
+
 }
 
 -(void)initializationData
@@ -81,64 +88,32 @@
 }
 #pragma mark - Local Methods
 
-- (NSArray *)createMenuItems {
+- (NSArray *)createMenuItems
+{
     NSMutableArray *items = [[NSMutableArray alloc] init];
     
-    // First Item
-    NAMenuItem *item1 = [[NAMenuItem alloc] initWithTitle:@"审核"
-                                                    image:[UIImage imageNamed:@"check"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item1];
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"UserCenterMenuList" ofType:@"plist"];
+    NSArray *menuArray = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
-    // Second Item
-    NAMenuItem *item2 = [[NAMenuItem alloc] initWithTitle:@"活动"
-                                                    image:[UIImage imageNamed:@"activities"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item2];
-    
-    // Third Item
-    NAMenuItem *item3 = [[NAMenuItem alloc] initWithTitle:@"我的帖子"
-                                                    image:[UIImage imageNamed:@"myPosts"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item3];
-    
-    // Fourth Item
-    NAMenuItem *item4 = [[NAMenuItem alloc] initWithTitle:@"我的收藏"
-                                                    image:[UIImage imageNamed:@"myCollections"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item4];
-    
-    // Fifth Item
-    NAMenuItem *item5 = [[NAMenuItem alloc] initWithTitle:@"附近"
-                                                    image:[UIImage imageNamed:@"nearby"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item5];
-    
-    // Sixth Item
-    NAMenuItem *item6 = [[NAMenuItem alloc] initWithTitle:@"搜索"
-                                                    image:[UIImage imageNamed:@"search"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item6];
-    
-    // Seventh Item
-    NAMenuItem *item7 = [[NAMenuItem alloc] initWithTitle:@"最近热门"
-                                                    image:[UIImage imageNamed:@"hot"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item7];
-    
-    // Eighth Item
-    NAMenuItem *item8 = [[NAMenuItem alloc] initWithTitle:@"用户反馈"
-                                                    image:[UIImage imageNamed:@"feedBack"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item8];
-    
-    // Ninth Item
-    NAMenuItem *item9 = [[NAMenuItem alloc] initWithTitle:@"游戏中心"
-                                                    image:[UIImage imageNamed:@"gameCenter"]
-                                                  vcClass:[MyPostsViewController class]];
-    [items addObject:item9];
+    [menuArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = obj;
+        NAMenuItem *item = [[NAMenuItem alloc] initWithTitle:[dic objectForKey:@"name"]
+                                                       image:[UIImage imageNamed:[dic objectForKey:@"imageName"]]
+                                                     vcClass:NSClassFromString([dic objectForKey:@"className"])];
+        [items addObject:item];
+    }];
     
     return items;
+}
+
+- (void)sendMessage:(id)sender
+{
+
+}
+
+- (void)setting:(id)sender
+{
+
 }
 
 

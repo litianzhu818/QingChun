@@ -7,6 +7,7 @@
 //
 
 #import "UITabBar+BackgroundImage.h"
+#import "UIImage+SA.h"
 
 @implementation UITabBar(BackgroundImage)
 
@@ -14,7 +15,7 @@
 {
     if (hiden && [self respondsToSelector:@selector(setShadowImage:)]) {
         
-        [self setShadowImage:[[UIImage alloc] init]];
+        [self setShadowImage:[UIImage imageWithColor:[ UIColor clearColor ] size: CGSizeMake (320 , 3)]];
     }
 }
 

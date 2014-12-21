@@ -71,6 +71,8 @@
     UIColor *selectedColor  =   UIColorFromRGB(0x61a653);
     UIColor *normalColor    =   UIColorFromRGB(0x757575);
     
+    [self.tabBar hidenShadowLine:YES];
+    
     [self.tabBar setTabBarItemsTitleNormalColor:normalColor
                                      normalFont:tabBarFont
                                   selectedColor:selectedColor
