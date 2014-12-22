@@ -18,4 +18,5 @@
                     positionAdjustment:(UIOffset)adjustment;
 - (void)setTabBarItemsNormalImages:(NSArray *)normalImages selectedImages:(NSArray *)selectedImages;
 - (void)setTabBarItemsNormalImageNames:(NSArray *)normalImageNames selectedImageNames:(NSArray *)selectedImageNames;
+
 @end

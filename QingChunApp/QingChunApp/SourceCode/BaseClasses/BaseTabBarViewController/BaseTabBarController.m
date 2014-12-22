@@ -51,10 +51,10 @@
     //Here initialization your UI parameters
     backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0,0,self.tabBar.frame.size.width,self.tabBar.frame.size.height)];
     backgroundView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-    backgroundView.backgroundColor = [UIColor colorWithRed:218/255.0 green:2/255.0 blue:2/255.0 alpha:1.0];
+    backgroundView.backgroundColor = [UIColor clearColor];
     
     [self.tabBar insertSubview:backgroundView atIndex:(IOS7_OR_LATER) ? 0 : 1];
-    
+ 
 }
 
 -(void)initData

@@ -48,7 +48,7 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    [self setBagroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"tabBar"]]];
+    [self.tabBar setBackgroundImage:[UIImage imageNamed:@"tabBar"]];
     self.tabBar.opaque = YES;
     
     [self initTabBarImage];
