@@ -169,7 +169,7 @@
 		E7FC67AC1A3D315600AF45A6 /* navigationBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67AA1A3D315600AF45A6 /* navigationBar@2x.png */; };
 		E7FC67AD1A3D315600AF45A6 /* tabBar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67AB1A3D315600AF45A6 /* tabBar@2x.png */; };
 		E7FC67B11A3D5A1D00AF45A6 /* UINavigationItem+Offset.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67B01A3D5A1D00AF45A6 /* UINavigationItem+Offset.m */; };
-		E7FC67B51A45386100AF45A6 /* API接口说明.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67B41A45386100AF45A6 /* API接口说明.rtf */; };
+		E7FC67B51A45386100AF45A6 /* API接口说明.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = E7FC67B41A45386100AF45A6 /* API接口说明.rtfd */; };
 		E7FC67BA1A454D3A00AF45A6 /* CellButtonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67B91A454D3A00AF45A6 /* CellButtonViewModel.m */; };
 		E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67BC1A4556F400AF45A6 /* CellButtonView.m */; };
 		E7FC67C31A45646500AF45A6 /* CircleView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67C01A45646500AF45A6 /* CircleView.m */; };
@@ -434,7 +434,7 @@
 		E7FC67AB1A3D315600AF45A6 /* tabBar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabBar@2x.png"; sourceTree = "<group>"; };
 		E7FC67AF1A3D5A1D00AF45A6 /* UINavigationItem+Offset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationItem+Offset.h"; sourceTree = "<group>"; };
 		E7FC67B01A3D5A1D00AF45A6 /* UINavigationItem+Offset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationItem+Offset.m"; sourceTree = "<group>"; };
-		E7FC67B41A45386100AF45A6 /* API接口说明.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "API接口说明.rtf"; sourceTree = "<group>"; };
+		E7FC67B41A45386100AF45A6 /* API接口说明.rtfd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = wrapper.rtfd; path = "API接口说明.rtfd"; sourceTree = "<group>"; };
 		E7FC67B81A454D3A00AF45A6 /* CellButtonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellButtonViewModel.h; sourceTree = "<group>"; };
 		E7FC67B91A454D3A00AF45A6 /* CellButtonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellButtonViewModel.m; sourceTree = "<group>"; };
 		E7FC67BB1A4556F400AF45A6 /* CellButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellButtonView.h; sourceTree = "<group>"; };
@@ -698,7 +698,7 @@
 		E7419EDC19E675D900B5B764 = {
 			isa = PBXGroup;
 			children = (
-				E7FC67B41A45386100AF45A6 /* API接口说明.rtf */,
+				E7FC67B41A45386100AF45A6 /* API接口说明.rtfd */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
 				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,
@@ -1366,7 +1366,7 @@
 				E7B9E4821A46F9BE00D7775C /* my_activites@2x.png in Resources */,
 				E79FD9A419FFE65300625BA8 /* comment@2x.png in Resources */,
 				E7DD1C561A4194ED00FAA24A /* timeline_image_loading@2x.png in Resources */,
-				E7FC67B51A45386100AF45A6 /* API接口说明.rtf in Resources */,
+				E7FC67B51A45386100AF45A6 /* API接口说明.rtfd in Resources */,
 				E7B9E48A1A46F9BE00D7775C /* send_msg@2x.png in Resources */,
 				E7B9E47F1A46F9BE00D7775C /* came_center@2x.png in Resources */,
 				E72B097C1A0B419000109658 /* cell_bg@2x.png in Resources */,
