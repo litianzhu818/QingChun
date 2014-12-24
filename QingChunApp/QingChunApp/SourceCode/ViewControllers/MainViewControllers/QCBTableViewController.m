@@ -120,7 +120,8 @@
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+        //segmentedControl.shouldAnimateUserSelection = NO;
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
         segmentedControl.font = [UIFont systemFontOfSize:17.0];
         segmentedControl.selectionIndicatorHeight = 2.0f;
@@ -282,16 +283,22 @@
 - (void)carouselDidScroll:(iCarousel *)carousel
 {
     if (_segmentControl) {
+        
         float offset = carousel.scrollOffset;
-        if (offset > 0) {
-//           [_segmentControl moveSegmentIndexWithProgress:offset];
-        }
+        
+        [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
+        
+        NSLog(@"Value:%f",offset);
+//        if (offset > 0) {
+//            
+//           [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
+//        }
     }
 }
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
     if (_segmentControl) {
-        [_segmentControl endMoveSegmentIndex:carousel.currentItemIndex];
+        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
     }
 //    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
 //    [curView refreshToQueryData];

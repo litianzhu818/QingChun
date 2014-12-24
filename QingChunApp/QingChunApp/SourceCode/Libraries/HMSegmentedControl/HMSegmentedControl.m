@@ -24,6 +24,8 @@
 @property (nonatomic, readwrite) NSArray *segmentWidthsArray;
 @property (nonatomic, strong) HMScrollView *scrollView;
 
+@property (nonatomic, assign) CGFloat offsetPercent;
+
 @end
 
 @implementation HMScrollView
@@ -366,11 +368,17 @@
             }
         } else {
             if (!self.selectionIndicatorStripLayer.superlayer) {
-                self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicator];
+                
+                //self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicator];
+                self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicatorWithOffset];
+                
                 [self.scrollView.layer addSublayer:self.selectionIndicatorStripLayer];
                 
                 if (self.selectionStyle == HMSegmentedControlSelectionStyleBox && !self.selectionIndicatorBoxLayer.superlayer) {
-                    self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
+                    
+                    //self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
+                    self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicatorWithOffset];
+                    
                     [self.scrollView.layer insertSublayer:self.selectionIndicatorBoxLayer atIndex:0];
                 }
             }
@@ -379,7 +387,8 @@
 }
 
 - (void)setArrowFrame {
-    self.selectionIndicatorArrowLayer.frame = [self frameForSelectionIndicator];
+    //self.selectionIndicatorArrowLayer.frame = [self frameForSelectionIndicator];
+    self.selectionIndicatorArrowLayer.frame = [self frameForSelectionIndicatorWithOffset];
     
     self.selectionIndicatorArrowLayer.mask = nil;
     
@@ -677,65 +686,6 @@
 }
 
 #pragma mark - Index change
-/*
-- (void)moveSegmentIndexWithProgress:(float)progress
-{
-    float delta = progress - _selectedSegmentIndex;
-    
-    CGRect origionRect = [_itemFrames[_currentIndex] CGRectValue];;
-    
-    CGRect origionLineRect = CGRectMake(CGRectGetMinX(origionRect) + XTSegmentControlHspace, CGRectGetHeight(origionRect) - XTSegmentControlLineHeight, CGRectGetWidth(origionRect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
-    
-    CGRect rect;
-    
-    if (delta > 0) {
-        //        如果delta大于1的话，不能简单的用相邻item间距的乘法来计算距离
-        if (delta > 1) {
-            self.currentIndex += floorf(delta);
-            delta -= floorf(delta);
-            origionRect = [_itemFrames[_currentIndex] CGRectValue];;
-            origionLineRect = CGRectMake(CGRectGetMinX(origionRect) + XTSegmentControlHspace, CGRectGetHeight(origionRect) - XTSegmentControlLineHeight, CGRectGetWidth(origionRect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
-        }
-        
-        
-        
-        if (_currentIndex == _itemFrames.count - 1) {
-            return;
-        }
-        
-        rect = [_itemFrames[_currentIndex + 1] CGRectValue];
-        
-        CGRect lineRect = CGRectMake(CGRectGetMinX(rect) + XTSegmentControlHspace, CGRectGetHeight(rect) - XTSegmentControlLineHeight, CGRectGetWidth(rect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
-        
-        CGRect moveRect = CGRectZero;
-        
-        moveRect.size = CGSizeMake(CGRectGetWidth(origionLineRect) + delta * (CGRectGetWidth(lineRect) - CGRectGetWidth(origionLineRect)), CGRectGetHeight(lineRect));
-        moveRect.origin = CGPointMake(CGRectGetMidX(origionLineRect) + delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)) - CGRectGetMidX(moveRect), CGRectGetMidY(origionLineRect) - CGRectGetMidY(moveRect));
-        _lineView.frame = moveRect;
-        //        _lineView.center = CGPointMake(CGRectGetMidX(origionLineRect) + delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)), CGRectGetMidY(origionLineRect));
-    }else if (delta < 0){
-        
-        if (_currentIndex == 0) {
-            return;
-        }
-        rect = [_itemFrames[_currentIndex - 1] CGRectValue];
-        CGRect lineRect = CGRectMake(CGRectGetMinX(rect) + XTSegmentControlHspace, CGRectGetHeight(rect) - XTSegmentControlLineHeight, CGRectGetWidth(rect) - 2 * XTSegmentControlHspace, XTSegmentControlLineHeight);
-        CGRect moveRect = CGRectZero;
-        moveRect.size = CGSizeMake(CGRectGetWidth(origionLineRect) - delta * (CGRectGetWidth(lineRect) - CGRectGetWidth(origionLineRect)), CGRectGetHeight(lineRect));
-        moveRect.origin = CGPointMake(CGRectGetMidX(origionLineRect) - delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)) - CGRectGetMidX(moveRect), CGRectGetMidY(origionLineRect) - CGRectGetMidY(moveRect));
-        _lineView.frame = moveRect;
-        //        _lineView.center = CGPointMake(CGRectGetMidX(origionLineRect) - delta * (CGRectGetMidX(lineRect) - CGRectGetMidX(origionLineRect)), CGRectGetMidY(origionLineRect));
-        if (delta < -1) {
-            self.currentIndex -= 1;
-        }
-    }    
-
-}
-*/
-- (void)endMoveSegmentIndex:(NSInteger)index
-{
-    [self setSelectedSegmentIndex:index animated:YES];
-}
 
 - (void)setSelectedSegmentIndex:(NSInteger)index {
     [self setSelectedSegmentIndex:index animated:NO notify:NO];
@@ -746,6 +696,8 @@
 }
 
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated notify:(BOOL)notify {
+   
+    self.offsetPercent = 0.0;
     _selectedSegmentIndex = index;
     [self setNeedsDisplay];
     
@@ -792,9 +744,15 @@
             [CATransaction setAnimationDuration:0.15f];
             [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear]];
             [self setArrowFrame];
+            /*//old codes
             self.selectionIndicatorBoxLayer.frame = [self frameForSelectionIndicator];
             self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicator];
             self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
+             */
+            self.selectionIndicatorBoxLayer.frame = [self frameForSelectionIndicatorWithOffset];
+            self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicatorWithOffset];
+            self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicatorWithOffset];
+            
             [CATransaction commit];
         } else {
             // Disable CALayer animations
@@ -803,11 +761,12 @@
             [self setArrowFrame];
             
             self.selectionIndicatorStripLayer.actions = newActions;
-            self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicator];
+            //self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicator];
+            self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicatorWithOffset];
             
             self.selectionIndicatorBoxLayer.actions = newActions;
-            self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
-            
+            //self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
+            self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicatorWithOffset];
             if (notify)
                 [self notifyForSegmentChangeToIndex:index];
         }
@@ -820,6 +779,28 @@
     
     if (self.indexChangeBlock)
         self.indexChangeBlock(index);
+}
+
+- (CGRect)frameForFillerSelectionIndicatorWithOffset
+{
+    CGRect frame = [self frameForFillerSelectionIndicator];
+    frame.origin.x += frame.size.width * self.offsetPercent;
+    return frame;
+}
+
+- (CGRect)frameForSelectionIndicatorWithOffset
+{
+    CGRect frame = [self frameForSelectionIndicator];
+    frame.origin.x += frame.size.width * self.offsetPercent;
+    return frame;
+}
+
+- (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent
+{
+    if (percent > -1.0 && percent < 1.0) {
+        self.offsetPercent = percent;
+        [self setNeedsDisplay];
+    }
 }
 
 @end

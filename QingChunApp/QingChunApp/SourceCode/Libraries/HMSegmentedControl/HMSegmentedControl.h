@@ -186,10 +186,6 @@ typedef enum {
 - (instancetype)initWithSectionImages:(NSArray *)sectionImages sectionSelectedImages:(NSArray *)sectionSelectedImages titlesForSections:(NSArray *)sectiontitles;
 - (void)setSelectedSegmentIndex:(NSUInteger)index animated:(BOOL)animated;
 - (void)setIndexChangeBlock:(IndexChangeBlock)indexChangeBlock;
-
-- (void)moveSegmentIndexWithProgress:(float)progress;
-
-- (void)endMoveSegmentIndex:(NSInteger)index;
-
+- (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent;
 
 @end
