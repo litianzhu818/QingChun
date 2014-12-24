@@ -57,6 +57,7 @@
 @end
 
 @implementation HMSegmentedControl
+@synthesize selectedSegmentIndex = _selectedSegmentIndex;
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
@@ -261,7 +262,7 @@
             titleLayer.string = titleString;
             titleLayer.truncationMode = kCATruncationEnd;
             
-            if (self.selectedSegmentIndex == idx) {
+            if (_selectedSegmentIndex == idx) {
                 titleLayer.foregroundColor = self.selectedTextColor.CGColor;
             } else {
                 titleLayer.foregroundColor = self.textColor.CGColor;
@@ -462,11 +463,13 @@
         if (self.selectionStyle == HMSegmentedControlSelectionStyleTextWidthStripe &&
             sectionWidth <= self.segmentWidth &&
             self.segmentWidthStyle != HMSegmentedControlSegmentWidthStyleDynamic) {
+            CGFloat marginWidth = (self.segmentWidth - sectionWidth)/2;
             CGFloat widthToEndOfSelectedSegment = (self.segmentWidth * self.selectedSegmentIndex) + self.segmentWidth;
             CGFloat widthToStartOfSelectedIndex = (self.segmentWidth * self.selectedSegmentIndex);
             
-            CGFloat x = ((widthToEndOfSelectedSegment - widthToStartOfSelectedIndex) / 2) + (widthToStartOfSelectedIndex - sectionWidth / 2);
-            return CGRectMake(x + self.selectionIndicatorEdgeInsets.left, indicatorYOffset, sectionWidth - self.selectionIndicatorEdgeInsets.right, self.selectionIndicatorHeight);
+//            CGFloat x = ((widthToEndOfSelectedSegment - widthToStartOfSelectedIndex) / 2) + (widthToStartOfSelectedIndex - sectionWidth / 2);
+            CGFloat x = widthToStartOfSelectedIndex + marginWidth;
+            return CGRectMake(x /*+ self.selectionIndicatorEdgeInsets.left*/, indicatorYOffset, sectionWidth/* - self.selectionIndicatorEdgeInsets.right*/, self.selectionIndicatorHeight);
         } else {
             if (self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleDynamic) {
                 CGFloat selectedSegmentOffset = 0.0f;
@@ -784,17 +787,17 @@
 - (CGRect)frameForFillerSelectionIndicatorWithOffset
 {
     CGRect frame = [self frameForFillerSelectionIndicator];
-    frame.origin.x += frame.size.width * self.offsetPercent;
+    frame.origin.x += self.segmentWidth * self.offsetPercent;
     return frame;
 }
 
 - (CGRect)frameForSelectionIndicatorWithOffset
 {
     CGRect frame = [self frameForSelectionIndicator];
-    frame.origin.x += frame.size.width * self.offsetPercent;
+    frame.origin.x += self.segmentWidth * self.offsetPercent;
     return frame;
 }
-
+#if 0
 - (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent
 {
     if (percent > -1.0 && percent < 1.0) {
@@ -802,5 +805,31 @@
         [self setNeedsDisplay];
     }
 }
+#else
+- (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent
+{
+    float delta = percent - self.selectedSegmentIndex;
+    if (delta > 0) {
+        
+        if (self.selectedSegmentIndex == [self.segmentWidthsArray count] - 1) return;
+        
+        self.offsetPercent = delta;
+        
+        if (delta >= 0.5) _selectedSegmentIndex += 1;
+        
+    }else if (delta == 0.0){
+        return;
+    }else{
+        
+        if (self.selectedSegmentIndex == 0) return;
+        
+        self.offsetPercent = delta;
+        
+        if (delta <= -0.5) _selectedSegmentIndex -= 1;
+    }
+    
+    [self setNeedsDisplay];
+}
+#endif
 
 @end

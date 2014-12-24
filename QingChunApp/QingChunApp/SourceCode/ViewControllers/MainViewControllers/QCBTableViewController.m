@@ -116,7 +116,7 @@
     
     _segmentControl = ({
         // Segmented control with scrolling
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热"]];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热" ,@"测试1"]];
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -259,7 +259,7 @@
 #pragma mark iCarouselDataSource methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return 2;
+    return 3;
 }
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
@@ -285,20 +285,15 @@
     if (_segmentControl) {
         
         float offset = carousel.scrollOffset;
-        
-        [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
-        
-        NSLog(@"Value:%f",offset);
-//        if (offset > 0) {
-//            
-//           [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
-//        }
+        if (offset > 0) {
+            [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
+        }
     }
 }
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
     if (_segmentControl) {
-        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
+//        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
     }
 //    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
 //    [curView refreshToQueryData];
