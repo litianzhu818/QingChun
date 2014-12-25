@@ -116,13 +116,24 @@
     
     _segmentControl = ({
         // Segmented control with scrolling
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热" ,@"测试1"]];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热"]];
+        /*
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionImages:[[NSArray alloc] initWithObjects:
+                                                                                                  PNG_NAME(@"qingchunba_normal.png"),
+                                                                                                  PNG_NAME(@"qingchunbell_normal.png"),
+                                                                                                  PNG_NAME(@"qingchungroup_normal.png"),
+                                                                                                  nil] sectionSelectedImages:[[NSArray alloc] initWithObjects:
+                                                                                                                              PNG_NAME(@"qingchunba_selected.png"),
+                                                                                                                              PNG_NAME(@"qingchunbell_selected.png"),
+                                                                                                                              PNG_NAME(@"qingchungroup_selected.png"),
+                                                                                                                              nil] titlesForSections:@[@"最新", @"最热" ,@"测试"]];
+         */
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
         //segmentedControl.shouldAnimateUserSelection = NO;
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
-        segmentedControl.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleTextWidthStripe;
+        //segmentedControl.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
         segmentedControl.font = [UIFont systemFontOfSize:17.0];
         segmentedControl.selectionIndicatorHeight = 2.0f;
@@ -260,7 +271,7 @@
 #pragma mark iCarouselDataSource methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
-    return 3;
+    return 2;
 }
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
@@ -287,7 +298,7 @@
         
         float offset = carousel.scrollOffset;
         if (offset > 0) {
-            [_segmentControl drawSelectionIndicatorByOffsetPercent:offset];
+            [_segmentControl moveSelectionIndicatorWithScrollOffset:offset];
         }
     }
 }

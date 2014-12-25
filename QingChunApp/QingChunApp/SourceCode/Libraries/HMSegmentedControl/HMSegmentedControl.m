@@ -241,13 +241,14 @@
             if (self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleFixed) {
                 rect = CGRectMake((self.segmentWidth * idx) + (self.segmentWidth - stringWidth)/2, y, stringWidth, stringHeight);
             } else if (self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleDynamic) {
+                
                 // When we are drawing dynamic widths, we need to loop the widths array to calculate the xOffset
                 CGFloat xOffset = 0;
                 NSInteger i = 0;
                 for (NSNumber *width in self.segmentWidthsArray) {
-                    if (idx == i)
-                        break;
-                    xOffset = xOffset + [width floatValue];
+                    
+                    if (idx == i) break;
+                    xOffset += [width floatValue];
                     i++;
                 }
                 
@@ -466,7 +467,8 @@
         CGFloat widthToStartOfSelectedIndex = (self.segmentWidth * tempIndex);
         
         CGFloat x = widthToStartOfSelectedIndex + ((widthToEndOfSelectedSegment - widthToStartOfSelectedIndex) / 2) - (self.selectionIndicatorHeight/2);
-        return CGRectMake(x - (self.selectionIndicatorHeight / 2), indicatorYOffset, self.selectionIndicatorHeight * 2, self.selectionIndicatorHeight);
+        CGRect tempFrame = CGRectMake(x - (self.selectionIndicatorHeight / 2), indicatorYOffset, self.selectionIndicatorHeight * 2, self.selectionIndicatorHeight);
+        return tempFrame;
     } else {
         //TODO:这里已经修改
         if (self.selectionStyle == HMSegmentedControlSelectionStyleTextWidthStripe &&
@@ -488,13 +490,13 @@
             CGFloat x = ((widthToEndOfSelectedSegment - widthToStartOfSelectedIndex) / 2) + (widthToStartOfSelectedIndex - sectionWidth / 2);
              */
             CGFloat x = widthToStartOfSelectedIndex + marginWidth;
-            return CGRectMake(x /*+ self.selectionIndicatorEdgeInsets.left*/, indicatorYOffset, sectionWidth/* - self.selectionIndicatorEdgeInsets.right*/, self.selectionIndicatorHeight);
-        } else {//FIXME:这里位置不对
+            CGRect tempFrame = CGRectMake(x /*+ self.selectionIndicatorEdgeInsets.left*/, indicatorYOffset, sectionWidth/* - self.selectionIndicatorEdgeInsets.right*/, self.selectionIndicatorHeight);
+            return tempFrame;
+        } else {
+            //TODO:这里已经修改
             //这里是包括  缩进+指示条  宽度等于字体宽度
             if (self.segmentWidthStyle == HMSegmentedControlSegmentWidthStyleDynamic) {
                 CGFloat selectedSegmentOffset = 0.0f;
-                
-                NSInteger i = 0;
                 
                 NSInteger tempIndex = self.selectedSegmentIndex;
                 if (self.offsetPercent >= 0.5) {
@@ -503,11 +505,11 @@
                     tempIndex += 1;
                 }
                 
+                NSInteger i = 0;
                 for (NSNumber *width in self.segmentWidthsArray) {
-                    
-                    if (tempIndex == i)
-                        break;
-                    selectedSegmentOffset = selectedSegmentOffset + [width floatValue];
+                
+                    if (tempIndex == i) break;
+                    selectedSegmentOffset += [width floatValue];
                     i++;
                     /*//The old code
                     if (self.selectedSegmentIndex == i)
@@ -516,7 +518,9 @@
                     i++;
                      */
                 }
-                return CGRectMake(selectedSegmentOffset + self.selectionIndicatorEdgeInsets.left, indicatorYOffset, [[self.segmentWidthsArray objectAtIndex:tempIndex] floatValue] - self.selectionIndicatorEdgeInsets.right, self.selectionIndicatorHeight + self.selectionIndicatorEdgeInsets.bottom);
+                CGRect tempFrame = CGRectMake(selectedSegmentOffset + self.selectionIndicatorEdgeInsets.left, indicatorYOffset, [[self.segmentWidthsArray objectAtIndex:tempIndex] floatValue] - self.selectionIndicatorEdgeInsets.right, self.selectionIndicatorHeight + self.selectionIndicatorEdgeInsets.bottom);
+                NSLog(@"tempFrame:%@",NSStringFromCGRect(tempFrame));
+                return tempFrame;
             }
             
             //TODO:这里已经修改
@@ -526,7 +530,9 @@
             }else if (self.offsetPercent <= -0.5 ){
                 tempIndex += 1;
             }
-            return CGRectMake((self.segmentWidth + self.selectionIndicatorEdgeInsets.left) * tempIndex, indicatorYOffset, self.segmentWidth - self.selectionIndicatorEdgeInsets.right, self.selectionIndicatorHeight);
+            
+            CGRect tempFrame = CGRectMake((self.segmentWidth + self.selectionIndicatorEdgeInsets.left) * tempIndex, indicatorYOffset, self.segmentWidth - self.selectionIndicatorEdgeInsets.right, self.selectionIndicatorHeight);
+            return tempFrame;
         }
     }
 }
@@ -545,17 +551,25 @@
     
         NSInteger i = 0;
         for (NSNumber *width in self.segmentWidthsArray) {
+            /*//The old code
             if (tempIndex == i) {
                 break;
             }
             selectedSegmentOffset = selectedSegmentOffset + [width floatValue];
-            
             i++;
+             */
+            if (tempIndex == i) break;
+            selectedSegmentOffset += [width floatValue];
+            i++;
+            
         }
         
-        return CGRectMake(selectedSegmentOffset, 0, [[self.segmentWidthsArray objectAtIndex:tempIndex] floatValue], CGRectGetHeight(self.frame));
+        CGRect tempFrame = CGRectMake(selectedSegmentOffset, 0, [[self.segmentWidthsArray objectAtIndex:tempIndex] floatValue], CGRectGetHeight(self.frame));
+        return tempFrame;
     }
-    return CGRectMake(self.segmentWidth * tempIndex, 0, self.segmentWidth, CGRectGetHeight(self.frame));
+    
+    CGRect tempFrame = CGRectMake(self.segmentWidth * tempIndex, 0, self.segmentWidth, CGRectGetHeight(self.frame));
+    return tempFrame;
 }
 
 - (void)updateSegmentsRects {
@@ -808,6 +822,7 @@
             
             [CATransaction commit];
         } else {
+            /*//The old codes
             // Disable CALayer animations
             NSMutableDictionary *newActions = [[NSMutableDictionary alloc] initWithObjectsAndKeys:[NSNull null], @"position", [NSNull null], @"bounds", nil];
             self.selectionIndicatorArrowLayer.actions = newActions;
@@ -820,6 +835,12 @@
             self.selectionIndicatorBoxLayer.actions = newActions;
             //self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicator];
             self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicatorWithOffset];
+            */
+            [self setArrowFrame];
+            
+            self.selectionIndicatorStripLayer.frame = [self frameForSelectionIndicatorWithOffset];
+            self.selectionIndicatorBoxLayer.frame = [self frameForFillerSelectionIndicatorWithOffset];
+            
             if (notify)
                 [self notifyForSegmentChangeToIndex:index];
         }
@@ -847,17 +868,15 @@
     frame.origin.x += self.segmentWidth * self.offsetPercent;
     return frame;
 }
-#if 0
-- (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent
+
+- (void)moveSelectionIndicatorWithScrollOffset:(CGFloat)scrollOffset
 {
-    if (percent > -1.0 && percent < 1.0) {
-        self.offsetPercent = percent;
-        [self setNeedsDisplay];
-    }
+    [self moveSelectionIndicatorWithOffsetPercent:scrollOffset];
 }
-#else
-- (void)drawSelectionIndicatorByOffsetPercent:(CGFloat)percent
+
+- (void)moveSelectionIndicatorWithOffsetPercent:(CGFloat)percent
 {
+    self.offsetPercent = 0.0f;
     float delta = percent - self.selectedSegmentIndex;
     if (delta > 0) {
         
@@ -880,6 +899,5 @@
     
     [self setNeedsDisplay];
 }
-#endif
 
 @end
