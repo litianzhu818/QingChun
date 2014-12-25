@@ -121,7 +121,8 @@
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
         //segmentedControl.shouldAnimateUserSelection = NO;
-        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleFullWidthStripe;
+        segmentedControl.selectionStyle = HMSegmentedControlSelectionStyleBox;
+        segmentedControl.segmentWidthStyle = HMSegmentedControlSegmentWidthStyleDynamic;
         segmentedControl.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocationDown;
         segmentedControl.font = [UIFont systemFontOfSize:17.0];
         segmentedControl.selectionIndicatorHeight = 2.0f;
@@ -293,7 +294,7 @@
 - (void)carouselDidEndDecelerating:(iCarousel *)carousel
 {
     if (_segmentControl) {
-//        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
+        [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
     }
 //    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
 //    [curView refreshToQueryData];
