@@ -8,9 +8,11 @@
 
 #import "BaseViewController.h"
 
+@class TPKeyboardAvoidingScrollView;
+
 @interface LoginViewController : BaseViewController<UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIButton *weiboButton;
 @property (weak, nonatomic) IBOutlet UIButton *QQButton;
 @property (weak, nonatomic) IBOutlet UITextField *nameTextField;
