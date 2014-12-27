@@ -7,7 +7,12 @@
 //
 
 #import "CellDisplayImageModel.h"
+#import "NSObject+AutoProperties.h"
 
 @implementation CellDisplayImageModel
 
+- (instancetype)initWithUrlStrSuffix:(NSString *)urlStrSuffix width:(CGFloat)width height:(CGFloat)height
+{
+    return nil;
+}
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "CellHeaderViewModel.h"
+#import "NSObject+AutoProperties.h"
 
 @implementation CellHeaderViewModel
 
@@ -21,7 +22,7 @@
     }
     return self;
 }
-
+/*
 -(NSString *)description
 {
     //Add your code here
@@ -67,7 +68,7 @@
     }
     return  self;
 }
-
+*/
 
 
 @end

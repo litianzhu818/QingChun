@@ -357,6 +357,7 @@ static void AC_swizzleInstanceMethod(Class c, SEL original, SEL replacement)
         if (object) [aCoder encodeObject:object forKey:key];
     }
 }
+
 #pragma mark - NSCopying method
 - (id)copyWithZone:(NSZone *)zone
 {
@@ -367,19 +368,5 @@ static void AC_swizzleInstanceMethod(Class c, SEL original, SEL replacement)
     }
     return copy;
 }
-
-#pragma mark - NSObject methods
-
-- (BOOL)isEqual:(id)object
-{
-    return [object isMemberOfClass:[self class]] &&
-    [[self dictionaryRepresentation] isEqual:[object dictionaryRepresentation]];
-}
-/*
-- (NSUInteger)hash
-{
-    return (NSUInteger)self;
-}
-*/
 
 @end

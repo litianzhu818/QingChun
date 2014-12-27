@@ -7,6 +7,7 @@
 //
 
 #import "CellButtonViewModel.h"
+#import "NSObject+AutoProperties.h"
 
 @implementation CellButtonViewModel
 
@@ -35,7 +36,7 @@
     return self;
 }
 
-
+/*
 #pragma mark - NSCopying method
 
 - (id)copyWithZone:(NSZone *)zone
@@ -72,6 +73,6 @@
     return  self;
     
 }
-
+*/
 
 @end

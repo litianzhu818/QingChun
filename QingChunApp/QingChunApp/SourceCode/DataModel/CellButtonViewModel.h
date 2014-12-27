@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CellButtonViewModel : NSObject <NSCopying, NSCoding>
+@interface CellButtonViewModel : NSObject
 
 @property (nonatomic, assign)   NSInteger       shareCount;         // 转发数
 @property (nonatomic, assign)   NSInteger       commentCount;       // 评论数

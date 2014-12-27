@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CellHeaderViewModel : NSObject<NSCopying, NSCoding>
+@interface CellHeaderViewModel : NSObject
 
 @property (strong, nonatomic) NSString  *name;
 @property (strong, nonatomic) NSString  *time;

@@ -7,6 +7,7 @@
 //
 
 #import "DisplayMessage.h"
+#import "NSObject+AutoProperties.h"
 
 @implementation DisplayMessage
 

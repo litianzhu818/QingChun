@@ -8,10 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DisplayMessage : NSObject <NSCopying, NSCoding>
+
+@interface DisplayMessage : NSObject 
 
 //The description string of this object
 //@property (readonly, copy) NSString *description;
-
+@property (strong, nonatomic) NSString *name;
+@property (assign, nonatomic) NSInteger ID;
 
 @end

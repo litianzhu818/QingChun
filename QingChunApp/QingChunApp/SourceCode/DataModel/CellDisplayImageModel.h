@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CellDisplayImageModel : NSObject <NSCopying, NSCoding>
+@interface CellDisplayImageModel : NSObject 
 
 @property (readonly, nonatomic) NSString *urlStr;
 @property (strong, nonatomic) NSString *urlStrSuffix;
