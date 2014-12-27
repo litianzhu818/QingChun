@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DisplayMessage : NSObject
+@interface DisplayMessage : NSObject <NSCopying, NSCoding>
 
 //The description string of this object
 //@property (readonly, copy) NSString *description;
