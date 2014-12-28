@@ -22,7 +22,7 @@
         NSDictionary *retweetedStatus = dict[@"retweeted_status"];
         if (retweetedStatus) {                                          // 转发体(被转载的微博内容)
             
-            self.retweetedStatus = [[SAStatus alloc] initWithDict:retweetedStatus];
+            self.retweetedStatus = [[SAStatus alloc] initWithDictionary:retweetedStatus];
             
         }
     }
@@ -31,7 +31,7 @@
 
 + (id)statusWithDict:(NSDictionary *)dict
 {
-    return [[self alloc] initWithDict:dict];
+    return [[self alloc] initWithDictionary:dict];
 }
 
 @end

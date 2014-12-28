@@ -20,7 +20,7 @@
 {
     // Override point for customization after application launch.
     //获取启动信息
-//    [self registerRemoteNotificationWith:application];
+    [self registerRemoteNotificationWith:application];
 //    [self launchWitchRemoteNotification:launchOptions];
 //    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
 //    application.applicationIconBadgeNumber = 0;
@@ -250,10 +250,21 @@
 -(void)registerRemoteNotificationWith:(UIApplication *)application
 {
     // Register for push notifications
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert |
-     UIRemoteNotificationTypeSound];
+
+#ifdef SUPPORT_IOS8
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        UIUserNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:myTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }else
+#endif
+    {
+        [application registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeAlert |
+         UIRemoteNotificationTypeSound];
+    }
+
 }
 
 -(void)setApplicationRootViewController:(UIViewController *)viewController

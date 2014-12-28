@@ -15,9 +15,9 @@
 @property (nonatomic, assign)   NSInteger       likeCount;          // 点赞数
 @property (assign, nonatomic)   NSInteger       unlikeCount;        //讨厌数量
 
-+ (id)cellButtonViewModelWithDict:(NSDictionary *)dict;
++ (id)cellButtonViewModelWithDictionary:(NSDictionary *)dictionary;
 
-- (id)initWithDict:(NSDictionary *)dict;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 - (id)initWithLikeCount:(NSInteger)likeCount unlikeCount:(NSInteger)unlikeCount shareCount:(NSInteger)shareCount commentCount:(NSInteger)commentCount;
 
 @end

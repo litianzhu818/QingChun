@@ -22,7 +22,7 @@
 
 + (id)reportsWithDict:(NSDictionary *)dict
 {
-    return [[self alloc] initWithDict:dict];
+    return [[self alloc] initWithDictionary:dict];
 }
 
 @end

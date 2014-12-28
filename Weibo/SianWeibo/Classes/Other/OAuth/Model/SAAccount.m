@@ -24,7 +24,7 @@
 
 + (id)accountWithDict:(NSDictionary *)dict
 {
-    return [[self alloc] initWithDict:dict];
+    return [[self alloc] initWithDictionary:dict];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder

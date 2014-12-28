@@ -10,11 +10,16 @@
 
 @interface CellHeaderViewModel : NSObject
 
-@property (strong, nonatomic) NSString  *name;
-@property (strong, nonatomic) NSString  *time;
-@property (strong, nonatomic) NSString  *text;
-@property (strong, nonatomic) NSString  *imageUrl;
+@property (strong, nonatomic)   NSString  *name;
+@property (strong, nonatomic)   NSString  *time;
+@property (strong, nonatomic)   NSString  *text;
+@property (readonly, nonatomic) NSString  *imageUrl;
+@property (strong, nonatomic)   NSString *imageUrlPrefix;
+@property (strong, nonatomic)   NSString  *imageUrlSuffix;
 
-- (instancetype)initWithName:(NSString *)name time:(NSString *)time text:(NSString *)text imageUrl:(NSString *)imageUrl;
+- (instancetype)initWithName:(NSString *)name
+                        time:(NSString *)time
+                        text:(NSString *)text
+                    imageUrl:(NSString *)imageUrl;
 
 @end

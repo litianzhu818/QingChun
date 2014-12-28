@@ -100,10 +100,6 @@
 		E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */; };
 		E7904ACB1A4EAE3900B47110 /* CellButtonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */; };
 		E7904ACC1A4EAE3900B47110 /* CellHeaderViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904ACA1A4EAE3900B47110 /* CellHeaderViewModel.m */; };
-		E7904B201A4F06D700B47110 /* NSObject+AutoDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904B1D1A4F06D700B47110 /* NSObject+AutoDescription.m */; };
-		E7904B211A4F06D700B47110 /* NSObject+CleanDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904B1F1A4F06D700B47110 /* NSObject+CleanDescription.m */; };
-		E7904B281A4F085600B47110 /* NSObject+AutoProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904B271A4F085600B47110 /* NSObject+AutoProperties.m */; };
-		E7904B2C1A4F0DD500B47110 /* AutoCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904B2B1A4F0DD500B47110 /* AutoCoding.m */; };
 		E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F599C19F7F40D001CB6F2 /* StartViewController.m */; };
 		E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F59A019F7F63E001CB6F2 /* SystemConfig.m */; };
 		E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F59A319F7F78D001CB6F2 /* UserConfig.m */; };
@@ -143,6 +139,10 @@
 		E7B51FDC1A4E9ACF000D78A4 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B51FDB1A4E9ACF000D78A4 /* CoreLocation.framework */; };
 		E7B51FDE1A4E9AE1000D78A4 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B51FDD1A4E9AE1000D78A4 /* MobileCoreServices.framework */; };
 		E7B51FE01A4E9AF2000D78A4 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7B51FDF1A4E9AF2000D78A4 /* SystemConfiguration.framework */; };
+		E7B6EA641A4FCE31009CF7D1 /* AutoCoding.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA5C1A4FCE31009CF7D1 /* AutoCoding.m */; };
+		E7B6EA651A4FCE31009CF7D1 /* NSObject+AutoDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA5F1A4FCE31009CF7D1 /* NSObject+AutoDescription.m */; };
+		E7B6EA661A4FCE31009CF7D1 /* NSObject+CleanDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA611A4FCE31009CF7D1 /* NSObject+CleanDescription.m */; };
+		E7B6EA671A4FCE31009CF7D1 /* NSObject+AutoProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA631A4FCE31009CF7D1 /* NSObject+AutoProperties.m */; };
 		E7B725691A09212700882998 /* DisplayMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* DisplayMessage.m */; };
 		E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */; };
 		E7B9E4591A46963F00D7775C /* UITabBar+BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4581A46963F00D7775C /* UITabBar+BackgroundImage.m */; };
@@ -382,14 +382,6 @@
 		E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellButtonViewModel.m; sourceTree = "<group>"; };
 		E7904AC91A4EAE3900B47110 /* CellHeaderViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellHeaderViewModel.h; sourceTree = "<group>"; };
 		E7904ACA1A4EAE3900B47110 /* CellHeaderViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellHeaderViewModel.m; sourceTree = "<group>"; };
-		E7904B1C1A4F06D700B47110 /* NSObject+AutoDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoDescription.h"; sourceTree = "<group>"; };
-		E7904B1D1A4F06D700B47110 /* NSObject+AutoDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AutoDescription.m"; sourceTree = "<group>"; };
-		E7904B1E1A4F06D700B47110 /* NSObject+CleanDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CleanDescription.h"; sourceTree = "<group>"; };
-		E7904B1F1A4F06D700B47110 /* NSObject+CleanDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CleanDescription.m"; sourceTree = "<group>"; };
-		E7904B261A4F085600B47110 /* NSObject+AutoProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoProperties.h"; sourceTree = "<group>"; };
-		E7904B271A4F085600B47110 /* NSObject+AutoProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AutoProperties.m"; sourceTree = "<group>"; };
-		E7904B2A1A4F0DD500B47110 /* AutoCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCoding.h; sourceTree = "<group>"; };
-		E7904B2B1A4F0DD500B47110 /* AutoCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCoding.m; sourceTree = "<group>"; };
 		E79F599B19F7F40D001CB6F2 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		E79F599C19F7F40D001CB6F2 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		E79F599F19F7F63E001CB6F2 /* SystemConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemConfig.h; sourceTree = "<group>"; };
@@ -444,6 +436,14 @@
 		E7B51FDB1A4E9ACF000D78A4 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E7B51FDD1A4E9AE1000D78A4 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		E7B51FDF1A4E9AF2000D78A4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E7B6EA5B1A4FCE31009CF7D1 /* AutoCoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoCoding.h; sourceTree = "<group>"; };
+		E7B6EA5C1A4FCE31009CF7D1 /* AutoCoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoCoding.m; sourceTree = "<group>"; };
+		E7B6EA5E1A4FCE31009CF7D1 /* NSObject+AutoDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoDescription.h"; sourceTree = "<group>"; };
+		E7B6EA5F1A4FCE31009CF7D1 /* NSObject+AutoDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AutoDescription.m"; sourceTree = "<group>"; };
+		E7B6EA601A4FCE31009CF7D1 /* NSObject+CleanDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CleanDescription.h"; sourceTree = "<group>"; };
+		E7B6EA611A4FCE31009CF7D1 /* NSObject+CleanDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CleanDescription.m"; sourceTree = "<group>"; };
+		E7B6EA621A4FCE31009CF7D1 /* NSObject+AutoProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+AutoProperties.h"; sourceTree = "<group>"; };
+		E7B6EA631A4FCE31009CF7D1 /* NSObject+AutoProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+AutoProperties.m"; sourceTree = "<group>"; };
 		E7B725671A09212700882998 /* DisplayMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMessage.h; sourceTree = "<group>"; };
 		E7B725681A09212700882998 /* DisplayMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayMessage.m; sourceTree = "<group>"; };
 		E7B9E4541A46757C00D7775C /* UINavigationBar+ImageBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ImageBackground.h"; sourceTree = "<group>"; };
@@ -652,8 +652,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				E7904B291A4F0DD500B47110 /* AutoCoding */,
-				E7904B1B1A4F06D700B47110 /* NSObject+AutoDescription */,
+				E7B6EA591A4FCE31009CF7D1 /* AutoProperties */,
 				E7904A8A1A4EABB500B47110 /* AFNetworkingFramework */,
 				E77C2FFB1A4D570800D12DBB /* TPKeyboardAvoiding */,
 				E77C2FC51A4AC0FD00D12DBB /* HMSegmentedControl */,
@@ -1053,26 +1052,6 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
-		E7904B1B1A4F06D700B47110 /* NSObject+AutoDescription */ = {
-			isa = PBXGroup;
-			children = (
-				E7904B1C1A4F06D700B47110 /* NSObject+AutoDescription.h */,
-				E7904B1D1A4F06D700B47110 /* NSObject+AutoDescription.m */,
-				E7904B1E1A4F06D700B47110 /* NSObject+CleanDescription.h */,
-				E7904B1F1A4F06D700B47110 /* NSObject+CleanDescription.m */,
-			);
-			path = "NSObject+AutoDescription";
-			sourceTree = "<group>";
-		};
-		E7904B291A4F0DD500B47110 /* AutoCoding */ = {
-			isa = PBXGroup;
-			children = (
-				E7904B2A1A4F0DD500B47110 /* AutoCoding.h */,
-				E7904B2B1A4F0DD500B47110 /* AutoCoding.m */,
-			);
-			path = AutoCoding;
-			sourceTree = "<group>";
-		};
 		E79F599A19F7F40D001CB6F2 /* StartViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1257,6 +1236,37 @@
 			path = Utility;
 			sourceTree = "<group>";
 		};
+		E7B6EA591A4FCE31009CF7D1 /* AutoProperties */ = {
+			isa = PBXGroup;
+			children = (
+				E7B6EA5A1A4FCE31009CF7D1 /* AutoCoding */,
+				E7B6EA5D1A4FCE31009CF7D1 /* NSObject+AutoDescription */,
+				E7B6EA621A4FCE31009CF7D1 /* NSObject+AutoProperties.h */,
+				E7B6EA631A4FCE31009CF7D1 /* NSObject+AutoProperties.m */,
+			);
+			path = AutoProperties;
+			sourceTree = "<group>";
+		};
+		E7B6EA5A1A4FCE31009CF7D1 /* AutoCoding */ = {
+			isa = PBXGroup;
+			children = (
+				E7B6EA5B1A4FCE31009CF7D1 /* AutoCoding.h */,
+				E7B6EA5C1A4FCE31009CF7D1 /* AutoCoding.m */,
+			);
+			path = AutoCoding;
+			sourceTree = "<group>";
+		};
+		E7B6EA5D1A4FCE31009CF7D1 /* NSObject+AutoDescription */ = {
+			isa = PBXGroup;
+			children = (
+				E7B6EA5E1A4FCE31009CF7D1 /* NSObject+AutoDescription.h */,
+				E7B6EA5F1A4FCE31009CF7D1 /* NSObject+AutoDescription.m */,
+				E7B6EA601A4FCE31009CF7D1 /* NSObject+CleanDescription.h */,
+				E7B6EA611A4FCE31009CF7D1 /* NSObject+CleanDescription.m */,
+			);
+			path = "NSObject+AutoDescription";
+			sourceTree = "<group>";
+		};
 		E7B73B261A4055970060CA94 /* PhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -1427,8 +1437,6 @@
 				E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */,
 				E7B9E4571A46963F00D7775C /* UITabBar+BackgroundImage.h */,
 				E7B9E4581A46963F00D7775C /* UITabBar+BackgroundImage.m */,
-				E7904B261A4F085600B47110 /* NSObject+AutoProperties.h */,
-				E7904B271A4F085600B47110 /* NSObject+AutoProperties.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1631,6 +1639,7 @@
 				E7904AB31A4EABB500B47110 /* AFHTTPSessionManager.m in Sources */,
 				E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */,
 				E7904AC11A4EABB500B47110 /* UIWebView+AFNetworking.m in Sources */,
+				E7B6EA661A4FCE31009CF7D1 /* NSObject+CleanDescription.m in Sources */,
 				E7DD1C3C1A412F7200FAA24A /* MJPhotoView.m in Sources */,
 				E7B725691A09212700882998 /* DisplayMessage.m in Sources */,
 				E7904AB61A4EABB500B47110 /* AFURLConnectionOperation.m in Sources */,
@@ -1644,7 +1653,6 @@
 				E725A2651A07C52A00FCE03D /* MainCellView.m in Sources */,
 				E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */,
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
-				E7904B211A4F06D700B47110 /* NSObject+CleanDescription.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
 				E7DD1C441A412F8D00FAA24A /* BaseTableViewCellView.m in Sources */,
 				E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */,
@@ -1655,7 +1663,6 @@
 				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
 				E77C30061A4D570800D12DBB /* TPKeyboardAvoidingTableView.m in Sources */,
 				E7DD1C391A412F7200FAA24A /* MJPhotoLoadingView.m in Sources */,
-				E7904B281A4F085600B47110 /* NSObject+AutoProperties.m in Sources */,
 				E7AF3D181A0B9EFE0073116D /* NAMenuViewController.m in Sources */,
 				E77C30071A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				E79F59A419F7F78D001CB6F2 /* UserConfig.m in Sources */,
@@ -1671,7 +1678,6 @@
 				E7AF3D171A0B9EFE0073116D /* NAMenuView.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
 				E7FC67C41A45646500AF45A6 /* EGORefreshTableHeaderView.m in Sources */,
-				E7904B201A4F06D700B47110 /* NSObject+AutoDescription.m in Sources */,
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
 				E7DD1C8B1A41AC3600FAA24A /* BaseCellButtonView.m in Sources */,
 				E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */,
@@ -1682,6 +1688,7 @@
 				E7DD1C3A1A412F7200FAA24A /* MJPhotoProgressView.m in Sources */,
 				E7BAD1531A0DECEA00D27F4B /* PullingRefreshTableView.m in Sources */,
 				E725A2991A07CDA900FCE03D /* UIView+WebCacheOperation.m in Sources */,
+				E7B6EA671A4FCE31009CF7D1 /* NSObject+AutoProperties.m in Sources */,
 				E7DD1C4D1A418E6E00FAA24A /* BaseCellImageView.m in Sources */,
 				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
 				E7904ABF1A4EABB500B47110 /* UIProgressView+AFNetworking.m in Sources */,
@@ -1695,9 +1702,9 @@
 				E75E90AE19F743E5000F2CE9 /* MBProgressHUD.m in Sources */,
 				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
 				E725A28A1A07CDA900FCE03D /* MKAnnotationView+WebCache.m in Sources */,
+				E7B6EA651A4FCE31009CF7D1 /* NSObject+AutoDescription.m in Sources */,
 				E77C2FC81A4AC0FD00D12DBB /* HMSegmentedControl.m in Sources */,
 				E7DD1C471A41333400FAA24A /* BaseCellHeaderView.m in Sources */,
-				E7904B2C1A4F0DD500B47110 /* AutoCoding.m in Sources */,
 				E725A2951A07CDA900FCE03D /* UIImage+MultiFormat.m in Sources */,
 				E79F59A119F7F63E001CB6F2 /* SystemConfig.m in Sources */,
 				E7904AB51A4EABB500B47110 /* AFSecurityPolicy.m in Sources */,
@@ -1709,6 +1716,7 @@
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
 				E725A2961A07CDA900FCE03D /* UIImage+WebP.m in Sources */,
 				E79FB2D919FB61C100FBC703 /* QCBTableViewController.m in Sources */,
+				E7B6EA641A4FCE31009CF7D1 /* AutoCoding.m in Sources */,
 				E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */,
 				E7DD1C1E1A40565100FAA24A /* MBProgressHUD+Add.m in Sources */,
 				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,

@@ -11,17 +11,17 @@
 
 @implementation CellButtonViewModel
 
-+ (id)cellButtonViewModelWithDict:(NSDictionary *)dict;
++ (id)cellButtonViewModelWithDictionary:(NSDictionary *)dictionary;
 {
-    return [[self alloc] initWithDict:dict];
+    return [[self alloc] initWithDictionary:dictionary];
 }
 
-- (id)initWithDict:(NSDictionary *)dict
+- (id)initWithDictionary:(NSDictionary *)dictionary
 {
-    return [self initWithLikeCount:[dict[@"likeCount"] integerValue]
-                       unlikeCount:[dict[@"unlikeCount"] integerValue]
-                        shareCount:[dict[@"shareCount"] integerValue]
-                      commentCount:[dict[@"commentCount" ] integerValue]];
+    return [self initWithLikeCount:[dictionary[@"praise"] integerValue]
+                       unlikeCount:[dictionary[@"step"] integerValue]
+                        shareCount:[dictionary[@"collection"] integerValue]
+                      commentCount:[dictionary[@"msgnum" ] integerValue]];
 }
 
 - (id)initWithLikeCount:(NSInteger)likeCount unlikeCount:(NSInteger)unlikeCount shareCount:(NSInteger)shareCount commentCount:(NSInteger)commentCount

@@ -69,7 +69,9 @@
 
     #define bound [ UIScreen mainScreen ].bounds
     #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
-    #define IOS_VERSION_7_OR_ABOVE (([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)? (YES):(NO))
+    #define CURRENT_IOS_SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
+    #define IOS_VERSION_7_OR_ABOVE ((CURRENT_IOS_SYSTEM_VERSION >= 7.0)? (YES):(NO))
+    #define SUPPORT_IOS8 __IPHONE_OS_VERSION_MIN_REQUIRED >= 80000
     #define isIPhone5 ([UIScreen mainScreen].bounds.size.height == 568)
     #define READ_PLIST(plistFileName) [[NSMutableDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plistFileName ofType:@"plist"]]
 

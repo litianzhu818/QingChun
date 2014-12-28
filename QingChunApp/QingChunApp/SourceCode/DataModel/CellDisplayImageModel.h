@@ -16,6 +16,9 @@
 @property (assign, nonatomic) CGFloat width;
 @property (assign, nonatomic) CGFloat height;
 
++ (instancetype)cellDisplayImageModelWithDictionary:(NSDictionary *)dictionary;
+
 - (instancetype)initWithUrlStrSuffix:(NSString *)urlStrSuffix width:(CGFloat)width height:(CGFloat)height;
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

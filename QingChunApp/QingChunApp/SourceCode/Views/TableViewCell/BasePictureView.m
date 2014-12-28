@@ -8,6 +8,7 @@
 
 #import "BasePictureView.h"
 #import "BaseCellImageView.h"
+#import "CellDisplayImageModel.h"
 
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
 #define MULTIPLE_IMAGE_WIDTH 80.0f
@@ -15,48 +16,39 @@
 
 @interface BasePictureView ()<BaseCellImageViewDelegate>
 {
-    NSArray *_urls;
-    NSMutableArray *_images;
-    CGFloat _aspectRatio;
-    CGSize _pictureSize;
+    CGSize              _pictureViewSize;
+    NSArray             *_cellDisplayImageModels;
+    NSMutableArray      *_images;
 }
 @end
 
 @implementation BasePictureView
-@synthesize urls = _urls;
+@synthesize cellDisplayImageModels = _cellDisplayImageModels;
 
+#pragma mark - public init method
 - (id)initWithFrame:(CGRect)frame
 {
-    return [self initWithFrame:frame urls:nil];
+    return [self initWithFrame:frame cellDisplayImageModels:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame urls:(NSArray *)urls
+- (instancetype)initWithFrame:(CGRect)frame cellDisplayImageModel:(CellDisplayImageModel *)cellDisplayImageModel
 {
-    return [self initWithFrame:frame multipleUrls:urls aspectRatio:0.0];
+    return [self initWithFrame:frame cellDisplayImageModels:[NSArray arrayWithObjects:cellDisplayImageModel,nil]];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url
-{
-    return [self initWithFrame:frame multipleUrls:[NSArray arrayWithObjects:url,nil] aspectRatio:1.0f];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame singleUrls:(NSString *)url aspectRatio:(CGFloat)aspectRatio
-{
-    return [self initWithFrame:frame multipleUrls:[NSArray arrayWithObjects:url,nil] aspectRatio:aspectRatio];
-}
-
-- (instancetype)initWithFrame:(CGRect)frame multipleUrls:(NSArray *)urls aspectRatio:(CGFloat)aspectRatio
+- (instancetype)initWithFrame:(CGRect)frame cellDisplayImageModels:(NSArray *)cellDisplayImageModels
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
         [self initParameters];
-        _urls = urls;
+        _cellDisplayImageModels = [self cellDisplayImageModelsFrom:cellDisplayImageModels];
         [self initUI];
     }
     return self;
 }
 
+#pragma mark - private init method
 
 - (void)initParameters
 {
@@ -66,7 +58,7 @@
 
 - (void)initUI
 {
-    if ([_urls count] == 1) {
+    if ([_cellDisplayImageModels count] == 1) {
         [self setupSinglePictureView];
     }else{
         [self setupMultiplePictureView];
@@ -78,6 +70,10 @@
     CGFloat imageWith = 0.0f;
     CGFloat imageHeight = 0.0f;
     
+    CellDisplayImageModel *cellDisplayImageModel = [_cellDisplayImageModels firstObject];
+    
+    CGFloat _aspectRatio = cellDisplayImageModel.width/cellDisplayImageModel.height;
+    
     if (_aspectRatio > 1.0) {
         imageWith = SINGLE_IMAGE_WIDTH;
         imageHeight = imageWith/_aspectRatio;
@@ -85,10 +81,10 @@
         imageHeight = SINGLE_IMAGE_WIDTH;
         imageWith = imageHeight*_aspectRatio;
     }
-    _pictureSize = CGSizeMake(imageWith, imageHeight);
+    _pictureViewSize = CGSizeMake(imageWith, imageHeight);
     self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
     
-    BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[_urls firstObject]];
+    BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
      singleImageView.contentMode = UIViewContentModeScaleAspectFit;
     singleImageView.tag = 0;
     
@@ -103,7 +99,7 @@
     
     NSUInteger column       =   0;//列数
     NSUInteger row          =   0;//行数
-    NSUInteger numOfImages  =   [_urls count];
+    NSUInteger numOfImages  =   [_cellDisplayImageModels count];
     
     if (numOfImages <= 3) {//一行，三列
         row = 1;
@@ -127,7 +123,7 @@
         imageHeight = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
     }
     
-    _pictureSize = CGSizeMake(imageWith, imageHeight);
+    _pictureViewSize = CGSizeMake(imageWith, imageHeight);
     self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
     
     CGFloat originX = 0.0f;
@@ -145,7 +141,9 @@
             
             originX += (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
             
-            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:[_urls objectAtIndex:sumOfViews - 1]];
+            CellDisplayImageModel *tempCellDisplayImageModel = [_cellDisplayImageModels objectAtIndex:sumOfViews - 1];
+            
+            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:tempCellDisplayImageModel.urlStr];
             singleImageView.contentMode = UIViewContentModeScaleAspectFill;
             singleImageView.tag = sumOfViews - 1;
             
@@ -156,11 +154,11 @@
     
 }
 
-
 - (NSString *)urlAtIndex:(NSUInteger)pictureIndex
 {
-    return [self.urls objectAtIndex:pictureIndex];
+    return [(CellDisplayImageModel *)[self.cellDisplayImageModels objectAtIndex:pictureIndex] urlStr];
 }
+
 - (UIImage *)imageAtIndex:(NSUInteger)pictureIndex
 {
     return [_images objectAtIndex:pictureIndex];
@@ -172,5 +170,26 @@
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTapedOnImageView:onIndex:)]) {
         [self.delegate didTapedOnImageView:baseCellImageView onIndex:baseCellImageView.tag];
     }
+}
+
+#pragma mark - tools method
+- (NSArray *)cellDisplayImageModelsFrom:(NSArray *)arrays
+{
+    if ([arrays count] < 1) return nil;
+    
+    NSMutableArray *tempArray = [NSMutableArray array];
+    
+    [arrays enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dic = obj;
+        CellDisplayImageModel *tempModel = [self cellDisplayImageModelFromDictionary:dic];
+        [tempArray addObject:tempModel];
+    }];
+    
+    return tempArray;
+}
+
+- (CellDisplayImageModel *)cellDisplayImageModelFromDictionary:(NSDictionary *)dictionary
+{
+    return [CellDisplayImageModel cellDisplayImageModelWithDictionary:dictionary];
 }
 @end

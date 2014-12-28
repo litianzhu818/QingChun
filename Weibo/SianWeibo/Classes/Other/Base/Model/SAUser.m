@@ -27,7 +27,7 @@
 #pragma mark - 2、类构造方法
 + (id)statusUserWithDict:(NSDictionary *)dict
 {
-    return [[self alloc] initWithDict:dict];
+    return [[self alloc] initWithDictionary:dict];
 }
 
 @end

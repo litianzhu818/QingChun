@@ -29,10 +29,16 @@
     DisplayMessage *m2 = [m1 copy];
     NSLog(@"%@",m2);
     
-    [[NSUserDefaults standardUserDefaults] setObject:m2 forKey:@"123"];
+    
+    m2.name = @"刘艳芳";
+    NSData *tempData1 = [NSKeyedArchiver archivedDataWithRootObject:m2];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:tempData1 forKey:@"123"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    DisplayMessage *m = [[NSUserDefaults standardUserDefaults] objectForKey:@"123"];
+    NSData *tempDate2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"123"];
+    
+    DisplayMessage *m = [NSKeyedUnarchiver unarchiveObjectWithData:tempDate2];
     
     NSLog(@"####%@",m.description);
     
