@@ -16,8 +16,15 @@
 @property (assign, nonatomic)   NSInteger       unlikeCount;        //讨厌数量
 
 + (id)cellButtonViewModelWithDictionary:(NSDictionary *)dictionary;
++ (id)cellButtonViewModelWithLikeCount:(NSInteger)likeCount
+                           unlikeCount:(NSInteger)unlikeCount
+                            shareCount:(NSInteger)shareCount
+                          commentCount:(NSInteger)commentCount;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
-- (id)initWithLikeCount:(NSInteger)likeCount unlikeCount:(NSInteger)unlikeCount shareCount:(NSInteger)shareCount commentCount:(NSInteger)commentCount;
+- (id)initWithLikeCount:(NSInteger)likeCount
+            unlikeCount:(NSInteger)unlikeCount
+             shareCount:(NSInteger)shareCount
+           commentCount:(NSInteger)commentCount;
 
 @end

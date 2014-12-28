@@ -16,6 +16,17 @@
     return [[self alloc] initWithDictionary:dictionary];
 }
 
++ (id)cellButtonViewModelWithLikeCount:(NSInteger)likeCount
+                           unlikeCount:(NSInteger)unlikeCount
+                            shareCount:(NSInteger)shareCount
+                          commentCount:(NSInteger)commentCount
+{
+    return [[self alloc] initWithLikeCount:likeCount
+                               unlikeCount:unlikeCount
+                                shareCount:shareCount
+                              commentCount:commentCount];
+}
+
 - (id)initWithDictionary:(NSDictionary *)dictionary
 {
     return [self initWithLikeCount:[dictionary[@"praise"] integerValue]

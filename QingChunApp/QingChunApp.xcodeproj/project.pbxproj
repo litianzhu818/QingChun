@@ -79,6 +79,7 @@
 		E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C2FFF1A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m */; };
 		E77C30061A4D570800D12DBB /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C30011A4D570800D12DBB /* TPKeyboardAvoidingTableView.m */; };
 		E77C30071A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C30031A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
+		E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A03D21A50581500DA1DA3 /* CellContentModel.m */; };
 		E7904AB11A4EABB500B47110 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904A8D1A4EABB500B47110 /* AFHTTPRequestOperation.m */; };
 		E7904AB21A4EABB500B47110 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904A8F1A4EABB500B47110 /* AFHTTPRequestOperationManager.m */; };
 		E7904AB31A4EABB500B47110 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904A911A4EABB500B47110 /* AFHTTPSessionManager.m */; };
@@ -144,6 +145,7 @@
 		E7B6EA6A1A5030B0009CF7D1 /* CellDisplayModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA691A5030B0009CF7D1 /* CellDisplayModel.m */; };
 		E7B6EA701A503209009CF7D1 /* SystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA6D1A503209009CF7D1 /* SystemConfig.m */; };
 		E7B6EA711A503209009CF7D1 /* UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA6F1A503209009CF7D1 /* UserConfig.m */; };
+		E7B6EA741A50548F009CF7D1 /* CellDisplayUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */; };
 		E7B725691A09212700882998 /* TestObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* TestObjectModel.m */; };
 		E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */; };
 		E7B9E4591A46963F00D7775C /* UITabBar+BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4581A46963F00D7775C /* UITabBar+BackgroundImage.m */; };
@@ -340,6 +342,8 @@
 		E77C30011A4D570800D12DBB /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
 		E77C30021A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+TPKeyboardAvoidingAdditions.h"; sourceTree = "<group>"; };
 		E77C30031A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
+		E78A03D11A50581500DA1DA3 /* CellContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellContentModel.h; sourceTree = "<group>"; };
+		E78A03D21A50581500DA1DA3 /* CellContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellContentModel.m; sourceTree = "<group>"; };
 		E7904A8C1A4EABB500B47110 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
 		E7904A8D1A4EABB500B47110 /* AFHTTPRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPRequestOperation.m; sourceTree = "<group>"; };
 		E7904A8E1A4EABB500B47110 /* AFHTTPRequestOperationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperationManager.h; sourceTree = "<group>"; };
@@ -447,6 +451,8 @@
 		E7B6EA6D1A503209009CF7D1 /* SystemConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemConfig.m; sourceTree = "<group>"; };
 		E7B6EA6E1A503209009CF7D1 /* UserConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConfig.h; sourceTree = "<group>"; };
 		E7B6EA6F1A503209009CF7D1 /* UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfig.m; sourceTree = "<group>"; };
+		E7B6EA721A50548F009CF7D1 /* CellDisplayUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDisplayUserModel.h; sourceTree = "<group>"; };
+		E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDisplayUserModel.m; sourceTree = "<group>"; };
 		E7B725671A09212700882998 /* TestObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectModel.h; sourceTree = "<group>"; };
 		E7B725681A09212700882998 /* TestObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObjectModel.m; sourceTree = "<group>"; };
 		E7B9E4541A46757C00D7775C /* UINavigationBar+ImageBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ImageBackground.h"; sourceTree = "<group>"; };
@@ -1078,6 +1084,10 @@
 				E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */,
 				E7B6EA681A5030B0009CF7D1 /* CellDisplayModel.h */,
 				E7B6EA691A5030B0009CF7D1 /* CellDisplayModel.m */,
+				E7B6EA721A50548F009CF7D1 /* CellDisplayUserModel.h */,
+				E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */,
+				E78A03D11A50581500DA1DA3 /* CellContentModel.h */,
+				E78A03D21A50581500DA1DA3 /* CellContentModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1642,6 +1652,8 @@
 				E7DD1C431A412F8D00FAA24A /* BasePictureView.m in Sources */,
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
+				E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */,
+				E7B6EA741A50548F009CF7D1 /* CellDisplayUserModel.m in Sources */,
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E7904AB11A4EABB500B47110 /* AFHTTPRequestOperation.m in Sources */,
 				E7FC67C31A45646500AF45A6 /* CircleView.m in Sources */,

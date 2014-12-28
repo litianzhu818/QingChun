@@ -9,7 +9,14 @@
 #import "CellDisplayImageModel.h"
 #import "NSObject+AutoProperties.h"
 
+@interface CellDisplayImageModel ()
+{
+    NSString *_urlStr;
+}
+@end
+
 @implementation CellDisplayImageModel
+@synthesize urlStr = _urlStr;
 
 + (instancetype)cellDisplayImageModelWithDictionary:(NSDictionary *)dictionary
 {
@@ -23,6 +30,7 @@
         self.urlStrSuffix = urlStrSuffix;
         self.width = width;
         self.height = height;
+        _urlStr = [NSString stringWithFormat:@"%@%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"image_url_string_prefix"],self.urlStrSuffix];
     }
     
     return self;

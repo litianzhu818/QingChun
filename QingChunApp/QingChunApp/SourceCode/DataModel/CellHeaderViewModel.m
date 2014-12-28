@@ -9,19 +9,44 @@
 #import "CellHeaderViewModel.h"
 #import "NSObject+AutoProperties.h"
 
-@implementation CellHeaderViewModel
+@interface CellHeaderViewModel ()
+{
+    NSString *_imageUrl;
+}
+@end
 
-- (instancetype)initWithName:(NSString *)name time:(NSString *)time text:(NSString *)text imageUrl:(NSString *)imageUrl
+@implementation CellHeaderViewModel
+@synthesize imageUrl = _imageUrl;
+
++ (instancetype)cellHeaderViewModelWithName:(NSString *)name
+                                       time:(NSString *)time
+                                       text:(NSString *)text
+                             imageUrlSuffix:(NSString *)imageUrlSuffix
+{
+    return [[self alloc] initWithName:name
+                                 time:time
+                                 text:text
+                       imageUrlSuffix:imageUrlSuffix];
+}
+
+- (instancetype)initWithName:(NSString *)name
+                        time:(NSString *)time
+                        text:(NSString *)text
+              imageUrlSuffix:(NSString *)imageUrlSuffix
 {
     self = [super init];
     if (self) {
         self.name = name;
         self.time = time;
         self.text = text;
-        self.imageUrl = imageUrl;
+        self.imageUrlSuffix = imageUrlSuffix;
+        _imageUrl = [NSString stringWithFormat:@"%@%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"user_image_url_string"],self.imageUrlSuffix];
+
     }
     return self;
 }
+
+
 /*
 -(NSString *)description
 {

@@ -14,12 +14,16 @@
 @property (strong, nonatomic)   NSString  *time;
 @property (strong, nonatomic)   NSString  *text;
 @property (readonly, nonatomic) NSString  *imageUrl;
-@property (strong, nonatomic)   NSString *imageUrlPrefix;
 @property (strong, nonatomic)   NSString  *imageUrlSuffix;
 
 - (instancetype)initWithName:(NSString *)name
                         time:(NSString *)time
                         text:(NSString *)text
-                    imageUrl:(NSString *)imageUrl;
+              imageUrlSuffix:(NSString *)imageUrlSuffix;
+
++ (instancetype)cellHeaderViewModelWithName:(NSString *)name
+                                       time:(NSString *)time
+                                       text:(NSString *)text
+                             imageUrlSuffix:(NSString *)imageUrlSuffix;
 
 @end

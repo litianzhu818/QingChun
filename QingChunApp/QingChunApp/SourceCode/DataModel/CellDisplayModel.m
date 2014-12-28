@@ -9,6 +9,27 @@
 #import "CellDisplayModel.h"
 #import "NSObject+AutoProperties.h"
 
+#import "CellContentModel.h"
+#import "CellDisplayUserModel.h"
+#import "CellButtonViewModel.h"
+#import "CellDisplayImageModel.h"
+
 @implementation CellDisplayModel
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary
+{
+    self = [super init];
+    if (self) {
+        
+        
+    }
+    
+    return self;
+}
+
++ (instancetype)cellDisplayModelWithDictionary:(NSDictionary *)dictionary
+{
+    return [[self alloc] initWithDictionary:dictionary];
+}
 
 @end
