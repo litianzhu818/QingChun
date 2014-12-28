@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface DisplayMessage : NSObject 
+@interface TestObjectModel : NSObject 
 
 //The description string of this object
 //@property (readonly, copy) NSString *description;

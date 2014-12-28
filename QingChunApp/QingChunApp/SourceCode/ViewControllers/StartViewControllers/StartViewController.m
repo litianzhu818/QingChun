@@ -7,7 +7,7 @@
 //
 
 #import "StartViewController.h"
-#import "DisplayMessage.h"
+#import "TestObjectModel.h"
 @interface StartViewController ()
 
 @end
@@ -21,12 +21,12 @@
     NSLog(peterLee);
 #endif
     
-    DisplayMessage *m1 = [[DisplayMessage alloc] init];
+    TestObjectModel *m1 = [[TestObjectModel alloc] init];
     m1.ID = 1234;
     m1.name = @"litianzhu";
     NSLog(@"%@",m1.description);
     
-    DisplayMessage *m2 = [m1 copy];
+    TestObjectModel *m2 = [m1 copy];
     NSLog(@"%@",m2);
     
     
@@ -38,7 +38,7 @@
     
     NSData *tempDate2 = [[NSUserDefaults standardUserDefaults] objectForKey:@"123"];
     
-    DisplayMessage *m = [NSKeyedUnarchiver unarchiveObjectWithData:tempDate2];
+    TestObjectModel *m = [NSKeyedUnarchiver unarchiveObjectWithData:tempDate2];
     
     NSLog(@"####%@",m.description);
     
