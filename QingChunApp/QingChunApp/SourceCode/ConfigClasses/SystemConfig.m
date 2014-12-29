@@ -7,6 +7,7 @@
 //
 
 #import "SystemConfig.h"
+#import "SystemConfigKeyValue.h"
 
 @implementation SystemConfig
 Single_implementation(SystemConfig);
@@ -14,14 +15,51 @@ Single_implementation(SystemConfig);
 //存取FistLoading的标志
 -(void)SetFistLoading:(BOOL)value;
 {
-    [[NSUserDefaults standardUserDefaults] setBool:value forKey:FIRST_LOADING];
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:qcdFirstLoading];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(BOOL)GetFistLoading
 {
-    return [[NSUserDefaults standardUserDefaults] boolForKey:FIRST_LOADING];
+    return [[NSUserDefaults standardUserDefaults] boolForKey:qcdFirstLoading];
 }
 
+//存取主站点的值
+-(void)SetBaseURLStr:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdBaseURLStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetBaseURLStr
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdBaseURLStr];
+}
+
+//存取Session的值
+-(void)SetSession:(NSData *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdSession];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSData *)GetSession
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdSession];
+}
+-(void)RemoveSession
+{
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:qcdSession];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+//登录的API路径
+-(void)SetLoginURLStr:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdLoginPath];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetLoginURLStr
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdLoginPath];
+}
 
 
 

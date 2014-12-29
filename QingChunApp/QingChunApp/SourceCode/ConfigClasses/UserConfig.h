@@ -12,5 +12,12 @@
 @interface UserConfig : NSObject
 Single_interface(UserConfig);
 
+//User login name
+-(void)SetUserName:(NSString *)value;
+-(NSString *)GetUserName;
+
+//存取用户密码的值
+-(void)SetUserPassword:(NSString *)value;
+-(NSString *)GetUserPassword;
 
 @end

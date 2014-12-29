@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "AFNetworkActivityIndicatorManager.h"
 
 @interface AppDelegate ()
 
@@ -25,7 +26,7 @@
 //    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
 //    application.applicationIconBadgeNumber = 0;
 //    [self startCheckNetwork];
-////    [self startEngine];
+    [self startEngine];
 //    [self startReadPlistFiles];
 //    [self initData];
     return YES;
@@ -204,12 +205,11 @@
     
 }
 
-////开启XMPP和RTC服务
-//- (void)startEngine
-//{
-//    [[XMPPWorker sharedInstance] startEngine];
-//    [[RTCWorker sharedInstance] startEngine];
-//}
+//开启网络服务
+- (void)startEngine
+{
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+}
 ////关闭XMPP和RTC服务
 //- (void)stopEngine
 //{
