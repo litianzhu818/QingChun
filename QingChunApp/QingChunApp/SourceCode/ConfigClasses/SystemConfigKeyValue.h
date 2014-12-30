@@ -14,5 +14,8 @@ NSString *const qcdBaseURLStr = @"QCD_BASE_URL_STRING";
 NSString *const qcdSession = @"QCD_LOGIN_SESSION_DATA";
 
 NSString *const qcdLoginPath = @"QCD_LOGIN_PATH_STRING";
+NSString *const qcdMessagePath = @"QCD_MESSAGE_PATH_STRING";
+
+NSString *const qcdCheckSumSecret = @"QCD_CHECK_SUM_SECRET_STRING";
 
 #endif

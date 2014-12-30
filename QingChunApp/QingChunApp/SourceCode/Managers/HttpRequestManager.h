@@ -10,6 +10,11 @@
 
 @interface HttpRequestManager : NSObject
 
++ (id)sharedInstance;
 
+- (void)requestQCDMessageWithPage:(NSUInteger)page
+                             type:(NSUInteger)type
+                       identifier:(NSString *)identifier
+                            block:(void (^)(id data, NSError *error))block;
 
 @end

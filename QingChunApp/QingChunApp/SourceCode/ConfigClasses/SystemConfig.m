@@ -61,6 +61,27 @@ Single_implementation(SystemConfig);
     return [[NSUserDefaults standardUserDefaults] objectForKey:qcdLoginPath];
 }
 
+-(void)SetMessageURLStr:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdMessagePath];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetMessageURLStr
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdMessagePath];
+}
+
+//获取加密校验值
+-(void)SetCheckSumSecret:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdCheckSumSecret];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetCheckSumSecret
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdCheckSumSecret];
+}
+
 
 
 @end

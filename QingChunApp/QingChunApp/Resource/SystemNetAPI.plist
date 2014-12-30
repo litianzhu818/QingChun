@@ -2,7 +2,11 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CHECKSUM_SECRET</key>
+	<string>refsdctrv7tgv7gbwef9u0sfewwfolkjnhghfekhjgw1</string>
 	<key>QCD_BASE_URL</key>
-	<string>http://api.qcd.me/</string>
+	<string>http://api.qcd.me</string>
+	<key>QCD_REQUEST_MSG_URL</key>
+	<string>api/readlist</string>
 </dict>
 </plist>

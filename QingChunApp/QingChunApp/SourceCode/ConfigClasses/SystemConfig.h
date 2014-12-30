@@ -29,4 +29,13 @@ Single_interface(SystemConfig);
 //登录的API路径
 -(void)SetLoginURLStr:(NSString *)value;
 -(NSString *)GetLoginURLStr;
+
+//获取消息API路径
+-(void)SetMessageURLStr:(NSString *)value;
+-(NSString *)GetMessageURLStr;
+
+//获取加密校验值
+-(void)SetCheckSumSecret:(NSString *)value;
+-(NSString *)GetCheckSumSecret;
+
 @end

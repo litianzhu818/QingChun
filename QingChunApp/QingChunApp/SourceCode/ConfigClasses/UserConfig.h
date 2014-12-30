@@ -20,4 +20,9 @@ Single_interface(UserConfig);
 -(void)SetUserPassword:(NSString *)value;
 -(NSString *)GetUserPassword;
 
+//存取自动登录的值
+-(void)SetAutoLogin:(BOOL)value;
+-(BOOL)GetAutoLogin;
+
+
 @end

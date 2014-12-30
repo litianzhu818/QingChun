@@ -15,7 +15,7 @@
 #import "iCarousel.h"
 #import "HMSegmentedControl.h"
 
-#import "HttpRequestClient.h"
+#import "HttpRequestManager.h"
 
 
 @interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,iCarouselDataSource, iCarouselDelegate>
@@ -196,18 +196,12 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
-    /*
-    [HttpRequestClient requestJsonDataWithPath:@"api/projects" withParams:[projects toParams] withMethodType:Get andBlock:^(id data, NSError *error) {
-        projects.isLoading = NO;
-        if (data) {
-            id resultData = [data valueForKeyPath:@"data"];
-            Projects *pros = [NSObject objectOfClass:@"Projects" fromJSON:resultData];
-            block(pros, nil);
-        }else{
-            block(nil, error);
-        }
-    }];
-     */
+    
+    [[HttpRequestManager sharedInstance] requestQCDMessageWithPage:1 type:1 identifier:@"litianzhu" block:^(id data, NSError *error) {
+     
+        
+     }];
+    
 }
 
 - (IBAction)sendMessage:(id)sender

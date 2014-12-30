@@ -27,10 +27,22 @@ Single_implementation(UserConfig);
 -(void)SetUserPassword:(NSString *)value
 {
     [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserPassword];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 -(NSString *)GetUserPassword
 {
     return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserPassword];
+}
+
+//存取自动登录的值
+-(void)SetAutoLogin:(BOOL)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:value] forKey:qcdUserAutoLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(BOOL)GetAutoLogin
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:qcdUserAutoLogin] boolValue];
 }
 
 

@@ -22,13 +22,13 @@
     // Override point for customization after application launch.
     //获取启动信息
     [self registerRemoteNotificationWith:application];
-//    [self launchWitchRemoteNotification:launchOptions];
-//    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
-//    application.applicationIconBadgeNumber = 0;
-//    [self startCheckNetwork];
+    [self launchWitchRemoteNotification:launchOptions];
+    //FIXME: we should not set the applicationIconBadgeNumber of the application to 0 here
+    application.applicationIconBadgeNumber = 0;
+    [self startCheckNetwork];
     [self startEngine];
-//    [self startReadPlistFiles];
-//    [self initData];
+    [self startReadPlistFiles];
+    [self initData];
     return YES;
 }
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
@@ -50,27 +50,28 @@
         
     }
 }
-
+/*
 //判断启动信息
-//-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-//    if(!url){
-//        return NO;
-//    }
-//    //Kissnapp://
-//    //LOG(@"Calling Application Bundle ID: %@", sourceApplication);
-//    LOG(@"URL scheme:%@", [url scheme]);
-//    LOG(@"URL query: %@", [url query]);
-//    NSString *infoString = [url query];
-//    switch ([infoString integerValue]) {
-//        case 101:
-//            [NotificationCenter postNotificationName:EMAIL_REGISTER_SUCCEED object:infoString];
-//            break;
-//
-//        default:
-//            break;
-//    }
-//    return YES;
-//}
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    if(!url){
+        return NO;
+    }
+    //Kissnapp://
+    //LOG(@"Calling Application Bundle ID: %@", sourceApplication);
+    LOG(@"URL scheme:%@", [url scheme]);
+    LOG(@"URL query: %@", [url query]);
+    NSString *infoString = [url query];
+    switch ([infoString integerValue]) {
+        case 101:
+            [NotificationCenter postNotificationName:EMAIL_REGISTER_SUCCEED object:infoString];
+            break;
+
+        default:
+            break;
+    }
+    return YES;
+}
+ */
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -119,9 +120,11 @@
     LOG(@"收到本地推送：%@,%@",notification.alertBody,notification.userInfo.description);
     NSDictionary *notificationDic = notification.userInfo;
     //FIXME:这里需要弹出对话框进行提醒，目前默认同意
-//    if ([[notificationDic objectForKey:@"noticeType"] isEqualToString:@"ADD_FRIEND_REQUEST"]) {
-//        [[[XMPPWorker sharedInstance] xmppRoster] acceptPresenceSubscriptionRequestFrom:[notificationDic objectForKey:@"userID"] withSelfNickName:[notificationDic objectForKey:@"selfNickName"] userName:[notificationDic objectForKey:@"userNickName"] andAddToRoster:YES];
-//    }
+    /*
+    if ([[notificationDic objectForKey:@"noticeType"] isEqualToString:@"ADD_FRIEND_REQUEST"]) {
+        [[[XMPPWorker sharedInstance] xmppRoster] acceptPresenceSubscriptionRequestFrom:[notificationDic objectForKey:@"userID"] withSelfNickName:[notificationDic objectForKey:@"selfNickName"] userName:[notificationDic objectForKey:@"userNickName"] andAddToRoster:YES];
+    }
+     */
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -134,18 +137,18 @@
 {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-//#if TARGET_IPHONE_SIMULATOR
-//    LOG(@"info:%@&%@",@"The iPhone simulator does not process background network traffic. ",@"Inbound traffic is queued until the keepAliveTimeout:handler: fires.");
-//#endif
-//    
-//    if ([application respondsToSelector:@selector(setKeepAliveTimeout:handler:)])
-//    {
-//        [application setKeepAliveTimeout:600 handler:^{
-//            
-//            LOG(@"KeepAliveHandler");
-//            // Do other keep alive stuff here.
-//        }];
-//    }
+#if TARGET_IPHONE_SIMULATOR
+    LOG(@"info:%@&%@",@"The iPhone simulator does not process background network traffic. ",@"Inbound traffic is queued until the keepAliveTimeout:handler: fires.");
+#endif
+    
+    if ([application respondsToSelector:@selector(setKeepAliveTimeout:handler:)])
+    {
+        [application setKeepAliveTimeout:600 handler:^{
+            
+            LOG(@"KeepAliveHandler");
+            // Do other keep alive stuff here.
+        }];
+    }
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -184,23 +187,20 @@
     [netStatusManager setDelegate:self];
     self.networkStatus = ([netStatusManager getInitNetworkStatus] ? NetworkStatusDefaultType:NetworkStatusNoInternetType);
 }
-////初始化Config对象
-//-(void)startReadConfigFiles
-//{
-//    UserConfig *userConfig = [UserConfig sharedInstance];
-//    SystemConfig *systemConfig = [SystemConfig sharedInstance];
-//}
 
 //读取.plist文件
 -(void)startReadPlistFiles
 {
     GLOBAL_GCD(^{
-//        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"Systemconfig" ofType:@"plist"];
-//        NSDictionary *systemIbInfoDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
-//        [[XMPPWorker sharedInstance] setHostName:[systemIbInfoDic objectForKey:@"XMPPServerHost"]];
+        NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"SystemNetAPI" ofType:@"plist"];
+        NSDictionary *systemAPIDic = [[NSDictionary alloc] initWithContentsOfFile:plistPath];
+        [[SystemConfig sharedInstance] SetBaseURLStr:[systemAPIDic objectForKey:@"QCD_BASE_URL"]];
+        [[SystemConfig sharedInstance] SetMessageURLStr:[systemAPIDic objectForKey:@"QCD_REQUEST_MSG_URL"]];
+        [[SystemConfig sharedInstance] SetCheckSumSecret:[systemAPIDic objectForKey:@"CHECKSUM_SECRET"]];
 //        [[XMPPWorker sharedInstance] setHostPort:[(NSString*)[systemIbInfoDic objectForKey:@"XMPPServerPort"] intValue]];
 //        [[SystemConfig sharedInstance] SetFileUploadURL:[systemIbInfoDic objectForKey:@"FileUploadURL"]];
 //        [[SystemConfig sharedInstance] SetImageCompression:[[systemIbInfoDic objectForKey:@"ImageCompression"] floatValue]];
+        //[[UserConfig sharedInstance] SetAutoLogin:YES];
     });
     
 }
@@ -210,12 +210,12 @@
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 }
-////关闭XMPP和RTC服务
-//- (void)stopEngine
-//{
+//关闭服务
+- (void)stopEngine
+{
 //    [[XMPPWorker sharedInstance] stopEngine];
 //    [[RTCWorker sharedInstance] stopEngine];
-//}
+}
 /*********************************************************************************************************************/
 
 /**
@@ -225,14 +225,14 @@
  */
 -(id)currentViewController
 {
-//    if ([[UserConfig sharedInstance] GetAutoLogin]) {
-//        //自动登录并跳转到主页面
-//        MainTabBarController *mainViewController = [self instantiateInitialViewControllerWithStroryboardName:@"Main"];
-//        [mainViewController setNeedLogin:YES];
-//        return mainViewController;
-//    }
+    if ([[UserConfig sharedInstance] GetAutoLogin]) {
+        //自动登录并跳转到主页面
+        MainTabBarController *mainViewController = [self instantiateInitialViewControllerWithStroryboardName:@"Main"];
+        //[mainViewController setNeedLogin:YES];
+        return mainViewController;
+    }
     //跳转到登录页面
-    return [self instantiateInitialViewControllerWithStroryboardName:@"Start"];
+    return [self instantiateInitialViewControllerWithStroryboardName:@"login_register"];
 }
 /**
  *  根据storyboard获取开始的viewcontroller对象

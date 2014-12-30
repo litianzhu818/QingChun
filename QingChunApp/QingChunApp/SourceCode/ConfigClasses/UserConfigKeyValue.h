@@ -11,5 +11,6 @@
 
 NSString *const qcdUserName = @"QCD_USER_NAME_STRING";
 NSString *const qcdUserPassword = @"QCD_USER_PASSWORD+STRING";
+NSString *const qcdUserAutoLogin = @"QCD_USER_AUTO_LOGIN";
 
 #endif
