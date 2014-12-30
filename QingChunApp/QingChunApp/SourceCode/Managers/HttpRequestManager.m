@@ -39,7 +39,7 @@
                              };
     
     [[HttpRequestClient sharedClient] requestJsonDataWithPath:path
-                                                   withParams:params
+                                                   withParams:nil
                                                withMethodType:HttpRequestTypePOST
                                                      andBlock:^(id data, NSError *error) {
         if (data) {
