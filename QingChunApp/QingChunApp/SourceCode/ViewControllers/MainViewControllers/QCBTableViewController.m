@@ -196,6 +196,7 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
+    /*
     [HttpRequestClient requestJsonDataWithPath:@"api/projects" withParams:[projects toParams] withMethodType:Get andBlock:^(id data, NSError *error) {
         projects.isLoading = NO;
         if (data) {
@@ -206,6 +207,7 @@
             block(nil, error);
         }
     }];
+     */
 }
 
 - (IBAction)sendMessage:(id)sender

@@ -134,7 +134,7 @@
            if (success == nil) return;
            
            // 将返回的JSON转换成微博模型保存到SAStatus变量中
-           SAStatus *status = [[SAStatus alloc] initWithDictionary:JSON];
+           SAStatus *status = [[SAStatus alloc] initWithDict:JSON];
            
            // 将数据模型返回给Block形参供方法调用者使用
            success(status);

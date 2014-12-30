@@ -17,7 +17,7 @@
 
 #define MARGIN_WIDTH 8.0f
 
-@interface MeViewController ()<UserHeaderViewDelegate>
+@interface MeViewController ()<UserHeaderViewDelegate,NAMenuViewDelegate>
 
 @property (nonatomic, strong) NSArray *menuItems;
 @property (nonatomic, strong) NAMenuView *menuView;
@@ -81,16 +81,25 @@
     
     [self.navigationItem addRightBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"me_setting" highLightedImageName:@"send_setting_highlighted" addTarget:self action:@selector(setting:)]];
     
-    userHeaderView = [UserHeaderView instanceFromNib];
-    [userHeaderView setFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
-    [userHeaderView setDelegate:self];
-    [userHeaderView setUserInteractionEnabled:YES];
-    [self.view addSubview:userHeaderView];
+    userHeaderView = ({
+        UserHeaderView *tempUserHeaderView = [UserHeaderView instanceFromNib];
+        [tempUserHeaderView setFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.navigationController.navigationBar) + MARGIN_WIDTH, VIEW_W(self.view)-2*MARGIN_WIDTH, 44.0f)];
+        [tempUserHeaderView setDelegate:self];
+        [tempUserHeaderView setUserInteractionEnabled:YES];
+        tempUserHeaderView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin ;
+        [self.view addSubview:tempUserHeaderView];
+        tempUserHeaderView;
+    });
     
-    menuView = [[NAMenuView alloc] init];
-    [menuView setFrame:CGRectMake(20, 128, 280, 280)];
-    menuView.menuDelegate = self;
-    [self.view addSubview:menuView];
+    
+    menuView = ({
+        NAMenuView *tempMenuView = [[NAMenuView alloc] init];
+        [tempMenuView setFrame:CGRectMake(MARGIN_WIDTH, VIEW_BY(self.userHeaderView), VIEW_W(self.view) - 2*MARGIN_WIDTH,VIEW_H(self.view) - VIEW_BY(self.userHeaderView) - VIEW_H(self.tabBarController.tabBar))];
+        tempMenuView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleRightMargin;
+        tempMenuView.menuDelegate = self;
+        [self.view addSubview:tempMenuView];
+        tempMenuView;
+    });
 
 }
 
