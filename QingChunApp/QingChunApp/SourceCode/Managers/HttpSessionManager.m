@@ -6,16 +6,16 @@
 //  Copyright (c) 2014年 Peter Lee. All rights reserved.
 //
 
-#import "HttpRequestManager.h"
+#import "HttpSessionManager.h"
 #import "NSObject+AutoProperties.h"
 #import "NSString+Hashes.h"
-#import "HttpRequestClient.h"
+#import "HttpSessionClient.h"
 
-@implementation HttpRequestManager
+@implementation HttpSessionManager
 
 + (id)sharedInstance
 {
-    static HttpRequestManager *_sharedManager = nil;
+    static HttpSessionManager *_sharedManager = nil;
     static dispatch_once_t pred;
     dispatch_once(&pred, ^{
         _sharedManager = [[self alloc] init];
@@ -37,21 +37,19 @@
                              @"identifier":identifier,
                              @"checksum":[checksumStr sha1]
                              };
-    
-    [[HttpRequestClient sharedClient] requestJsonDataWithPath:path
+    [HttpSessionClient requestJsonDataWithPath:path
                                                    withParams:params
-                                               withMethodType:HttpRequestTypePOST
+                                               withMethodType:HttpSessionTypePOST
                                                      andBlock:^(id data, NSError *error) {
-        if (data) {
-            id resultData = [data valueForKeyPath:@"data"];
-            LOG(@"%@",resultData);
-            //Project *resultA = [NSObject objectOfClass:@"Project" fromJSON:resultData];
-            //block(resultA, nil);
-        }else{
-            block(nil, error);
-        }
-
-    }];
+                                                         if (data) {
+                                                             id resultData = [data valueForKeyPath:@"data"];
+                                                             LOG(@"%@",resultData);
+                                                             //Project *resultA = [NSObject objectOfClass:@"Project" fromJSON:resultData];
+                                                             //block(resultA, nil);
+                                                         }else{
+                                                             block(nil, error);
+                                                         }
+                                                     }];
 }
 
 

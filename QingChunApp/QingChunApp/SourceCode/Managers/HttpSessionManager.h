@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface HttpRequestManager : NSObject
+@interface HttpSessionManager : NSObject
 
 + (id)sharedInstance;
 
