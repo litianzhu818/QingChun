@@ -196,8 +196,8 @@
     self.responseSerializer = [AFJSONResponseSerializer serializer];
     //self.requestSerializer = [AFHTTPRequestSerializer serializer];
     //self.responseSerializer = [AFHTTPResponseSerializer serializer];
-    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil];
     
+    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil];
     
     [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
