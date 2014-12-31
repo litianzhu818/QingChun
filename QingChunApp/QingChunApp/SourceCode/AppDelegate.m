@@ -200,7 +200,7 @@
 //        [[XMPPWorker sharedInstance] setHostPort:[(NSString*)[systemIbInfoDic objectForKey:@"XMPPServerPort"] intValue]];
 //        [[SystemConfig sharedInstance] SetFileUploadURL:[systemIbInfoDic objectForKey:@"FileUploadURL"]];
 //        [[SystemConfig sharedInstance] SetImageCompression:[[systemIbInfoDic objectForKey:@"ImageCompression"] floatValue]];
-        //[[UserConfig sharedInstance] SetAutoLogin:YES];
+        [[UserConfig sharedInstance] SetAutoLogin:YES];
     });
     
 }

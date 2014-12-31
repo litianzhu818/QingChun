@@ -97,7 +97,7 @@
         case HttpRequestTypePOST:{
             [self POST:aPath parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 LOG(@"\n%@===========response===========:\n%@", aPath, responseObject);
-                NSString *shabi =  [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
+                //NSString *shabi =  [[NSString alloc]initWithData:responseObject encoding:NSUTF8StringEncoding];
                 id error = [self handleResponse:responseObject];
                 if (error) {
                     block(nil, error);
@@ -193,15 +193,14 @@
         return nil;
     }
     
-    
+    self.responseSerializer = [AFJSONResponseSerializer serializer];
+    //self.requestSerializer = [AFHTTPRequestSerializer serializer];
+    //self.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil];
     
     
     [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
-    self.responseSerializer = [AFJSONResponseSerializer serializer];
-    //self.requestSerializer = [AFHTTPRequestSerializer serializer];
-    //self.responseSerializer = [AFHTTPResponseSerializer serializer];
     self.securityPolicy.allowInvalidCertificates = YES;
     
     return self;
