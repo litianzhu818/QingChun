@@ -9,11 +9,11 @@
 @import UIKit;
 
 @class CellDisplayImageModel;
-@protocol BasePictureViewDelegate;
+@protocol CellImageViewDelegate;
 
-@interface BasePictureView : UIView
+@interface CellImageView : UIView
 
-@property (assign, nonatomic) id<BasePictureViewDelegate> delegate;
+@property (assign, nonatomic) id<CellImageViewDelegate> delegate;
 
 @property (strong, nonatomic, readonly) NSArray *cellDisplayImageModels;
 @property (assign, nonatomic, readonly) CGSize pictureViewSize;
@@ -27,7 +27,7 @@
 @end
 
 
-@protocol BasePictureViewDelegate <NSObject>
+@protocol CellImageViewDelegate <NSObject>
 
 @optional
 

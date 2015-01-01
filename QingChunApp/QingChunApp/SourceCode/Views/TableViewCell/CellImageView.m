@@ -6,7 +6,7 @@
 //  Copyright (c) 2014年 Peter Lee. All rights reserved.
 //
 
-#import "BasePictureView.h"
+#import "CellImageView.h"
 #import "BaseCellImageView.h"
 #import "CellDisplayImageModel.h"
 
@@ -14,7 +14,7 @@
 #define MULTIPLE_IMAGE_WIDTH 80.0f
 #define SINGLE_IMAGE_WIDTH 200.0f
 
-@interface BasePictureView ()<BaseCellImageViewDelegate>
+@interface CellImageView ()<BaseCellImageViewDelegate>
 {
     CGSize              _pictureViewSize;
     NSArray             *_cellDisplayImageModels;
@@ -22,7 +22,7 @@
 }
 @end
 
-@implementation BasePictureView
+@implementation CellImageView
 @synthesize cellDisplayImageModels = _cellDisplayImageModels;
 
 #pragma mark - public init method

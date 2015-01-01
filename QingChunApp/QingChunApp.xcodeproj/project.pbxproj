@@ -57,6 +57,7 @@
 		E72B09831A0B477700109658 /* test.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B09821A0B477700109658 /* test.png */; };
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
 		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
 		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
@@ -189,8 +190,7 @@
 		E7DD1C3C1A412F7200FAA24A /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C311A412F7200FAA24A /* MJPhotoView.m */; };
 		E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C331A412F7200FAA24A /* SDWebImageManager+MJ.m */; };
 		E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C351A412F7200FAA24A /* UIImageView+MJWebCache.m */; };
-		E7DD1C431A412F8D00FAA24A /* BasePictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C401A412F8D00FAA24A /* BasePictureView.m */; };
-		E7DD1C441A412F8D00FAA24A /* BaseTableViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C421A412F8D00FAA24A /* BaseTableViewCellView.m */; };
+		E7DD1C431A412F8D00FAA24A /* CellImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C401A412F8D00FAA24A /* CellImageView.m */; };
 		E7DD1C471A41333400FAA24A /* BaseCellHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C461A41333400FAA24A /* BaseCellHeaderView.m */; };
 		E7DD1C4D1A418E6E00FAA24A /* BaseCellImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C4C1A418E6E00FAA24A /* BaseCellImageView.m */; };
 		E7DD1C531A4194ED00FAA24A /* timeline_image_gif.png in Resources */ = {isa = PBXBuildFile; fileRef = E7DD1C4F1A4194ED00FAA24A /* timeline_image_gif.png */; };
@@ -305,6 +305,8 @@
 		E74176541A5544570068F0E7 /* NSObject+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Description.m"; sourceTree = "<group>"; };
 		E74176571A5545510068F0E7 /* DescriptionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionBuilder.h; sourceTree = "<group>"; };
 		E74176581A5545510068F0E7 /* DescriptionBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DescriptionBuilder.m; sourceTree = "<group>"; };
+		E741765A1A5552640068F0E7 /* MessageDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDisplayCell.h; sourceTree = "<group>"; };
+		E741765B1A5552640068F0E7 /* MessageDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDisplayCell.m; sourceTree = "<group>"; };
 		E7419EE519E675D900B5B764 /* QingChunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QingChunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QingChunAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7419F0619E675DA00B5B764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -522,10 +524,8 @@
 		E7DD1C331A412F7200FAA24A /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SDWebImageManager+MJ.m"; sourceTree = "<group>"; };
 		E7DD1C341A412F7200FAA24A /* UIImageView+MJWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+MJWebCache.h"; sourceTree = "<group>"; };
 		E7DD1C351A412F7200FAA24A /* UIImageView+MJWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+MJWebCache.m"; sourceTree = "<group>"; };
-		E7DD1C3F1A412F8D00FAA24A /* BasePictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasePictureView.h; sourceTree = "<group>"; };
-		E7DD1C401A412F8D00FAA24A /* BasePictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasePictureView.m; sourceTree = "<group>"; };
-		E7DD1C411A412F8D00FAA24A /* BaseTableViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCellView.h; sourceTree = "<group>"; };
-		E7DD1C421A412F8D00FAA24A /* BaseTableViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewCellView.m; sourceTree = "<group>"; };
+		E7DD1C3F1A412F8D00FAA24A /* CellImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellImageView.h; sourceTree = "<group>"; };
+		E7DD1C401A412F8D00FAA24A /* CellImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellImageView.m; sourceTree = "<group>"; };
 		E7DD1C451A41333400FAA24A /* BaseCellHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCellHeaderView.h; sourceTree = "<group>"; };
 		E7DD1C461A41333400FAA24A /* BaseCellHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCellHeaderView.m; sourceTree = "<group>"; };
 		E7DD1C4B1A418E6E00FAA24A /* BaseCellImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseCellImageView.h; sourceTree = "<group>"; };
@@ -1159,10 +1159,8 @@
 		E7AE673A19FE1D05008546EA /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				E7DD1C3F1A412F8D00FAA24A /* BasePictureView.h */,
-				E7DD1C401A412F8D00FAA24A /* BasePictureView.m */,
-				E7DD1C411A412F8D00FAA24A /* BaseTableViewCellView.h */,
-				E7DD1C421A412F8D00FAA24A /* BaseTableViewCellView.m */,
+				E7DD1C3F1A412F8D00FAA24A /* CellImageView.h */,
+				E7DD1C401A412F8D00FAA24A /* CellImageView.m */,
 				E7AE673B19FE1D21008546EA /* InfoTableViewCell.h */,
 				E7AE673C19FE1D21008546EA /* InfoTableViewCell.m */,
 				E7AE673D19FE1D21008546EA /* InfoTableViewCell.xib */,
@@ -1174,6 +1172,8 @@
 				E7DD1C8A1A41AC3600FAA24A /* BaseCellButtonView.m */,
 				E7FC67BB1A4556F400AF45A6 /* CellButtonView.h */,
 				E7FC67BC1A4556F400AF45A6 /* CellButtonView.m */,
+				E741765A1A5552640068F0E7 /* MessageDisplayCell.h */,
+				E741765B1A5552640068F0E7 /* MessageDisplayCell.m */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -1743,7 +1743,7 @@
 				E725A2971A07CDA900FCE03D /* UIImageView+HighlightedWebCache.m in Sources */,
 				E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */,
 				E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */,
-				E7DD1C431A412F8D00FAA24A /* BasePictureView.m in Sources */,
+				E7DD1C431A412F8D00FAA24A /* CellImageView.m in Sources */,
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */,
@@ -1765,6 +1765,7 @@
 				E725A2931A07CDA900FCE03D /* UIButton+WebCache.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
 				E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */,
+				E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */,
 				E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */,
 				E725A2651A07C52A00FCE03D /* MainCellView.m in Sources */,
 				E7B8B3301A51A3AF0015CE40 /* AFNetworkReachabilityManager.m in Sources */,
@@ -1772,7 +1773,6 @@
 				E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */,
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
-				E7DD1C441A412F8D00FAA24A /* BaseTableViewCellView.m in Sources */,
 				E7F1C98C1A527D7700E8DF67 /* NSString+Hashes.m in Sources */,
 				E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */,
 				E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */,
