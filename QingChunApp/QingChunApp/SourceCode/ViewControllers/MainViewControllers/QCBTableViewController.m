@@ -317,21 +317,19 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-#if 0
+#if 1
     NSInteger result = 0;
     if ([tableView isEqual:_tableView]) {
         result = [_newMsgs count];
-        if (result == 0) {
-            [_tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]];
-        }
+        //当列表数据为空时，需要去掉背景图片或者替换背景图片
+        [_tableView setBackgroundView:(result == 0 ? [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]:nil)];
+        
         return result;
     }else{
         result = [_hotMsgs count];
-        
-        if (result == 0) {
-            [_tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]];
-        }
-        
+        //当列表数据为空时，需要去掉背景图片或者替换背景图片
+        [_hotTableView setBackgroundView:(result == 0 ? [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]:nil)];
+    
         return result;
     }
     
