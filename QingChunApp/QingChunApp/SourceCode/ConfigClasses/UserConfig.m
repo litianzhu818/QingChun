@@ -45,5 +45,27 @@ Single_implementation(UserConfig);
     return [[[NSUserDefaults standardUserDefaults] objectForKey:qcdUserAutoLogin] boolValue];
 }
 
+//存取用户head_url_prefix的值
+-(void)SetHeadURLPrefix:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserHeadURLPrefix];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetHeadURLPrefix
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserHeadURLPrefix];
+}
+
+//存取用户image_url_prefix的值
+-(void)SetImageURLPrefix:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdImageURLPrefix];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetImageURLPrefix
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdImageURLPrefix];
+}
+
 
 @end

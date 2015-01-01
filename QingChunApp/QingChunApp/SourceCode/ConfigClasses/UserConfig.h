@@ -24,5 +24,13 @@ Single_interface(UserConfig);
 -(void)SetAutoLogin:(BOOL)value;
 -(BOOL)GetAutoLogin;
 
+//存取用户head_url_prefix的值
+-(void)SetHeadURLPrefix:(NSString *)value;
+-(NSString *)GetHeadURLPrefix;
+
+//存取用户image_url_prefix的值
+-(void)SetImageURLPrefix:(NSString *)value;
+-(NSString *)GetImageURLPrefix;
+
 
 @end

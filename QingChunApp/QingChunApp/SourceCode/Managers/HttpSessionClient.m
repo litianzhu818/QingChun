@@ -12,7 +12,7 @@
 
 @implementation HttpSessionClient
 
-+ (instancetype)sharedClient
++ (id)sharedClient
 {
     static HttpSessionClient *_sharedClient = nil;
     static dispatch_once_t onceToken;
@@ -55,15 +55,14 @@
 - (id)initWithBaseURL:(NSURL *)url
 {
     self = [super initWithBaseURL:url];
-    if (!self) {
-        return nil;
+    if (self) {
+        
+        self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil];
+        
+        [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        
+        self.securityPolicy.allowInvalidCertificates = YES;
     }
-    
-    self.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/plain", @"text/javascript", @"text/json",@"text/html", nil];
-    
-    [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-
-    self.securityPolicy.allowInvalidCertificates = YES;
     
     return self;
 }
@@ -205,7 +204,7 @@
     
     return urlSessionDataTask;
 }
-
+/*
 - (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
                path:(NSString *)path
                                    name:(NSString *)name
@@ -258,7 +257,7 @@
     return uploadTask;
 }
 
-
+*/
 
 
 

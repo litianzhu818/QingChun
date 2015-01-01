@@ -25,10 +25,14 @@
     //  Reloading var should really be your tableviews datasource
     //  Putting it here for demo purposes
     BOOL _reloading;
-    
+
     iCarousel           *_icarousel;
     HMSegmentedControl  *_segmentControl;
     UITableView         *_hotTableView;
+    
+    NSUInteger _currentPage;
+    NSMutableArray *_newMsgs;
+    NSMutableArray *_hotMsgs;
 }
 
 - (void)reloadTableViewDataSource;
@@ -45,12 +49,12 @@
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [self.navigationController.navigationBar setHidden:YES];
+
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-//    [self.navigationController.navigationBar setHidden:NO];
+
 }
 
 - (void)viewDidLoad
@@ -80,24 +84,6 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-
-//    [self.tableView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    
-//    NSMutableArray *Constraints = [NSMutableArray array];
-//    
-//    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-MARGIN1-[_tableView]-MARGIN1-|"
-//                                                                             options:0
-//                                                                             metrics:@{
-//                                                                                       @"MARGIN1":@0.0}
-//                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
-//    
-//    [Constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-MARGIN1-[_tableView]-MARGIN2-|"
-//                                                                             options:0
-//                                                                             metrics:@{
-//                                                                                       @"MARGIN1":@64.0,
-//                                                                                       @"MARGIN2":@44.0}
-//                                                                               views:NSDictionaryOfVariableBindings(_tableView)]];
-//    [self.view addConstraints:Constraints];
     
     self.title = @"青春吧";
     
@@ -143,7 +129,7 @@
     });
     
     _icarousel = ({
-        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, 64, 320, 480-64)];
+        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), VIEW_W(self.view), VIEW_H(self.view)-VIEW_BY(self.navigationController.navigationBar)-VIEW_H(self.tabBarController.tabBar))];
         icarousel.dataSource = self;
         icarousel.delegate = self;
         icarousel.decelerationRate = 1.0;
@@ -155,7 +141,8 @@
         [self.view addSubview:icarousel];
         icarousel;
     });
-
+    
+    [self initTableView];
 }
 
 - (void)initTableView
@@ -168,7 +155,17 @@
         [tableView setDataSource:self];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
-        //[self.view addSubview:self.tableView];
+    
+        tableView;
+    });
+    
+    _hotTableView = ({
+        
+        UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
+        [tableView setDelegate:self];
+        [tableView setDataSource:self];
+        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        [tableView setBackgroundColor:[UIColor clearColor]];
         
         tableView;
     });
@@ -185,12 +182,25 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
-    
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:1 type:1 identifier:@"litianzhu" block:^(id data, NSError *error) {
-     
+    _currentPage = 0;//The default value
+    _newMsgs = [NSMutableArray array];
+    _hotMsgs = [NSMutableArray array];
+
+#if 1
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%ld",(_currentPage + 1)] block:^(id data, NSError *error) {
         
-     }];
+        if (!error) {
+            _currentPage += 1;
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_newMsgs insertObjects:data atIndexes:indexes];
+            [_tableView reloadData];
+        }
     
+     }];
+#else
+    
+#endif
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -272,20 +282,7 @@
 }
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view
 {
-    
-    _tableView = ({
-        
-        UITableView *tableView = [[UITableView alloc] initWithFrame:carousel.bounds style:UITableViewStylePlain];
-        [tableView setDelegate:self];
-        [tableView setDataSource:self];
-        [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-        [tableView setBackgroundColor:[UIColor clearColor]];
-        //[self.view addSubview:self.tableView];
-        
-        tableView;
-    });
-
-    return _tableView;
+    return index == 0 ? _tableView:_hotTableView;
 }
 
 #pragma mark - iCarouselDelegate methods
@@ -304,8 +301,6 @@
     if (_segmentControl) {
         [_segmentControl setSelectedSegmentIndex:carousel.currentItemIndex];
     }
-//    ProjectListView *curView = (ProjectListView *)carousel.currentItemView;
-//    [curView refreshToQueryData];
 }
 
 
@@ -322,7 +317,28 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
+#if 0
+    NSInteger result = 0;
+    if ([tableView isEqual:_tableView]) {
+        result = [_newMsgs count];
+        if (result == 0) {
+            [_tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]];
+        }
+        return result;
+    }else{
+        result = [_hotMsgs count];
+        
+        if (result == 0) {
+            [_tableView setBackgroundView:[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"headerImage"]]];
+        }
+        
+        return result;
+    }
+    
+    return result;
+#else
     return 10;
+#endif
 }
 
 
@@ -342,10 +358,7 @@
         [cell setBackgroundColor:[UIColor clearColor]];
     }
     
-    // Configure the cell...x
-//    for (UIView *view in cell.contentView.subviews) {
-//        [view removeFromSuperview];
-//    }
+    // Configure the cell...
     
     return cell;
 }

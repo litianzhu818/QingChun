@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Weibo/SianWeibo.xcodeproj">
+      location = "group:QingChunApp/QingChunApp.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:QingChunApp/QingChunApp.xcodeproj">
+      location = "group:Weibo/SianWeibo.xcodeproj">
    </FileRef>
 </Workspace>

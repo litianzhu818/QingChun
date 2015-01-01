@@ -16,10 +16,12 @@
 + (id)sharedInstance
 {
     static HttpSessionManager *_sharedManager = nil;
-    static dispatch_once_t pred;
-    dispatch_once(&pred, ^{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
         _sharedManager = [[self alloc] init];
     });
+    
+    
     return _sharedManager;
 }
 
@@ -30,22 +32,31 @@
 {
     NSString *path = [[SystemConfig sharedInstance] GetMessageURLStr];
   
-    NSString *checksumStr = [NSString stringWithFormat:@"%@%d%d%@",identifier,page,type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
+    NSString *checksumStr = [NSString stringWithFormat:@"%@%ld%ld%@",identifier,page,type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
     
     NSDictionary *params = @{@"page":[NSNumber numberWithUnsignedInteger:page],
                              @"type":[NSNumber numberWithUnsignedInteger:type],
                              @"identifier":identifier,
                              @"checksum":[checksumStr sha1]
                              };
-    [HttpSessionClient requestJsonDataWithPath:path
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
                                                    withParams:params
                                                withMethodType:HttpSessionTypePOST
                                                      andBlock:^(id data, NSError *error) {
                                                          if (data) {
                                                              id resultData = [data valueForKeyPath:@"data"];
-                                                             LOG(@"%@",resultData);
-                                                             //Project *resultA = [NSObject objectOfClass:@"Project" fromJSON:resultData];
-                                                             //block(resultA, nil);
+                                                             id listData = [resultData valueForKeyPath:@"list"];
+                                                             //获取头像URL的前缀
+                                                             NSString *headURLPrefix = [resultData valueForKeyPath:@"headUrl"];
+                                                             //获取图片信息的URL的前缀
+                                                             NSString *imgURLPrefix = [resultData valueForKeyPath:@"imgUrl"];
+                                                             //存储这两个信息
+                                                             [[UserConfig sharedInstance] SetHeadURLPrefix:headURLPrefix];
+                                                             [[UserConfig sharedInstance] SetImageURLPrefix:imgURLPrefix];
+                                                             
+                                                             LOG(@"%@",listData);
+                                                             block(listData, nil);
+                                                             
                                                          }else{
                                                              block(nil, error);
                                                          }

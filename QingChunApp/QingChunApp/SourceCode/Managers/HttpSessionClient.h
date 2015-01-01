@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
 @interface HttpSessionClient : AFHTTPSessionManager
 
 
-+ (instancetype)sharedClient;
++ (id)sharedClient;
 
 + (void)saveCookieData;
 + (void)removeCookieData;

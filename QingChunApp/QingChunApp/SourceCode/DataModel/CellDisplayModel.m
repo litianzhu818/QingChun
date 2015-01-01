@@ -32,4 +32,9 @@
     return [[self alloc] initWithDictionary:dictionary];
 }
 
+- (void)setWithDictionary:(NSDictionary *)dictionary
+{
+    
+}
+
 @end

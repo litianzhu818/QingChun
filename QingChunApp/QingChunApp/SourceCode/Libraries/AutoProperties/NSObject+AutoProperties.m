@@ -7,14 +7,14 @@
 //
 
 #import "NSObject+AutoProperties.h"
-#import "NSObject+AutoDescription.h"
+#import "DescriptionBuilder.h"
 #import "AutoCoding.h"
 
 @implementation NSObject (AutoProperties)
 
 - (NSString *)description
 {
-    return [self autoDescription];
+    return [DescriptionBuilder reflectDescription:self];
 }
 
 @end
