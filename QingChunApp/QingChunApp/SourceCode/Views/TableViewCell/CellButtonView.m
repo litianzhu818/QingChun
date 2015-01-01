@@ -27,7 +27,7 @@
         _shareButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
                               backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
         _commentButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
-    backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
+    backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:3];
         
     }     return self;
 }
@@ -49,7 +49,7 @@
                                 backgroundImage:nil
                                     buttonIndex:2];
         _commentButton = [self addButtonWithImage:@"comment.png"
-    backgroundImage:nil buttonIndex:2];
+    backgroundImage:nil buttonIndex:3];
     }
     
     return self;

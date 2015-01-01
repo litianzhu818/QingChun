@@ -9,12 +9,15 @@
 #import "MessageDisplayCell.h"
 #import "CellDisplayModel.h"
 #import "BaseCellHeaderView.h"
+#import "CellButtonView.h"
 
 #define DEFAULT_EDGE_INSERT 8.0f
+#define DAFAULT_MARGIN_WIDTH 10.0f
 
 @interface MessageDisplayCell ()
 {
-    BaseCellHeaderView *_cellHeaderView;
+    BaseCellHeaderView      *_cellHeaderView;
+    CellButtonView          *_cellButtonView;
 }
 @end
 
@@ -54,9 +57,13 @@
 
 - (void)setupUINormal
 {
+    //头部视图
     _cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
-//    _cellHeaderView = [[BaseCellHeaderView alloc] initWithIndentTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
     [self.contentView addSubview:_cellHeaderView];
+    
+    //按钮视图
+    _cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
+    [self.contentView addSubview:_cellButtonView];
 }
 
 - (void)setCellDisPlayModel:(CellDisplayModel *)cellDisPlayModel
@@ -82,6 +89,10 @@
     }
     
     _cellHeaderView.cellDisplayModel = _cellDisPlayModel;
+    _cellButtonView.cellButtonViewModel = _cellDisPlayModel.cellButtonViewModel;
+    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 40);
+    
+    NSLog(@"%@##%@",NSStringFromCGRect(_cellHeaderView.frame),NSStringFromCGRect(_cellButtonView.frame));
     
 }
 
@@ -93,9 +104,10 @@
 + (CGFloat)cellFrameHeightWithWidth:(CGFloat)width cellDisplayModel:(CellDisplayModel *)cellDisplayModel
 {
     CGFloat height = 0.0f;
-    //因为字体的label距左右各为10.0f,所以穿进来的宽度要减去20
+    //加上顶部信息视图的高度
     height += [BaseCellHeaderView normalHeaderViewHeightWithWidth:width content:cellDisplayModel.cellContentModel.text];
-    
+    //加上底部按钮视图的高度
+    height += 50.0;
     return height;
 }
 
