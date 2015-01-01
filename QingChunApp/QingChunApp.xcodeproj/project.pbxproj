@@ -86,7 +86,6 @@
 		E7904AC31A4EABD100B47110 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7904AC21A4EABD100B47110 /* UIKit.framework */; };
 		E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */; };
 		E7904ACB1A4EAE3900B47110 /* CellButtonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */; };
-		E7904ACC1A4EAE3900B47110 /* CellHeaderViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904ACA1A4EAE3900B47110 /* CellHeaderViewModel.m */; };
 		E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F599C19F7F40D001CB6F2 /* StartViewController.m */; };
 		E79F59A719F7FACE001CB6F2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A619F7FACE001CB6F2 /* Security.framework */; };
 		E79F59A919F7FADD001CB6F2 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E79F59A819F7FADD001CB6F2 /* CFNetwork.framework */; };
@@ -360,8 +359,6 @@
 		E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDisplayImageModel.m; sourceTree = "<group>"; };
 		E7904AC71A4EAE3900B47110 /* CellButtonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellButtonViewModel.h; sourceTree = "<group>"; };
 		E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellButtonViewModel.m; sourceTree = "<group>"; };
-		E7904AC91A4EAE3900B47110 /* CellHeaderViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellHeaderViewModel.h; sourceTree = "<group>"; };
-		E7904ACA1A4EAE3900B47110 /* CellHeaderViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellHeaderViewModel.m; sourceTree = "<group>"; };
 		E79F599B19F7F40D001CB6F2 /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		E79F599C19F7F40D001CB6F2 /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		E79F59A619F7FACE001CB6F2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -1061,8 +1058,6 @@
 			children = (
 				E7904AC71A4EAE3900B47110 /* CellButtonViewModel.h */,
 				E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */,
-				E7904AC91A4EAE3900B47110 /* CellHeaderViewModel.h */,
-				E7904ACA1A4EAE3900B47110 /* CellHeaderViewModel.m */,
 				E7B725671A09212700882998 /* TestObjectModel.h */,
 				E7B725681A09212700882998 /* TestObjectModel.m */,
 				E7904AC41A4EAD2B00B47110 /* CellDisplayImageModel.h */,
@@ -1831,7 +1826,6 @@
 				E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */,
 				E7AE673E19FE1D21008546EA /* InfoTableViewCell.m in Sources */,
 				E7B6EA6A1A5030B0009CF7D1 /* CellDisplayModel.m in Sources */,
-				E7904ACC1A4EAE3900B47110 /* CellHeaderViewModel.m in Sources */,
 				E725A28B1A07CDA900FCE03D /* NSData+ImageContentType.m in Sources */,
 				E7FC67CD1A45688600AF45A6 /* UIBarButtonItem+SA.m in Sources */,
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,

@@ -8,6 +8,8 @@
 
 #import "BaseCellHeaderView.h"
 #import "UIButton+WebCache.h"
+#import "NSString+SA.h"
+#import "CellDisplayModel.h"
 
 #define DEFAULT_MARGIN_WIDTH    10.0f
 #define USER_IMAGE_WIDTH        34                                              // 用户头像尺寸
@@ -31,83 +33,112 @@
     UILabel             *_timeLabel;
     UILabel             *_textLabel;
     
-    CGSize              _headerSize;
     CGFloat             _textWidth;
     CGFloat             _textHeight;
-    
-    BOOL                _hasMoreButton;
-    CellHeaderType      _headerType;
-    CellHeaderPhotoType _photoType;
-    
-    CellHeaderViewModel *_headerViewModel;
-    
+    CellHeaderViewType  _cellHeaderViewType;
 }
 
 @end
 
 @implementation BaseCellHeaderView
-@synthesize headerViewModel = _headerViewModel;
+@synthesize cellDisplayModel = _cellDisplayModel;
+@synthesize cellHeaderViewType = _cellHeaderViewType;
+
+#pragma mark - class public methods
++ (CGFloat)normalHeaderViewHeightWithWidth:(CGFloat)width content:(NSString *)content
+{
+    return [BaseCellHeaderView headerViewHeightWithWidth:width
+                                      cellHeaderViewType:CellHeaderViewTypeNormal
+                                                 content:content];
+}
++ (CGFloat)indentHeaderViewHeightWithWidth:(CGFloat)width content:(NSString *)content
+{
+    return [BaseCellHeaderView headerViewHeightWithWidth:width
+                                      cellHeaderViewType:CellHeaderViewTypeIndent
+                                                 content:content];
+}
++ (CGFloat)headerViewHeightWithWidth:(CGFloat)width
+                  cellHeaderViewType:(CellHeaderViewType)cellHeaderViewType
+                             content:(NSString *)content
+{
+    CGFloat height = 0.0f;
+    
+    if (cellHeaderViewType == CellHeaderViewTypeNormal) {
+        height = 3*DEFAULT_MARGIN_WIDTH + USER_IMAGE_WIDTH;
+        height += [content sizeWithWidth:width
+                                    font:TEXT_FONT
+                           lineBreakMode:NSLineBreakByWordWrapping].height;
+    }else if (cellHeaderViewType == CellHeaderViewTypeIndent){
+        height = 3*DEFAULT_MARGIN_WIDTH + NAME_LABEL_HEIGHT;
+        height += [content sizeWithWidth:(width - DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH)
+                                    font:TEXT_FONT
+                           lineBreakMode:NSLineBreakByWordWrapping].height;
+    }
+    
+    return height;
+}
+
+#pragma mark - object init methods
 
 - (id)initWithFrame:(CGRect)frame
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+    return [self initWithFrame:frame cellDisplayModel:nil];
 }
 
-- (id)initWithFrame:(CGRect)frame cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel
+- (id)initWithFrame:(CGRect)frame cellDisplayModel:(CellDisplayModel *)cellDisplayModel
+{
+    return [self initWithNormalTypeFrame:frame cellDisplayModel:cellDisplayModel];
+}
+
+- (id)initWithIndentTypeFrame:(CGRect)frame
+             cellDisplayModel:(CellDisplayModel *)cellDisplayModel
 {
     return [self initWithFrame:frame
-           cellHeaderViewModel:headerViewModel
-                CellHeaderType:CellHeaderTypeSimple
-           cellHeaderPhotoType:CellHeaderPhotoTypeSquare
-                    hasMoreBtn:NO];
+            cellHeaderViewType:CellHeaderViewTypeIndent
+              cellDisplayModel:cellDisplayModel];
 }
 
-- (id)initWithMultipleTypeFrame:(CGRect)frame  cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel cellHeaderPhotoType:(CellHeaderPhotoType)photoType
+- (id)initWithNormalTypeFrame:(CGRect)frame
+             cellDisplayModel:(CellDisplayModel *)cellDisplayModel
 {
-    return [self initWithFrame:frame cellHeaderViewModel:headerViewModel CellHeaderType:CellHeaderTypeMultiple cellHeaderPhotoType:photoType hasMoreBtn:YES];
-}
-
-- (id)initWithSimpleTypeFrame:(CGRect)frame  cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel cellHeaderPhotoType:(CellHeaderPhotoType)photoType
-{
-    return [self initWithFrame:frame cellHeaderViewModel:headerViewModel CellHeaderType:CellHeaderTypeSimple cellHeaderPhotoType:photoType hasMoreBtn:NO];
+    return [self initWithFrame:frame
+            cellHeaderViewType:CellHeaderViewTypeNormal
+              cellDisplayModel:cellDisplayModel];
 }
 
 - (id)initWithFrame:(CGRect)frame
-cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel
-     CellHeaderType:(CellHeaderType)headerType
-cellHeaderPhotoType:(CellHeaderPhotoType)photoType
-         hasMoreBtn:(BOOL)hasMoreBtn
+ cellHeaderViewType:(CellHeaderViewType)cellHeaderViewType
+   cellDisplayModel:(CellDisplayModel *)headerViewModel
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        _headerViewModel = headerViewModel;
-        _headerType = headerType;
-        _photoType = photoType;
-        [self setupUIWithCellHeaderType:_headerType cellHeaderPhotoType:_photoType];
+        _cellDisplayModel = headerViewModel;
+        _cellHeaderViewType = cellHeaderViewType;
+        
+        [self setupUIWithCellHeaderViewType:_cellHeaderViewType];
     }
     return self;
 }
 
-- (void)setupUIWithCellHeaderType:(CellHeaderType)headerType cellHeaderPhotoType:(CellHeaderPhotoType)photoType
+- (void)setCellDisplayModel:(CellDisplayModel *)cellDisplayModel
 {
+    _cellDisplayModel = cellDisplayModel;
+    [self setNeedsLayout];
+}
+
+#pragma mark - object private methods
+
+- (void)setupUIWithCellHeaderViewType:(CellHeaderViewType)headerViewType
+{
+    //头像
     _photoButton = [[UIButton alloc] initWithFrame:CGRectMake(DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, USER_IMAGE_WIDTH, USER_IMAGE_WIDTH)];
-    if (photoType == CellHeaderPhotoTypeCircle) {
-        _photoButton.layer.masksToBounds = YES;
-        _photoButton.layer.cornerRadius = USER_IMAGE_WIDTH/2;
-        /*
-        _photoButton.layer.borderWidth = 2;
-        _photoButton.layer.borderColor = [[UIColor blackColor] CGColor];
-         */
-    }
-    
     [_photoButton addTarget:self action:@selector(ClikedOnPhotoButton:) forControlEvents:UIControlEventTouchUpInside];
     
-    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - MORE_BUTTON_WIDTH, NAME_LABEL_HEIGHT)];
+    //名称
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - 4*MORE_BUTTON_WIDTH, NAME_LABEL_HEIGHT)];
+    
+    //时间和内容
     _timeLabel = [[UILabel alloc] init];
     _textLabel = [[UILabel alloc] init];
     
@@ -119,42 +150,87 @@ cellHeaderPhotoType:(CellHeaderPhotoType)photoType
     [_textLabel setFont:TEXT_FONT];
     _textLabel.numberOfLines = 0;
     
-    if (headerType == CellHeaderTypeMultiple) {
-        _moreBUtton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - MORE_BUTTON_WIDTH - DEFAULT_MARGIN_WIDTH, MORE_BUTTON_MARGIN, MORE_BUTTON_WIDTH, MORE_BUTTON_HEIGHT)];
-        [_moreBUtton setImage:[UIImage imageNamed:@"more_btn_nor"] forState:UIControlStateNormal];
-        [_moreBUtton setImage:[UIImage imageNamed:@"more_btn_sel"] forState:UIControlStateSelected];
-        [_moreBUtton addTarget:self action:@selector(ClikedOnMoreButton:) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_moreBUtton];
-        
-        _timeLabel.frame = CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, NAME_LABEL_HEIGHT+DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - MORE_BUTTON_WIDTH, TIME_LABEL_HEIGHT);
-        
-        _textWidth = self.frame.size.width - 2*2*DEFAULT_MARGIN_WIDTH;
-        _textHeight = [self sizeWithString:_headerViewModel.text font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping].height;
-        
-        _textLabel.frame = CGRectMake(DEFAULT_MARGIN_WIDTH, USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, _textWidth, _textHeight);
-    }else{
-        _timeLabel.frame = CGRectMake(self.frame.size.width - MORE_BUTTON_WIDTH - DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, MORE_BUTTON_WIDTH, TIME_LABEL_HEIGHT);
-        
-        _textWidth = self.frame.size.width - 3*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH;
-        _textHeight = [self sizeWithString:_headerViewModel.text font:TEXT_FONT lineBreakMode:NSLineBreakByWordWrapping].height;
-        
-        _textLabel.frame = CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, NAME_LABEL_HEIGHT + 2*DEFAULT_MARGIN_WIDTH, _textWidth, _textHeight);
-    }
-    
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.headerSize.width, self.headerSize.height);
-    
+    //添加这些控件
     [self addSubview:_photoButton];
     [self addSubview:_nameLabel];
     [self addSubview:_timeLabel];
     [self addSubview:_textLabel];
     
-    [_nameLabel setText:_headerViewModel.name];
-    [_timeLabel setText:_headerViewModel.time];
-    [_textLabel setText:_headerViewModel.text];
-    [_photoButton sd_setImageWithURL:[NSURL URLWithString:_headerViewModel.imageUrl] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    
+    if (headerViewType == CellHeaderViewTypeIndent) {//如果是缩进类型的
+        //设置头像为圆形
+        _photoButton.layer.masksToBounds = YES;
+        _photoButton.layer.cornerRadius = USER_IMAGE_WIDTH/2;
+        
+        //时间label的frame
+        _timeLabel.frame = CGRectMake(self.frame.size.width - 4*MORE_BUTTON_WIDTH - DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, 4*MORE_BUTTON_WIDTH, TIME_LABEL_HEIGHT);
+        //这时的时间要往右对齐
+        [_timeLabel setTextAlignment:NSTextAlignmentRight];
+        
+        //文本的宽高和frame
+        _textWidth = self.frame.size.width - 3*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH;
+        _textHeight = 2* DEFAULT_MARGIN_WIDTH;
+        
+        _textLabel.frame = CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, NAME_LABEL_HEIGHT + 2*DEFAULT_MARGIN_WIDTH, _textWidth, _textHeight);
+        
+        //初始化结束
+        return;
+    }
+    /*******************如果是正常布局（带有more按钮的）***************************/
+    //添加more按钮
+    _moreBUtton = [[UIButton alloc] initWithFrame:CGRectMake(self.frame.size.width - MORE_BUTTON_WIDTH - DEFAULT_MARGIN_WIDTH, MORE_BUTTON_MARGIN, MORE_BUTTON_WIDTH, MORE_BUTTON_HEIGHT)];
+    [_moreBUtton setImage:[UIImage imageNamed:@"more_btn_nor"] forState:UIControlStateNormal];
+    [_moreBUtton setImage:[UIImage imageNamed:@"more_btn_sel"] forState:UIControlStateSelected];
+    [_moreBUtton addTarget:self action:@selector(ClikedOnMoreButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_moreBUtton];
+    
+    //设置时间的label的位置
+    _timeLabel.frame = CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, NAME_LABEL_HEIGHT+DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - MORE_BUTTON_WIDTH, TIME_LABEL_HEIGHT);
+    //这时的时间应以左对齐
+    [_timeLabel setTextAlignment:NSTextAlignmentLeft];
+    
+    //设置文本的长宽和frame
+    _textWidth = self.frame.size.width - 2*DEFAULT_MARGIN_WIDTH;
+    _textHeight = 2* DEFAULT_MARGIN_WIDTH;
+    
+    _textLabel.frame = CGRectMake(DEFAULT_MARGIN_WIDTH, USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, _textWidth, _textHeight);
 }
 
-- (CGSize)headerSize
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (!_cellDisplayModel) {
+        return;
+    }
+    [_photoButton sd_setImageWithURL:[NSURL URLWithString:_cellDisplayModel.cellDisplayUserModel.imgUrlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    [_nameLabel setText:_cellDisplayModel.cellDisplayUserModel.name];
+    [_timeLabel setText:_cellDisplayModel.cellContentModel.time];
+    [_textLabel setText:_cellDisplayModel.cellContentModel.text];
+    
+    CGRect textLabelFrame = _textLabel.frame;
+    
+     _textHeight = [_cellDisplayModel.cellContentModel.text sizeWithWidth:_textWidth
+                                                                     font:TEXT_FONT
+                                                            lineBreakMode:NSLineBreakByWordWrapping].height;
+    
+    textLabelFrame.size.height = _textHeight;
+    
+    _textLabel.frame = textLabelFrame;
+    
+    CGFloat height = 0.0f;
+    
+    if (_cellHeaderViewType == CellHeaderViewTypeNormal) {
+        height = 3*DEFAULT_MARGIN_WIDTH + USER_IMAGE_WIDTH + _textHeight;
+    }else if (_cellHeaderViewType == CellHeaderViewTypeIndent){
+        height = 3*DEFAULT_MARGIN_WIDTH + NAME_LABEL_HEIGHT + _textHeight;
+    }
+    
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+    
+}
+/*
+- (CGSize)headerViewSize
 {
     CGFloat height = 0.0f;
     switch (_headerType) {
@@ -170,6 +246,7 @@ cellHeaderPhotoType:(CellHeaderPhotoType)photoType
     
     return CGSizeMake(self.frame.size.width, height);
 }
+ */
 
 - (IBAction)ClikedOnPhotoButton:(id)sender
 {
@@ -184,21 +261,28 @@ cellHeaderPhotoType:(CellHeaderPhotoType)photoType
         [self.delegate baseCellHeaderView:self clikedOnMoreButton:sender];
     }
 }
-
-- (CGSize)sizeWithString:(NSString *)string font:(UIFont *)font lineBreakMode:(NSLineBreakMode)lineBreakMode
+/*
+- (CGSize)sizeWithString:(NSString *)string
+                   width:(CGFloat)width
+                    font:(UIFont *)font
+           lineBreakMode:(NSLineBreakMode)lineBreakMode
 {
     //  //该方法已经弃用
     //    CGSize size = [sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
     
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = lineBreakMode;
     
-    NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:paragraphStyle.copy
+                                 };
     
-    return  [string boundingRectWithSize:CGSizeMake(_textWidth, CGFLOAT_MAX)
+    return  [string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
                                  options:NSStringDrawingUsesLineFragmentOrigin
                               attributes:attributes
                                  context:nil].size;
 }
+ */
 
 @end

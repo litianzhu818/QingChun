@@ -7,35 +7,45 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CellHeaderViewModel.h"
 
-typedef NS_ENUM(NSUInteger, CellHeaderPhotoType) {
-    CellHeaderPhotoTypeSquare = 0,
-    CellHeaderPhotoTypeCircle
+typedef NS_ENUM(NSUInteger, CellHeaderViewType) {
+    CellHeaderViewTypeNormal = 0,
+    CellHeaderViewTypeIndent
 };
 
-typedef NS_ENUM(NSUInteger, CellHeaderType) {
-    CellHeaderTypeSimple = 0,
-    CellHeaderTypeMultiple
-};
+@class CellDisplayModel;
 
 @protocol BaseCellHeaderViewDelegate;
 
 @interface BaseCellHeaderView : UIView
 
+@property (strong, nonatomic) CellDisplayModel *cellDisplayModel;
+
 @property (assign, nonatomic) id<BaseCellHeaderViewDelegate> delegate;
-@property (assign, nonatomic, readonly) CGSize headerSize;
-@property (strong, nonatomic, readonly) CellHeaderViewModel *headerViewModel;
 
-- (id)initWithFrame:(CGRect)frame cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel;
+@property (assign, nonatomic, readonly) CellHeaderViewType cellHeaderViewType;
 
-- (id)initWithMultipleTypeFrame:(CGRect)frame
-            cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel
-            cellHeaderPhotoType:(CellHeaderPhotoType)photoType;
 
-- (id)initWithSimpleTypeFrame:(CGRect)frame
-          cellHeaderViewModel:(CellHeaderViewModel *)headerViewModel
-          cellHeaderPhotoType:(CellHeaderPhotoType)photoType;
+- (id)initWithFrame:(CGRect)frame
+   cellDisplayModel:(CellDisplayModel *)cellDisplayModel;
+
+- (id)initWithIndentTypeFrame:(CGRect)frame
+          cellDisplayModel:(CellDisplayModel *)cellDisplayModel;
+
+- (id)initWithNormalTypeFrame:(CGRect)frame
+          cellDisplayModel:(CellDisplayModel *)cellDisplayModel;
+
+- (id)initWithFrame:(CGRect)frame
+ cellHeaderViewType:(CellHeaderViewType)cellHeaderViewType
+cellDisplayModel:(CellDisplayModel *)headerViewModel;
+
+
++ (CGFloat)normalHeaderViewHeightWithWidth:(CGFloat)width content:(NSString *)content;
++ (CGFloat)indentHeaderViewHeightWithWidth:(CGFloat)width content:(NSString *)content;
++ (CGFloat)headerViewHeightWithWidth:(CGFloat)width
+                  cellHeaderViewType:(CellHeaderViewType)cellHeaderViewType
+                             content:(NSString *)content;
+
 
 @end
 

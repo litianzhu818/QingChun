@@ -23,8 +23,9 @@ typedef NS_ENUM(NSUInteger, MessageDisplayCellType) {
 
 @property (strong, nonatomic) CellDisplayModel *cellDisPlayModel;
 
+@property (assign, nonatomic) MessageDisplayCellType messageDisplayCellType;
 
 + (NSString *)cellIdentifier;
-+ (CGFloat)cellFrameHeight;
++ (CGFloat)cellFrameHeightWithWidth:(CGFloat)width cellDisplayModel:(CellDisplayModel *)cellDisplayModel;
 
 @end

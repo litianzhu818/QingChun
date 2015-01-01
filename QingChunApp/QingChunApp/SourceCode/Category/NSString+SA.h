@@ -12,4 +12,8 @@
 
 - (NSString *)fileAppend:(NSString *)string;
 
+- (CGSize)sizeWithWidth:(CGFloat)width
+                   font:(UIFont *)font
+          lineBreakMode:(NSLineBreakMode)lineBreakMode;
+
 @end

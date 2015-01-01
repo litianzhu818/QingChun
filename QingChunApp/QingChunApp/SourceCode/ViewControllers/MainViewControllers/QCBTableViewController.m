@@ -16,6 +16,8 @@
 #import "HMSegmentedControl.h"
 
 #import "HttpSessionManager.h"
+#import "MessageDisplayCell.h"
+#import "CellDisplayModel.h"
 
 
 @interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,iCarouselDataSource, iCarouselDelegate>
@@ -155,7 +157,7 @@
         [tableView setDataSource:self];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
-    
+        [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         tableView;
     });
     
@@ -166,7 +168,7 @@
         [tableView setDataSource:self];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
-        
+        [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         tableView;
     });
 }
@@ -343,27 +345,55 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellIdentifier = @"cell";
-    InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) {
-        cell = cell = [InfoTableViewCell instanceFromNib];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//#if 0
+//    static NSString *cellIdentifier = @"cell";
+//    InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+//    if (cell == nil) {
+//        cell = cell = [InfoTableViewCell instanceFromNib];
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        
+//        UIImage *backgroundImage = [UIImage imageNamed:@"cell_bg"];
+//        backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
+//        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
+//        [cell setBackgroundView:imageView];
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//    }
+//    // Configure the cell...
+//    
+//    return cell;
+//#else
+    MessageDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:[MessageDisplayCell cellIdentifier] forIndexPath:indexPath];
+    
+    if ([tableView isEqual:_tableView]) {
         
-        UIImage *backgroundImage = [UIImage imageNamed:@"cell_bg"];
-        backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-        [cell setBackgroundView:imageView];
-        [cell setBackgroundColor:[UIColor clearColor]];
+        // Configure the cell...
+        cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]];
+
+    }else if ([tableView isEqual:_hotTableView]){
+        
+        // Configure the cell...
+        cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]];
     }
     
-    // Configure the cell...
+//#endif
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 368;
+    CGFloat height = 0.0f;
+#if 0
+    height =  368;
+#else
+    if ([tableView isEqual:_tableView]) {
+        height = [MessageDisplayCell cellFrameHeightWithWidth:(tableView.frame.size.width - 2 * 10) cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]]];
+    }else if ([tableView isEqual:_hotTableView]){
+        height = [MessageDisplayCell cellFrameHeightWithWidth:tableView.frame.size.width cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]]];
+    }
+    
+#endif
+    return height;
 }
 /*
 // Override to support conditional editing of the table view.

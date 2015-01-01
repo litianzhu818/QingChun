@@ -27,5 +27,27 @@
     return str;
 
 }
+//计算字体在label中的高
+- (CGSize)sizeWithWidth:(CGFloat)width
+                   font:(UIFont *)font
+          lineBreakMode:(NSLineBreakMode)lineBreakMode
+{
+    //  //该方法已经弃用
+    //    CGSize size = [sizeWithFont:TEXT_FONT constrainedToSize:CGSizeMake(180.0f, 20000.0f) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    paragraphStyle.lineBreakMode = lineBreakMode;
+    
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName:font,
+                                 NSParagraphStyleAttributeName:paragraphStyle.copy
+                                 };
+    
+    return  [self boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX)
+                                 options:NSStringDrawingUsesLineFragmentOrigin
+                              attributes:attributes
+                                 context:nil].size;
+}
+
 
 @end

@@ -30,7 +30,7 @@
         self.urlStrSuffix = urlStrSuffix;
         self.width = width;
         self.height = height;
-        _urlStr = [NSString stringWithFormat:@"%@%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"image_url_string_prefix"],self.urlStrSuffix];
+        _urlStr = [NSString stringWithFormat:@"%@%@",[[UserConfig sharedInstance] GetImageURLPrefix],self.urlStrSuffix];
     }
     
     return self;

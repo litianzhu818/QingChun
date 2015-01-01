@@ -25,7 +25,7 @@
         self.ID = ID;
         self.name = name;
         self.imgUrlStrSufix = imgUrlStrSufix;
-        _imgUrlStr = [NSString stringWithFormat:@"%@%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"user_image_url_string"],self.imgUrlStrSufix];
+        _imgUrlStr = [NSString stringWithFormat:@"%@%@",[[UserConfig sharedInstance] GetHeadURLPrefix],self.imgUrlStrSufix];
     }
     
     return self;
