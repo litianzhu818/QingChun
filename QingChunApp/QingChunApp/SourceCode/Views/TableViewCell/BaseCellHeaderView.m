@@ -18,11 +18,13 @@
 #define MORE_BUTTON_MARGIN      15
 #define NAME_LABEL_HEIGHT       20
 #define TIME_LABEL_HEIGHT       10
-#define TIME_COLOR              [UIColor darkGrayColor]
+#define TIME_COLOR              [UIColor lightGrayColor]
 #define USER_NAME_FONT          [UIFont systemFontOfSize:15]                    // 用户昵称字号
 //#define kMBIconWH             12                                              // 会员图标尺寸
 #define TIME_FONT               [UIFont systemFontOfSize:10]                    // 发表时间字号
+
 #define TEXT_FONT               [UIFont systemFontOfSize:15]                    // 微博正文字号
+#define TEXT_COLOR              [UIColor darkGrayColor]
 
 
 @interface BaseCellHeaderView ()
@@ -137,6 +139,7 @@
     
     //名称
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - 4*MORE_BUTTON_WIDTH, NAME_LABEL_HEIGHT)];
+    [_nameLabel setTextColor:UIColorFromRGB(0x61a653)];
     
     //时间和内容
     _timeLabel = [[UILabel alloc] init];
@@ -155,7 +158,6 @@
     [self addSubview:_nameLabel];
     [self addSubview:_timeLabel];
     [self addSubview:_textLabel];
-    
     
     if (headerViewType == CellHeaderViewTypeIndent) {//如果是缩进类型的
         //设置头像为圆形
@@ -194,6 +196,7 @@
     _textHeight = 2* DEFAULT_MARGIN_WIDTH;
     
     _textLabel.frame = CGRectMake(DEFAULT_MARGIN_WIDTH, USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, _textWidth, _textHeight);
+    [_textLabel setTextColor:TEXT_COLOR];
 }
 
 - (void)layoutSubviews
@@ -203,7 +206,7 @@
     if (!_cellDisplayModel) {
         return;
     }
-    [_photoButton sd_setImageWithURL:[NSURL URLWithString:_cellDisplayModel.cellDisplayUserModel.imgUrlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"headerImage"]];
+    [_photoButton sd_setImageWithURL:[NSURL URLWithString:_cellDisplayModel.cellDisplayUserModel.imgUrlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default"]];
     [_nameLabel setText:_cellDisplayModel.cellDisplayUserModel.name];
     [_timeLabel setText:_cellDisplayModel.cellContentModel.time];
     [_textLabel setText:_cellDisplayModel.cellContentModel.text];
@@ -217,6 +220,7 @@
     textLabelFrame.size.height = _textHeight;
     
     _textLabel.frame = textLabelFrame;
+    [_textLabel sizeToFit];
     
     CGFloat height = 0.0f;
     

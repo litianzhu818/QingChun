@@ -90,7 +90,10 @@
     
     _cellHeaderView.cellDisplayModel = _cellDisPlayModel;
     _cellButtonView.cellButtonViewModel = _cellDisPlayModel.cellButtonViewModel;
-    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 40);
+    [_cellButtonView sizeToFit];
+    
+    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30);
+    [_cellButtonView sizeToFit];
     
     NSLog(@"%@##%@",NSStringFromCGRect(_cellHeaderView.frame),NSStringFromCGRect(_cellButtonView.frame));
     

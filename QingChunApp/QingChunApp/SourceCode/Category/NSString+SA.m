@@ -37,6 +37,7 @@
     
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     paragraphStyle.lineBreakMode = lineBreakMode;
+    //paragraphStyle.lineSpacing = 5.0;//调整行间距
     
     NSDictionary *attributes = @{
                                  NSFontAttributeName:font,
