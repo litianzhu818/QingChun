@@ -16,6 +16,6 @@ NSString *const qcdUserAutoLogin = @"QCD_USER_AUTO_LOGIN";
 NSString *const qcdUserHeadURLPrefix = @"QCD_USER_HEAD_URL_PREFIX_STRING";
 NSString *const qcdImageURLPrefix = @"QCD_IMAGE_URL_PREFIX_STRING";
 
-
+//NSString *const qcdUserHeaderImageQuality = @"QCD_USER_HEADER_IMAGE_QUALITY";
 
 #endif

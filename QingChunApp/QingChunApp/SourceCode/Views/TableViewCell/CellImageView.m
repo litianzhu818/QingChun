@@ -82,7 +82,7 @@
     }
     
     BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
-     singleImageView.contentMode = UIViewContentModeScaleAspectFit;
+     singleImageView.contentMode = UIViewContentModeScaleToFill;
     singleImageView.tag = 0;
     
     [self addSubview:singleImageView];

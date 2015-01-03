@@ -32,8 +32,16 @@
 
     #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
     /*************************************System info***************************************/
-    #define FILE_UPLOAD_URL     @"file_upload_url"
-    #define IMAGE_COMORESSION   @"ImageCompression"
+    //用户头像质量对应的路径
+    #define USER_HEADER_IMAGE_QUALIRT_HEIGHT            @"bigs/"
+    #define USER_HEADER_IMAGE_QUALIRT_LOW               @"thumb/"
+    #define USER_HEADER_IMAGE_QUALIRT_DEFAULT           USER_HEADER_IMAGE_QUALIRT_LOW
+
+    //消息图片质量对应的路径
+    #define MESSAGE_IMAGE_QUALIRT_HEIGHT                USER_HEADER_IMAGE_QUALIRT_HEIGHT
+    #define MESSAGE_IMAGE_QUALIRT_MIDDLE                USER_HEADER_IMAGE_QUALIRT_LOW
+    #define MESSAGE_IMAGE_QUALIRT_DEFAULT               MESSAGE_IMAGE_QUALIRT_MIDDLE
+    #define MESSAGE_IMAGE_QUALIRT_LOW                   @"small/"
     /*************************************User info***************************************/
     //get the left top origin's x,y of a view
     #define VIEW_TX(view) (view.frame.origin.x)

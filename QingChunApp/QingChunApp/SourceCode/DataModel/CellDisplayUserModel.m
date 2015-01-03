@@ -25,7 +25,7 @@
         self.ID = ID;
         self.name = name;
         self.imgUrlStrSufix = imgUrlStrSufix;
-        _imgUrlStr = [NSString stringWithFormat:@"%@%@",[[UserConfig sharedInstance] GetHeadURLPrefix],self.imgUrlStrSufix];
+        _imgUrlStr = [NSString stringWithFormat:@"%@%@%@", [[UserConfig sharedInstance] GetHeadURLPrefix], USER_HEADER_IMAGE_QUALIRT_LOW, self.imgUrlStrSufix];
     }
     
     return self;
