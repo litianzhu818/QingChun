@@ -37,7 +37,7 @@
         self.urlStrSuffix = urlStrSuffix;
         self.width = width;
         self.height = height;
-        _urlStr = [NSString stringWithFormat:@"%@%@%@", [[UserConfig sharedInstance] GetImageURLPrefix], MESSAGE_IMAGE_QUALIRT_DEFAULT, self.urlStrSuffix];
+        _urlStr = [NSString stringWithFormat:@"%@%@%@", [[UserConfig sharedInstance] GetImageURLPrefix], MESSAGE_IMAGE_QUALIRT_LOW, self.urlStrSuffix];
     }
     
     return self;

@@ -10,13 +10,14 @@
 #import "BaseCellImageView.h"
 #import "CellDisplayImageModel.h"
 
+#import "MJPhoto.h"
+
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
 #define MULTIPLE_IMAGE_WIDTH ((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3)
 #define SINGLE_IMAGE_WIDTH 200.0f
 
 @interface CellImageView ()<BaseCellImageViewDelegate>
 {
-    CGSize              _pictureViewSize;
     NSArray             *_cellDisplayImageModels;
     NSMutableArray      *_images;
 }
@@ -82,11 +83,22 @@
     }
     
     BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
-     singleImageView.contentMode = UIViewContentModeScaleToFill;
+    singleImageView.contentMode = UIViewContentModeScaleToFill;
+    singleImageView.userInteractionEnabled = YES;
+    singleImageView.delegate = self;
     singleImageView.tag = 0;
     
     [self addSubview:singleImageView];
-    [_images addObject:singleImageView];
+    
+    MJPhoto *photo = [[MJPhoto alloc] init];
+    
+    // 来源于哪个UIImageView
+    photo.srcImageView = singleImageView;
+    
+    NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
+    // 图片路径
+    photo.url = [NSURL URLWithString:url];
+    [_images addObject:photo];
 }
 
 - (void)setupMultiplePictureView
@@ -143,10 +155,19 @@
             
             BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:tempCellDisplayImageModel.urlStr];
             singleImageView.contentMode = UIViewContentModeScaleAspectFill;
+            singleImageView.userInteractionEnabled = YES;
+            singleImageView.delegate = self;
             singleImageView.tag = sumOfViews - 1;
             
             [self addSubview:singleImageView];
-            [_images addObject:singleImageView];
+            
+            MJPhoto *photo = [[MJPhoto alloc] init];
+            // 来源于哪个UIImageView
+            photo.srcImageView = singleImageView;
+            NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
+            // 图片路径
+            photo.url = [NSURL URLWithString:url];
+            [_images addObject:photo];
         }
     }
     
@@ -174,6 +195,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    [_images removeAllObjects];
     
     [self initUI];
 }
@@ -228,8 +251,8 @@
 #pragma mark - BaseCellImageViewDelegate method
 - (void)tapOnImageView:(BaseCellImageView *)baseCellImageView
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapedOnImageView:onIndex:)]) {
-        [self.delegate didTapedOnImageView:baseCellImageView onIndex:baseCellImageView.tag];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(cellImageView:didTapedOnImageViewWith:onIndex:)]) {
+        [self.delegate cellImageView:self didTapedOnImageViewWith:_images onIndex:baseCellImageView.tag];
     }
 }
 

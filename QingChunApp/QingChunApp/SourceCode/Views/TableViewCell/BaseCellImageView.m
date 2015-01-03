@@ -74,7 +74,7 @@
 - (void)setImageUrl:(NSString *)imageUrl
 {
     _imageUrl = imageUrl;
-    [self sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority ];
+    [self sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
     
     if ([self isGifImageWithUrl:self.imageUrl]) {
         _gifView.hidden = ![self isGifImageWithUrl:self.imageUrl];

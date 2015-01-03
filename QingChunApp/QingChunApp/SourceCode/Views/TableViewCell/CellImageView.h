@@ -17,8 +17,6 @@
 
 @property (strong, nonatomic) NSArray *cellDisplayImageModels;
 
-@property (assign, nonatomic, readonly) CGSize pictureViewSize;
-
 - (instancetype)initWithFrame:(CGRect)frame cellDisplayImageModels:(NSArray *)cellDisplayImageModels;
 - (instancetype)initWithFrame:(CGRect)frame cellDisplayImageModel:(CellDisplayImageModel *)cellDisplayImageModel;
 
@@ -34,6 +32,6 @@
 
 @optional
 
-- (void)didTapedOnImageView:(UIImageView *)imageView onIndex:(NSUInteger)index;
+- (void)cellImageView:(CellImageView *)cellImageView didTapedOnImageViewWith:(NSArray *)imageInfos onIndex:(NSUInteger)index;
 
 @end

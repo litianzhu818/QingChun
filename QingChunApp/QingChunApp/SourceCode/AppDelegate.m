@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
+#import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
 
 @interface AppDelegate ()
@@ -168,6 +169,14 @@
 //    [self stopEngine];
 }
 
+//内存紧张就及时回收内存
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
+{
+    // 清除内存中的图片缓存
+    SDWebImageManager *sdWebImageManager = [SDWebImageManager sharedManager];
+    [sdWebImageManager cancelAll];
+    [sdWebImageManager.imageCache clearMemory];
+}
 
 /****************************************************初始化数据***********************************************************/
 

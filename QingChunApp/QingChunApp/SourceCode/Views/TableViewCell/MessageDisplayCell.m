@@ -12,10 +12,12 @@
 #import "CellButtonView.h"
 #import "CellImageView.h"
 
+#import "MJPhotoBrowser.h"
+
 #define DEFAULT_EDGE_INSERT 8.0f
 #define DAFAULT_MARGIN_WIDTH 10.0f
 
-@interface MessageDisplayCell ()
+@interface MessageDisplayCell ()<CellImageViewDelegate,CellButtonViewDelegate,BaseCellHeaderViewDelegate>
 {
     //顶部视图，显示用户信息和文本内容
     BaseCellHeaderView      *_cellHeaderView;
@@ -63,18 +65,32 @@
 - (void)setupUINormal
 {
     //头部视图
-    _cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
-    [self.contentView addSubview:_cellHeaderView];
+    _cellHeaderView = ({
+        BaseCellHeaderView *cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
+        cellHeaderView.delegate = self;
+        [self.contentView addSubview:cellHeaderView];
+        cellHeaderView;
+    });
+    
     
     //图片视图
-    _cellImageView = [[CellImageView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView), VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, 10)];
-    [self.contentView addSubview:_cellImageView];
+    _cellImageView = ({
+        CellImageView *cellImageView = [[CellImageView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView), VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, 10)];
+        cellImageView.delegate = self;
+        cellImageView.userInteractionEnabled = YES;
+        [self.contentView addSubview:cellImageView];
+        cellImageView;
+    });
+    
     
     
     //按钮视图
-    _cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellImageView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
-    [self.contentView addSubview:_cellButtonView];
-
+    _cellButtonView = ({
+        CellButtonView *cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellImageView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
+        cellButtonView.delegate = self;
+        [self.contentView addSubview:cellButtonView];
+        cellButtonView;
+    });
 }
 
 - (void)setCellDisPlayModel:(CellDisplayModel *)cellDisPlayModel
@@ -158,6 +174,16 @@
     height += 30.0f;
     
     return height;
+}
+
+#pragma mark - CellImageViewDelegate methods
+- (void)cellImageView:(CellImageView *)cellImageView didTapedOnImageViewWith:(NSArray *)imageInfos onIndex:(NSUInteger)index
+{
+    //显示相册
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
+    browser.photos = imageInfos; // 设置所有的图片
+    [browser show];
 }
 
 @end

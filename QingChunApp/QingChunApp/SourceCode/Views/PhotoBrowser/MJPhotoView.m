@@ -15,6 +15,8 @@
 @interface MJPhotoView ()
 {
     BOOL _doubleTap;
+    BOOL _disableLayoutSubviews;
+    
     UIImageView *_imageView;
     MJPhotoLoadingView *_photoLoadingView;
 }
@@ -55,6 +57,39 @@
     return self;
 }
 
+- (void)layoutSubviews
+{
+    // Super
+    [super layoutSubviews];
+    
+    //disableLayoutSubvies 自己添加一个属性，用来控制是否对图片进行调整
+    if (_disableLayoutSubviews) {
+        return;
+    }
+    
+    // Center the image as it becomes smaller than the size of the screen
+    CGSize boundsSize = self.bounds.size;
+    CGRect frameToCenter = _imageView.frame;
+    
+    // Horizontally
+    if (frameToCenter.size.width < boundsSize.width) {
+        frameToCenter.origin.x = floorf((boundsSize.width - frameToCenter.size.width) / 2.0);
+    } else {
+        frameToCenter.origin.x = 0;
+    }
+    
+    // Vertically
+    if (frameToCenter.size.height < boundsSize.height) {
+        frameToCenter.origin.y = floorf((boundsSize.height - frameToCenter.size.height) / 2.0);
+    } else {
+        frameToCenter.origin.y = 0;
+    }
+    
+    // Center
+    if (!CGRectEqualToRect(_imageView.frame, frameToCenter)) {
+        _imageView.frame = frameToCenter;
+    }
+}
 #pragma mark - photoSetter
 - (void)setPhoto:(MJPhoto *)photo {
     _photo = photo;
@@ -79,12 +114,6 @@
                 // 调整frame参数
                 [photoView adjustFrame];
             }];
-//            [_imageView setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-//                photo.image = image;
-//                
-//                // 调整frame参数
-//                [photoView adjustFrame];
-//            }];
         }
     } else {
         [self photoStartLoad];
@@ -222,6 +251,7 @@
 - (void)hide
 {
     if (_doubleTap) return;
+    _disableLayoutSubviews = YES;
     
     // 移除进度条
     [_photoLoadingView removeFromSuperview];
@@ -230,11 +260,12 @@
     // 清空底部的小图
     _photo.srcImageView.image = nil;
     
+    //原始代码
     CGFloat duration = 0.15;
     if (_photo.srcImageView.clipsToBounds) {
         [self performSelector:@selector(reset) withObject:nil afterDelay:duration];
     }
-    
+         
     [UIView animateWithDuration:duration + 0.1 animations:^{
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
         
@@ -249,7 +280,13 @@
         }
     } completion:^(BOOL finished) {
         // 设置底部的小图片
+#warning 这里有一个bug就是返回后，srcImageView显示的是最原始的placeholder
+        /*//原始代码
         _photo.srcImageView.image = _photo.placeholder;
+         */
+        
+        //改动之处 2013-01-03
+        [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
