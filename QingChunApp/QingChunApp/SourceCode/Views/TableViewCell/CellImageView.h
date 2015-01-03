@@ -15,7 +15,8 @@
 
 @property (assign, nonatomic) id<CellImageViewDelegate> delegate;
 
-@property (strong, nonatomic, readonly) NSArray *cellDisplayImageModels;
+@property (strong, nonatomic) NSArray *cellDisplayImageModels;
+
 @property (assign, nonatomic, readonly) CGSize pictureViewSize;
 
 - (instancetype)initWithFrame:(CGRect)frame cellDisplayImageModels:(NSArray *)cellDisplayImageModels;
@@ -23,6 +24,8 @@
 
 - (NSString *)urlAtIndex:(NSUInteger)pictureIndex;
 - (UIImage *)imageAtIndex:(NSUInteger)pictureIndex;
+
++ (CGFloat)heightWithCellDisplayImageModels:(NSArray *)cellDisplayImageModels;
 
 @end
 

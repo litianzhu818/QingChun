@@ -28,6 +28,7 @@
 		E712AA5F1A0BD44F000648C4 /* 箭头-选中.png in Resources */ = {isa = PBXBuildFile; fileRef = E712AA541A0BD44F000648C4 /* 箭头-选中.png */; };
 		E712AA601A0BD44F000648C4 /* 箭头.png in Resources */ = {isa = PBXBuildFile; fileRef = E712AA551A0BD44F000648C4 /* 箭头.png */; };
 		E712AA611A0BD44F000648C4 /* input_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E712AA561A0BD44F000648C4 /* input_bg@2x.png */; };
+		E71943761A58103E00680664 /* TTTAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = E71943751A58103E00680664 /* TTTAttributedLabel.m */; };
 		E725A2651A07C52A00FCE03D /* MainCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = E725A2641A07C52A00FCE03D /* MainCellView.m */; };
 		E725A2671A07CD7000FCE03D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E725A2661A07CD7000FCE03D /* CoreGraphics.framework */; };
 		E725A28A1A07CDA900FCE03D /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E725A26A1A07CDA900FCE03D /* MKAnnotationView+WebCache.m */; };
@@ -254,6 +255,8 @@
 		E712AA541A0BD44F000648C4 /* 箭头-选中.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "箭头-选中.png"; sourceTree = "<group>"; };
 		E712AA551A0BD44F000648C4 /* 箭头.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "箭头.png"; sourceTree = "<group>"; };
 		E712AA561A0BD44F000648C4 /* input_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "input_bg@2x.png"; sourceTree = "<group>"; };
+		E71943741A58103E00680664 /* TTTAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAttributedLabel.h; sourceTree = "<group>"; };
+		E71943751A58103E00680664 /* TTTAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAttributedLabel.m; sourceTree = "<group>"; };
 		E725A2631A07C52A00FCE03D /* MainCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainCellView.h; sourceTree = "<group>"; };
 		E725A2641A07C52A00FCE03D /* MainCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainCellView.m; sourceTree = "<group>"; };
 		E725A2661A07CD7000FCE03D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -674,6 +677,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E71943731A58103E00680664 /* TTTAttributedLabel */,
 				E7F1C9891A527D7700E8DF67 /* NSString+Hashes */,
 				E7B8B3001A51A3AF0015CE40 /* AFNetworking */,
 				E7B6EA591A4FCE31009CF7D1 /* AutoProperties */,
@@ -740,6 +744,15 @@
 				E712AA561A0BD44F000648C4 /* input_bg@2x.png */,
 			);
 			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		E71943731A58103E00680664 /* TTTAttributedLabel */ = {
+			isa = PBXGroup;
+			children = (
+				E71943741A58103E00680664 /* TTTAttributedLabel.h */,
+				E71943751A58103E00680664 /* TTTAttributedLabel.m */,
+			);
+			path = TTTAttributedLabel;
 			sourceTree = "<group>";
 		};
 		E725A2621A07C4FB00FCE03D /* MainCellView */ = {
@@ -1837,6 +1850,7 @@
 				E7063F9E19E68EAE00CC3CE0 /* JSONKit.m in Sources */,
 				E7DD1C381A412F7200FAA24A /* MJPhotoBrowser.m in Sources */,
 				E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */,
+				E71943761A58103E00680664 /* TTTAttributedLabel.m in Sources */,
 				E7B8B3371A51A3AF0015CE40 /* UIButton+AFNetworking.m in Sources */,
 				E712AA441A0BC1B5000648C4 /* UserHeaderView.m in Sources */,
 				E725A28C1A07CDA900FCE03D /* SDImageCache.m in Sources */,

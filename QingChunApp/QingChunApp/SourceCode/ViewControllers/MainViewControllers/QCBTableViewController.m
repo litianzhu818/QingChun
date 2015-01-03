@@ -188,8 +188,7 @@
     _newMsgs = [NSMutableArray array];
     _hotMsgs = [NSMutableArray array];
 
-#if 1
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%ld",(_currentPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(_currentPage + 1)] block:^(id data, NSError *error) {
         
         if (!error) {
             _currentPage += 1;
@@ -200,9 +199,6 @@
         }
     
      }];
-#else
-    
-#endif
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -319,8 +315,9 @@
 {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-#if 1
+    
     NSInteger result = 0;
+    
     if ([tableView isEqual:_tableView]) {
         result = [_newMsgs count];
         //当列表数据为空时，需要去掉背景图片或者替换背景图片
@@ -336,32 +333,12 @@
     }
     
     return result;
-#else
-    return 10;
-#endif
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//#if 0
-//    static NSString *cellIdentifier = @"cell";
-//    InfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-//    if (cell == nil) {
-//        cell = cell = [InfoTableViewCell instanceFromNib];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        
-//        UIImage *backgroundImage = [UIImage imageNamed:@"cell_bg"];
-//        backgroundImage = [backgroundImage resizableImageWithCapInsets:UIEdgeInsetsMake(8, 8, 8, 8)];
-//        UIImageView *imageView = [[UIImageView alloc] initWithImage:backgroundImage];
-//        [cell setBackgroundView:imageView];
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//    }
-//    // Configure the cell...
-//    
-//    return cell;
-//#else
     MessageDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:[MessageDisplayCell cellIdentifier] forIndexPath:indexPath];
     
     if ([tableView isEqual:_tableView]) {
@@ -375,24 +352,21 @@
         cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]];
     }
     
-//#endif
-    
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CGFloat height = 0.0f;
-#if 0
-    height =  368;
-#else
+
     if ([tableView isEqual:_tableView]) {
-        height = [MessageDisplayCell cellFrameHeightWithWidth:(tableView.frame.size.width - 2 * 10) cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]]];
+        height = [MessageDisplayCell cellFrameHeightWithWidth:(bound.size.width - 2*10) 
+                                             cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]]];
     }else if ([tableView isEqual:_hotTableView]){
-        height = [MessageDisplayCell cellFrameHeightWithWidth:tableView.frame.size.width cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]]];
+        height = [MessageDisplayCell cellFrameHeightWithWidth:(bound.size.width - 2*10)
+                                             cellDisplayModel:[CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]]];
     }
     
-#endif
     return height;
 }
 /*

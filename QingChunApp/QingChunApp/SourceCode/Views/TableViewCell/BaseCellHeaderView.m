@@ -7,6 +7,7 @@
 //
 
 #import "BaseCellHeaderView.h"
+#import "TTTAttributedLabel.h"
 #import "UIButton+WebCache.h"
 #import "NSString+SA.h"
 #import "CellDisplayModel.h"
@@ -27,17 +28,17 @@
 #define TEXT_COLOR              [UIColor darkGrayColor]
 
 
-@interface BaseCellHeaderView ()
+@interface BaseCellHeaderView ()<TTTAttributedLabelDelegate>
 {
-    UIButton            *_photoButton;
-    UIButton            *_moreBUtton;
-    UILabel             *_nameLabel;
-    UILabel             *_timeLabel;
-    UILabel             *_textLabel;
+    UIButton                        *_photoButton;
+    UIButton                        *_moreBUtton;
+    UILabel                         *_nameLabel;
+    UILabel                         *_timeLabel;
+    TTTAttributedLabel              *_textLabel;
     
-    CGFloat             _textWidth;
-    CGFloat             _textHeight;
-    CellHeaderViewType  _cellHeaderViewType;
+    CGFloat                         _textWidth;
+    CGFloat                         _textHeight;
+    CellHeaderViewType              _cellHeaderViewType;
 }
 
 @end
@@ -143,7 +144,7 @@
     
     //时间和内容
     _timeLabel = [[UILabel alloc] init];
-    _textLabel = [[UILabel alloc] init];
+    _textLabel = [[TTTAttributedLabel alloc] init];
     
     [_nameLabel setFont:USER_NAME_FONT];
     
@@ -152,6 +153,17 @@
     
     [_textLabel setFont:TEXT_FONT];
     _textLabel.numberOfLines = 0;
+    _textLabel.lineSpacing = 2.0f;
+    //_textLabel.backgroundColor = [UIColor lightGrayColor];
+    _textLabel.linkAttributes = @{
+                                  (__bridge NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],
+                                  (NSString *)kCTForegroundColorAttributeName : (__bridge id)[UIColor blueColor].CGColor
+                                  };
+    _textLabel.activeLinkAttributes = @{
+                                        (NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],
+                                        (NSString *)kCTForegroundColorAttributeName : (__bridge id)[[UIColor blueColor] CGColor]
+                                        };
+    _textLabel.delegate = self;
     
     //添加这些控件
     [self addSubview:_photoButton];
@@ -209,7 +221,10 @@
     [_photoButton sd_setImageWithURL:[NSURL URLWithString:_cellDisplayModel.cellDisplayUserModel.imgUrlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default"]];
     [_nameLabel setText:_cellDisplayModel.cellDisplayUserModel.name];
     [_timeLabel setText:_cellDisplayModel.cellContentModel.time];
-    [_textLabel setText:_cellDisplayModel.cellContentModel.text];
+    [_textLabel setText:_cellDisplayModel.cellContentModel.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        //这里配置显示字体的属性
+        return mutableAttributedString;
+    }];
     
     CGRect textLabelFrame = _textLabel.frame;
     
@@ -220,7 +235,7 @@
     textLabelFrame.size.height = _textHeight;
     
     _textLabel.frame = textLabelFrame;
-    [_textLabel sizeToFit];
+
     
     CGFloat height = 0.0f;
     
@@ -231,7 +246,6 @@
     }
     
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
-    
 }
 /*
 - (CGSize)headerViewSize

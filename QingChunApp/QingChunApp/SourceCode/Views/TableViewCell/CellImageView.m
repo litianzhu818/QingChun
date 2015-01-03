@@ -11,7 +11,7 @@
 #import "CellDisplayImageModel.h"
 
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
-#define MULTIPLE_IMAGE_WIDTH 80.0f
+#define MULTIPLE_IMAGE_WIDTH ((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3)
 #define SINGLE_IMAGE_WIDTH 200.0f
 
 @interface CellImageView ()<BaseCellImageViewDelegate>
@@ -42,8 +42,7 @@
     if (self) {
         // Initialization code
         [self initParameters];
-        _cellDisplayImageModels = [self cellDisplayImageModelsFrom:cellDisplayImageModels];
-        [self initUI];
+        [self setCellDisplayImageModels:[self cellDisplayImageModelsFrom:cellDisplayImageModels]];
     }
     return self;
 }
@@ -81,8 +80,6 @@
         imageHeight = SINGLE_IMAGE_WIDTH;
         imageWith = imageHeight*_aspectRatio;
     }
-    _pictureViewSize = CGSizeMake(imageWith, imageHeight);
-    self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
     
     BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
      singleImageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -94,12 +91,15 @@
 
 - (void)setupMultiplePictureView
 {
+    
     CGFloat imageWith = 0.0f;
     CGFloat imageHeight = 0.0f;
+     
     
     NSUInteger column       =   0;//列数
     NSUInteger row          =   0;//行数
     NSUInteger numOfImages  =   [_cellDisplayImageModels count];
+    
     
     if (numOfImages <= 3) {//一行，三列
         row = 1;
@@ -123,9 +123,7 @@
         imageHeight = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
     }
     
-    _pictureViewSize = CGSizeMake(imageWith, imageHeight);
-    self.frame =CGRectMake(self.frame.origin.x, self.frame.origin.y, imageWith, imageHeight);
-    
+    //这里的布局是：|-0-image-margin-image-margin-image-0|
     CGFloat originX = 0.0f;
     CGFloat originY = 0.0f;
     for (NSUInteger index = 1; index <= row; ++index) {
@@ -134,9 +132,9 @@
         originY += (index - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
         
         for (NSInteger item = 1; item <= column; ++item) {
-            
+            //到目前的视图，总共的视图数量
             NSUInteger sumOfViews = (index - 1) * 3 + item;
-            
+            //如果目前视图数量大于总数了，那么需要停止布局
             if (sumOfViews > numOfImages) break;
             
             originX += (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
@@ -162,6 +160,69 @@
 - (UIImage *)imageAtIndex:(NSUInteger)pictureIndex
 {
     return [_images objectAtIndex:pictureIndex];
+}
+
+- (void)setCellDisplayImageModels:(NSArray *)cellDisplayImageModels
+{
+    if (!cellDisplayImageModels) {
+        return;
+    }
+    _cellDisplayImageModels = cellDisplayImageModels;
+    [self setNeedsLayout];
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self initUI];
+}
+
++ (CGFloat)heightWithCellDisplayImageModels:(NSArray *)cellDisplayImageModels
+{
+    CGFloat height = 0.0f;
+    
+    if ([cellDisplayImageModels count] == 1) {
+        
+        CellDisplayImageModel *cellDisplayImageModel = [cellDisplayImageModels firstObject];
+        
+        CGFloat _aspectRatio = cellDisplayImageModel.width/cellDisplayImageModel.height;
+        
+        if (_aspectRatio > 1.0) {
+            height = SINGLE_IMAGE_WIDTH/_aspectRatio;
+        }else{
+            height = SINGLE_IMAGE_WIDTH;
+        }
+
+    }else{
+        NSUInteger column       =   0;//列数
+        NSUInteger row          =   0;//行数
+        NSUInteger numOfImages  =   [cellDisplayImageModels count];
+        
+        if (numOfImages <= 3) {//一行，三列
+            row = 1;
+            column = numOfImages;
+            
+            height = MULTIPLE_IMAGE_WIDTH;
+        }else if (numOfImages == 4){//两行，两列
+            row = 2;
+            column = 2;
+
+            height = 2 * MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL;
+        }else if (4 < numOfImages && numOfImages <= 6){//两行，三列
+            row = 2;
+            column = 3;
+            
+            height = 2 * MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL;
+        }else if (6 < numOfImages && numOfImages <= 9){//三行，三列
+            row = 3;
+            column = 3;
+            
+            height = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
+        }
+    }
+    
+    return height;
 }
 
 #pragma mark - BaseCellImageViewDelegate method

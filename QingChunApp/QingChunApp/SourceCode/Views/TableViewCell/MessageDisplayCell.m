@@ -10,13 +10,18 @@
 #import "CellDisplayModel.h"
 #import "BaseCellHeaderView.h"
 #import "CellButtonView.h"
+#import "CellImageView.h"
 
 #define DEFAULT_EDGE_INSERT 8.0f
 #define DAFAULT_MARGIN_WIDTH 10.0f
 
 @interface MessageDisplayCell ()
 {
+    //顶部视图，显示用户信息和文本内容
     BaseCellHeaderView      *_cellHeaderView;
+    //图片视图，用于显示图片
+    CellImageView           *_cellImageView;
+    //按钮视图
     CellButtonView          *_cellButtonView;
 }
 @end
@@ -61,9 +66,15 @@
     _cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
     [self.contentView addSubview:_cellHeaderView];
     
+    //图片视图
+    _cellImageView = [[CellImageView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView), VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, 10)];
+    [self.contentView addSubview:_cellImageView];
+    
+    
     //按钮视图
-    _cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
+    _cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellImageView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
     [self.contentView addSubview:_cellButtonView];
+
 }
 
 - (void)setCellDisPlayModel:(CellDisplayModel *)cellDisPlayModel
@@ -88,15 +99,37 @@
         return;
     }
     
+    //为各个子控件添加相应的数据源
     _cellHeaderView.cellDisplayModel = _cellDisPlayModel;
+    _cellImageView.cellDisplayImageModels = _cellDisPlayModel.cellDisplayImageModels;
     _cellButtonView.cellButtonViewModel = _cellDisPlayModel.cellButtonViewModel;
-    [_cellButtonView sizeToFit];
     
-    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30);
-    [_cellButtonView sizeToFit];
+    //顶部视图的高度,此时的宽度是屏宽-20（左右边距各10）
+    CGFloat tempHeight = [BaseCellHeaderView normalHeaderViewHeightWithWidth:(bound.size.width-20) content:_cellDisPlayModel.cellContentModel.text];
     
-    NSLog(@"%@##%@",NSStringFromCGRect(_cellHeaderView.frame),NSStringFromCGRect(_cellButtonView.frame));
+    //如果有图片
+    if ([self.cellDisPlayModel.cellDisplayImageModels count] > 0) {
+        //显示图片视图控件
+        [_cellImageView setHidden:NO];
+        
+        //计算图片视图的高度
+        CGFloat _cellImageViewHeight = [CellImageView heightWithCellDisplayImageModels:_cellDisPlayModel.cellDisplayImageModels];
+        
+        //调整图片视图新的位置frame
+        _cellImageView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, tempHeight, VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, _cellImageViewHeight);
+        
+        //调整完图片视图的高度之后，需要把起点高度加上，以便后面的视图好调整位置
+        tempHeight += _cellImageViewHeight;
+        //加上按钮和图片之间的距离10
+        tempHeight += 10;
+    }else{
+        //没有图片时，影藏图片视图控件
+        //这时千万不能romevFromSuperview或者设置nil，因为其他数据需要重用该控件
+        [_cellImageView setHidden:YES];
+    }
     
+    //调整按钮视图的位置frame
+    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, tempHeight, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30);
 }
 
 #pragma mark - class public methods
@@ -109,8 +142,21 @@
     CGFloat height = 0.0f;
     //加上顶部信息视图的高度
     height += [BaseCellHeaderView normalHeaderViewHeightWithWidth:width content:cellDisplayModel.cellContentModel.text];
+    
+    if ([cellDisplayModel.cellDisplayImageModels count] > 0){
+        //加上图片高度
+        height += [CellImageView heightWithCellDisplayImageModels:cellDisplayModel.cellDisplayImageModels];
+        
+        //按钮视图距离上面视图边距10.0f
+        height += 10.0f;
+    }
+    
+    //按钮视图距离下边距10.0f
+    height += 10.0f;
+    
     //加上底部按钮视图的高度
-    height += 50.0;
+    height += 30.0f;
+    
     return height;
 }
 

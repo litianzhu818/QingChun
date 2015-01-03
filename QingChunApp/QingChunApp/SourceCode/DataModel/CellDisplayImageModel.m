@@ -27,6 +27,13 @@
 {
     self = [super init];
     if (self) {
+        //这里需要防止服务器返回图片宽高都为0的数据
+        if (width == 0) {
+            width = 200.0f;
+        }
+        if (height == 0) {
+            height = 200.0f;
+        }
         self.urlStrSuffix = urlStrSuffix;
         self.width = width;
         self.height = height;
