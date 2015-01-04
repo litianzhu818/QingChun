@@ -38,6 +38,8 @@
         self.width = width;
         self.height = height;
         _urlStr = [NSString stringWithFormat:@"%@%@%@", [[UserConfig sharedInstance] GetImageURLPrefix], MESSAGE_IMAGE_QUALIRT_DEFAULT, self.urlStrSuffix];
+        //测试gif图显示问题
+        //_urlStr = [NSString stringWithFormat:@"%@",@"http://ww4.sinaimg.cn/bmiddle/7f8c1087gw1e9g06pc68ug20ag05y4qq.gif"];
     }
     
     return self;

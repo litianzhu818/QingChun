@@ -107,7 +107,7 @@
         _imageView.image = [_photo.srcImageView.image copy]; // 占位图片
         
         // 不是gif，就马上开始下载
-        if (![_photo.url.absoluteString hasSuffix:@"gif"]) {
+        if (![_photo.url.absoluteString.lowercaseString hasSuffix:@".gif"]) {
             __unsafe_unretained MJPhotoView *photoView = self;
             __unsafe_unretained MJPhoto *photo = _photo;
             [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {

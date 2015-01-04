@@ -24,6 +24,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setupUIWithFrame:frame imageUrl:nil];
+        [self addGestures];
     }
     return self;
 }
@@ -33,6 +35,8 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setupUIWithFrame:frame imageUrl:imageUrl];
+        [self addGestures];
     }
     return self;
 }
@@ -42,8 +46,10 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        [self setImageUrl:imageUrl];
+        [self setupUIWithFrame:frame imageUrl:imageUrl];
+        //[self setImageUrl:imageUrl];
         [self addGestures];
+        [self setDelegate:delegate];
     }
     return self;
 }
