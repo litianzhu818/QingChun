@@ -217,7 +217,7 @@
             _imageView.frame = imageFrame;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
-            //_photo.srcImageView.image = _photo.placeholder;
+            _photo.srcImageView.image = _photo.placeholder;
             _imageView.image = _photo.placeholder;
             [self photoStartLoad];
         }];
@@ -259,7 +259,7 @@
     _hasProgressView = NO;
     
     // 清空底部的小图
-    //_photo.srcImageView.image = nil;
+    _photo.srcImageView.image = nil;
     
     //原始代码
     CGFloat duration = 0.15;
@@ -285,9 +285,11 @@
         /*//原始代码
         _photo.srcImageView.image = _photo.placeholder;
          */
+        //_photo.srcImageView.image = _photo.image;
+        _photo.srcImageView.image = _photo.placeholder;
         
         //改动之处 2013-01-03
-        [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+        //[_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
