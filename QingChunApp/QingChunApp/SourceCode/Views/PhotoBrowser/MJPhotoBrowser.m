@@ -11,11 +11,13 @@
 #import "MJPhotoView.h"
 #import "MJPhotoToolbar.h"
 
+#import "MBProgressHUD+Add.h"
+
 #define kPadding 10
 #define kPhotoViewTagOffset 1000
 #define kPhotoViewIndex(photoView) ([photoView tag] - kPhotoViewTagOffset)
 
-@interface MJPhotoBrowser () <MJPhotoViewDelegate>
+@interface MJPhotoBrowser () <MJPhotoViewDelegate, MJPhotoToolbarDelegate, UIActionSheetDelegate>
 {
     // 滚动的view
 	UIScrollView *_photoScrollView;
@@ -24,6 +26,8 @@
     NSMutableSet *_reusablePhotoViews;
     // 工具条
     MJPhotoToolbar *_toolbar;
+    
+    UIActionSheet *_actionSheet;
     
     // 一开始的状态栏
     BOOL _statusBarHiddenInited;
@@ -52,6 +56,8 @@
     
     // 2.创建工具条
     [self createToolbar];
+    
+    [self createActionSheet];
 }
 
 - (void)show
@@ -75,9 +81,21 @@
     _toolbar.frame = CGRectMake(0, barY, self.view.frame.size.width, barHeight);
     _toolbar.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     _toolbar.photos = _photos;
+    _toolbar.delegate = self;
     [self.view addSubview:_toolbar];
     
     [self updateTollbarState];
+}
+
+- (void)createActionSheet
+{
+    _actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                               delegate:self
+                                      cancelButtonTitle:@"取消"
+                                 destructiveButtonTitle:nil
+                                      otherButtonTitles:@"保存到相册", nil];
+    _actionSheet.actionSheetStyle = UIBarStyleBlackTranslucent;
+    
 }
 
 #pragma mark 创建UIScrollView
@@ -152,6 +170,37 @@
 {
     _toolbar.currentPhotoIndex = _currentPhotoIndex;
 }
+
+- (void)showActionMenu
+{
+    [_actionSheet showInView:self.view];
+}
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //存入相册
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            MJPhoto *photo = _photos[_currentPhotoIndex];
+            UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
+        });
+    }else if (buttonIndex == 1) {
+        //取消按钮
+    }    
+}
+
+- (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
+{
+    if (error) {
+        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
+    } else {
+        MJPhoto *photo = _photos[_currentPhotoIndex];
+        photo.save = YES;
+        [_toolbar setMenuButtonStatus:NO];
+        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+    }
+}
+
 
 #pragma mark 显示照片
 - (void)showPhotos

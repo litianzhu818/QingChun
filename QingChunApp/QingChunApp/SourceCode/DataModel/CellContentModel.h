@@ -11,8 +11,8 @@
 @interface CellContentModel : NSObject
 
 @property (strong, nonatomic) NSString *ID;
-@property (strong, nonatomic) NSString *time;
 @property (strong, nonatomic) NSString *text;
+@property (strong, nonatomic, readonly) NSString *time;
 
 + (id)cellContentModelWithID:(NSString *)ID time:(NSString *)time text:(NSString *)text;
 

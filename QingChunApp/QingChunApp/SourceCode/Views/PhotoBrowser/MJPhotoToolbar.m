@@ -48,7 +48,7 @@
     // 保存图片按钮
     CGFloat btnWidth = 44;
     _saveImageBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    _saveImageBtn.frame = CGRectMake(20, 50, btnWidth, btnWidth);
+    _saveImageBtn.frame = CGRectMake(self.frame.size.width - btnWidth - 20, 50, btnWidth, btnWidth);
     _saveImageBtn.autoresizingMask = UIViewAutoresizingFlexibleHeight;
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon.png"] forState:UIControlStateNormal];
     [_saveImageBtn setImage:[UIImage imageNamed:@"MJPhotoBrowser.bundle/save_icon_highlighted.png"] forState:UIControlStateHighlighted];
@@ -67,12 +67,17 @@
 
 - (void)saveImage
 {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(showActionMenu)]) {
+        [self.delegate showActionMenu];
+    }
+    /*
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         MJPhoto *photo = _photos[_currentPhotoIndex];
         UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
     });
+     */
 }
-
+/*
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
@@ -84,13 +89,19 @@
         [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
     }
 }
+ */
+
+- (void)setMenuButtonStatus:(BOOL)avlible
+{
+    _saveImageBtn.enabled = avlible;
+}
 
 - (void)setCurrentPhotoIndex:(NSUInteger)currentPhotoIndex
 {
     _currentPhotoIndex = currentPhotoIndex;
     
     // 更新页码
-    _indexLabel.text = [NSString stringWithFormat:@"%lu / %lu", _currentPhotoIndex + 1, (unsigned long)_photos.count];
+    _indexLabel.text = [NSString stringWithFormat:@"%u / %lu", _currentPhotoIndex + 1, (unsigned long)_photos.count];
     
     MJPhoto *photo = _photos[_currentPhotoIndex];
     [_textView setText:photo.photoDescription];

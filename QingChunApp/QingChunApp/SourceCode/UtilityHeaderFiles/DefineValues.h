@@ -43,6 +43,8 @@
     #define MESSAGE_IMAGE_QUALIRT_MIDDLE                USER_HEADER_IMAGE_QUALIRT_LOW
     #define MESSAGE_IMAGE_QUALIRT_DEFAULT               MESSAGE_IMAGE_QUALIRT_MIDDLE
     #define MESSAGE_IMAGE_QUALIRT_LOW                   @"small/"
+
+    //#define NSDateTimeAgoLocalizedStrings
     /*************************************User info***************************************/
     //get the left top origin's x,y of a view
     #define VIEW_TX(view) (view.frame.origin.x)

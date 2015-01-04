@@ -113,6 +113,10 @@
             [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 photo.image = image;
                 
+                if ([self.photoViewDelegate respondsToSelector:@selector(photoViewImageFinishLoad:)]) {
+                    [self.photoViewDelegate photoViewImageFinishLoad:self];
+                }
+                
                 // 调整frame参数
                 [photoView adjustFrame];
             }];
@@ -223,8 +227,6 @@
         _imageView.alpha = 0;
         _imageView.image = [_photo.srcImageView.image copy];
         _photo.srcImageView.image = nil;
-        
-        NSLog(@"%@####%@====>%@",NSStringFromCGRect(_imageView.frame),NSStringFromCGRect(_photo.srcImageView.frame),NSStringFromCGRect(imageFrame));
         
         [UIView animateWithDuration:0.30 animations:^{
             _imageView.frame = imageFrame;

@@ -13,6 +13,7 @@
 @class MJPhoto;
 
 @interface MJPhotoLoadingView : UIView
+
 @property (nonatomic) float progress;
 
 - (void)showLoading;
