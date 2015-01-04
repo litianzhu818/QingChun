@@ -106,7 +106,7 @@
     _needLayoutSubviews = NO;
     
     [self addSubview:singleImageView];
-    
+    //NSLog(@"#####%@",NSStringFromCGRect(singleImageView.bounds));
     MJPhoto *photo = ({
         MJPhoto *photo = [[MJPhoto alloc] init];
         // 来源于哪个UIImageView

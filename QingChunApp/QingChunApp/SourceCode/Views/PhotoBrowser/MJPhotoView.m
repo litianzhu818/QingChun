@@ -199,9 +199,10 @@
 	self.zoomScale = minScale;
     
     CGRect imageFrame = CGRectMake(0, 0, boundsWidth, imageHeight * boundsWidth / imageWidth);
+    
     // 内容尺寸
     self.contentSize = CGSizeMake(0, imageFrame.size.height);
-    
+
     // y值
     if (imageFrame.size.height < boundsHeight) {
         imageFrame.origin.y = floorf((boundsHeight - imageFrame.size.height) / 2.0);
@@ -212,13 +213,26 @@
     if (_photo.firstShow) { // 第一次显示的图片
         _photo.firstShow = NO; // 已经显示过了
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
+       
+        /*//透明动画
+        _imageView.frame = imageFrame;
+        _imageView.alpha = 0;
+         */
+        
+        //采取透明动画+位置动画，效果更加
+        _imageView.alpha = 0;
+        _imageView.image = [_photo.srcImageView.image copy];
+        _photo.srcImageView.image = nil;
+        
         NSLog(@"%@####%@====>%@",NSStringFromCGRect(_imageView.frame),NSStringFromCGRect(_photo.srcImageView.frame),NSStringFromCGRect(imageFrame));
-        [UIView animateWithDuration:10.25 animations:^{
+        
+        [UIView animateWithDuration:0.30 animations:^{
             _imageView.frame = imageFrame;
+            _imageView.alpha = 1.0;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
             //_photo.srcImageView.image = _photo.placeholder;
-            _imageView.image = _photo.srcImageView.image;
+            _photo.srcImageView.image = _imageView.image;
             [self photoStartLoad];
         }];
     } else {
