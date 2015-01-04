@@ -8,7 +8,6 @@
 
 #import "QCBTableViewController.h"
 #import "EGORefreshTableHeaderView.h"
-#import "InfoTableViewCell.h"
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
 

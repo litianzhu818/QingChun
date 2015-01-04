@@ -107,8 +107,6 @@
 		E7AE66F819FA083C008546EA /* MainHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66F719FA083C008546EA /* MainHeaderView.m */; };
 		E7AE66FB19FA090C008546EA /* MainHeaderViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66FA19FA090C008546EA /* MainHeaderViewItem.m */; };
 		E7AE66FE19FA0B04008546EA /* MainHeaderViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE66FD19FA0B04008546EA /* MainHeaderViewCell.m */; };
-		E7AE673E19FE1D21008546EA /* InfoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AE673C19FE1D21008546EA /* InfoTableViewCell.m */; };
-		E7AE673F19FE1D21008546EA /* InfoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AE673D19FE1D21008546EA /* InfoTableViewCell.xib */; };
 		E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF3D0C1A0B9EFE0073116D /* NAMenuItem.m */; };
 		E7AF3D151A0B9EFE0073116D /* NAMenuItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AF3D0E1A0B9EFE0073116D /* NAMenuItemView.m */; };
 		E7AF3D161A0B9EFE0073116D /* NAMenuItemView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7AF3D0F1A0B9EFE0073116D /* NAMenuItemView.xib */; };
@@ -387,9 +385,6 @@
 		E7AE66FA19FA090C008546EA /* MainHeaderViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHeaderViewItem.m; sourceTree = "<group>"; };
 		E7AE66FC19FA0B04008546EA /* MainHeaderViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHeaderViewCell.h; sourceTree = "<group>"; };
 		E7AE66FD19FA0B04008546EA /* MainHeaderViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHeaderViewCell.m; sourceTree = "<group>"; };
-		E7AE673B19FE1D21008546EA /* InfoTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoTableViewCell.h; sourceTree = "<group>"; };
-		E7AE673C19FE1D21008546EA /* InfoTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoTableViewCell.m; sourceTree = "<group>"; };
-		E7AE673D19FE1D21008546EA /* InfoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoTableViewCell.xib; sourceTree = "<group>"; };
 		E7AF3D0B1A0B9EFE0073116D /* NAMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuItem.h; sourceTree = "<group>"; };
 		E7AF3D0C1A0B9EFE0073116D /* NAMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NAMenuItem.m; sourceTree = "<group>"; };
 		E7AF3D0D1A0B9EFE0073116D /* NAMenuItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NAMenuItemView.h; sourceTree = "<group>"; };
@@ -1167,9 +1162,6 @@
 			children = (
 				E7DD1C3F1A412F8D00FAA24A /* CellImageView.h */,
 				E7DD1C401A412F8D00FAA24A /* CellImageView.m */,
-				E7AE673B19FE1D21008546EA /* InfoTableViewCell.h */,
-				E7AE673C19FE1D21008546EA /* InfoTableViewCell.m */,
-				E7AE673D19FE1D21008546EA /* InfoTableViewCell.xib */,
 				E7DD1C451A41333400FAA24A /* BaseCellHeaderView.h */,
 				E7DD1C461A41333400FAA24A /* BaseCellHeaderView.m */,
 				E7DD1C4B1A418E6E00FAA24A /* BaseCellImageView.h */,
@@ -1661,7 +1653,6 @@
 				E7AF3D161A0B9EFE0073116D /* NAMenuItemView.xib in Resources */,
 				E79FB2E419FB79EC00FBC703 /* fabiao_selected@2x.png in Resources */,
 				E7FC67A61A3D2DDF00AF45A6 /* qingchunbell_normal@2x.png in Resources */,
-				E7AE673F19FE1D21008546EA /* InfoTableViewCell.xib in Resources */,
 				E7063F8A19E67A6A00CC3CE0 /* Main.storyboard in Resources */,
 				E712AA5A1A0BD44F000648C4 /* QQ_nor@2x.png in Resources */,
 				E7DD1C541A4194ED00FAA24A /* timeline_image_gif@2x.png in Resources */,
@@ -1833,7 +1824,6 @@
 				E7B8B3351A51A3AF0015CE40 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				E725A2951A07CDA900FCE03D /* UIImage+MultiFormat.m in Sources */,
 				E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */,
-				E7AE673E19FE1D21008546EA /* InfoTableViewCell.m in Sources */,
 				E7B6EA6A1A5030B0009CF7D1 /* CellDisplayModel.m in Sources */,
 				E725A28B1A07CDA900FCE03D /* NSData+ImageContentType.m in Sources */,
 				E7FC67CD1A45688600AF45A6 /* UIBarButtonItem+SA.m in Sources */,

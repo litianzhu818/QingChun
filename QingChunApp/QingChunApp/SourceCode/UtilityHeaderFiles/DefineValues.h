@@ -31,6 +31,7 @@
     #define MAIN_GCD(block) dispatch_async(dispatch_get_main_queue(),block)
 
     #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
     /*************************************System info***************************************/
     //用户头像质量对应的路径
     #define USER_HEADER_IMAGE_QUALIRT_HEIGHT            @"bigs/"

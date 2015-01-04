@@ -13,7 +13,7 @@
 #import "MJPhoto.h"
 
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
-#define MULTIPLE_IMAGE_WIDTH ((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3)
+#define MULTIPLE_IMAGE_WIDTH 80.0f//((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3)
 #define SINGLE_IMAGE_WIDTH 200.0f
 
 @interface CellImageView ()<BaseCellImageViewDelegate>
@@ -83,6 +83,8 @@
     }
     
     BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
+    singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+    singleImageView.clipsToBounds = YES;
     singleImageView.contentMode = UIViewContentModeScaleToFill;
     singleImageView.userInteractionEnabled = YES;
     singleImageView.delegate = self;
@@ -141,7 +143,7 @@
     for (NSUInteger index = 1; index <= row; ++index) {
         
         originX = 0.0f;
-        originY += (index - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
+        originY = (index - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
         
         for (NSInteger item = 1; item <= column; ++item) {
             //到目前的视图，总共的视图数量
@@ -149,11 +151,14 @@
             //如果目前视图数量大于总数了，那么需要停止布局
             if (sumOfViews > numOfImages) break;
             
-            originX += (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
+            originX = (item - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
             
             CellDisplayImageModel *tempCellDisplayImageModel = [_cellDisplayImageModels objectAtIndex:sumOfViews - 1];
             
             BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:tempCellDisplayImageModel.urlStr];
+            singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+            // 内容模式
+            singleImageView.clipsToBounds = YES;
             singleImageView.contentMode = UIViewContentModeScaleAspectFill;
             singleImageView.userInteractionEnabled = YES;
             singleImageView.delegate = self;
@@ -164,7 +169,7 @@
             MJPhoto *photo = [[MJPhoto alloc] init];
             // 来源于哪个UIImageView
             photo.srcImageView = singleImageView;
-            NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
+            NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
             // 图片路径
             photo.url = [NSURL URLWithString:url];
             [_images addObject:photo];
@@ -195,6 +200,11 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    [self.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        UIView *tempView = obj;
+        [tempView removeFromSuperview];
+    }];
     
     [_images removeAllObjects];
     
