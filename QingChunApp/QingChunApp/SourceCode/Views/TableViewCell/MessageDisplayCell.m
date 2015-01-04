@@ -75,7 +75,7 @@
     
     //图片视图
     _cellImageView = ({
-        CellImageView *cellImageView = [[CellImageView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView), VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, 10)];
+        CellImageView *cellImageView = [[CellImageView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellHeaderView), VIEW_W(self.contentView)-2*DAFAULT_MARGIN_WIDTH, 100)];
         cellImageView.delegate = self;
         cellImageView.userInteractionEnabled = YES;
         [self.contentView addSubview:cellImageView];

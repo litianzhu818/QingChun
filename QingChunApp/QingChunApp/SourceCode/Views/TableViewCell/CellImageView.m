@@ -13,11 +13,12 @@
 #import "MJPhoto.h"
 
 #define MULTIPLE_IMAGE_INTERVAL 5.0f
-#define MULTIPLE_IMAGE_WIDTH 80.0f//((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3)
+#define MULTIPLE_IMAGE_WIDTH ((bound.size.width - 2*MULTIPLE_IMAGE_INTERVAL - 20)/3) //80.0f
 #define SINGLE_IMAGE_WIDTH 200.0f
 
 @interface CellImageView ()<BaseCellImageViewDelegate>
 {
+    BOOL                _needLayoutSubviews;//是否调用- (void)layoutSubviews的标志，默认不调用，只有重新赋值时才使用
     NSArray             *_cellDisplayImageModels;
     NSMutableArray      *_images;
 }
@@ -54,6 +55,7 @@
 {
     self.backgroundColor = [UIColor clearColor];
     _images = [ NSMutableArray array];
+    _needLayoutSubviews = NO;
 }
 
 - (void)initUI
@@ -67,6 +69,10 @@
 
 - (void)setupSinglePictureView
 {
+    if ([_images count] >= 1) {
+        return;
+    }
+    
     CGFloat imageWith = 0.0f;
     CGFloat imageHeight = 0.0f;
     
@@ -82,24 +88,37 @@
         imageWith = imageHeight*_aspectRatio;
     }
     
-    BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
-    singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
-    singleImageView.clipsToBounds = YES;
-    singleImageView.contentMode = UIViewContentModeScaleToFill;
-    singleImageView.userInteractionEnabled = YES;
-    singleImageView.delegate = self;
-    singleImageView.tag = 0;
+    BaseCellImageView *singleImageView = ({
+    
+        BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
+        
+        singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+        singleImageView.clipsToBounds = YES;
+        singleImageView.contentMode = UIViewContentModeScaleToFill;
+        singleImageView.userInteractionEnabled = YES;
+        singleImageView.delegate = self;
+        singleImageView.tag = 0;
+        
+        singleImageView;
+    });
+    
+    //这时要将标志设置为NO，防止addSubview时调用了layoutSubviews方法，重复布局一遍
+    _needLayoutSubviews = NO;
     
     [self addSubview:singleImageView];
     
-    MJPhoto *photo = [[MJPhoto alloc] init];
+    MJPhoto *photo = ({
+        MJPhoto *photo = [[MJPhoto alloc] init];
+        // 来源于哪个UIImageView
+        photo.srcImageView = singleImageView;
+        
+        NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
+        // 图片路径
+        photo.url = [NSURL URLWithString:url];
+        
+        photo;
+    });
     
-    // 来源于哪个UIImageView
-    photo.srcImageView = singleImageView;
-    
-    NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
-    // 图片路径
-    photo.url = [NSURL URLWithString:url];
     [_images addObject:photo];
 }
 
@@ -137,6 +156,10 @@
         imageHeight = 3 * MULTIPLE_IMAGE_WIDTH + 2 * MULTIPLE_IMAGE_INTERVAL;
     }
     
+    //这时_cellDisplayImageModels，已经有新的值了，需要锁定，防止添加子视图引起的layoutSubviews
+    //这时要将标志设置为NO，防止addSubview时调用了layoutSubviews方法，重复布局一遍
+    _needLayoutSubviews = NO;
+    
     //这里的布局是：|-0-image-margin-image-margin-image-0|
     CGFloat originX = 0.0f;
     CGFloat originY = 0.0f;
@@ -155,23 +178,30 @@
             
             CellDisplayImageModel *tempCellDisplayImageModel = [_cellDisplayImageModels objectAtIndex:sumOfViews - 1];
             
-            BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:tempCellDisplayImageModel.urlStr];
-            singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
-            // 内容模式
-            singleImageView.clipsToBounds = YES;
-            singleImageView.contentMode = UIViewContentModeScaleAspectFill;
-            singleImageView.userInteractionEnabled = YES;
-            singleImageView.delegate = self;
-            singleImageView.tag = sumOfViews - 1;
+            BaseCellImageView *singleImageView = ({
+                BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(originX, originY, MULTIPLE_IMAGE_WIDTH, MULTIPLE_IMAGE_WIDTH) delegate:self imageUrl:tempCellDisplayImageModel.urlStr];
+                singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
+                // 内容模式
+                singleImageView.clipsToBounds = YES;
+                singleImageView.contentMode = UIViewContentModeScaleAspectFill;
+                singleImageView.userInteractionEnabled = YES;
+                singleImageView.delegate = self;
+                singleImageView.tag = sumOfViews - 1;
+                singleImageView;
+            });
             
             [self addSubview:singleImageView];
             
-            MJPhoto *photo = [[MJPhoto alloc] init];
-            // 来源于哪个UIImageView
-            photo.srcImageView = singleImageView;
-            NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
-            // 图片路径
-            photo.url = [NSURL URLWithString:url];
+            MJPhoto *photo = ({
+                MJPhoto *photo = [[MJPhoto alloc] init];
+                // 来源于哪个UIImageView
+                photo.srcImageView = singleImageView;
+                NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
+                // 图片路径
+                photo.url = [NSURL URLWithString:url];
+                photo;
+            });
+        
             [_images addObject:photo];
         }
     }
@@ -194,12 +224,19 @@
         return;
     }
     _cellDisplayImageModels = cellDisplayImageModels;
+    _needLayoutSubviews = YES;
     [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    
+    //_needLayoutSubviews只有在赋值_cellDisplayImageModels时，才为YES,这时的变动布局是外部变动的
+    //_needLayoutSubviews = NO时，说明变动布局是增加子视图引起的，例如addSubView方法
+    if (!_needLayoutSubviews) {
+        return;
+    }
     
     [self.subviews enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         UIView *tempView = obj;
