@@ -59,6 +59,7 @@
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
 		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
+		E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C271A412F7200FAA24A /* MJPhotoBrowser.bundle */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
 		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
 		E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E908519F743B1000F2CE9 /* BaseViewController.m */; };
@@ -1738,6 +1739,7 @@
 				E725A2971A07CDA900FCE03D /* UIImageView+HighlightedWebCache.m in Sources */,
 				E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */,
 				E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */,
+				E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */,
 				E7DD1C431A412F8D00FAA24A /* CellImageView.m in Sources */,
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,

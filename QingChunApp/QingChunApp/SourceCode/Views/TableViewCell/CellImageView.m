@@ -111,8 +111,8 @@
         MJPhoto *photo = [[MJPhoto alloc] init];
         // 来源于哪个UIImageView
         photo.srcImageView = singleImageView;
-        
-        NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
+        //photo.originalUrl = [NSURL URLWithString:[cellDisplayImageModel urlStr]];
+        NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
         // 图片路径
         photo.url = [NSURL URLWithString:url];
         
@@ -196,7 +196,8 @@
                 MJPhoto *photo = [[MJPhoto alloc] init];
                 // 来源于哪个UIImageView
                 photo.srcImageView = singleImageView;
-                NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
+                //photo.originalUrl = [NSURL URLWithString:[tempCellDisplayImageModel urlStr]];
+                NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
                 // 图片路径
                 photo.url = [NSURL URLWithString:url];
                 photo;

@@ -15,6 +15,7 @@
 @interface MJPhotoView ()
 {
     BOOL _doubleTap;
+    BOOL _hasProgressView;
     BOOL _disableLayoutSubviews;
     
     UIImageView *_imageView;
@@ -35,6 +36,7 @@
         
         // 进度条
         _photoLoadingView = [[MJPhotoLoadingView alloc] init];
+        _hasProgressView = NO;
 		
 		// 属性
 		self.backgroundColor = [UIColor clearColor];
@@ -102,7 +104,7 @@
 {
     if (_photo.firstShow) { // 首次显示
         _imageView.image = _photo.placeholder; // 占位图片
-        _photo.srcImageView.image = nil;
+        //_photo.srcImageView.image = nil;
         
         // 不是gif，就马上开始下载
         if (![_photo.url.absoluteString hasSuffix:@"gif"]) {
@@ -134,11 +136,12 @@
         // 直接显示进度条
         [_photoLoadingView showLoading];
         [self addSubview:_photoLoadingView];
+        _hasProgressView = YES;
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
         [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
-            if (receivedSize > kMinProgress && loading) {
+            if (_hasProgressView && receivedSize > kMinProgress) {
                 loading.progress = (float)receivedSize/expectedSize;
             }
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
@@ -162,6 +165,8 @@
         [self addSubview:_photoLoadingView];
         [_photoLoadingView showFailure];
     }
+    
+    _hasProgressView = NO;
     
     // 设置缩放比例
     [self adjustFrame];
@@ -212,7 +217,8 @@
             _imageView.frame = imageFrame;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
-            _photo.srcImageView.image = _photo.placeholder;
+            //_photo.srcImageView.image = _photo.placeholder;
+            _imageView.image = _photo.placeholder;
             [self photoStartLoad];
         }];
     } else {
@@ -250,8 +256,10 @@
     [_photoLoadingView removeFromSuperview];
     self.contentOffset = CGPointZero;
     
+    _hasProgressView = NO;
+    
     // 清空底部的小图
-    _photo.srcImageView.image = nil;
+    //_photo.srcImageView.image = nil;
     
     //原始代码
     CGFloat duration = 0.15;
