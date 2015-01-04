@@ -8,7 +8,7 @@
 #import "MJPhotoView.h"
 #import "MJPhoto.h"
 #import "MJPhotoLoadingView.h"
-#import "UIImageView+WebCache.h"
+#import "UIImageView+MJWebCache.h"
 #import <QuartzCore/QuartzCore.h>
 #import "SDImageCache.h"
 
@@ -92,6 +92,7 @@
         _imageView.frame = frameToCenter;
     }
 }
+ 
 #pragma mark - photoSetter
 - (void)setPhoto:(MJPhoto *)photo {
     _photo = photo;
@@ -103,8 +104,7 @@
 - (void)showImage
 {
     if (_photo.firstShow) { // 首次显示
-        _imageView.image = _photo.placeholder; // 占位图片
-        //_photo.srcImageView.image = nil;
+        _imageView.image = [_photo.srcImageView.image copy]; // 占位图片
         
         // 不是gif，就马上开始下载
         if (![_photo.url.absoluteString hasSuffix:@"gif"]) {
@@ -130,7 +130,7 @@
 {
     if (_photo.image) {
         self.scrollEnabled = YES;
-        _imageView.image = _photo.image;
+        _imageView.image = _photo.srcImageView.image;
     } else {
         self.scrollEnabled = NO;
         // 直接显示进度条
@@ -212,13 +212,13 @@
     if (_photo.firstShow) { // 第一次显示的图片
         _photo.firstShow = NO; // 已经显示过了
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
-        
-        [UIView animateWithDuration:0.3 animations:^{
+        NSLog(@"%@####%@====>%@",NSStringFromCGRect(_imageView.frame),NSStringFromCGRect(_photo.srcImageView.frame),NSStringFromCGRect(imageFrame));
+        [UIView animateWithDuration:10.25 animations:^{
             _imageView.frame = imageFrame;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
-            _photo.srcImageView.image = _photo.placeholder;
-            _imageView.image = _photo.placeholder;
+            //_photo.srcImageView.image = _photo.placeholder;
+            _imageView.image = _photo.srcImageView.image;
             [self photoStartLoad];
         }];
     } else {
@@ -259,7 +259,8 @@
     _hasProgressView = NO;
     
     // 清空底部的小图
-    _photo.srcImageView.image = nil;
+    UIImage *tempImage = [_photo.srcImageView.image copy];
+    //_photo.srcImageView.image = nil;
     
     //原始代码
     CGFloat duration = 0.15;
@@ -285,11 +286,10 @@
         /*//原始代码
         _photo.srcImageView.image = _photo.placeholder;
          */
-        //_photo.srcImageView.image = _photo.image;
-        _photo.srcImageView.image = _photo.placeholder;
         
         //改动之处 2013-01-03
-        //[_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:[UIImage imageNamed:@"timeline_image_loading"] options:SDWebImageRetryFailed | SDWebImageLowPriority];
+        [_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
+        //[_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
@@ -300,7 +300,9 @@
 
 - (void)reset
 {
-    _imageView.image = _photo.capture;
+    /*//这里会导致动画过程中_imageView是空白的
+    _imageView.image = _photo.srcImageView.image;
+     */
     _imageView.contentMode = UIViewContentModeScaleToFill;
 }
 
