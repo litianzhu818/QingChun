@@ -16,7 +16,7 @@
 {
     BOOL _doubleTap;
     BOOL _hasProgressView;
-    BOOL _disableLayoutSubviews;
+    BOOL _canAdjustFrame;//是否能执行adjustFrame方法的标志，条件不成熟时不能执行
     
     UIImageView *_imageView;
     MJPhotoLoadingView *_photoLoadingView;
@@ -55,56 +55,31 @@
         UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
         doubleTap.numberOfTapsRequired = 2;
         [self addGestureRecognizer:doubleTap];
+        
+        [singleTap requireGestureRecognizerToFail:doubleTap];
     }
     return self;
 }
 
-- (void)layoutSubviews
-{
-    // Super
-    [super layoutSubviews];
-    
-    //disableLayoutSubvies 自己添加一个属性，用来控制是否对图片进行调整
-    if (_disableLayoutSubviews) {
-        return;
-    }
-    
-    // Center the image as it becomes smaller than the size of the screen
-    CGSize boundsSize = self.bounds.size;
-    CGRect frameToCenter = _imageView.frame;
-    
-    // Horizontally
-    if (frameToCenter.size.width < boundsSize.width) {
-        frameToCenter.origin.x = floorf((boundsSize.width - frameToCenter.size.width) / 2.0);
-    } else {
-        frameToCenter.origin.x = 0;
-    }
-    
-    // Vertically
-    if (frameToCenter.size.height < boundsSize.height) {
-        frameToCenter.origin.y = floorf((boundsSize.height - frameToCenter.size.height) / 2.0);
-    } else {
-        frameToCenter.origin.y = 0;
-    }
-    
-    // Center
-    if (!CGRectEqualToRect(_imageView.frame, frameToCenter)) {
-        _imageView.frame = frameToCenter;
-    }
-}
- 
+
 #pragma mark - photoSetter
 - (void)setPhoto:(MJPhoto *)photo {
+    
     _photo = photo;
     
+    _canAdjustFrame = NO;//默认的不满足条件不能执行adjustFrame方法
+    
     [self showImage];
+    
 }
 
 #pragma mark 显示图片
 - (void)showImage
 {
     if (_photo.firstShow) { // 首次显示
-        _imageView.image = [_photo.srcImageView.image copy]; // 占位图片
+        
+        //_imageView.image = [_photo.srcImageView.image copy]; // 占位图片
+        _imageView.image = _photo.placeholder; // 占位图片
         
         // 不是gif，就马上开始下载
         if (![_photo.url.absoluteString.lowercaseString hasSuffix:@".gif"]) {
@@ -117,15 +92,21 @@
                     [self.photoViewDelegate photoViewImageFinishLoad:self];
                 }
                 
+                //设置是否能执行adjustFrame
+                _canAdjustFrame = YES;
+                
                 // 调整frame参数
                 [photoView adjustFrame];
             }];
         }
     } else {
         [self photoStartLoad];
+        
+        //设置是否能执行adjustFrame
+        _canAdjustFrame = YES;
     }
-
-    // 调整frame参数
+    
+    // 设置缩放比例
     [self adjustFrame];
 }
 
@@ -134,7 +115,7 @@
 {
     if (_photo.image) {
         self.scrollEnabled = YES;
-        _imageView.image = _photo.srcImageView.image;
+        _imageView.image = _photo.image;
     } else {
         self.scrollEnabled = NO;
         // 直接显示进度条
@@ -180,6 +161,9 @@
 {
 	if (_imageView.image == nil) return;
     
+    //如果不能执行adjustFrame，说明应该执行时间和条件还未到
+    if (!_canAdjustFrame) return;
+        
     // 基本尺寸参数
     CGSize boundsSize = self.bounds.size;
     CGFloat boundsWidth = boundsSize.width;
@@ -218,22 +202,16 @@
         _photo.firstShow = NO; // 已经显示过了
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
        
-        /*//透明动画
-        _imageView.frame = imageFrame;
-        _imageView.alpha = 0;
-         */
-        
         //采取透明动画+位置动画，效果更加
-        _imageView.alpha = 0;
-        _imageView.image = [_photo.srcImageView.image copy];
-        _photo.srcImageView.image = nil;
+        //_imageView.alpha = 0;
+        //_imageView.image = [_photo.srcImageView.image copy];
+        //_photo.srcImageView.image = nil;
         
         [UIView animateWithDuration:0.30 animations:^{
             _imageView.frame = imageFrame;
-            _imageView.alpha = 1.0;
+            //_imageView.alpha = 1.0;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
-            //_photo.srcImageView.image = _photo.placeholder;
             _photo.srcImageView.image = _imageView.image;
             [self photoStartLoad];
         }];
@@ -266,19 +244,19 @@
 - (void)hide
 {
     if (_doubleTap) return;
-    _disableLayoutSubviews = YES;
     
     // 移除进度条
     [_photoLoadingView removeFromSuperview];
     self.contentOffset = CGPointZero;
     
     _hasProgressView = NO;
+    _canAdjustFrame = NO;
     
     // 清空底部的小图
     UIImage *tempImage = [_photo.srcImageView.image copy];
     //_photo.srcImageView.image = nil;
     
-    //原始代码
+    
     CGFloat duration = 0.15;
     if (_photo.srcImageView.clipsToBounds) {
         [self performSelector:@selector(reset) withObject:nil afterDelay:duration];
@@ -298,27 +276,21 @@
         }
     } completion:^(BOOL finished) {
         // 设置底部的小图片
-#warning 这里有一个bug就是返回后，srcImageView显示的是最原始的placeholder
-        /*//原始代码
-        _photo.srcImageView.image = _photo.placeholder;
-         */
         
         //改动之处 2013-01-03
-        [_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
-        //[_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
+        //[_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
+        [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
         if ([self.photoViewDelegate respondsToSelector:@selector(photoViewDidEndZoom:)]) {
             [self.photoViewDelegate photoViewDidEndZoom:self];
         }
+
     }];
 }
 
 - (void)reset
 {
-    /*//这里会导致动画过程中_imageView是空白的
-    _imageView.image = _photo.srcImageView.image;
-     */
     _imageView.contentMode = UIViewContentModeScaleToFill;
 }
 

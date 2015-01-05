@@ -60,6 +60,7 @@
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
 		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
 		E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C271A412F7200FAA24A /* MJPhotoBrowser.bundle */; };
+		E75763AB1A5AAEE000A8E077 /* LTZButtonActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
 		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
 		E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E908519F743B1000F2CE9 /* BaseViewController.m */; };
@@ -318,6 +319,8 @@
 		E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QingChunAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7419F0619E675DA00B5B764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7419F0719E675DA00B5B764 /* QingChunAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QingChunAppTests.m; sourceTree = "<group>"; };
+		E75763A91A5AAEE000A8E077 /* LTZButtonActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTZButtonActionView.h; sourceTree = "<group>"; };
+		E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTZButtonActionView.m; sourceTree = "<group>"; };
 		E75E907619F74389000F2CE9 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		E75E907719F74389000F2CE9 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		E75E907A19F7438F000F2CE9 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
@@ -649,6 +652,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E75763A81A5AAEA900A8E077 /* ButtonActionView */,
 				E7FC67BE1A45646500AF45A6 /* RefreshTableHeaderView */,
 				E7B73B261A4055970060CA94 /* PhotoBrowser */,
 				E7FC67AE1A3D59EE00AF45A6 /* OfsetUIBarButtonItem */,
@@ -908,6 +912,15 @@
 				E7419F0619E675DA00B5B764 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E75763A81A5AAEA900A8E077 /* ButtonActionView */ = {
+			isa = PBXGroup;
+			children = (
+				E75763A91A5AAEE000A8E077 /* LTZButtonActionView.h */,
+				E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */,
+			);
+			path = ButtonActionView;
 			sourceTree = "<group>";
 		};
 		E75E907519F74389000F2CE9 /* BaseNavigationController */ = {
@@ -1859,6 +1872,7 @@
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
 				E7DD1C8B1A41AC3600FAA24A /* BaseCellButtonView.m in Sources */,
 				E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */,
+				E75763AB1A5AAEE000A8E077 /* LTZButtonActionView.m in Sources */,
 				E7AE66F819FA083C008546EA /* MainHeaderView.m in Sources */,
 				E7B8B3391A51A3AF0015CE40 /* UIProgressView+AFNetworking.m in Sources */,
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
