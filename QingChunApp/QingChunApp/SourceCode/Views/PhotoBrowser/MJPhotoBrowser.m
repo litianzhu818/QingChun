@@ -93,7 +93,7 @@
                                                delegate:self
                                       cancelButtonTitle:@"取消"
                                  destructiveButtonTitle:nil
-                                      otherButtonTitles:@"保存到相册", nil];
+                                      otherButtonTitles:@"保存到相册",@"浏览原图", nil];
     _actionSheet.actionSheetStyle = UIBarStyleBlackTranslucent;
     
 }
@@ -185,8 +185,18 @@
             UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         });
     }else if (buttonIndex == 1) {
+        
+        for (MJPhotoView *photoView in _visiblePhotoViews) {
+            if (kPhotoViewIndex(photoView) == _currentPhotoIndex) {
+                [photoView showBigImage];
+                break;
+            }
+        }
+        
+    }else if (buttonIndex == 2){
         //取消按钮
-    }    
+        
+    }
 }
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo

@@ -289,6 +289,30 @@
     }];
 }
 
+- (void)showBigImage
+{
+        self.scrollEnabled = NO;
+        // 直接显示进度条
+        [_photoLoadingView showLoading];
+        [self addSubview:_photoLoadingView];
+        _hasProgressView = YES;
+        
+        __unsafe_unretained MJPhotoView *photoView = self;
+        __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+        
+        NSURL *downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
+        
+        [_imageView sd_setImageWithURL:downloadURL placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
+            
+            if (_hasProgressView && receivedSize > kMinProgress) {
+                loading.progress = (float)receivedSize/expectedSize;
+            }
+            
+        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
+            [photoView photoDidFinishLoadWithImage:image];
+        }];
+}
+
 - (void)reset
 {
     _imageView.contentMode = UIViewContentModeScaleToFill;
