@@ -7,10 +7,9 @@
 //
 
 #import "QCBTableViewController.h"
-#import "EGORefreshTableHeaderView.h"
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
-
+#import "MJRefresh.h"
 #import "iCarousel.h"
 #import "HMSegmentedControl.h"
 
@@ -19,14 +18,8 @@
 #import "CellDisplayModel.h"
 
 
-@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,iCarouselDataSource, iCarouselDelegate>
+@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,iCarouselDataSource, iCarouselDelegate>
 {
-    EGORefreshTableHeaderView *_refreshHeaderView;
-    
-    //  Reloading var should really be your tableviews datasource
-    //  Putting it here for demo purposes
-    BOOL _reloading;
-
     iCarousel           *_icarousel;
     HMSegmentedControl  *_segmentControl;
     UITableView         *_hotTableView;
@@ -34,6 +27,12 @@
     NSUInteger _currentPage;
     NSMutableArray *_newMsgs;
     NSMutableArray *_hotMsgs;
+    
+    NSUInteger _currentTableViewIndex;
+    NSMutableArray *_tableViewFirstLoadingStatuss;
+    
+    NSMutableArray *_tableViewCurrentPages;
+    
 }
 
 - (void)reloadTableViewDataSource;
@@ -46,7 +45,7 @@
 
 - (void)dealloc
 {
-    _refreshHeaderView = nil;
+    
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -89,19 +88,6 @@
     self.title = @"青春吧";
     
     [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"send_msg" highLightedImageName:@"send_msg_highlighted" addTarget:self action:@selector(sendMessage:)]];
-    
-    if (_refreshHeaderView == nil) {
-        
-        EGORefreshTableHeaderView *refreshTableHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
-        refreshTableHeaderView.delegate = self;
-        //refreshTableHeaderView.backgroundColor = [UIColor redColor];
-        [self.view insertSubview:refreshTableHeaderView belowSubview:self.tableView];
-        _refreshHeaderView = refreshTableHeaderView;
-    
-    }
-    
-    //  update the last update date
-    [_refreshHeaderView refreshLastUpdatedDate];
     
     _segmentControl = ({
         // Segmented control with scrolling
@@ -148,7 +134,24 @@
 
 - (void)initTableView
 {
+    /*
+    // dateKey用于存储刷新时间，可以保证不同界面拥有不同的刷新时间
+    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing) dateKey:@"table"];
+#warning 自动刷新(一进入程序就下拉刷新)
+    [self.tableView headerBeginRefreshing];
     
+    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
+    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
+    
+    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
+    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
+    self.tableView.headerRefreshingText = @"MJ哥正在帮你刷新中,不客气";
+    
+    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
+    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
+    self.tableView.footerRefreshingText = @"MJ哥正在帮你加载中,不客气";
+    */
     _tableView = ({
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
@@ -157,6 +160,20 @@
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
+        
+        //添加上拉下拉操作
+        [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"QCB_tableview_refresh_time_tag"];
+        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBData)];
+        
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        tableView.headerPullToRefreshText = @"下拉刷新青春吧数据";
+        tableView.headerReleaseToRefreshText = @"松开立即刷新";
+        tableView.headerRefreshingText = @"刷新青春吧数据中...";
+        
+        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
+        tableView.footerReleaseToRefreshText = @"松开立即加载";
+        tableView.footerRefreshingText = @"数据加载中...";
+        
         tableView;
     });
     
@@ -168,6 +185,20 @@
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
+        
+        //添加上拉下拉操作
+        [tableView addHeaderWithTarget:self action:@selector(refreshQCBHotData) dateKey:@"QCB_hot_tableview_refresh_time_tag"];
+        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBHotData)];
+        
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        tableView.headerPullToRefreshText = @"下拉浏览最热的数据";
+        tableView.headerReleaseToRefreshText = @"松开立即获取数据";
+        tableView.headerRefreshingText = @"正在获取最热的数据...";
+        
+        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
+        tableView.footerReleaseToRefreshText = @"松开立即加载";
+        tableView.footerRefreshingText = @"数据加载中...";
+        
         tableView;
     });
 }
@@ -179,14 +210,79 @@
     [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
 }
 
+- (void)refreshQCBData
+{
+    __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
+    
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView headerEndRefreshing];
+        
+        if (!error) {
+            currentQCBDataPage += 1;
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_newMsgs insertObjects:data atIndexes:indexes];
+            [_tableView reloadData];
+            
+        }
+        
+    }];
+}
+
+- (void)loadingMoreQCBData
+{
+
+}
+
+- (void)refreshQCBHotData
+{
+    __block NSUInteger currentQCBDataPage = 0;
+    
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView headerEndRefreshing];
+        
+        if (!error) {
+            currentQCBDataPage += 1;
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+             
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_newMsgs insertObjects:data atIndexes:indexes];
+            
+            [_tableView reloadData];
+            
+        }
+        
+    }];
+
+}
+
+- (void)loadingMoreQCBHotData
+{
+    
+}
+
 
 -(void)initializationData
 {
     //Here initialization your data parameters
+    _currentTableViewIndex = 0;
     _currentPage = 30;//The default value
     _newMsgs = [NSMutableArray array];
     _hotMsgs = [NSMutableArray array];
-
+    
+    _tableViewFirstLoadingStatuss = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
+    _tableViewCurrentPages = [NSMutableArray arrayWithObjects:[NSNumber numberWithUnsignedInteger:0],[NSNumber numberWithUnsignedInteger:0], nil];
+    
+    
+    /*
     [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(_currentPage + 1)] block:^(id data, NSError *error) {
         
         if (!error) {
@@ -198,6 +294,7 @@
         }
     
      }];
+     */
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -205,73 +302,6 @@
 
 }
 
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
-
-- (void)reloadTableViewDataSource{
-    
-    //  should be calling your tableviews data source model to reload
-    //  put here just for demo
-    _reloading = YES;
-    
-}
-
-- (void)doneLoadingTableViewData{
-    
-    //  model should call this when its done loading
-    _reloading = NO;
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-}
-
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [_refreshHeaderView egoRefreshScrollViewWillBeginScroll:scrollView];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-    
-}
-
-
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
-{
-    
-    [self reloadTableViewDataSource];
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
-    
-}
-
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
-{
-    
-    return _reloading; // should return if data source model is reloading
-    
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
-{
-    
-    return [NSDate date]; // should return date data source was last changed
-    
-}
-
-//#pragma mark - iCarousel
 #pragma mark iCarouselDataSource methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
