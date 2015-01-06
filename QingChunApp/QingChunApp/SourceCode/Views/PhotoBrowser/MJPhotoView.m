@@ -16,8 +16,7 @@
 {
     BOOL _doubleTap;
     BOOL _hasProgressView;
-    BOOL _canAdjustFrame;//是否能执行adjustFrame方法的标志，条件不成熟时不能执行
-    
+
     UIImageView *_imageView;
     MJPhotoLoadingView *_photoLoadingView;
 }
@@ -31,7 +30,7 @@
         self.clipsToBounds = YES;
 		// 图片
 		_imageView = [[UIImageView alloc] init];
-		_imageView.contentMode = UIViewContentModeScaleAspectFit;
+        _imageView.contentMode = UIViewContentModeScaleAspectFit;
 		[self addSubview:_imageView];
         
         // 进度条
@@ -67,8 +66,6 @@
     
     _photo = photo;
     
-    _canAdjustFrame = NO;//默认的不满足条件不能执行adjustFrame方法
-    
     [self showImage];
     
 }
@@ -76,34 +73,28 @@
 #pragma mark 显示图片
 - (void)showImage
 {
+    // 占位图片
+    _imageView.image = _photo.srcImageView.image;
+    
     if (_photo.firstShow) { // 首次显示
         
-        //_imageView.image = [_photo.srcImageView.image copy]; // 占位图片
-        _imageView.image = _photo.placeholder; // 占位图片
-        
+        /*
         // 不是gif，就马上开始下载
         if (![_photo.url.absoluteString.lowercaseString hasSuffix:@".gif"]) {
             __unsafe_unretained MJPhotoView *photoView = self;
             __unsafe_unretained MJPhoto *photo = _photo;
-            [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                 photo.image = image;
-                
-                if ([self.photoViewDelegate respondsToSelector:@selector(photoViewImageFinishLoad:)]) {
-                    [self.photoViewDelegate photoViewImageFinishLoad:self];
-                }
-                
-                //设置是否能执行adjustFrame
-                _canAdjustFrame = YES;
-                
-                // 调整frame参数
+
+                // 设置缩放比例
                 [photoView adjustFrame];
             }];
         }
-    } else {
-        [self photoStartLoad];
+         */
         
-        //设置是否能执行adjustFrame
-        _canAdjustFrame = YES;
+    } else {
+        
+        [self photoStartLoad];
     }
     
     // 设置缩放比例
@@ -116,6 +107,8 @@
     if (_photo.image) {
         self.scrollEnabled = YES;
         _imageView.image = _photo.image;
+        [_photoLoadingView removeFromSuperview];
+    
     } else {
         self.scrollEnabled = NO;
         // 直接显示进度条
@@ -125,13 +118,25 @@
         
         __unsafe_unretained MJPhotoView *photoView = self;
         __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
-        [_imageView sd_setImageWithURL:_photo.url placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
+        
+        NSURL *downloadURL = nil;
+        
+        if ([_photo.url.absoluteString.lowercaseString hasSuffix:@".gif"]) {//如果是GIF图的话，需要替换链接（服务器局限原因）
+            downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
+        }else{
+            downloadURL = _photo.url;
+        }
+        
+        [_imageView sd_setImageWithURL:downloadURL placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
+            
             if (_hasProgressView && receivedSize > kMinProgress) {
                 loading.progress = (float)receivedSize/expectedSize;
             }
+            
         } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
             [photoView photoDidFinishLoadWithImage:image];
         }];
+    
     }
 }
 
@@ -161,9 +166,6 @@
 {
 	if (_imageView.image == nil) return;
     
-    //如果不能执行adjustFrame，说明应该执行时间和条件还未到
-    if (!_canAdjustFrame) return;
-        
     // 基本尺寸参数
     CGSize boundsSize = self.bounds.size;
     CGFloat boundsWidth = boundsSize.width;
@@ -204,18 +206,18 @@
        
         //采取透明动画+位置动画，效果更加
         //_imageView.alpha = 0;
-        //_imageView.image = [_photo.srcImageView.image copy];
-        //_photo.srcImageView.image = nil;
         
         [UIView animateWithDuration:0.30 animations:^{
             _imageView.frame = imageFrame;
             //_imageView.alpha = 1.0;
         } completion:^(BOOL finished) {
             // 设置底部的小图片
-            _photo.srcImageView.image = _imageView.image;
+            //_photo.srcImageView.image = _imageView.image;
+            
             [self photoStartLoad];
         }];
-    } else {
+    }
+    else {
         _imageView.frame = imageFrame;
     }
 }
@@ -250,11 +252,9 @@
     self.contentOffset = CGPointZero;
     
     _hasProgressView = NO;
-    _canAdjustFrame = NO;
     
     // 清空底部的小图
-    UIImage *tempImage = [_photo.srcImageView.image copy];
-    //_photo.srcImageView.image = nil;
+    UIImage *tempImage = _photo.srcImageView.image;
     
     
     CGFloat duration = 0.15;

@@ -93,7 +93,7 @@
         BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
         
         singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
-        singleImageView.clipsToBounds = YES;
+        //singleImageView.clipsToBounds = YES;
         singleImageView.contentMode = UIViewContentModeScaleToFill;
         singleImageView.userInteractionEnabled = YES;
         singleImageView.delegate = self;
@@ -106,16 +106,15 @@
     _needLayoutSubviews = NO;
     
     [self addSubview:singleImageView];
-    //NSLog(@"#####%@",NSStringFromCGRect(singleImageView.bounds));
+    
     MJPhoto *photo = ({
         MJPhoto *photo = [[MJPhoto alloc] init];
         // 来源于哪个UIImageView
         photo.srcImageView = singleImageView;
         photo.originalUrl = [NSURL URLWithString:[cellDisplayImageModel urlStr]];
-        NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
+        //NSString *url = [[cellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
         // 图片路径
-        photo.url = [NSURL URLWithString:url];
-        
+        photo.url = [NSURL URLWithString:[cellDisplayImageModel urlStr]];
         photo;
     });
     
@@ -197,9 +196,9 @@
                 // 来源于哪个UIImageView
                 photo.srcImageView = singleImageView;
                 photo.originalUrl = [NSURL URLWithString:[tempCellDisplayImageModel urlStr]];
-                NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT];
+                //NSString *url = [[tempCellDisplayImageModel urlStr] stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_LOW withString:MESSAGE_IMAGE_QUALIRT_DEFAULT];
                 // 图片路径
-                photo.url = [NSURL URLWithString:url];
+                photo.url = [NSURL URLWithString:[tempCellDisplayImageModel urlStr]];
                 photo;
             });
         

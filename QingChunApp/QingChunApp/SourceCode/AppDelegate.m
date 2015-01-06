@@ -173,9 +173,9 @@
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
     // 清除内存中的图片缓存
-    SDWebImageManager *sdWebImageManager = [SDWebImageManager sharedManager];
-    [sdWebImageManager cancelAll];
-    [sdWebImageManager.imageCache clearMemory];
+    //SDWebImageManager *sdWebImageManager = [SDWebImageManager sharedManager];
+    //[sdWebImageManager cancelAll];
+    //[sdWebImageManager.imageCache clearMemory];
 }
 
 /****************************************************初始化数据***********************************************************/

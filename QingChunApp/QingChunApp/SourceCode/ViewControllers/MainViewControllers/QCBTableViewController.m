@@ -183,7 +183,7 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
-    _currentPage = 0;//The default value
+    _currentPage = 20;//The default value
     _newMsgs = [NSMutableArray array];
     _hotMsgs = [NSMutableArray array];
 
