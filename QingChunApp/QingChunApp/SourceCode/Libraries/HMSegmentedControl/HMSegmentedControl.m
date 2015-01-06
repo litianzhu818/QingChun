@@ -884,7 +884,7 @@
         
         self.offsetPercent = delta;
         
-        if (delta >= 0.5) _selectedSegmentIndex += 1;
+        if (delta >= 0.5) [self notifyForSegmentChangeToIndex:++_selectedSegmentIndex];
         
     }else if (delta == 0.0){
         return;
@@ -894,7 +894,7 @@
         
         self.offsetPercent = delta;
         
-        if (delta <= -0.5) _selectedSegmentIndex -= 1;
+        if (delta <= -0.5) [self notifyForSegmentChangeToIndex:--_selectedSegmentIndex];
     }
     
     [self setNeedsDisplay];

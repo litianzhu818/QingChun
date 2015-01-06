@@ -35,9 +35,6 @@
     
 }
 
-- (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;
-
 @end
 
 @implementation QCBTableViewController
@@ -45,7 +42,10 @@
 
 - (void)dealloc
 {
-    
+    [_newMsgs removeAllObjects];
+    [_hotMsgs removeAllObjects];
+    [_tableViewFirstLoadingStatuss removeAllObjects];
+    [_tableViewCurrentPages removeAllObjects];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -134,24 +134,6 @@
 
 - (void)initTableView
 {
-    /*
-    // dateKey用于存储刷新时间，可以保证不同界面拥有不同的刷新时间
-    [self.tableView addHeaderWithTarget:self action:@selector(headerRereshing) dateKey:@"table"];
-#warning 自动刷新(一进入程序就下拉刷新)
-    [self.tableView headerBeginRefreshing];
-    
-    // 2.上拉加载更多(进入刷新状态就会调用self的footerRereshing)
-    [self.tableView addFooterWithTarget:self action:@selector(footerRereshing)];
-    
-    // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-    self.tableView.headerPullToRefreshText = @"下拉可以刷新了";
-    self.tableView.headerReleaseToRefreshText = @"松开马上刷新了";
-    self.tableView.headerRefreshingText = @"MJ哥正在帮你刷新中,不客气";
-    
-    self.tableView.footerPullToRefreshText = @"上拉可以加载更多数据了";
-    self.tableView.footerReleaseToRefreshText = @"松开马上加载更多数据了";
-    self.tableView.footerRefreshingText = @"MJ哥正在帮你加载中,不客气";
-    */
     _tableView = ({
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
@@ -207,26 +189,37 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
+    
+    if ([(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) return;
+    
+    [_hotTableView headerBeginRefreshing];
 }
 
 - (void)refreshQCBData
 {
-    __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
+    __block NSUInteger currentQCBDataPage = 0;
     
     
     [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
         
-        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_tableView headerEndRefreshing];
-        
+    
         if (!error) {
+            [_newMsgs removeAllObjects];
             currentQCBDataPage += 1;
             NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
                                    NSMakeRange(0,[(NSArray *)data count])];
             [_newMsgs insertObjects:data atIndexes:indexes];
             [_tableView reloadData];
             
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+        }
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView headerEndRefreshing];
+        
+        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:0] boolValue]) {
+            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
         }
         
     }];
@@ -234,30 +227,66 @@
 
 - (void)loadingMoreQCBData
 {
-
+    __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+        
+        
+        if (!error) {
+    
+            currentQCBDataPage += 1;
+            
+            [_tableView beginUpdates];
+            
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                [_newMsgs addObject:obj];
+                
+                [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_newMsgs.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+                
+            }];
+            
+            [_tableView endUpdates];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+        }
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView footerEndRefreshing];
+        
+    }];
 }
 
 - (void)refreshQCBHotData
 {
-    __block NSUInteger currentQCBDataPage = 0;
+    __block NSUInteger currentQCBHotDataPage = 0;
     
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_tableView headerEndRefreshing];
+        [_hotTableView headerEndRefreshing];
         
         if (!error) {
-            currentQCBDataPage += 1;
             
-            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            currentQCBHotDataPage += 1;
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
+            
              
             NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
                                    NSMakeRange(0,[(NSArray *)data count])];
-            [_newMsgs insertObjects:data atIndexes:indexes];
+            [_hotMsgs removeAllObjects];
+            [_hotMsgs insertObjects:data atIndexes:indexes];
             
-            [_tableView reloadData];
+            [_hotTableView reloadData];
             
+        }
+        
+        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) {
+            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
         }
         
     }];
@@ -266,7 +295,34 @@
 
 - (void)loadingMoreQCBHotData
 {
+    __block NSUInteger currentQCBHotDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:1] unsignedIntegerValue];
     
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_hotTableView footerEndRefreshing];
+        
+        if (!error) {
+            
+            currentQCBHotDataPage += 1;
+            
+            [_hotTableView beginUpdates];
+            
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                [_hotMsgs addObject:obj];
+                
+                [_hotTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_hotMsgs.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+                
+            }];
+            
+            [_hotTableView endUpdates];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
+            
+        }
+        
+    }];
 }
 
 
@@ -281,20 +337,8 @@
     _tableViewFirstLoadingStatuss = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     _tableViewCurrentPages = [NSMutableArray arrayWithObjects:[NSNumber numberWithUnsignedInteger:0],[NSNumber numberWithUnsignedInteger:0], nil];
     
-    
-    /*
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(_currentPage + 1)] block:^(id data, NSError *error) {
-        
-        if (!error) {
-            _currentPage += 1;
-            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
-                                   NSMakeRange(0,[(NSArray *)data count])];
-            [_newMsgs insertObjects:data atIndexes:indexes];
-            [_tableView reloadData];
-        }
-    
-     }];
-     */
+    //开始刷新第一个UITableView数据
+    [_tableView headerBeginRefreshing];
 }
 
 - (IBAction)sendMessage:(id)sender
@@ -398,6 +442,9 @@
     
     return height;
 }
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
