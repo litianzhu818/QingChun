@@ -198,6 +198,11 @@
     [_moreBUtton addTarget:self action:@selector(ClikedOnMoreButton:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_moreBUtton];
     
+    //设置头像的圆角
+    _photoButton.layer.masksToBounds = YES;
+    _photoButton.layer.cornerRadius = 4;
+    _photoButton.layer.borderColor = [[UIColor clearColor] CGColor];
+    
     //设置时间的label的位置
     _timeLabel.frame = CGRectMake(USER_IMAGE_WIDTH + 2*DEFAULT_MARGIN_WIDTH, NAME_LABEL_HEIGHT+DEFAULT_MARGIN_WIDTH, self.frame.size.width - 4*DEFAULT_MARGIN_WIDTH - USER_IMAGE_WIDTH - MORE_BUTTON_WIDTH, TIME_LABEL_HEIGHT);
     //这时的时间应以左对齐
