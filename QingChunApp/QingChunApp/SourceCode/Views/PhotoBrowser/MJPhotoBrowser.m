@@ -191,7 +191,7 @@
             UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         });
     }else if (buttonIndex == 1) {
-        
+        //展示原图（比较大）
         [_currentPhotoView showBigImage];
         
     }else if (buttonIndex == 2){
@@ -202,14 +202,18 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    if (error) {
-        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
-    } else {
-        MJPhoto *photo = _photos[_currentPhotoIndex];
-        photo.save = YES;
-        [_toolbar setMenuButtonStatus:NO];
-        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (error) {
+            [MBProgressHUD showSuccess:@"保存失败" toView:nil];
+        } else {
+            MJPhoto *photo = _photos[_currentPhotoIndex];
+            photo.save = YES;
+            [_toolbar setMenuButtonStatus:NO];
+            [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+        }
+        
+    });
 }
 
 
@@ -261,7 +265,6 @@
     if (!photoView) { // 添加新的图片view
         photoView = [[MJPhotoView alloc] init];
         photoView.photoViewDelegate = self;
-        _currentPhotoView = photoView;
     }
     
     // 调整当期页的frame
