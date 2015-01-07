@@ -116,7 +116,7 @@
     });
     
     _icarousel = ({
-        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), VIEW_W(self.view), VIEW_H(self.view)-VIEW_BY(self.navigationController.navigationBar)-VIEW_H(self.tabBarController.tabBar))];
+        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, 0, VIEW_W(self.view), VIEW_H(self.view))];
         icarousel.dataSource = self;
         icarousel.delegate = self;
         icarousel.decelerationRate = 1.0;
@@ -143,6 +143,9 @@
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, -44, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
+        
         //添加上拉下拉操作
         [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"QCB_tableview_refresh_time_tag"];
         [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBData)];
@@ -168,6 +171,9 @@
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, -44, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
+        
         //添加上拉下拉操作
         [tableView addHeaderWithTarget:self action:@selector(refreshQCBHotData) dateKey:@"QCB_hot_tableview_refresh_time_tag"];
         [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBHotData)];
@@ -189,6 +195,8 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
+    
+    _currentTableViewIndex = segmentedControl.selectedSegmentIndex;
     
     if ([(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) return;
     
@@ -345,6 +353,51 @@
 {
 
 }
+#pragma mark - UIScrollViewDelegate methods
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    //Selected index's color changed.
+    if (scrollView.contentSize.height <= CGRectGetHeight(scrollView.bounds)-50) {
+        [self hideToolBar:NO];
+        return;
+    }
+    static float newY = 0;
+    static float oldY = 0;
+    newY= scrollView.contentOffset.y;
+    if (ABS(newY - oldY) > 50) {
+        if (newY > oldY && newY > 1) {
+            [self hideToolBar:YES];
+        }else if(newY < oldY ){
+            [self hideToolBar:NO];
+        }
+        oldY = newY;
+    }
+}
+
+- (void)hideToolBar:(BOOL)hide
+{
+    if (hide == self.tabBarController.tabBar.hidden) return;
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake((hide ? 0.0:64.0), 0.0, (hide ? 0.0:-44.0), 0.0);
+    
+    CGFloat apha = (hide ? 0.0:1.0);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        _tableView.contentInset = contentInsets;
+        _tableView.scrollIndicatorInsets = contentInsets;
+        
+        _hotTableView.contentInset = contentInsets;
+        _hotTableView.scrollIndicatorInsets = contentInsets;
+        
+        self.navigationController.navigationBar.alpha = apha;
+        
+    } completion:^(BOOL finished) {
+        
+        [self.tabBarController.tabBar setHidden:hide];
+        
+    }];
+}
+
 
 #pragma mark iCarouselDataSource methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -407,8 +460,6 @@
     
     return result;
 }
-
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

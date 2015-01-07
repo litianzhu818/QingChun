@@ -70,8 +70,6 @@
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_se"] forState:UIControlStateSelected];
     [_backPwdButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     [_registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-//    [_nameTextField setDelegate:self];
-//    [_pwdTextField setDelegate:self];
     
     [self.scrollView contentSizeToFit];
 }

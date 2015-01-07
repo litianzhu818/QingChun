@@ -141,6 +141,7 @@
 		E7B780ED1A5993E9009ECFCE /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B780EB1A5993E8009ECFCE /* NSDate+TimeAgo.m */; };
 		E7B780EE1A5993E9009ECFCE /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */; };
 		E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */; };
+		E7B7FCE01A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B7FCDF1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m */; };
 		E7B8B2FF1A519FE40015CE40 /* SystemNetAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B8B2FE1A519FE40015CE40 /* SystemNetAPI.plist */; };
 		E7B8B32B1A51A3AF0015CE40 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3041A51A3AF0015CE40 /* AFHTTPRequestOperation.m */; };
 		E7B8B32C1A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3061A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m */; };
@@ -453,6 +454,8 @@
 		E7B780EA1A5993E8009ECFCE /* NSDate+TimeAgo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeAgo.h"; sourceTree = "<group>"; };
 		E7B780EB1A5993E8009ECFCE /* NSDate+TimeAgo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeAgo.m"; sourceTree = "<group>"; };
 		E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
+		E7B7FCDE1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
+		E7B7FCDF1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
 		E7B8B2FB1A519D090015CE40 /* HttpRequestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestClient.h; sourceTree = "<group>"; };
 		E7B8B2FE1A519FE40015CE40 /* SystemNetAPI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SystemNetAPI.plist; sourceTree = "<group>"; };
 		E7B8B3011A51A3AF0015CE40 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -707,6 +710,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E7B7FCDD1A5D889D00E49FE3 /* AMScrollingNavbar */,
 				E75EB00F1A5C07CC00755972 /* MJRefresh */,
 				E7B780E91A5993E8009ECFCE /* NSDate-TimeAgo */,
 				E71943731A58103E00680664 /* TTTAttributedLabel */,
@@ -1368,6 +1372,15 @@
 			path = "NSDate-TimeAgo";
 			sourceTree = "<group>";
 		};
+		E7B7FCDD1A5D889D00E49FE3 /* AMScrollingNavbar */ = {
+			isa = PBXGroup;
+			children = (
+				E7B7FCDE1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.h */,
+				E7B7FCDF1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m */,
+			);
+			path = AMScrollingNavbar;
+			sourceTree = "<group>";
+		};
 		E7B8B2FA1A519CBC0015CE40 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1854,6 +1867,7 @@
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
 				E7F1C98C1A527D7700E8DF67 /* NSString+Hashes.m in Sources */,
+				E7B7FCE01A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m in Sources */,
 				E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */,
 				E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */,
 				E7FC67B11A3D5A1D00AF45A6 /* UINavigationItem+Offset.m in Sources */,
