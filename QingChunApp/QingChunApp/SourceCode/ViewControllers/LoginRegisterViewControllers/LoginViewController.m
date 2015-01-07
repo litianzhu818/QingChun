@@ -59,6 +59,9 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
+    
+    self.defaultImageView.image = [UIImage imageNamed:@"login_bg"];
+    
     [_weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_weiboButton setBackgroundImage:[UIImage imageNamed:@"weibo_se"] forState:UIControlStateSelected];
     

@@ -140,7 +140,7 @@
     <resources>
         <image name="QQ_nor.png" width="271" height="37"/>
         <image name="input_bg.png" width="270" height="72"/>
-        <image name="login_nor.png" width="271" height="35"/>
+        <image name="login_nor.png" width="309" height="38"/>
         <image name="weibo_nor.png" width="270" height="37"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
