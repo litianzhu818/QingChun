@@ -24,11 +24,6 @@
 
 @implementation MJPhotoView
 
-//- (id)init
-//{
-//    return [self initWithFrame:CGRectZero];
-//}
-
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
@@ -73,7 +68,8 @@
 
 
 #pragma mark - photoSetter
-- (void)setPhoto:(MJPhoto *)photo {
+- (void)setPhoto:(MJPhoto *)photo
+{
     
     _photo = photo;
     
@@ -238,11 +234,13 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
 	return _imageView;
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
     CGRect imageViewFrame = _imageView.frame;
     CGRect screenBounds = [UIScreen mainScreen].bounds;
     if (imageViewFrame.size.height > screenBounds.size.height) {
@@ -254,10 +252,24 @@
 }
 
 #pragma mark - 手势处理
-- (void)handleSingleTap:(UITapGestureRecognizer *)tap {
+- (void)handleSingleTap:(UITapGestureRecognizer *)tap
+{
     _doubleTap = NO;
     [self performSelector:@selector(hide) withObject:nil afterDelay:0.2];
 }
+
+- (void)handleDoubleTap:(UITapGestureRecognizer *)tap
+{
+    _doubleTap = YES;
+    
+    CGPoint touchPoint = [tap locationInView:self];
+    if (self.zoomScale == self.maximumZoomScale) {
+        [self setZoomScale:self.minimumZoomScale animated:YES];
+    } else {
+        [self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
+    }
+}
+
 - (void)hide
 {
     if (_doubleTap) return;
@@ -292,9 +304,8 @@
         }
     } completion:^(BOOL finished) {
         // 设置底部的小图片
-        _photo.srcImageView.image = tempImage;
+        //_photo.srcImageView.image = tempImage;
         //改动之处 2013-01-03
-        //[_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
         [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
@@ -307,42 +318,45 @@
 
 - (void)showBigImage
 {
-        self.scrollEnabled = NO;
-        // 直接显示进度条
-        [_photoLoadingView showLoading];
-        [self addSubview:_photoLoadingView];
-        _hasProgressView = YES;
+    self.scrollEnabled = NO;
+    // 直接显示进度条
+    [_photoLoadingView showLoading];
+    [self addSubview:_photoLoadingView];
+    _hasProgressView = YES;
+    
+    UIImage *tempImage = _imageView.image;
         
-        __unsafe_unretained MJPhotoView *photoView = self;
-        __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+    __unsafe_unretained MJPhotoView *photoView = self;
+    __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+    
+    NSURL *downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
         
-        NSURL *downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
-        
-        [_imageView sd_setImageWithURL:downloadURL placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
+    [_imageView sd_setImageWithURL:downloadURL placeholderImage:tempImage options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
             
-            if (_hasProgressView && receivedSize > kMinProgress) {
-                loading.progress = (float)receivedSize/expectedSize;
-            }
+        if (_hasProgressView && receivedSize > kMinProgress) {
+            loading.progress = (float)receivedSize/expectedSize;
+        }
             
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
-            [photoView photoDidFinishLoadWithImage:image];
-        }];
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
+            
+        if (image) {
+            photoView.scrollEnabled = YES;
+            _photo.image = image;
+            [loading removeFromSuperview];
+                
+        } else {
+            //[photoView addSubview:loading];
+            [loading showFailure];
+        }
+            
+        _hasProgressView = NO;
+            
+    }];
 }
 
 - (void)reset
 {
     _imageView.contentMode = UIViewContentModeScaleToFill;
-}
-
-- (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
-    _doubleTap = YES;
-    
-    CGPoint touchPoint = [tap locationInView:self];
-	if (self.zoomScale == self.maximumZoomScale) {
-		[self setZoomScale:self.minimumZoomScale animated:YES];
-	} else {
-		[self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
-	}
 }
 
 - (void)dealloc
