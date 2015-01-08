@@ -155,12 +155,14 @@
 #pragma mark - MJPhotoView代理
 - (void)photoViewSingleTap:(MJPhotoView *)photoView
 {
-    [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
-    self.view.backgroundColor = [UIColor clearColor];
-    
-    // 移除工具条
-    [_toolbar removeFromSuperview];
-    _currentPhotoView = nil;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
+        self.view.backgroundColor = [UIColor clearColor];
+        
+        // 移除工具条
+        [_toolbar removeFromSuperview];
+        _currentPhotoView = nil;
+    });
 }
 
 - (void)photoViewDidEndZoom:(MJPhotoView *)photoView

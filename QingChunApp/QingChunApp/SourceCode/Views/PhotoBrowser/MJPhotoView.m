@@ -24,6 +24,11 @@
 
 @implementation MJPhotoView
 
+//- (id)init
+//{
+//    return [self initWithFrame:CGRectZero];
+//}
+
 - (id)initWithFrame:(CGRect)frame
 {
     if ((self = [super initWithFrame:frame])) {
@@ -46,18 +51,24 @@
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         // 监听点击
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        singleTap.delaysTouchesBegan = YES;
-        singleTap.numberOfTapsRequired = 1;
-        [self addGestureRecognizer:singleTap];
-        
-        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-        doubleTap.numberOfTapsRequired = 2;
-        [self addGestureRecognizer:doubleTap];
-        
-        [singleTap requireGestureRecognizerToFail:doubleTap];
+        [self setupGestures];
     }
     return self;
+}
+
+- (void)setupGestures
+{
+    // 监听点击
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.delaysTouchesBegan = YES;
+    singleTap.numberOfTapsRequired = 1;
+    [self addGestureRecognizer:singleTap];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
 }
 
 
@@ -76,6 +87,7 @@
     // 占位图片
     _imageView.image = _photo.srcImageView.image;
     
+    //还是先需要将图片放大到屏幕比例，再开始下载大图
     if (_photo.firstShow) { // 首次显示
         
         /*
@@ -91,7 +103,6 @@
             }];
         }
          */
-        
     } else {
         
         [self photoStartLoad];
@@ -203,7 +214,10 @@
     if (_photo.firstShow) { // 第一次显示的图片
         _photo.firstShow = NO; // 已经显示过了
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
-       
+        
+        //开始放大的动画时，需要清掉底部的小图片
+        _photo.srcImageView.image = nil;
+        
         //采取透明动画+位置动画，效果更加
         //_imageView.alpha = 0;
         
@@ -211,8 +225,9 @@
             _imageView.frame = imageFrame;
             //_imageView.alpha = 1.0;
         } completion:^(BOOL finished) {
+            
             // 设置底部的小图片
-            //_photo.srcImageView.image = _imageView.image;
+            _photo.srcImageView.image = _imageView.image;
             
             [self photoStartLoad];
         }];
@@ -255,6 +270,7 @@
     
     // 清空底部的小图
     UIImage *tempImage = _photo.srcImageView.image;
+    _photo.srcImageView.image = nil;
     
     
     CGFloat duration = 0.15;
@@ -276,7 +292,7 @@
         }
     } completion:^(BOOL finished) {
         // 设置底部的小图片
-        
+        _photo.srcImageView.image = tempImage;
         //改动之处 2013-01-03
         //[_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
         [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
