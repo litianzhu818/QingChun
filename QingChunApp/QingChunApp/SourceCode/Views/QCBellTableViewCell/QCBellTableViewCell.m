@@ -32,6 +32,7 @@
 - (void)awakeFromNib
 {
     // Initialization code
+    self.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -39,16 +40,13 @@
     [super setSelected:selected animated:animated];
     
     // Configure the view for the selected state
+    self.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
 }
 
 -(void)initSuperUI
 {
-    self.imageView.image = nil;
-    self.imageView.hidden = YES;
-    self.textLabel.text = nil;
-    self.textLabel.hidden = YES;
-    self.detailTextLabel.text = nil;
-    self.detailTextLabel.hidden = YES;
+    self.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
+    
 }
 
 /*
