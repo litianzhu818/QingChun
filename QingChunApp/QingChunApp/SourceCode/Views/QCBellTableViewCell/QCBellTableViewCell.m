@@ -7,13 +7,13 @@
 //
 
 #import "QCBellTableViewCell.h"
+#import "QCBellDataModel.h"
 
 @interface QCBellTableViewCell ()
 {
     UIImageView *_imageView;
     UILabel *_titleLabel;
     UIButton *_badgeButton;
-    
 }
 @end
 
@@ -47,6 +47,14 @@
 {
     self.accessoryType =  UITableViewCellAccessoryDisclosureIndicator;
     
+}
+
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    if (!self.qcbellDataModel) return;
+    _imageView.image = self.qcbellDataModel.image;
 }
 
 /*
