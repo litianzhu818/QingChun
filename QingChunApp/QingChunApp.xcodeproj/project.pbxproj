@@ -87,6 +87,7 @@
 		E75EB0261A5C07CC00755972 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E75EB01D1A5C07CC00755972 /* UIScrollView+MJRefresh.m */; };
 		E75EB0271A5C07CC00755972 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E75EB01F1A5C07CC00755972 /* UIView+MJExtension.m */; };
 		E75EB0291A5D2C5100755972 /* login_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E75EB0281A5D2C5100755972 /* login_bg@2x.png */; };
+		E771B9F81A5FD5230087F14F /* QCBellViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E771B9F71A5FD5230087F14F /* QCBellViewController.m */; };
 		E77C2FC81A4AC0FD00D12DBB /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C2FC71A4AC0FD00D12DBB /* HMSegmentedControl.m */; };
 		E77C30041A4D570800D12DBB /* TPKeyboardAvoidingCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C2FFD1A4D570800D12DBB /* TPKeyboardAvoidingCollectionView.m */; };
 		E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C2FFF1A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m */; };
@@ -191,6 +192,8 @@
 		E7CF62DD19F8980E009A9A20 /* me_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D519F8980E009A9A20 /* me_normal@2x.png */; };
 		E7CF62DE19F8980E009A9A20 /* qingchunba_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D619F8980E009A9A20 /* qingchunba_selected@2x.png */; };
 		E7CF62DF19F8980E009A9A20 /* qingchunba_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D719F8980E009A9A20 /* qingchunba_normal@2x.png */; };
+		E7DC9EEA1A5FD6B400578647 /* QCBellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DC9EE91A5FD6B400578647 /* QCBellTableViewCell.m */; };
+		E7DC9EED1A5FDA4700578647 /* QCBellDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DC9EEC1A5FDA4700578647 /* QCBellDataModel.m */; };
 		E7DD1C1E1A40565100FAA24A /* MBProgressHUD+Add.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C1D1A40565100FAA24A /* MBProgressHUD+Add.m */; };
 		E7DD1C361A412F7200FAA24A /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C261A412F7200FAA24A /* MJPhoto.m */; };
 		E7DD1C371A412F7200FAA24A /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7DD1C271A412F7200FAA24A /* MJPhotoBrowser.bundle */; };
@@ -373,6 +376,8 @@
 		E75EB01E1A5C07CC00755972 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		E75EB01F1A5C07CC00755972 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
 		E75EB0281A5D2C5100755972 /* login_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login_bg@2x.png"; sourceTree = "<group>"; };
+		E771B9F61A5FD5230087F14F /* QCBellViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBellViewController.h; sourceTree = "<group>"; };
+		E771B9F71A5FD5230087F14F /* QCBellViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBellViewController.m; sourceTree = "<group>"; };
 		E77C2FC61A4AC0FD00D12DBB /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		E77C2FC71A4AC0FD00D12DBB /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		E77C2FFC1A4D570800D12DBB /* TPKeyboardAvoidingCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingCollectionView.h; sourceTree = "<group>"; };
@@ -535,6 +540,10 @@
 		E7CF62D519F8980E009A9A20 /* me_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "me_normal@2x.png"; sourceTree = "<group>"; };
 		E7CF62D619F8980E009A9A20 /* qingchunba_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchunba_selected@2x.png"; sourceTree = "<group>"; };
 		E7CF62D719F8980E009A9A20 /* qingchunba_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qingchunba_normal@2x.png"; sourceTree = "<group>"; };
+		E7DC9EE81A5FD6B400578647 /* QCBellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBellTableViewCell.h; sourceTree = "<group>"; };
+		E7DC9EE91A5FD6B400578647 /* QCBellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBellTableViewCell.m; sourceTree = "<group>"; };
+		E7DC9EEB1A5FDA4700578647 /* QCBellDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCBellDataModel.h; sourceTree = "<group>"; };
+		E7DC9EEC1A5FDA4700578647 /* QCBellDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCBellDataModel.m; sourceTree = "<group>"; };
 		E7DD1C1C1A40565100FAA24A /* MBProgressHUD+Add.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+Add.h"; sourceTree = "<group>"; };
 		E7DD1C1D1A40565100FAA24A /* MBProgressHUD+Add.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+Add.m"; sourceTree = "<group>"; };
 		E7DD1C251A412F7200FAA24A /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
@@ -664,7 +673,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E75EB02A1A5F99D900755972 /* QCFLTableViewCell */,
+				E7DC9EE71A5FD66000578647 /* QCBellTableViewCell */,
 				E75763A81A5AAEA900A8E077 /* ButtonActionView */,
 				E7FC67BE1A45646500AF45A6 /* RefreshTableHeaderView */,
 				E7B73B261A4055970060CA94 /* PhotoBrowser */,
@@ -1093,13 +1102,6 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
-		E75EB02A1A5F99D900755972 /* QCFLTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = QCFLTableViewCell;
-			sourceTree = "<group>";
-		};
 		E77C2FC51A4AC0FD00D12DBB /* HMSegmentedControl */ = {
 			isa = PBXGroup;
 			children = (
@@ -1155,6 +1157,8 @@
 				E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */,
 				E78A03D11A50581500DA1DA3 /* CellContentModel.h */,
 				E78A03D21A50581500DA1DA3 /* CellContentModel.m */,
+				E7DC9EEB1A5FDA4700578647 /* QCBellDataModel.h */,
+				E7DC9EEC1A5FDA4700578647 /* QCBellDataModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -1545,6 +1549,8 @@
 				E79FB2D819FB61C100FBC703 /* QCBTableViewController.m */,
 				E7AF3D191A0B9FAF0073116D /* MeViewController.h */,
 				E7AF3D1A1A0B9FAF0073116D /* MeViewController.m */,
+				E771B9F61A5FD5230087F14F /* QCBellViewController.h */,
+				E771B9F71A5FD5230087F14F /* QCBellViewController.m */,
 			);
 			path = MainViewControllers;
 			sourceTree = "<group>";
@@ -1593,6 +1599,15 @@
 			children = (
 			);
 			path = BaseNavigationBar;
+			sourceTree = "<group>";
+		};
+		E7DC9EE71A5FD66000578647 /* QCBellTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				E7DC9EE81A5FD6B400578647 /* QCBellTableViewCell.h */,
+				E7DC9EE91A5FD6B400578647 /* QCBellTableViewCell.m */,
+			);
+			path = QCBellTableViewCell;
 			sourceTree = "<group>";
 		};
 		E7DD1C4E1A4194ED00FAA24A /* CellViews */ = {
@@ -1835,6 +1850,7 @@
 				E7B8B3341A51A3AF0015CE40 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */,
 				E7B8B32B1A51A3AF0015CE40 /* AFHTTPRequestOperation.m in Sources */,
+				E771B9F81A5FD5230087F14F /* QCBellViewController.m in Sources */,
 				E7904ACB1A4EAE3900B47110 /* CellButtonViewModel.m in Sources */,
 				E7AF3D1B1A0B9FAF0073116D /* MeViewController.m in Sources */,
 				E7DD1C361A412F7200FAA24A /* MJPhoto.m in Sources */,
@@ -1862,6 +1878,7 @@
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
 				E7B8B32D1A51A3AF0015CE40 /* AFURLConnectionOperation.m in Sources */,
+				E7DC9EEA1A5FD6B400578647 /* QCBellTableViewCell.m in Sources */,
 				E725A2931A07CDA900FCE03D /* UIButton+WebCache.m in Sources */,
 				E75EB0271A5C07CC00755972 /* UIView+MJExtension.m in Sources */,
 				E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */,
@@ -1898,6 +1915,7 @@
 				E7B9E46A1A46B94700D7775C /* iCarousel.m in Sources */,
 				E7B8B32C1A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m in Sources */,
 				E725A28F1A07CDA900FCE03D /* SDWebImageDownloader.m in Sources */,
+				E7DC9EED1A5FDA4700578647 /* QCBellDataModel.m in Sources */,
 				E7B8B3311A51A3AF0015CE40 /* AFSecurityPolicy.m in Sources */,
 				E725A2901A07CDA900FCE03D /* SDWebImageDownloaderOperation.m in Sources */,
 				E725A28E1A07CDA900FCE03D /* SDWebImageDecoder.m in Sources */,

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bBW-EJ-IF6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="bBW-EJ-IF6">
     <dependencies>
-        <deployment identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <development version="5100" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Main Tab Bar Controller-->
@@ -27,37 +27,10 @@
             </objects>
             <point key="canvasLocation" x="-234" y="409"/>
         </scene>
-        <!--青春风铃-->
-        <scene sceneID="6MS-ag-WpS">
-            <objects>
-                <tableViewController id="lJe-Qb-hhQ" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="tvM-AX-qzO">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="m2L-f3-Cuo">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="m2L-f3-Cuo" id="h4p-o5-p6y">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="lJe-Qb-hhQ" id="P8d-PV-udy"/>
-                            <outlet property="delegate" destination="lJe-Qb-hhQ" id="ouZ-rk-hrD"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="青春风铃" id="Vlz-t1-Z6u"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="gip-jQ-7Yy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="990" y="63"/>
-        </scene>
-        <!--青春风铃-->
+        <!--青友团-->
         <scene sceneID="xri-HN-dcE">
             <objects>
-                <tableViewController title="青春风铃" id="AxA-TA-H7j" sceneMemberID="viewController">
+                <tableViewController title="青友团" id="AxA-TA-H7j" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="nIM-En-jgR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -98,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="460" y="1403"/>
         </scene>
-        <!--Me View Controller-->
+        <!--我-->
         <scene sceneID="24h-ae-5za">
             <objects>
-                <viewController id="j51-JB-1MZ" customClass="MeViewController" sceneMemberID="viewController">
+                <viewController title="我" id="j51-JB-1MZ" customClass="MeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zcq-tN-pgg"/>
                         <viewControllerLayoutGuide type="bottom" id="bN0-gU-Mcw"/>
@@ -166,12 +139,31 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="lJe-Qb-hhQ" kind="relationship" relationship="rootViewController" id="ZwG-uY-VQ4"/>
+                        <segue destination="Pbg-Sj-u8B" kind="relationship" relationship="rootViewController" id="suh-lJ-BNV"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoM-If-MyE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="460" y="51"/>
+        </scene>
+        <!--Bell View Controller-->
+        <scene sceneID="aD7-dY-Kwm">
+            <objects>
+                <viewController id="Pbg-Sj-u8B" customClass="QCBellViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="4ly-XP-785"/>
+                        <viewControllerLayoutGuide type="bottom" id="fad-s9-A5T"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3sc-aJ-p81">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="rBw-WJ-oSV"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fLm-2f-GJd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="990" y="51"/>
         </scene>
         <!--青春吧-->
         <scene sceneID="ZIm-uL-ahc">
