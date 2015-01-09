@@ -664,6 +664,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E75EB02A1A5F99D900755972 /* QCFLTableViewCell */,
 				E75763A81A5AAEA900A8E077 /* ButtonActionView */,
 				E7FC67BE1A45646500AF45A6 /* RefreshTableHeaderView */,
 				E7B73B261A4055970060CA94 /* PhotoBrowser */,
@@ -1090,6 +1091,13 @@
 				E75EB01F1A5C07CC00755972 /* UIView+MJExtension.m */,
 			);
 			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		E75EB02A1A5F99D900755972 /* QCFLTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QCFLTableViewCell;
 			sourceTree = "<group>";
 		};
 		E77C2FC51A4AC0FD00D12DBB /* HMSegmentedControl */ = {

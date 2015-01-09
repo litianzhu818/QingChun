@@ -204,7 +204,7 @@
     
     return urlSessionDataTask;
 }
-/*
+
 - (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
                path:(NSString *)path
                                    name:(NSString *)name
@@ -256,9 +256,56 @@
     
     return uploadTask;
 }
+/*//Creating an Upload Task for a Multi-Part Request, with Progress
+ NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:@"http://example.com/upload" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+ [formData appendPartWithFileURL:[NSURL fileURLWithPath:@"file://path/to/image.jpg"] name:@"file" fileName:@"filename.jpg" mimeType:@"image/jpeg" error:nil];
+ } error:nil];
+ 
+ AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+ NSProgress *progress = nil;
+ 
+ NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request progress:&progress completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+ if (error) {
+ NSLog(@"Error: %@", error);
+ } else {
+ NSLog(@"%@ %@", response, responseObject);
+ }
+ }];
+ 
+ [uploadTask resume];
+ */
 
+/*//Creating a Download Task
+ NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+ AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+ 
+ NSURL *URL = [NSURL URLWithString:@"http://example.com/download.zip"];
+ NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+ 
+ NSURLSessionDownloadTask *downloadTask = [manager downloadTaskWithRequest:request progress:nil destination:^NSURL *(NSURL *targetPath, NSURLResponse *response) {
+ NSURL *documentsDirectoryURL = [[NSFileManager defaultManager] URLForDirectory:NSDocumentDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:NO error:nil];
+ return [documentsDirectoryURL URLByAppendingPathComponent:[response suggestedFilename]];
+ } completionHandler:^(NSURLResponse *response, NSURL *filePath, NSError *error) {
+ NSLog(@"File downloaded to: %@", filePath);
+ }];
+ [downloadTask resume];
 */
 
-
+/*//Creating a Data Task
+ NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+ AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+ 
+ NSURL *URL = [NSURL URLWithString:@"http://example.com/upload"];
+ NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+ 
+ NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+ if (error) {
+ NSLog(@"Error: %@", error);
+ } else {
+ NSLog(@"%@ %@", response, responseObject);
+ }
+ }];
+ [dataTask resume];
+ */
 
 @end
