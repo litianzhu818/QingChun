@@ -97,7 +97,7 @@
     
     _segmentControl = ({
         // Segmented control with scrolling
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热"]];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"精华"]];
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -214,7 +214,7 @@
     __block NSUInteger currentQCBDataPage = 0;
     
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
         
     
         if (!error) {
@@ -243,7 +243,7 @@
 {
     __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
         
         
         
@@ -278,7 +278,7 @@
     __block NSUInteger currentQCBHotDataPage = 0;
     
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [_hotTableView headerEndRefreshing];
@@ -311,7 +311,7 @@
 {
     __block NSUInteger currentQCBHotDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:1] unsignedIntegerValue];
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [_hotTableView footerEndRefreshing];
