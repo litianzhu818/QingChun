@@ -143,6 +143,7 @@
 		E7B780EE1A5993E9009ECFCE /* NSDateTimeAgo.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */; };
 		E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */; };
 		E7B7FCE01A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B7FCDF1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m */; };
+		E7B7FCE21A60D8FE00E49FE3 /* new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B7FCE11A60D8FE00E49FE3 /* new@2x.png */; };
 		E7B8B2FF1A519FE40015CE40 /* SystemNetAPI.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7B8B2FE1A519FE40015CE40 /* SystemNetAPI.plist */; };
 		E7B8B32B1A51A3AF0015CE40 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3041A51A3AF0015CE40 /* AFHTTPRequestOperation.m */; };
 		E7B8B32C1A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3061A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m */; };
@@ -461,6 +462,7 @@
 		E7B780EC1A5993E8009ECFCE /* NSDateTimeAgo.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = NSDateTimeAgo.bundle; sourceTree = "<group>"; };
 		E7B7FCDE1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ScrollingNavbar.h"; sourceTree = "<group>"; };
 		E7B7FCDF1A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ScrollingNavbar.m"; sourceTree = "<group>"; };
+		E7B7FCE11A60D8FE00E49FE3 /* new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new@2x.png"; sourceTree = "<group>"; };
 		E7B8B2FB1A519D090015CE40 /* HttpRequestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestClient.h; sourceTree = "<group>"; };
 		E7B8B2FE1A519FE40015CE40 /* SystemNetAPI.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = SystemNetAPI.plist; sourceTree = "<group>"; };
 		E7B8B3011A51A3AF0015CE40 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -1558,6 +1560,7 @@
 		E7CF62D219F89616009A9A20 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7B7FCE11A60D8FE00E49FE3 /* new@2x.png */,
 				E7DD1C4E1A4194ED00FAA24A /* CellViews */,
 				E7AF3D531A0C838A0073116D /* Utility */,
 				E72B09801A0B462200109658 /* default@2x.png */,
@@ -1782,6 +1785,7 @@
 				E79FB2E819FB79EC00FBC703 /* shuaxin_selected@2x.png in Resources */,
 				E7B9E4891A46F9BE00D7775C /* send_msg_highlighted@2x.png in Resources */,
 				E7CF62DD19F8980E009A9A20 /* me_normal@2x.png in Resources */,
+				E7B7FCE21A60D8FE00E49FE3 /* new@2x.png in Resources */,
 				E7AF3D491A0BA17A0073116D /* header_ac_se@2x.png in Resources */,
 				E7FC67A91A3D2DDF00AF45A6 /* qingchungroup_selected@2x.png in Resources */,
 				E7B9E4721A46F1FB00D7775C /* UserCenterMenuList.plist in Resources */,

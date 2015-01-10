@@ -9,6 +9,11 @@
 #import "QCBellViewController.h"
 
 @interface QCBellViewController ()
+{
+    NSMutableArray *_dateSources;
+}
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 

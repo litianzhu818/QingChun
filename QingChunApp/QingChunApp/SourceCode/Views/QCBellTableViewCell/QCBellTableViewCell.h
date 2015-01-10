@@ -14,4 +14,6 @@
 
 @property (strong, nonatomic) QCBellDataModel *qcbellDataModel;
 
++ (CGFloat)CellHeight;
+
 @end
