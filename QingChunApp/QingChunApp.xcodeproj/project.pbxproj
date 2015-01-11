@@ -57,7 +57,6 @@
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
-		E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7419F0719E675DA00B5B764 /* QingChunAppTests.m */; };
 		E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C271A412F7200FAA24A /* MJPhotoBrowser.bundle */; };
 		E75763AB1A5AAEE000A8E077 /* LTZButtonActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
@@ -232,16 +231,6 @@
 		E7FC67CE1A45688600AF45A6 /* UIImage+SA.m in Sources */ = {isa = PBXBuildFile; fileRef = E7FC67CB1A45688600AF45A6 /* UIImage+SA.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E7419F0219E675D900B5B764 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E7419EDD19E675D900B5B764 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E7419EE419E675D900B5B764;
-			remoteInfo = QingChunApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		E7063F8319E67A6A00CC3CE0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		E7063F8519E67A6A00CC3CE0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -323,9 +312,6 @@
 		E741765A1A5552640068F0E7 /* MessageDisplayCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageDisplayCell.h; sourceTree = "<group>"; };
 		E741765B1A5552640068F0E7 /* MessageDisplayCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageDisplayCell.m; sourceTree = "<group>"; };
 		E7419EE519E675D900B5B764 /* QingChunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QingChunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QingChunAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E7419F0619E675DA00B5B764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7419F0719E675DA00B5B764 /* QingChunAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QingChunAppTests.m; sourceTree = "<group>"; };
 		E75763A91A5AAEE000A8E077 /* LTZButtonActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTZButtonActionView.h; sourceTree = "<group>"; };
 		E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTZButtonActionView.m; sourceTree = "<group>"; };
 		E75E907619F74389000F2CE9 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
@@ -622,13 +608,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E7419EFE19E675D900B5B764 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -898,7 +877,6 @@
 			children = (
 				E7FC67B41A45386100AF45A6 /* API接口说明.rtfd */,
 				E7419EE719E675D900B5B764 /* QingChunApp */,
-				E7419F0419E675D900B5B764 /* QingChunAppTests */,
 				E7419EE619E675D900B5B764 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -907,7 +885,6 @@
 			isa = PBXGroup;
 			children = (
 				E7419EE519E675D900B5B764 /* QingChunApp.app */,
-				E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -920,23 +897,6 @@
 				E7063F8419E67A6A00CC3CE0 /* Supporting Files */,
 			);
 			path = QingChunApp;
-			sourceTree = "<group>";
-		};
-		E7419F0419E675D900B5B764 /* QingChunAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				E7419F0719E675DA00B5B764 /* QingChunAppTests.m */,
-				E7419F0519E675DA00B5B764 /* Supporting Files */,
-			);
-			path = QingChunAppTests;
-			sourceTree = "<group>";
-		};
-		E7419F0519E675DA00B5B764 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E7419F0619E675DA00B5B764 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E75763A81A5AAEA900A8E077 /* ButtonActionView */ = {
@@ -1680,6 +1640,7 @@
 				E7419EE119E675D900B5B764 /* Sources */,
 				E7419EE219E675D900B5B764 /* Frameworks */,
 				E7419EE319E675D900B5B764 /* Resources */,
+				E7B7FCE31A62E2DB00E49FE3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1689,24 +1650,6 @@
 			productName = QingChunApp;
 			productReference = E7419EE519E675D900B5B764 /* QingChunApp.app */;
 			productType = "com.apple.product-type.application";
-		};
-		E7419F0019E675D900B5B764 /* QingChunAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E7419F0E19E675DA00B5B764 /* Build configuration list for PBXNativeTarget "QingChunAppTests" */;
-			buildPhases = (
-				E7419EFD19E675D900B5B764 /* Sources */,
-				E7419EFE19E675D900B5B764 /* Frameworks */,
-				E7419EFF19E675D900B5B764 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E7419F0319E675D900B5B764 /* PBXTargetDependency */,
-			);
-			name = QingChunAppTests;
-			productName = QingChunAppTests;
-			productReference = E7419F0119E675D900B5B764 /* QingChunAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -1720,10 +1663,6 @@
 					E7419EE419E675D900B5B764 = {
 						CreatedOnToolsVersion = 6.0;
 						DevelopmentTeam = PAS524E8WG;
-					};
-					E7419F0019E675D900B5B764 = {
-						CreatedOnToolsVersion = 6.0;
-						TestTargetID = E7419EE419E675D900B5B764;
 					};
 				};
 			};
@@ -1741,7 +1680,6 @@
 			projectRoot = "";
 			targets = (
 				E7419EE419E675D900B5B764 /* QingChunApp */,
-				E7419F0019E675D900B5B764 /* QingChunAppTests */,
 			);
 		};
 /* End PBXProject section */
@@ -1837,14 +1775,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E7419EFF19E675D900B5B764 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E7B7FCE31A62E2DB00E49FE3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 8;
 			files = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+			shellPath = /bin/sh;
+			shellScript = "/usr/libexec/PlistBuddy -c “Set :CFBundleShortVersionString `git rev-list HEAD | wc -l | awk ‘{print $1}’`” “${TARGET_BUILD_DIR}”/${INFOPLIST_PATH}";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E7419EE119E675D900B5B764 /* Sources */ = {
@@ -1984,23 +1931,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E7419EFD19E675D900B5B764 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E7419F0819E675DA00B5B764 /* QingChunAppTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		E7419F0319E675D900B5B764 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E7419EE419E675D900B5B764 /* QingChunApp */;
-			targetProxy = E7419F0219E675D900B5B764 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		E7419F0919E675DA00B5B764 /* Debug */ = {
@@ -2020,7 +1951,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2040,6 +1972,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -2061,7 +1994,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2074,6 +2008,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -2084,7 +2019,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp-Prefix.pch";
@@ -2092,7 +2027,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
 			};
 			name = Debug;
 		};
@@ -2101,7 +2036,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_INPUT_FILETYPE = automatic;
 				GCC_PREFIX_HEADER = "QingChunApp/Supporting Files/QingChunApp-Prefix.pch";
@@ -2109,41 +2044,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-			};
-			name = Release;
-		};
-		E7419F0F19E675DA00B5B764 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = QingChunAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QingChunApp.app/QingChunApp";
-			};
-			name = Debug;
-		};
-		E7419F1019E675DA00B5B764 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = QingChunAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QingChunApp.app/QingChunApp";
+				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
 			};
 			name = Release;
 		};
@@ -2164,15 +2065,6 @@
 			buildConfigurations = (
 				E7419F0C19E675DA00B5B764 /* Debug */,
 				E7419F0D19E675DA00B5B764 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E7419F0E19E675DA00B5B764 /* Build configuration list for PBXNativeTarget "QingChunAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E7419F0F19E675DA00B5B764 /* Debug */,
-				E7419F1019E675DA00B5B764 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
