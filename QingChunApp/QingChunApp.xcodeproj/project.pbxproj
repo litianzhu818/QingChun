@@ -1640,7 +1640,7 @@
 				E7419EE119E675D900B5B764 /* Sources */,
 				E7419EE219E675D900B5B764 /* Frameworks */,
 				E7419EE319E675D900B5B764 /* Resources */,
-				E7B7FCE31A62E2DB00E49FE3 /* ShellScript */,
+				E7B7FCE41A62E55B00E49FE3 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1778,18 +1778,18 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E7B7FCE31A62E2DB00E49FE3 /* ShellScript */ = {
+		E7B7FCE41A62E55B00E49FE3 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
+			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/libexec/PlistBuddy -c “Set :CFBundleShortVersionString `git rev-list HEAD | wc -l | awk ‘{print $1}’`” “${TARGET_BUILD_DIR}”/${INFOPLIST_PATH}";
+			shellScript = "REV=`svnversion -nc | sed -e 's/^[^:]*://;s/[A-Za-z]//'`\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${REV}\" \"${TARGET_BUILD_DIR}\"/${INFOPLIST_PATH}";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2027,7 +2027,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2044,7 +2044,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5d8273af-52f6-429b-b914-00787740e056";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
