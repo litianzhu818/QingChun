@@ -65,11 +65,11 @@
     _badgeButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [button setFrame:CGRectMake(self.contentView.frame.size.width-4*DEFAULT_MARGIN_WIDTH, DEFAULT_MARGIN_HEIGHT, 2*DEFAULT_MARGIN_WIDTH, 2*DEFAULT_MARGIN_WIDTH)];
+        [button setFrame:CGRectMake(self.contentView.frame.size.width-6*DEFAULT_MARGIN_WIDTH, (self.contentView.frame.size.height-2*DEFAULT_MARGIN_WIDTH)/2, 2*DEFAULT_MARGIN_WIDTH, 2*DEFAULT_MARGIN_WIDTH)];
         
         //竖直居中显示
         CGPoint buttonCenterPoint = button.center;
-        buttonCenterPoint.y = self.contentView.center.y;
+        buttonCenterPoint.y = _imageView.center.y;
         button.center = buttonCenterPoint;
         
         UIImage *image = [UIImage imageNamed:@"new"];
@@ -88,7 +88,7 @@
     
     _titleLabel = ({
     
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(2*DEFAULT_MARGIN_WIDTH+_imageView.frame.size.width, DEFAULT_MARGIN_HEIGHT, DEFAULT_IMAGE_VIEW_HEIGHT, (self.contentView.frame.size.width-4*DEFAULT_MARGIN_WIDTH)-3*DEFAULT_MARGIN_WIDTH-DEFAULT_IMAGE_VIEW_HEIGHT)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(2*DEFAULT_MARGIN_WIDTH+_imageView.frame.size.width, DEFAULT_MARGIN_HEIGHT, (self.contentView.frame.size.width-4*DEFAULT_MARGIN_WIDTH)-3*DEFAULT_MARGIN_WIDTH-DEFAULT_IMAGE_VIEW_HEIGHT, DEFAULT_IMAGE_VIEW_HEIGHT)];
         [titleLabel setFont:F1];
         [self.contentView addSubview:titleLabel];
         titleLabel;
@@ -128,6 +128,11 @@
 + (CGFloat)CellHeight
 {
     return 2*DEFAULT_MARGIN_HEIGHT + DEFAULT_IMAGE_VIEW_HEIGHT;
+}
+
++ (NSString *)CellIdentifier
+{
+    return [NSString stringWithFormat:@"%@",@"QCBellTableViewCellIdentifier"];
 }
 
 /*

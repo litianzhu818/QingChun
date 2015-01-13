@@ -15,5 +15,6 @@
 @property (strong, nonatomic) QCBellDataModel *qcbellDataModel;
 
 + (CGFloat)CellHeight;
++ (NSString *)CellIdentifier;
 
 @end
