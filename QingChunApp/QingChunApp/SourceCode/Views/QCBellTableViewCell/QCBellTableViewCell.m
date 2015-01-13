@@ -10,7 +10,7 @@
 #import "QCBellDataModel.h"
 
 #define F0 [UIFont systemFontOfSize:10]
-#define F1 [UIFont boldSystemFontOfSize:22]
+#define F1 [UIFont boldSystemFontOfSize:17]
 
 #define DEFAULT_MARGIN_HEIGHT 5.0
 #define DEFAULT_MARGIN_WIDTH 2*DEFAULT_MARGIN_HEIGHT
