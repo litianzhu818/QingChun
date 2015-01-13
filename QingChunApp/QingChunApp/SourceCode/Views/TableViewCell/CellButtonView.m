@@ -21,13 +21,11 @@
         _likeButton = [self addButtonWithImage:@"timeline_icon_comment.png"
                             backgroundImage:@"timeline_card_leftbottom.png" buttonIndex:0];
         
-        _unlikeButton = [self addButtonWithImage:@"timeline_icon_retweet.png"
-                             backgroundImage:@"timeline_card_middlebottom.png" buttonIndex:1];
-        
         _shareButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
-                              backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
+                              backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:1];
         _commentButton = [self addButtonWithImage:@"timeline_icon_unlike.png"
-    backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:3];
+                                  backgroundImage:@"timeline_card_rightbottom.png" buttonIndex:2];
+
         
     }     return self;
 }
@@ -40,16 +38,12 @@
         _likeButton = [self addButtonWithImage:@"like.png"
                                backgroundImage:nil
                                    buttonIndex:0];
-        
-        _unlikeButton = [self addButtonWithImage:@"unlike.png"
-                                 backgroundImage:nil
-                                     buttonIndex:1];
-        
+                
         _shareButton = [self addButtonWithImage:@"share.png"
                                 backgroundImage:nil
-                                    buttonIndex:2];
+                                    buttonIndex:1];
         _commentButton = [self addButtonWithImage:@"comment.png"
-    backgroundImage:nil buttonIndex:3];
+                                  backgroundImage:nil buttonIndex:2];
     }
     
     return self;
@@ -76,7 +70,7 @@
 
 - (void)clikedOnButton:(UIButton *)button
 {
-    if (button.tag <= 1) {
+    if (button.tag < 1) {
         [button.imageView.layer addAnimation:_keyframeAnimation forKey:@"SHOW"];
     }
     

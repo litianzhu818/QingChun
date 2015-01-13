@@ -25,11 +25,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        /*
-        // 设置Dock的尺寸位置
-        CGFloat dockWidth = [UIScreen mainScreen].bounds.size.width - 2 * kCellMargins;
-        self.frame = CGRectMake(0, kCellDefaultHeight - kCellMargins - kStatusDockHeight, dockWidth, kStatusDockHeight);
-        */
+        
         // Dock贴紧父控件底部，即保持在Cell底部
         self.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         
@@ -49,6 +45,8 @@
     _keyframeAnimation.values = @[@(0.1),@(1.0),@(1.5)];
     _keyframeAnimation.keyTimes = @[@(0.0),@(0.5),@(0.8),@(1.0)];
     _keyframeAnimation.calculationMode = kCAAnimationLinear;
+    _keyframeAnimation.delegate = self;
+    [_keyframeAnimation setValue:@"toViewValue" forKey:@"toViewKey"];
 }
 
 #pragma mark - 2、添加子控件
@@ -64,7 +62,7 @@
     button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);                         // 图文间距
     
     // 按钮尺寸位置
-    CGFloat buttonWidth = self.frame.size.width / 4;
+    CGFloat buttonWidth = self.frame.size.width / 3;
     button.frame = CGRectMake(index * buttonWidth, 0, buttonWidth, self.frame.size.height);
     
     return button;
@@ -92,10 +90,20 @@
     
     // 根据模型数据内容设置菜单栏按钮文字
     [self setButton:_likeButton withTitle:@"喜欢" forCounts:cellButtonViewModel.likeCount];
-    [self setButton:_unlikeButton withTitle:@"讨厌" forCounts:cellButtonViewModel.unlikeCount];
     [self setButton:_shareButton withTitle:@"转发" forCounts:cellButtonViewModel.shareCount];
     [self setButton:_commentButton withTitle:@"评论" forCounts:cellButtonViewModel.commentCount];
 }
+
+/*
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if ([[anim valueForKey:@"toViewKey"] isEqualToString:@"toViewValue"]) {
+        
+        [_likeButton setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal]; // 按钮图标
+    }
+}
+ */
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
