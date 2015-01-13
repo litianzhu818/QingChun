@@ -162,14 +162,14 @@
     //这里的布局是：|-0-image-margin-image-margin-image-0|
     CGFloat originX = 0.0f;
     CGFloat originY = 0.0f;
-    for (NSUInteger index = 1; index <= row; ++index) {
+    for (NSUInteger index = 1; index <= row; ++index) {//行
         
         originX = 0.0f;
         originY = (index - 1) * (MULTIPLE_IMAGE_WIDTH + MULTIPLE_IMAGE_INTERVAL);
         
-        for (NSInteger item = 1; item <= column; ++item) {
-            //到目前的视图，总共的视图数量
-            NSUInteger sumOfViews = (index - 1) * 3 + item;
+        for (NSInteger item = 1; item <= column; ++item) {//列
+            //到目前的视图，总共的视图数量（行*列）
+            NSUInteger sumOfViews = (index - 1) * column + item;
             //如果目前视图数量大于总数了，那么需要停止布局
             if (sumOfViews > numOfImages) break;
             
