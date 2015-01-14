@@ -204,6 +204,10 @@
     
     _currentTableViewIndex = segmentedControl.selectedSegmentIndex;
     
+    if (_icarousel.currentItemIndex != segmentedControl.selectedSegmentIndex) {
+        [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
+    }
+    
     if ([(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) return;
     
     [_hotTableView headerBeginRefreshing];

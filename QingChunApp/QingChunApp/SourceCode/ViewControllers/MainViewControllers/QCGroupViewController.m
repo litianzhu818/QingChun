@@ -48,7 +48,7 @@
 {
     //Here initialization your UI parameters
     self.title = @"青春风铃";
-    
+    /*
     _tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), VIEW_W(self.view), VIEW_H(self.view)-VIEW_H(self.navigationController.navigationBar)-VIEW_H(self.tabBarController.tabBar)) style:UITableViewStylePlain];
         tableView.delegate = self;
@@ -68,12 +68,13 @@
         [self.view addSubview:tableView];
         tableView;
     });
+     */
 }
 
 -(void)initializationData
 {
     //Here initialization your data parameters
-    _dateSources = [self createDataSources];
+    //_dateSources = [self createDataSources];
     
 }
 
