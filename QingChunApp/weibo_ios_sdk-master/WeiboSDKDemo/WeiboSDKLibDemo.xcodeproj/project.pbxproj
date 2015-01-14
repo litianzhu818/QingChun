@@ -343,7 +343,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Wei Cheng (P9KMJ2UFM6)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiboSDKDemo/WeiboSDKDemo-Prefix.pch";
 				INFOPLIST_FILE = "WeiboSDKDemo/WeiboSDKDemo-Info.plist";
@@ -355,7 +356,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = SDKDemo;
-				PROVISIONING_PROFILE = "888aea8f-75ed-438c-a546-829aa2f53b19";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s i386 arm64 x86_64";
@@ -366,8 +367,8 @@
 		18E67ED517057D9000DFAD63 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Sina.Com Technology (China) Co., Ltd.";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Sina.Com Technology (China) Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: LI TIANZHU (7S8PFGQXM2)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WeiboSDKDemo/WeiboSDKDemo-Prefix.pch";
 				INFOPLIST_FILE = "WeiboSDKDemo/WeiboSDKDemo-Info.plist";
@@ -378,8 +379,8 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = SDKDemo;
-				PROVISIONING_PROFILE = "68651D66-3D0A-4B4B-9223-B15F00149092";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "68651D66-3D0A-4B4B-9223-B15F00149092";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5f42591b-38ce-4e9e-ad5a-d9b3ad51bbce";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv7 armv7s i386 arm64 x86_64";

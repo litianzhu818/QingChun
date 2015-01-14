@@ -933,8 +933,8 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TIANZHU (7S8PFGQXM2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/sdkDemo/framework\\\\\\\"",
@@ -967,7 +967,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5f42591b-38ce-4e9e-ad5a-d9b3ad51bbce";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos8.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -980,8 +980,8 @@
 			buildSettings = {
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CODE_SIGN_ENTITLEMENTS = "";
-				CODE_SIGN_IDENTITY = "iPhone Developer: LI TIANZHU (7S8PFGQXM2)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: LI TIANZHU (PAS524E8WG)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\\\\\\\"$(SRCROOT)/sdkDemo/framework\\\\\\\"",
@@ -1014,7 +1014,7 @@
 				);
 				OTHER_LDFLAGS = "-all_load";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "5f42591b-38ce-4e9e-ad5a-d9b3ad51bbce";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos8.0;
 				TARGETED_DEVICE_FAMILY = 1;
