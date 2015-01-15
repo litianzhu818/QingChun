@@ -10,6 +10,7 @@
 #import "MainTabBarController.h"
 #import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 
 @interface AppDelegate ()
 
@@ -74,6 +75,13 @@
 }
  */
 
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [TencentOAuth HandleOpenURL:url];
+}
+
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -91,7 +99,7 @@
         default:
             break;
     }
-    return YES;
+    return [TencentOAuth HandleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
