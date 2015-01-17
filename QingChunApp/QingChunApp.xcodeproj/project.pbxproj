@@ -62,6 +62,7 @@
 		E738582C1A6A1951003D864D /* libCoreDataStorage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E73858281A6A1951003D864D /* libCoreDataStorage.a */; };
 		E738582D1A6A1951003D864D /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E738582B1A6A1951003D864D /* GCDMulticastDelegate.m */; };
 		E73858311A6A23F7003D864D /* WeiBoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858301A6A23F7003D864D /* WeiBoManager.m */; };
+		E73858481A6A4290003D864D /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858471A6A4290003D864D /* UserInfoModel.m */; };
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
@@ -345,6 +346,8 @@
 		E738582B1A6A1951003D864D /* GCDMulticastDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDMulticastDelegate.m; sourceTree = "<group>"; };
 		E738582F1A6A23F7003D864D /* WeiBoManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiBoManager.h; sourceTree = "<group>"; };
 		E73858301A6A23F7003D864D /* WeiBoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiBoManager.m; sourceTree = "<group>"; };
+		E73858461A6A4290003D864D /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		E73858471A6A4290003D864D /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		E74176531A5544570068F0E7 /* NSObject+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Description.h"; sourceTree = "<group>"; };
 		E74176541A5544570068F0E7 /* NSObject+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Description.m"; sourceTree = "<group>"; };
 		E74176571A5545510068F0E7 /* DescriptionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionBuilder.h; sourceTree = "<group>"; };
@@ -986,6 +989,22 @@
 			path = WeiBoManager;
 			sourceTree = "<group>";
 		};
+		E73858451A6A426F003D864D /* UserInfoModel */ = {
+			isa = PBXGroup;
+			children = (
+				E73858461A6A4290003D864D /* UserInfoModel.h */,
+				E73858471A6A4290003D864D /* UserInfoModel.m */,
+			);
+			path = UserInfoModel;
+			sourceTree = "<group>";
+		};
+		E73858491A6A46D1003D864D /* LoginHelper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = LoginHelper;
+			sourceTree = "<group>";
+		};
 		E74176521A55442C0068F0E7 /* NSObject+Description */ = {
 			isa = PBXGroup;
 			children = (
@@ -1139,6 +1158,7 @@
 		E75E90D919F74718000F2CE9 /* UtilityHelpers */ = {
 			isa = PBXGroup;
 			children = (
+				E73858491A6A46D1003D864D /* LoginHelper */,
 				E79F59A519F7F823001CB6F2 /* SecurityTools */,
 				E75E90E219F7479C000F2CE9 /* SingletonManager */,
 				E75E90E419F7479C000F2CE9 /* CheckNetStatusTools */,
@@ -1239,6 +1259,7 @@
 		E79F599E19F7F621001CB6F2 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				E73858451A6A426F003D864D /* UserInfoModel */,
 				E7904AC71A4EAE3900B47110 /* CellButtonViewModel.h */,
 				E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */,
 				E7B725671A09212700882998 /* TestObjectModel.h */,
@@ -2123,6 +2144,7 @@
 				E73858181A6A02E5003D864D /* HttpSessionManager.m in Sources */,
 				E725A2961A07CDA900FCE03D /* UIImage+WebP.m in Sources */,
 				E73858171A6A02E5003D864D /* HttpSessionClient.m in Sources */,
+				E73858481A6A4290003D864D /* UserInfoModel.m in Sources */,
 				E7B8B32E1A51A3AF0015CE40 /* AFHTTPSessionManager.m in Sources */,
 				E79FB2D919FB61C100FBC703 /* QCBTableViewController.m in Sources */,
 				E7B6EA641A4FCE31009CF7D1 /* AutoCoding.m in Sources */,
@@ -2183,7 +2205,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "3ff53c23-72c4-45f9-bd2f-92226a7a14b5";
@@ -2220,7 +2242,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "3ff53c23-72c4-45f9-bd2f-92226a7a14b5";
 				SDKROOT = iphoneos;

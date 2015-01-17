@@ -47,7 +47,7 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
-    self.title = @"青春风铃";
+    self.title = @"青友团";
     /*
     _tableView = ({
         UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), VIEW_W(self.view), VIEW_H(self.view)-VIEW_H(self.navigationController.navigationBar)-VIEW_H(self.tabBarController.tabBar)) style:UITableViewStylePlain];

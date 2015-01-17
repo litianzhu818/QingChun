@@ -142,15 +142,17 @@ Single_implementation(TencentManager);
 //TeccentLoginDelegate methods
 - (void)tencentDidLogin
 {
-    LOG(@"%@",@"登录完成");
+    //登录完成
     [multicastDelegate tencentManager:self didCompletedLoginWithTencentOAuth:self.tencentOAuth];
     
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length]){
-        //  记录登录用户的OpenID、Token以及过期时间
+        //记录登录用户的OpenID、Token以及过期时间
         LOG(@"Token===>%@",_tencentOAuth.accessToken);
+        //获取用户基本信息
+        [self.tencentOAuth getUserInfo];
         [multicastDelegate tencentManager:self didLoginSucceedWithTencentOAuth:self.tencentOAuth];
     }else{
-        LOG(@"%@",@"登录不成功 没有获取accesstoken");
+        //登录不成功 没有获取accesstoken
         [multicastDelegate tencentManager:self didLoginFailedWithTencentOAuth:self.tencentOAuth];
     }
 }
@@ -159,10 +161,10 @@ Single_implementation(TencentManager);
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {
     if (cancelled){
-        //_labelTitle.text = @"用户取消登录";
+        //用户取消登录
         [multicastDelegate tencentManager:self didUserCancelLoginWithTencentOAuth:self.tencentOAuth];
     }else{
-        //_labelTitle.text = @"登录失败";
+        //登录失败
         [multicastDelegate tencentManager:self didLoginFailedWithTencentOAuth:self.tencentOAuth];
     }
 }
@@ -172,6 +174,14 @@ Single_implementation(TencentManager);
 {
     LOG(@"%@",@"无网络连接，请设置网络");
     [multicastDelegate tencentManager:self didHasNoNetworkWithTencentOAuth:self.tencentOAuth];
-} 
+}
+//Get the user sample info
+- (void)getUserInfoResponse:(APIResponse*) response
+{
+    @autoreleasepool {
+        NSDictionary *tempDic = [response.jsonResponse copy];
+        [multicastDelegate tencentManager:self didGetUserInfoWithTencentOAuth:self.tencentOAuth dictionary:tempDic];
+    }
+}
 
 @end
