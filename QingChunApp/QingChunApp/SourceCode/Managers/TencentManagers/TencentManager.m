@@ -19,7 +19,44 @@
 
 @implementation TencentManager
 
-Single_implementation(TencentManager);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark - Singleton class methods
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+static TencentManager *sharedInstance = nil;
+
++ (TencentManager *)sharedInstance
+{
+    @synchronized (self){
+        if (sharedInstance == nil) {
+            sharedInstance = [[self alloc] init];
+        }
+    }
+    return sharedInstance;
+}
+
++ (id)allocWithZone:(NSZone *)zone
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [super allocWithZone:zone];
+    });
+    return sharedInstance;
+}
+
+- (id)copyWithZone:(NSZone *)zone
+{
+    @synchronized (self){
+        if (sharedInstance == nil) {
+            sharedInstance = [[TencentManager alloc] init];
+        }
+    }
+    return sharedInstance;
+}
+
++ (BOOL)HandleOpenURL:(NSURL *)url
+{
+    return [TencentOAuth HandleOpenURL:url];
+}
 
 /**
  * Designated initializer.

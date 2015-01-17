@@ -7,7 +7,6 @@
 //
 
 #import "LTZManager.h"
-#import "SingletonManager.h"
 
 @class TencentOAuth;
 @protocol TencentManagerDelage;
@@ -16,7 +15,12 @@
 
 @property (strong, nonatomic, readonly) TencentOAuth *tencentOAuth;
 
-Single_interface(TencentManager);
++ (TencentManager *)sharedInstance;
++ (id)allocWithZone:(NSZone *)zone;
+
+- (id)copyWithZone:(NSZone *)zone;
+
++ (BOOL)HandleOpenURL:(NSURL *)url;
 
 - (void)authorize;
 - (void)authorizeInSafari:(BOOL)inSafari;

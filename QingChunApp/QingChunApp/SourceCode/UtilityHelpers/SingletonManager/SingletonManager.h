@@ -11,8 +11,8 @@
 
 //.h
 #define Single_interface(class)  + (class *)sharedInstance; \
-                                 +(id)allocWithZone:(NSZone *)zone; \
-                                 -(id)copyWithZone:(NSZone *)zone;
+                                 + (id)allocWithZone:(NSZone *)zone; \
+                                 - (id)copyWithZone:(NSZone *)zone;
 
 // .m
 // \ 代表下一行也属于宏
@@ -39,7 +39,7 @@ static class *sharedInstance = nil; \
     return sharedInstance; \
 } \
  \
--(id)copyWithZone:(NSZone *)zone \
+- (id)copyWithZone:(NSZone *)zone \
 { \
     @synchronized (self){ \
         if (sharedInstance == nil) { \

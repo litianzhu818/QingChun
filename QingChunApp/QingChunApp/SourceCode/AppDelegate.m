@@ -10,11 +10,12 @@
 #import "MainTabBarController.h"
 #import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
-#import <TencentOpenAPI/TencentOAuth.h>
-#import "WeiboSDK.h"
-#import "OtherSDKInfo.h"
+//#import <TencentOpenAPI/TencentOAuth.h>
+//#import "WeiboSDK.h"
+#import "LoginHelper.h"
 
-@interface AppDelegate ()<NetStatusManagerDelegate, WeiboSDKDelegate>
+
+@interface AppDelegate ()<NetStatusManagerDelegate>
 
 @end
 
@@ -81,33 +82,13 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
 {
-    BOOL result = NO;
-    
-    if (!url) return result;
-    
-    if ([[url scheme] isEqualToString:WeiBoAppURLScheme]) {
-        result = [WeiboSDK handleOpenURL:url delegate:self];
-    }else if ([[url scheme] isEqualToString:TenCentAppURLScheme]){
-        result = [TencentOAuth HandleOpenURL:url];
-    }
-    
-    return result;
+    return [LoginHelper HandleOpenURL:url];
 }
 
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    BOOL result = NO;
-    
-    if (!url) return result;
-    
-    if ([[url scheme] isEqualToString:WeiBoAppURLScheme]) {
-        result = [WeiboSDK handleOpenURL:url delegate:self];
-    }else if ([[url scheme] isEqualToString:TenCentAppURLScheme]){
-        result = [TencentOAuth HandleOpenURL:url];
-    }
-
     /*
     LOG(@"Calling Application Bundle ID: %@\nURL scheme:%@\nURL query: %@", sourceApplication,[url scheme],[url query]);
     NSString *infoString = [url query];
@@ -120,7 +101,7 @@
             break;
     }
      */
-    return result;
+    return [LoginHelper HandleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo

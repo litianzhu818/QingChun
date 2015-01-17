@@ -63,6 +63,7 @@
 		E738582D1A6A1951003D864D /* GCDMulticastDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E738582B1A6A1951003D864D /* GCDMulticastDelegate.m */; };
 		E73858311A6A23F7003D864D /* WeiBoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858301A6A23F7003D864D /* WeiBoManager.m */; };
 		E73858481A6A4290003D864D /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858471A6A4290003D864D /* UserInfoModel.m */; };
+		E738584C1A6A5093003D864D /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E738584B1A6A5093003D864D /* LoginHelper.m */; };
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
@@ -348,6 +349,8 @@
 		E73858301A6A23F7003D864D /* WeiBoManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeiBoManager.m; sourceTree = "<group>"; };
 		E73858461A6A4290003D864D /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
 		E73858471A6A4290003D864D /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		E738584A1A6A5093003D864D /* LoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHelper.h; sourceTree = "<group>"; };
+		E738584B1A6A5093003D864D /* LoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHelper.m; sourceTree = "<group>"; };
 		E74176531A5544570068F0E7 /* NSObject+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Description.h"; sourceTree = "<group>"; };
 		E74176541A5544570068F0E7 /* NSObject+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Description.m"; sourceTree = "<group>"; };
 		E74176571A5545510068F0E7 /* DescriptionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionBuilder.h; sourceTree = "<group>"; };
@@ -1001,6 +1004,8 @@
 		E73858491A6A46D1003D864D /* LoginHelper */ = {
 			isa = PBXGroup;
 			children = (
+				E738584A1A6A5093003D864D /* LoginHelper.h */,
+				E738584B1A6A5093003D864D /* LoginHelper.m */,
 			);
 			path = LoginHelper;
 			sourceTree = "<group>";
@@ -2072,6 +2077,7 @@
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
 				E7F1C98C1A527D7700E8DF67 /* NSString+Hashes.m in Sources */,
+				E738584C1A6A5093003D864D /* LoginHelper.m in Sources */,
 				E7B7FCE01A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m in Sources */,
 				E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */,
 				E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */,
