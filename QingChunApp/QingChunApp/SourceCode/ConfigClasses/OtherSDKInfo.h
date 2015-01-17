@@ -10,6 +10,8 @@
 
 UIKIT_EXTERN NSString *const TenCentAppID;
 UIKIT_EXTERN NSString *const TenCentAppKey;
+UIKIT_EXTERN NSString *const TenCentAppURLScheme;
 
 UIKIT_EXTERN NSString *const WeiBoAppID;
 UIKIT_EXTERN NSString *const WeiBoAppKey;
+UIKIT_EXTERN NSString *const WeiBoAppURLScheme;
