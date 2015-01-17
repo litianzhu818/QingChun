@@ -98,6 +98,8 @@ Single_implementation(TencentManager);
 {
     dispatch_block_t block = ^{
         
+        [multicastDelegate tencentManager:self willAuthorizeWithTencentOAuth:self.tencentOAuth];
+        
         [self.tencentOAuth authorize:_permissions inSafari:inSafari];
     };
     
@@ -116,7 +118,7 @@ Single_implementation(TencentManager);
     
     if (!_tencentOAuth) {
         _tencentOAuth = ({
-            TencentOAuth * tencentOAuth = [[TencentOAuth alloc] initWithAppId:TenCentAppID andDelegate:self];
+            TencentOAuth *tencentOAuth = [[TencentOAuth alloc] initWithAppId:TenCentAppID andDelegate:self];
             tencentOAuth.redirectURI = @"www.qq.com";//www.qcd.me
             tencentOAuth;
         });
@@ -160,6 +162,7 @@ Single_implementation(TencentManager);
 - (void)tencentDidLogin
 {
     LOG(@"%@",@"登录完成");
+    [multicastDelegate tencentManager:self didCompletedLoginWithTencentOAuth:self.tencentOAuth];
     
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
     {

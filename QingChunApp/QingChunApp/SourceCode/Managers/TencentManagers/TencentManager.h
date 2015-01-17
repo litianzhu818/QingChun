@@ -10,6 +10,7 @@
 #import "SingletonManager.h"
 
 @class TencentOAuth;
+@protocol TencentManagerDelage;
 
 @interface TencentManager : LTZManager
 
@@ -19,5 +20,18 @@ Single_interface(TencentManager);
 
 - (void)authorize;
 - (void)authorizeInSafari:(BOOL)inSafari;
+
+@end
+
+@protocol TencentManagerDelage <NSObject>
+
+@required
+
+@optional
+
+- (void)tencentManager:(TencentManager *)tencentManager willAuthorizeWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
 
 @end
