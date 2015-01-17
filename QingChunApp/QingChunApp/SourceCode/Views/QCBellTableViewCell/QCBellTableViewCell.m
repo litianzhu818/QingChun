@@ -111,7 +111,7 @@
 {
     NSString *bageNumberString = nil;
     if (bageNumber <= 99) {
-        bageNumberString = [NSString stringWithFormat:@"%ld",bageNumber];
+        bageNumberString = [NSString stringWithFormat:@"%ld",(unsigned long)bageNumber];
     }else{
         bageNumberString = [NSString stringWithFormat:@"%@",@"..."];
     }

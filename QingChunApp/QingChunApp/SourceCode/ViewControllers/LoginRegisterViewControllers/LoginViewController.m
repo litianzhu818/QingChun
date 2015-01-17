@@ -8,7 +8,7 @@
 
 #import "LoginViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
-
+#import "TencentManager.h"
 @implementation LoginViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -80,15 +80,21 @@
 }
 
 - (IBAction)ClikedWeiBoButton:(id)sender
-{}
+{
+}
 - (IBAction)ClikedOnQQButton:(id)sender
-{}
+{
+    [[TencentManager sharedInstance] authorize];
+}
 - (IBAction)ClikedOnLoginButton:(id)sender
-{}
+{
+}
 - (IBAction)ClikedOnBackPwdButton:(id)sender
-{}
+{
+}
 - (IBAction)ClikedOnRegisterButton:(id)sender
-{}
+{
+}
 - (BOOL)checkData
 {
     if (!self.nameTextField.text || [self.nameTextField.text isEqualToString:@""]) {

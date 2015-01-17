@@ -1,0 +1,23 @@
+//
+//  TencentManager.h
+//  QingChunApp
+//
+//  Created by Peter Lee on 15/1/17.
+//  Copyright (c) 2015年 Peter Lee. All rights reserved.
+//
+
+#import "LTZManager.h"
+#import "SingletonManager.h"
+
+@class TencentOAuth;
+
+@interface TencentManager : LTZManager
+
+@property (strong, nonatomic, readonly) TencentOAuth *tencentOAuth;
+
+Single_interface(TencentManager);
+
+- (void)authorize;
+- (void)authorizeInSafari:(BOOL)inSafari;
+
+@end

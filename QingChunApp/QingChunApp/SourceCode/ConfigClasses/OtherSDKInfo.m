@@ -9,7 +9,8 @@
 #import "OtherSDKInfo.h"
 
 NSString *const TenCentAppID = @"1104064235";
-NSString *const TenCentAppKey = @"AaYz5CEvDpMFZaxo";
+NSString *const TenCentAppKey = @"AaYz5CEvDpMFzAxo";
+
 
 NSString *const WeiBoAppID = @"68978670";
 NSString *const WeiBoAppKey = @"2612499d9586303f3341432af6d89b65";
