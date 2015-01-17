@@ -31,7 +31,8 @@ Single_interface(TencentManager);
 
 - (void)tencentManager:(TencentManager *)tencentManager willAuthorizeWithTencentOAuth:(TencentOAuth *)tencentOAuth;
 - (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
-- (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
-- (void)tencentManager:(TencentManager *)tencentManager didCompletedLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
-
+- (void)tencentManager:(TencentManager *)tencentManager didLoginSucceedWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didLoginFailedWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didHasNoNetworkWithTencentOAuth:(TencentOAuth *)tencentOAuth;
+- (void)tencentManager:(TencentManager *)tencentManager didUserCancelLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
 @end

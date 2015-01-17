@@ -26,28 +26,9 @@ Single_implementation(TencentManager);
  **/
 - (id)initWithDispatchQueue:(dispatch_queue_t)queue
 {
-    if ((self = [super init]))
+    if ((self = [super initWithDispatchQueue:queue]))
     {
-        if (queue)
-        {
-            managerQueue = queue;
-#if !OS_OBJECT_USE_OBJC
-            dispatch_retain(managerQueue);
-#endif
-        }
-        else
-        {
-            const char *managerQueueName = [[self managerName] UTF8String];
-            managerQueue = dispatch_queue_create(managerQueueName, NULL);
-        }
-        
-        managerQueueTag = &managerQueueTag;
-        dispatch_queue_set_specific(managerQueue, managerQueueTag, managerQueueTag, NULL);
-        
-        multicastDelegate = [[GCDMulticastDelegate alloc] init];
-        
         [self initParameters];
-        
     }
     return self;
 }
@@ -164,27 +145,25 @@ Single_implementation(TencentManager);
     LOG(@"%@",@"登录完成");
     [multicastDelegate tencentManager:self didCompletedLoginWithTencentOAuth:self.tencentOAuth];
     
-    if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
-    {
+    if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length]){
         //  记录登录用户的OpenID、Token以及过期时间
         LOG(@"Token===>%@",_tencentOAuth.accessToken);
-    }
-    else
-    {
+        [multicastDelegate tencentManager:self didLoginSucceedWithTencentOAuth:self.tencentOAuth];
+    }else{
         LOG(@"%@",@"登录不成功 没有获取accesstoken");
+        [multicastDelegate tencentManager:self didLoginFailedWithTencentOAuth:self.tencentOAuth];
     }
 }
 
 //TencentSessionDelegate methods
 -(void)tencentDidNotLogin:(BOOL)cancelled
 {
-    if (cancelled)
-    {
+    if (cancelled){
         //_labelTitle.text = @"用户取消登录";
-    }
-    else
-    {
+        [multicastDelegate tencentManager:self didUserCancelLoginWithTencentOAuth:self.tencentOAuth];
+    }else{
         //_labelTitle.text = @"登录失败";
+        [multicastDelegate tencentManager:self didLoginFailedWithTencentOAuth:self.tencentOAuth];
     }
 }
 
@@ -192,6 +171,7 @@ Single_implementation(TencentManager);
 -(void)tencentDidNotNetWork
 {
     LOG(@"%@",@"无网络连接，请设置网络");
+    [multicastDelegate tencentManager:self didHasNoNetworkWithTencentOAuth:self.tencentOAuth];
 } 
 
 @end
