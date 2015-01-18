@@ -39,6 +39,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     
     NSUInteger _currentTableViewIndex;
     NSMutableArray *_tableViewFirstLoadingStatuss;
+    NSMutableArray *_tableViewHasLoadingData;
     
     NSMutableArray *_tableViewCurrentPages;
     
@@ -222,38 +223,6 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     [_hotTableView headerBeginRefreshing];
 }
 
-- (void)refreshQCBData
-{
-    __block NSUInteger currentQCBDataPage = 0;
-    
-    
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%u",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
-        
-    
-        if (!error) {
-            [_newMsgs removeAllObjects];
-            currentQCBDataPage += 1;
-            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
-                                   NSMakeRange(0,[(NSArray *)data count])];
-            [_newMsgs insertObjects:data atIndexes:indexes];
-            [_tableView reloadData];
-            
-            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
-            
-            [self cacheListDataWithType:CacheDataTypeNew data:data];
-            
-        }
-        
-        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_tableView headerEndRefreshing];
-        
-        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:0] boolValue]) {
-            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
-        }
-        
-    }];
-}
-
 - (void)cacheListDataWithType:(CacheDataType)cacheType data:(id)data
 {
     NSString *cacheKey = nil;
@@ -275,6 +244,42 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     [_tableView reloadData];
     [_hotTableView reloadData];
 }
+
+
+- (void)refreshQCBData
+{
+    __block NSUInteger currentQCBDataPage = 0;
+    
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%u",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+        if (!error) {
+            [_newMsgs removeAllObjects];
+            currentQCBDataPage += 1;
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_newMsgs insertObjects:data atIndexes:indexes];
+            [_tableView reloadData];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+            [self cacheListDataWithType:CacheDataTypeNew data:data];
+            
+            if (![(NSNumber *)[_tableViewHasLoadingData objectAtIndex:0] boolValue]) {
+                [_tableViewHasLoadingData replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+            }
+        }
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView headerEndRefreshing];
+        
+        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:0] boolValue]) {
+            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+        }
+    
+    }];
+}
+
 
 - (void)loadingMoreQCBData
 {
@@ -301,7 +306,6 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
             [_tableView endUpdates];
             
             [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
-            [self cacheListDataWithType:CacheDataTypeNew data:data];
         }
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -335,13 +339,15 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
             [_hotTableView reloadData];
             
             [self cacheListDataWithType:CacheDataTypeHot data:data];
-            
+    
+            if (![(NSNumber *)[_tableViewHasLoadingData objectAtIndex:1] boolValue]) {
+                [_tableViewHasLoadingData replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+            }
         }
         
         if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) {
             [_tableViewFirstLoadingStatuss replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
         }
-        
     }];
 
 }
@@ -372,9 +378,6 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
             [_hotTableView endUpdates];
             
             [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
-            
-            [self cacheListDataWithType:CacheDataTypeHot data:data];
-            
         }
         
     }];
@@ -390,6 +393,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     
     _tableViewFirstLoadingStatuss = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     _tableViewCurrentPages = [NSMutableArray arrayWithObjects:[NSNumber numberWithUnsignedInteger:0],[NSNumber numberWithUnsignedInteger:0], nil];
+    _tableViewHasLoadingData = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:NO],[NSNumber numberWithBool:NO], nil];
     
     //开始刷新第一个UITableView数据
     [_tableView headerBeginRefreshing];
