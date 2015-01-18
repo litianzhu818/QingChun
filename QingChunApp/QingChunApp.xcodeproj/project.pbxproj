@@ -204,6 +204,7 @@
 		E7BB17301A6576260036D495 /* notice_me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB172A1A6576260036D495 /* notice_me@2x.png */; };
 		E7BB17311A6576260036D495 /* prise_me@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7BB172B1A6576260036D495 /* prise_me@2x.png */; };
 		E7BB17341A65864F0036D495 /* QCGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB17331A65864F0036D495 /* QCGroupViewController.m */; };
+		E7BB834A1A6BFCCF00230EF4 /* EGOCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BB83491A6BFCCF00230EF4 /* EGOCache.m */; };
 		E7CF628F19F7A057009A9A20 /* BaseTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */; };
 		E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7CF629219F7A359009A9A20 /* MainTabBarController.m */; };
 		E7CF62DC19F8980E009A9A20 /* me_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7CF62D419F8980E009A9A20 /* me_selected@2x.png */; };
@@ -574,6 +575,8 @@
 		E7BB172B1A6576260036D495 /* prise_me@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "prise_me@2x.png"; sourceTree = "<group>"; };
 		E7BB17321A65864F0036D495 /* QCGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QCGroupViewController.h; sourceTree = "<group>"; };
 		E7BB17331A65864F0036D495 /* QCGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QCGroupViewController.m; sourceTree = "<group>"; };
+		E7BB83481A6BFCCF00230EF4 /* EGOCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOCache.h; sourceTree = "<group>"; };
+		E7BB83491A6BFCCF00230EF4 /* EGOCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGOCache.m; sourceTree = "<group>"; };
 		E7CF628D19F7A057009A9A20 /* BaseTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTabBarController.h; sourceTree = "<group>"; };
 		E7CF628E19F7A057009A9A20 /* BaseTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabBarController.m; sourceTree = "<group>"; };
 		E7CF629119F7A359009A9A20 /* MainTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainTabBarController.h; sourceTree = "<group>"; };
@@ -778,6 +781,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E7BB83471A6BFCB600230EF4 /* EGOCache */,
 				E73858241A6A1951003D864D /* CoreDataStorage */,
 				E73858291A6A1951003D864D /* GCDMulticastDelegate */,
 				E7E4EBEE1A681A01003A2E1F /* OtherSDKs */,
@@ -1673,6 +1677,15 @@
 			path = QCFLViewController;
 			sourceTree = "<group>";
 		};
+		E7BB83471A6BFCB600230EF4 /* EGOCache */ = {
+			isa = PBXGroup;
+			children = (
+				E7BB83481A6BFCCF00230EF4 /* EGOCache.h */,
+				E7BB83491A6BFCCF00230EF4 /* EGOCache.m */,
+			);
+			path = EGOCache;
+			sourceTree = "<group>";
+		};
 		E7CF628C19F79F91009A9A20 /* BaseTabbarController */ = {
 			isa = PBXGroup;
 			children = (
@@ -2033,6 +2046,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7B8B3341A51A3AF0015CE40 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				E7BB834A1A6BFCCF00230EF4 /* EGOCache.m in Sources */,
 				E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */,
 				E7B8B32B1A51A3AF0015CE40 /* AFHTTPRequestOperation.m in Sources */,
 				E771B9F81A5FD5230087F14F /* QCBellViewController.m in Sources */,

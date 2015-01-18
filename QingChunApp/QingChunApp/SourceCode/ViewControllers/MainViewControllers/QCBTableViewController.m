@@ -17,6 +17,15 @@
 #import "MessageDisplayCell.h"
 #import "CellDisplayModel.h"
 
+#import "EGOCache.h"
+
+#define QCB_NEW_DATA_CACHE_KEY_STRING @"QCBTableViewNewSourceKey"
+#define QCB_HOT_DATA_CACHE_KEY_STRING @"QCBTableViewHotSourceKey"
+
+typedef NS_ENUM(NSUInteger, CacheDataType) {
+    CacheDataTypeNew = 0,
+    CacheDataTypeHot
+};
 
 @interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,iCarouselDataSource, iCarouselDelegate>
 {
@@ -218,7 +227,7 @@
     __block NSUInteger currentQCBDataPage = 0;
     
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%u",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
         
     
         if (!error) {
@@ -230,6 +239,8 @@
             [_tableView reloadData];
             
             [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+            [self cacheListDataWithType:CacheDataTypeNew data:data];
             
         }
         
@@ -243,11 +254,33 @@
     }];
 }
 
+- (void)cacheListDataWithType:(CacheDataType)cacheType data:(id)data
+{
+    NSString *cacheKey = nil;
+    
+    if (cacheType == CacheDataTypeHot) {
+        cacheKey = QCB_HOT_DATA_CACHE_KEY_STRING;
+    }else if (cacheType == CacheDataTypeNew){
+        cacheKey = QCB_NEW_DATA_CACHE_KEY_STRING;
+    }
+    
+    [[EGOCache globalCache] setObject:data forKey:cacheKey];
+}
+
+- (void)initTableViewDataSourceFromCache
+{
+    _newMsgs = [NSMutableArray arrayWithArray:(NSArray *)[[EGOCache globalCache] objectForKey:QCB_NEW_DATA_CACHE_KEY_STRING]];
+    _hotMsgs = [NSMutableArray arrayWithArray:(NSArray *)[[EGOCache globalCache] objectForKey:QCB_HOT_DATA_CACHE_KEY_STRING]];
+    
+    [_tableView reloadData];
+    [_hotTableView reloadData];
+}
+
 - (void)loadingMoreQCBData
 {
     __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%u",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
         
         
         
@@ -268,7 +301,7 @@
             [_tableView endUpdates];
             
             [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
-            
+            [self cacheListDataWithType:CacheDataTypeNew data:data];
         }
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
@@ -282,7 +315,7 @@
     __block NSUInteger currentQCBHotDataPage = 0;
     
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%u",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [_hotTableView headerEndRefreshing];
@@ -301,6 +334,8 @@
             
             [_hotTableView reloadData];
             
+            [self cacheListDataWithType:CacheDataTypeHot data:data];
+            
         }
         
         if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) {
@@ -315,7 +350,7 @@
 {
     __block NSUInteger currentQCBHotDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:1] unsignedIntegerValue];
     
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%u",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
         [_hotTableView footerEndRefreshing];
@@ -338,6 +373,8 @@
             
             [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
             
+            [self cacheListDataWithType:CacheDataTypeHot data:data];
+            
         }
         
     }];
@@ -349,8 +386,7 @@
     //Here initialization your data parameters
     _currentTableViewIndex = 0;
     _currentPage = 30;//The default value
-    _newMsgs = [NSMutableArray array];
-    _hotMsgs = [NSMutableArray array];
+    [self initTableViewDataSourceFromCache];
     
     _tableViewFirstLoadingStatuss = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
     _tableViewCurrentPages = [NSMutableArray arrayWithObjects:[NSNumber numberWithUnsignedInteger:0],[NSNumber numberWithUnsignedInteger:0], nil];

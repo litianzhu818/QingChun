@@ -34,6 +34,6 @@
 
 @optional
 
-- (void)weiBoManager:(WeiBoManager *)weiBoManager 
+//- (void)weiBoManager:(WeiBoManager *)weiBoManager
 
 @end

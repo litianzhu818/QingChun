@@ -11,6 +11,7 @@
 #import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
 #import "LoginHelper.h"
+#import "EGOCache.h"
 
 @interface AppDelegate ()<NetStatusManagerDelegate>
 
@@ -226,6 +227,8 @@
 - (void)startEngine
 {
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
+    //30day
+    [[EGOCache globalCache] setDefaultTimeoutInterval:30*24*60*60];
 }
 //关闭服务
 - (void)stopEngine
