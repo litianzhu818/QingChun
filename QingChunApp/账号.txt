@@ -8,3 +8,6 @@ QQ:
 App Key：68978670
 App Secret：2612499d9586303f3341432af6d89b65
 
+
+微博的bundle id 需要换成www.QCD.app,目前用www.afusion.app
+redirectURI 暂时：https://api.weibo.com/oauth2/default.html

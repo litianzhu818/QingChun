@@ -8,7 +8,8 @@
 
 #import "LoginViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
-#import "TencentManager.h"
+#import "LoginHelper.h"
+
 @implementation LoginViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -81,19 +82,33 @@
 
 - (IBAction)ClikedWeiBoButton:(id)sender
 {
+    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeWeibo
+                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
+                                                     
+                                                 } failure:^(LoginType loginType, NSError *error) {
+                                                     
+                                                 }];
 }
 - (IBAction)ClikedOnQQButton:(id)sender
 {
-    [[TencentManager sharedInstance] authorize];
+    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeTencent
+                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
+                                                     
+                                                 } failure:^(LoginType loginType, NSError *error) {
+                                                     
+                                                 }];
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
+    
 }
 - (IBAction)ClikedOnBackPwdButton:(id)sender
 {
+    
 }
 - (IBAction)ClikedOnRegisterButton:(id)sender
 {
+    
 }
 - (BOOL)checkData
 {

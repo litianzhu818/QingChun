@@ -10,10 +10,7 @@
 #import "MainTabBarController.h"
 #import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
-//#import <TencentOpenAPI/TencentOAuth.h>
-//#import "WeiboSDK.h"
 #import "LoginHelper.h"
-
 
 @interface AppDelegate ()<NetStatusManagerDelegate>
 
@@ -39,8 +36,10 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     //send the deviceToken
-//    NSString* device_token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-//    [[UserConfig sharedInstance] SetDeviceToken:device_token];
+    /*
+    NSString* device_token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    [[UserConfig sharedInstance] SetDeviceToken:device_token];
+     */
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -156,7 +155,7 @@
     {
         [application setKeepAliveTimeout:600 handler:^{
             
-            LOG(@"KeepAliveHandler");
+            NSLog(@"KeepAliveHandler");
             // Do other keep alive stuff here.
         }];
     }
@@ -281,7 +280,6 @@
          UIRemoteNotificationTypeAlert |
          UIRemoteNotificationTypeSound];
     }
-
 }
 
 -(void)setApplicationRootViewController:(UIViewController *)viewController

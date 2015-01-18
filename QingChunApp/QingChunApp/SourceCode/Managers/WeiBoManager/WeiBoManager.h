@@ -9,6 +9,8 @@
 #import "LTZManager.h"
 
 @class WeiboSDK;
+@protocol WeiboSDKDelegate;
+
 @interface WeiBoManager : LTZManager
 
 @property (strong, nonatomic, readonly) WeiboSDK *weiboSDK;
@@ -31,5 +33,7 @@
 @required
 
 @optional
+
+- (void)weiBoManager:(WeiBoManager *)weiBoManager 
 
 @end

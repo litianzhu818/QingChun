@@ -67,5 +67,27 @@ Single_implementation(UserConfig);
     return [[NSUserDefaults standardUserDefaults] objectForKey:qcdImageURLPrefix];
 }
 
+//存取用户Tencent的Token值
+-(void)SetTencentToken:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserTencentTokenStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetTencentToken
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserTencentTokenStr];
+}
+
+//存取用户Weibo的Token值
+-(void)SetWeiboToken:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserWeiboTokenStr];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetWeiboToken
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserWeiboTokenStr];
+}
+
 
 @end

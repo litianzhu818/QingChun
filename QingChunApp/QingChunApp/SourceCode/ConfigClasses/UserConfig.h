@@ -32,5 +32,13 @@ Single_interface(UserConfig);
 -(void)SetImageURLPrefix:(NSString *)value;
 -(NSString *)GetImageURLPrefix;
 
+//存取用户Tencent的Token值
+-(void)SetTencentToken:(NSString *)value;
+-(NSString *)GetTencentToken;
+
+//存取用户Weibo的Token值
+-(void)SetWeiboToken:(NSString *)value;
+-(NSString *)GetWeiboToken;
+
 
 @end

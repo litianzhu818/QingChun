@@ -66,45 +66,5 @@
 		<key>className</key>
 		<string>MyPostsViewController</string>
 	</dict>
-	<dict>
-		<key>name</key>
-		<string>用户反馈</string>
-		<key>imageName</key>
-		<string>my_feedback.png</string>
-		<key>className</key>
-		<string>MyPostsViewController</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>用户反馈</string>
-		<key>imageName</key>
-		<string>my_feedback.png</string>
-		<key>className</key>
-		<string>MyPostsViewController</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>用户反馈</string>
-		<key>imageName</key>
-		<string>my_feedback.png</string>
-		<key>className</key>
-		<string>MyPostsViewController</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>用户反馈</string>
-		<key>imageName</key>
-		<string>my_feedback.png</string>
-		<key>className</key>
-		<string>MyPostsViewController</string>
-	</dict>
-	<dict>
-		<key>name</key>
-		<string>用户反馈</string>
-		<key>imageName</key>
-		<string>my_feedback.png</string>
-		<key>className</key>
-		<string>MyPostsViewController</string>
-	</dict>
 </array>
 </plist>

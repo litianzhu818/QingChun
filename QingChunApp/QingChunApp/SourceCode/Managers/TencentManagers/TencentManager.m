@@ -81,7 +81,7 @@ static TencentManager *sharedInstance = nil;
     if (dispatch_get_specific(managerQueueTag))
         block();
     else
-        dispatch_sync(managerQueue, block);
+        dispatch_async(managerQueue, block);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -124,7 +124,7 @@ static TencentManager *sharedInstance = nil;
     if (dispatch_get_specific(managerQueueTag))
         block();
     else
-        dispatch_sync(managerQueue, block);
+        dispatch_async(managerQueue, block);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

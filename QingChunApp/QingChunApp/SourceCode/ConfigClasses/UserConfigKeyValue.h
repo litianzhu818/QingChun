@@ -9,13 +9,14 @@
 #ifndef QingChunApp_UserConfigKeyValue_h
 #define QingChunApp_UserConfigKeyValue_h
 
-NSString *const qcdUserName = @"QCD_USER_NAME_STRING";
-NSString *const qcdUserPassword = @"QCD_USER_PASSWORD_STRING";
-NSString *const qcdUserAutoLogin = @"QCD_USER_AUTO_LOGIN";
+NSString *const qcdUserName = @"QCD_USER_NAME_STRING_IOS";
+NSString *const qcdUserPassword = @"QCD_USER_PASSWORD_STRING_IOS";
+NSString *const qcdUserAutoLogin = @"QCD_USER_AUTO_LOGIN_IOS";
 
-NSString *const qcdUserHeadURLPrefix = @"QCD_USER_HEAD_URL_PREFIX_STRING";
-NSString *const qcdImageURLPrefix = @"QCD_IMAGE_URL_PREFIX_STRING";
+NSString *const qcdUserHeadURLPrefix = @"QCD_USER_HEAD_URL_PREFIX_STRING_IOS";
+NSString *const qcdImageURLPrefix = @"QCD_IMAGE_URL_PREFIX_STRING_IOS";
 
-//NSString *const qcdUserHeaderImageQuality = @"QCD_USER_HEADER_IMAGE_QUALITY";
+NSString *const qcdUserTencentTokenStr = @"QCD_USER_TENCENT_TOKEN_STRING_IOS";
+NSString *const qcdUserWeiboTokenStr = @"QCD_USER_WEIBO_TOKEN_STRING_IOS";
 
 #endif
