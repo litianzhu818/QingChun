@@ -6,20 +6,26 @@
 //  Copyright (c) 2014年 Peter Lee. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import QuartzCore;
 
 @class CellButtonViewModel;
 
-@interface BaseCellButtonView : UIImageView
+typedef NS_ENUM(NSUInteger, LikeButtonTouchStatusType) {
+    LikeButtonTouchStatusTypeDefault = 0,
+    LikeButtonTouchStatusTypeTouched,
+};
+
+@interface BaseCellButtonView : UIImageView 
 {
-    UIButton                *_likeButton;
-    UIButton                *_unlikeButton;
-    UIButton                *_shareButton;
-    UIButton                *_commentButton;
+    UIButton                        *_likeButton;
+    UIButton                        *_shareButton;
+    UIButton                        *_commentButton;
     
-    CellButtonViewModel     *_cellButtonViewModel;
-    CAKeyframeAnimation     *_keyframeAnimation;
+    CellButtonViewModel             *_cellButtonViewModel;
+    CAKeyframeAnimation             *_keyframeAnimation;
     
+    LikeButtonTouchStatusType       _likeButtonTouchStatusType;
 }
 
 @property (strong, nonatomic) CellButtonViewModel *cellButtonViewModel;

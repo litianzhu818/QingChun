@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>image</key>
+		<string>notice_me</string>
+		<key>title</key>
+		<string>@我的消息</string>
+		<key>tag</key>
+		<integer>0</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>message_me</string>
+		<key>title</key>
+		<string>评论</string>
+		<key>tag</key>
+		<integer>1</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>prise_me</string>
+		<key>title</key>
+		<string>赞</string>
+		<key>tag</key>
+		<integer>2</integer>
+	</dict>
+	<dict>
+		<key>image</key>
+		<string>message_private</string>
+		<key>title</key>
+		<string>我的私信</string>
+		<key>tag</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>

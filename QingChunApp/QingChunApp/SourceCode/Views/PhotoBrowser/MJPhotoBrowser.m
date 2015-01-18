@@ -31,6 +31,8 @@
     
     // 一开始的状态栏
     BOOL _statusBarHiddenInited;
+    
+    MJPhotoView *_currentPhotoView;
 }
 @end
 
@@ -153,11 +155,14 @@
 #pragma mark - MJPhotoView代理
 - (void)photoViewSingleTap:(MJPhotoView *)photoView
 {
-    [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
-    self.view.backgroundColor = [UIColor clearColor];
-    
-    // 移除工具条
-    [_toolbar removeFromSuperview];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].statusBarHidden = _statusBarHiddenInited;
+        self.view.backgroundColor = [UIColor clearColor];
+        
+        // 移除工具条
+        [_toolbar removeFromSuperview];
+        _currentPhotoView = nil;
+    });
 }
 
 - (void)photoViewDidEndZoom:(MJPhotoView *)photoView
@@ -180,18 +185,16 @@
 {
     if (buttonIndex == 0) {
         //存入相册
+        
+        [MBProgressHUD showMessag:@"正在保存..." toView:nil];
+        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             MJPhoto *photo = _photos[_currentPhotoIndex];
             UIImageWriteToSavedPhotosAlbum(photo.image, self, @selector(image:didFinishSavingWithError:contextInfo:), nil);
         });
     }else if (buttonIndex == 1) {
-        
-        for (MJPhotoView *photoView in _visiblePhotoViews) {
-            if (kPhotoViewIndex(photoView) == _currentPhotoIndex) {
-                [photoView showBigImage];
-                break;
-            }
-        }
+        //展示原图（比较大）
+        [_currentPhotoView showBigImage];
         
     }else if (buttonIndex == 2){
         //取消按钮
@@ -201,20 +204,26 @@
 
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
-    if (error) {
-        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
-    } else {
-        MJPhoto *photo = _photos[_currentPhotoIndex];
-        photo.save = YES;
-        [_toolbar setMenuButtonStatus:NO];
-        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (error) {
+            [MBProgressHUD showSuccess:@"保存失败" toView:nil];
+        } else {
+            MJPhoto *photo = _photos[_currentPhotoIndex];
+            photo.save = YES;
+            [_toolbar setMenuButtonStatus:NO];
+            [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+        }
+        
+    });
 }
 
 
 #pragma mark 显示照片
 - (void)showPhotos
 {
+    _currentPhotoView = nil;
+    
     // 只有一张图片
     if (_photos.count == 1) {
         [self showPhotoViewAtIndex:0];
@@ -273,6 +282,7 @@
     
     [_visiblePhotoViews addObject:photoView];
     [_photoScrollView addSubview:photoView];
+    _currentPhotoView = photoView;
     
     [self loadImageNearIndex:index];
 }

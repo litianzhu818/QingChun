@@ -53,7 +53,8 @@
 #pragma mark 控制状态栏的样式
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
-    return UIStatusBarStyleLightContent;
+    return UIStatusBarStyleLightContent;//浅色背景
+    //return UIStatusBarStyleDefault;//深色背景
 }
 
 
@@ -94,6 +95,7 @@
                           landscapeBackgroundImage:nil
                                     withShadowLine:NO];
     self.navigationBar.tintColor = UIColorFromRGB(0x757575);
+
     /*
     [self.navigationBar setTitleTextAttributes:@{
                                             NSForegroundColorAttributeName : UIColorFromRGB(0x757575)

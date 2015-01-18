@@ -50,11 +50,13 @@
 - (NSDate *)timeFormatted:(int)totalSeconds
 {
     NSDate  *date = [NSDate dateWithTimeIntervalSince1970:totalSeconds];
+    /*
     NSTimeZone *zone = [NSTimeZone systemTimeZone];
     NSInteger interval = [zone secondsFromGMTForDate: date];
     NSDate *localeDate = [date  dateByAddingTimeInterval: interval];
-    //NSLog(@"enddate=%@",localeDate);
-    return localeDate;
+    NSLog(@"enddate=%@",localeDate);
+     */
+    return date;
 }
 
 @end

@@ -46,23 +46,30 @@
 		self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         // 监听点击
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
-        singleTap.delaysTouchesBegan = YES;
-        singleTap.numberOfTapsRequired = 1;
-        [self addGestureRecognizer:singleTap];
-        
-        UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
-        doubleTap.numberOfTapsRequired = 2;
-        [self addGestureRecognizer:doubleTap];
-        
-        [singleTap requireGestureRecognizerToFail:doubleTap];
+        [self setupGestures];
     }
     return self;
 }
 
+- (void)setupGestures
+{
+    // 监听点击
+    UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+    singleTap.delaysTouchesBegan = YES;
+    singleTap.numberOfTapsRequired = 1;
+    [self addGestureRecognizer:singleTap];
+    
+    UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+    doubleTap.numberOfTapsRequired = 2;
+    [self addGestureRecognizer:doubleTap];
+    
+    [singleTap requireGestureRecognizerToFail:doubleTap];
+}
+
 
 #pragma mark - photoSetter
-- (void)setPhoto:(MJPhoto *)photo {
+- (void)setPhoto:(MJPhoto *)photo
+{
     
     _photo = photo;
     
@@ -76,6 +83,7 @@
     // 占位图片
     _imageView.image = _photo.srcImageView.image;
     
+    //还是先需要将图片放大到屏幕比例，再开始下载大图
     if (_photo.firstShow) { // 首次显示
         
         /*
@@ -91,7 +99,6 @@
             }];
         }
          */
-        
     } else {
         
         [self photoStartLoad];
@@ -203,7 +210,10 @@
     if (_photo.firstShow) { // 第一次显示的图片
         _photo.firstShow = NO; // 已经显示过了
         _imageView.frame = [_photo.srcImageView convertRect:_photo.srcImageView.bounds toView:nil];
-       
+        
+        //开始放大的动画时，需要清掉底部的小图片
+        _photo.srcImageView.image = nil;
+        
         //采取透明动画+位置动画，效果更加
         //_imageView.alpha = 0;
         
@@ -211,8 +221,9 @@
             _imageView.frame = imageFrame;
             //_imageView.alpha = 1.0;
         } completion:^(BOOL finished) {
+            
             // 设置底部的小图片
-            //_photo.srcImageView.image = _imageView.image;
+            _photo.srcImageView.image = _imageView.image;
             
             [self photoStartLoad];
         }];
@@ -223,11 +234,13 @@
 }
 
 #pragma mark - UIScrollViewDelegate
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+{
 	return _imageView;
 }
 
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView {
+- (void)scrollViewDidZoom:(UIScrollView *)scrollView
+{
     CGRect imageViewFrame = _imageView.frame;
     CGRect screenBounds = [UIScreen mainScreen].bounds;
     if (imageViewFrame.size.height > screenBounds.size.height) {
@@ -239,10 +252,24 @@
 }
 
 #pragma mark - 手势处理
-- (void)handleSingleTap:(UITapGestureRecognizer *)tap {
+- (void)handleSingleTap:(UITapGestureRecognizer *)tap
+{
     _doubleTap = NO;
     [self performSelector:@selector(hide) withObject:nil afterDelay:0.2];
 }
+
+- (void)handleDoubleTap:(UITapGestureRecognizer *)tap
+{
+    _doubleTap = YES;
+    
+    CGPoint touchPoint = [tap locationInView:self];
+    if (self.zoomScale == self.maximumZoomScale) {
+        [self setZoomScale:self.minimumZoomScale animated:YES];
+    } else {
+        [self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
+    }
+}
+
 - (void)hide
 {
     if (_doubleTap) return;
@@ -255,6 +282,7 @@
     
     // 清空底部的小图
     UIImage *tempImage = _photo.srcImageView.image;
+    _photo.srcImageView.image = nil;
     
     
     CGFloat duration = 0.15;
@@ -276,9 +304,8 @@
         }
     } completion:^(BOOL finished) {
         // 设置底部的小图片
-        
+        //_photo.srcImageView.image = tempImage;
         //改动之处 2013-01-03
-        //[_photo.srcImageView setImageURL:_photo.url placeholder:tempImage];
         [_photo.srcImageView sd_setImageWithURL:_photo.url placeholderImage:tempImage options:SDWebImageRetryFailed | SDWebImageLowPriority];
         
         // 通知代理
@@ -291,42 +318,45 @@
 
 - (void)showBigImage
 {
-        self.scrollEnabled = NO;
-        // 直接显示进度条
-        [_photoLoadingView showLoading];
-        [self addSubview:_photoLoadingView];
-        _hasProgressView = YES;
+    self.scrollEnabled = NO;
+    // 直接显示进度条
+    [_photoLoadingView showLoading];
+    [self addSubview:_photoLoadingView];
+    _hasProgressView = YES;
+    
+    UIImage *tempImage = _imageView.image;
         
-        __unsafe_unretained MJPhotoView *photoView = self;
-        __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+    __unsafe_unretained MJPhotoView *photoView = self;
+    __unsafe_unretained MJPhotoLoadingView *loading = _photoLoadingView;
+    
+    NSURL *downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
         
-        NSURL *downloadURL = [NSURL URLWithString:[[_photo.url absoluteString]stringByReplacingOccurrencesOfString:MESSAGE_IMAGE_QUALIRT_DEFAULT withString:MESSAGE_IMAGE_QUALIRT_HEIGHT]];
-        
-        [_imageView sd_setImageWithURL:downloadURL placeholderImage:_photo.srcImageView.image options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
+    [_imageView sd_setImageWithURL:downloadURL placeholderImage:tempImage options:SDWebImageRetryFailed|SDWebImageLowPriority progress:^(NSInteger receivedSize , NSInteger expectedSize) {
             
-            if (_hasProgressView && receivedSize > kMinProgress) {
-                loading.progress = (float)receivedSize/expectedSize;
-            }
+        if (_hasProgressView && receivedSize > kMinProgress) {
+            loading.progress = (float)receivedSize/expectedSize;
+        }
             
-        } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
-            [photoView photoDidFinishLoadWithImage:image];
-        }];
+    } completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType , NSURL *imageUrl) {
+            
+        if (image) {
+            photoView.scrollEnabled = YES;
+            _photo.image = image;
+            [loading removeFromSuperview];
+                
+        } else {
+            //[photoView addSubview:loading];
+            [loading showFailure];
+        }
+            
+        _hasProgressView = NO;
+            
+    }];
 }
 
 - (void)reset
 {
     _imageView.contentMode = UIViewContentModeScaleToFill;
-}
-
-- (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
-    _doubleTap = YES;
-    
-    CGPoint touchPoint = [tap locationInView:self];
-	if (self.zoomScale == self.maximumZoomScale) {
-		[self setZoomScale:self.minimumZoomScale animated:YES];
-	} else {
-		[self zoomToRect:CGRectMake(touchPoint.x, touchPoint.y, 1, 1) animated:YES];
-	}
 }
 
 - (void)dealloc

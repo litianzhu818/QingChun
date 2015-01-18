@@ -12,7 +12,12 @@
 
 @implementation NSObject (AutoProperties)
 
-- (NSString *)description
+/**
+ *  Auto descript the object for debug
+ *
+ *  @return The description string
+ */
+- (NSString *)autoDescription
 {
     return [DescriptionBuilder reflectDescription:self];
 }

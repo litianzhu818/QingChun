@@ -10,8 +10,9 @@
 #import "MainTabBarController.h"
 #import "SDWebImageManager.h"
 #import "AFNetworkActivityIndicatorManager.h"
+#import "LoginHelper.h"
 
-@interface AppDelegate ()
+@interface AppDelegate ()<NetStatusManagerDelegate>
 
 @end
 
@@ -35,8 +36,10 @@
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     //send the deviceToken
-//    NSString* device_token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
-//    [[UserConfig sharedInstance] SetDeviceToken:device_token];
+    /*
+    NSString* device_token = [[deviceToken description] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    [[UserConfig sharedInstance] SetDeviceToken:device_token];
+     */
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
@@ -53,7 +56,8 @@
 }
 /*
 //判断启动信息
--(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+ {
     if(!url){
         return NO;
     }
@@ -74,13 +78,17 @@
 }
  */
 
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [LoginHelper HandleOpenURL:url];
+}
+
+
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    if(!url){
-        return NO;
-    }
-    //字符串形式：Kissnapp://?XXXXXXXXXX
+    /*
     LOG(@"Calling Application Bundle ID: %@\nURL scheme:%@\nURL query: %@", sourceApplication,[url scheme],[url query]);
     NSString *infoString = [url query];
     switch ([infoString integerValue]) {
@@ -91,7 +99,8 @@
         default:
             break;
     }
-    return YES;
+     */
+    return [LoginHelper HandleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -119,7 +128,7 @@
 {
     //TODO:处理界面跳转
     LOG(@"收到本地推送：%@,%@",notification.alertBody,notification.userInfo.description);
-    NSDictionary *notificationDic = notification.userInfo;
+    //NSDictionary *notificationDic = notification.userInfo;
     //FIXME:这里需要弹出对话框进行提醒，目前默认同意
     /*
     if ([[notificationDic objectForKey:@"noticeType"] isEqualToString:@"ADD_FRIEND_REQUEST"]) {
@@ -146,7 +155,7 @@
     {
         [application setKeepAliveTimeout:600 handler:^{
             
-            LOG(@"KeepAliveHandler");
+            NSLog(@"KeepAliveHandler");
             // Do other keep alive stuff here.
         }];
     }
@@ -166,16 +175,18 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-//    [self stopEngine];
+    [self stopEngine];
 }
 
 //内存紧张就及时回收内存
 - (void)applicationDidReceiveMemoryWarning:(UIApplication *)application
 {
+    /*
     // 清除内存中的图片缓存
-    //SDWebImageManager *sdWebImageManager = [SDWebImageManager sharedManager];
-    //[sdWebImageManager cancelAll];
-    //[sdWebImageManager.imageCache clearMemory];
+    SDWebImageManager *sdWebImageManager = [SDWebImageManager sharedManager];
+    [sdWebImageManager cancelAll];
+    [sdWebImageManager.imageCache clearMemory];
+     */
 }
 
 /****************************************************初始化数据***********************************************************/
@@ -206,9 +217,6 @@
         [[SystemConfig sharedInstance] SetBaseURLStr:[systemAPIDic objectForKey:@"QCD_BASE_URL"]];
         [[SystemConfig sharedInstance] SetMessageURLStr:[systemAPIDic objectForKey:@"QCD_REQUEST_MSG_URL"]];
         [[SystemConfig sharedInstance] SetCheckSumSecret:[systemAPIDic objectForKey:@"CHECKSUM_SECRET"]];
-//        [[XMPPWorker sharedInstance] setHostPort:[(NSString*)[systemIbInfoDic objectForKey:@"XMPPServerPort"] intValue]];
-//        [[SystemConfig sharedInstance] SetFileUploadURL:[systemIbInfoDic objectForKey:@"FileUploadURL"]];
-//        [[SystemConfig sharedInstance] SetImageCompression:[[systemIbInfoDic objectForKey:@"ImageCompression"] floatValue]];
         [[UserConfig sharedInstance] SetAutoLogin:YES];
     });
     
@@ -222,8 +230,7 @@
 //关闭服务
 - (void)stopEngine
 {
-//    [[XMPPWorker sharedInstance] stopEngine];
-//    [[RTCWorker sharedInstance] stopEngine];
+
 }
 /*********************************************************************************************************************/
 
@@ -273,7 +280,6 @@
          UIRemoteNotificationTypeAlert |
          UIRemoteNotificationTypeSound];
     }
-
 }
 
 -(void)setApplicationRootViewController:(UIViewController *)viewController
@@ -281,7 +287,6 @@
     [self.window setRootViewController:viewController];
 }
 
-#pragma mark -
 #pragma mark CheckNetStatusDelegate Methods
 //运行断网处理
 -(void)DisconnectNetWork
@@ -305,85 +310,86 @@
 #pragma mark - Private methods
 
 
+/*
+//CoreData manager
+#pragma mark - Core Data stack
 
-//#pragma mark - Core Data stack
-//
-//@synthesize managedObjectContext = _managedObjectContext;
-//@synthesize managedObjectModel = _managedObjectModel;
-//@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-//
-//- (NSURL *)applicationDocumentsDirectory {
-//    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.qingchund.app.QingChunApp" in the application's documents directory.
-//    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-//}
-//
-//- (NSManagedObjectModel *)managedObjectModel {
-//    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
-//    if (_managedObjectModel != nil) {
-//        return _managedObjectModel;
-//    }
-//    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"QingChunApp" withExtension:@"momd"];
-//    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-//    return _managedObjectModel;
-//}
-//
-//- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-//    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
-//    if (_persistentStoreCoordinator != nil) {
-//        return _persistentStoreCoordinator;
-//    }
-//    
-//    // Create the coordinator and store
-//    
-//    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-//    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"QingChunApp.sqlite"];
-//    NSError *error = nil;
-//    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-//    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-//        // Report any error we got.
-//        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-//        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-//        dict[NSUnderlyingErrorKey] = error;
-//        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-//        // Replace this with code to handle the error appropriately.
-//        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//        abort();
-//    }
-//    
-//    return _persistentStoreCoordinator;
-//}
-//
-//
-//- (NSManagedObjectContext *)managedObjectContext {
-//    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
-//    if (_managedObjectContext != nil) {
-//        return _managedObjectContext;
-//    }
-//    
-//    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-//    if (!coordinator) {
-//        return nil;
-//    }
-//    _managedObjectContext = [[NSManagedObjectContext alloc] init];
-//    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-//    return _managedObjectContext;
-//}
-//
-//#pragma mark - Core Data Saving support
-//
-//- (void)saveContext {
-//    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
-//    if (managedObjectContext != nil) {
-//        NSError *error = nil;
-//        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
-//            // Replace this implementation with code to handle the error appropriately.
-//            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//            abort();
-//        }
-//    }
-//}
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+- (NSURL *)applicationDocumentsDirectory {
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.qingchund.app.QingChunApp" in the application's documents directory.
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
+    if (_managedObjectModel != nil) {
+        return _managedObjectModel;
+    }
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"QingChunApp" withExtension:@"momd"];
+    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    return _managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    // The persistent store coordinator for the application. This implementation creates and return a coordinator, having added the store for the application to it.
+    if (_persistentStoreCoordinator != nil) {
+        return _persistentStoreCoordinator;
+    }
+    
+    // Create the coordinator and store
+    
+    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"QingChunApp.sqlite"];
+    NSError *error = nil;
+    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        // Report any error we got.
+        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
+        dict[NSUnderlyingErrorKey] = error;
+        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+        // Replace this with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    return _persistentStoreCoordinator;
+}
+
+
+- (NSManagedObjectContext *)managedObjectContext {
+    // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
+    if (_managedObjectContext != nil) {
+        return _managedObjectContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+    return _managedObjectContext;
+}
+
+#pragma mark - Core Data Saving support
+
+- (void)saveContext {
+    NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
+    if (managedObjectContext != nil) {
+        NSError *error = nil;
+        if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
+            // Replace this implementation with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+        }
+    }
+}
+*/
 @end

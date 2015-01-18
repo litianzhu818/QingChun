@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
+#import "LoginHelper.h"
 
 @implementation LoginViewController
 
@@ -59,6 +60,9 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
+    
+    self.defaultImageView.image = [UIImage imageNamed:@"login_bg"];
+    
     [_weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_weiboButton setBackgroundImage:[UIImage imageNamed:@"weibo_se"] forState:UIControlStateSelected];
     
@@ -67,8 +71,6 @@
     [_loginButton setBackgroundImage:[UIImage imageNamed:@"login_se"] forState:UIControlStateSelected];
     [_backPwdButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     [_registerButton setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
-//    [_nameTextField setDelegate:self];
-//    [_pwdTextField setDelegate:self];
     
     [self.scrollView contentSizeToFit];
 }
@@ -79,15 +81,35 @@
 }
 
 - (IBAction)ClikedWeiBoButton:(id)sender
-{}
+{
+    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeWeibo
+                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
+                                                     
+                                                 } failure:^(LoginType loginType, NSError *error) {
+                                                     
+                                                 }];
+}
 - (IBAction)ClikedOnQQButton:(id)sender
-{}
+{
+    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeTencent
+                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
+                                                     
+                                                 } failure:^(LoginType loginType, NSError *error) {
+                                                     
+                                                 }];
+}
 - (IBAction)ClikedOnLoginButton:(id)sender
-{}
+{
+    
+}
 - (IBAction)ClikedOnBackPwdButton:(id)sender
-{}
+{
+    
+}
 - (IBAction)ClikedOnRegisterButton:(id)sender
-{}
+{
+    
+}
 - (BOOL)checkData
 {
     if (!self.nameTextField.text || [self.nameTextField.text isEqualToString:@""]) {

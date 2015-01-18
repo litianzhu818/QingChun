@@ -7,10 +7,9 @@
 //
 
 #import "QCBTableViewController.h"
-#import "EGORefreshTableHeaderView.h"
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
-
+#import "MJRefresh.h"
 #import "iCarousel.h"
 #import "HMSegmentedControl.h"
 
@@ -19,14 +18,8 @@
 #import "CellDisplayModel.h"
 
 
-@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,EGORefreshTableHeaderDelegate,iCarouselDataSource, iCarouselDelegate>
+@interface QCBTableViewController ()<UITableViewDataSource,UITableViewDelegate,iCarouselDataSource, iCarouselDelegate>
 {
-    EGORefreshTableHeaderView *_refreshHeaderView;
-    
-    //  Reloading var should really be your tableviews datasource
-    //  Putting it here for demo purposes
-    BOOL _reloading;
-
     iCarousel           *_icarousel;
     HMSegmentedControl  *_segmentControl;
     UITableView         *_hotTableView;
@@ -34,10 +27,13 @@
     NSUInteger _currentPage;
     NSMutableArray *_newMsgs;
     NSMutableArray *_hotMsgs;
+    
+    NSUInteger _currentTableViewIndex;
+    NSMutableArray *_tableViewFirstLoadingStatuss;
+    
+    NSMutableArray *_tableViewCurrentPages;
+    
 }
-
-- (void)reloadTableViewDataSource;
-- (void)doneLoadingTableViewData;
 
 @end
 
@@ -46,16 +42,25 @@
 
 - (void)dealloc
 {
-    _refreshHeaderView = nil;
+    [_newMsgs removeAllObjects];
+    [_hotMsgs removeAllObjects];
+    [_tableViewFirstLoadingStatuss removeAllObjects];
+    [_tableViewCurrentPages removeAllObjects];
 }
 - (void)viewWillAppear:(BOOL)animated
 {
-
+    [super viewWillAppear:animated];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-
+    [super viewDidDisappear:animated];
+    
+    [self.navigationController.navigationBar setHidden:NO];
+    [self.tabBarController.tabBar setHidden:NO];
 }
 
 - (void)viewDidLoad
@@ -90,22 +95,9 @@
     
     [self.navigationItem addLeftBarButtonItem:[UIBarButtonItem barButtonItemWithImageName:@"send_msg" highLightedImageName:@"send_msg_highlighted" addTarget:self action:@selector(sendMessage:)]];
     
-    if (_refreshHeaderView == nil) {
-        
-        EGORefreshTableHeaderView *refreshTableHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height)];
-        refreshTableHeaderView.delegate = self;
-        //refreshTableHeaderView.backgroundColor = [UIColor redColor];
-        [self.view insertSubview:refreshTableHeaderView belowSubview:self.tableView];
-        _refreshHeaderView = refreshTableHeaderView;
-    
-    }
-    
-    //  update the last update date
-    [_refreshHeaderView refreshLastUpdatedDate];
-    
     _segmentControl = ({
         // Segmented control with scrolling
-        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"最新", @"最热"]];
+        HMSegmentedControl *segmentedControl = [[HMSegmentedControl alloc] initWithSectionTitles:@[@"广场", @"精华"]];
         segmentedControl.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
         segmentedControl.frame = CGRectMake(0, 0, 200, 40);
         segmentedControl.segmentEdgeInset = UIEdgeInsetsMake(0, 10, 0, 10);
@@ -130,7 +122,7 @@
     });
     
     _icarousel = ({
-        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), VIEW_W(self.view), VIEW_H(self.view)-VIEW_BY(self.navigationController.navigationBar)-VIEW_H(self.tabBarController.tabBar))];
+        iCarousel *icarousel = [[iCarousel alloc] initWithFrame:CGRectMake(0, 0, VIEW_W(self.view), VIEW_H(self.view))];
         icarousel.dataSource = self;
         icarousel.delegate = self;
         icarousel.decelerationRate = 1.0;
@@ -148,7 +140,6 @@
 
 - (void)initTableView
 {
-    
     _tableView = ({
         
         UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
@@ -157,6 +148,23 @@
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
+        
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, -44, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
+        
+        //添加上拉下拉操作
+        [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"QCB_tableview_refresh_time_tag"];
+        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBData)];
+        
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        tableView.headerPullToRefreshText = @"下拉刷新青春吧数据";
+        tableView.headerReleaseToRefreshText = @"松开立即刷新";
+        tableView.headerRefreshingText = @"刷新青春吧数据中...";
+        
+        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
+        tableView.footerReleaseToRefreshText = @"松开立即加载";
+        tableView.footerRefreshingText = @"数据加载中...";
+        
         tableView;
     });
     
@@ -168,6 +176,23 @@
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
+        
+        tableView.contentInset = UIEdgeInsetsMake(64, 0, -44, 0);
+        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
+        
+        //添加上拉下拉操作
+        [tableView addHeaderWithTarget:self action:@selector(refreshQCBHotData) dateKey:@"QCB_hot_tableview_refresh_time_tag"];
+        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBHotData)];
+        
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        tableView.headerPullToRefreshText = @"下拉浏览最热的数据";
+        tableView.headerReleaseToRefreshText = @"松开立即获取数据";
+        tableView.headerRefreshingText = @"正在获取最热的数据...";
+        
+        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
+        tableView.footerReleaseToRefreshText = @"松开立即加载";
+        tableView.footerRefreshingText = @"数据加载中...";
+        
         tableView;
     });
 }
@@ -176,102 +201,214 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
     NSLog(@"Selected index %ld (via UIControlEventValueChanged)", (long)segmentedControl.selectedSegmentIndex);
-    [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
+    
+    _currentTableViewIndex = segmentedControl.selectedSegmentIndex;
+    
+    if (_icarousel.currentItemIndex != segmentedControl.selectedSegmentIndex) {
+        [_icarousel setCurrentItemIndex:segmentedControl.selectedSegmentIndex];
+    }
+    
+    if ([(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) return;
+    
+    [_hotTableView headerBeginRefreshing];
+}
+
+- (void)refreshQCBData
+{
+    __block NSUInteger currentQCBDataPage = 0;
+    
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+    
+        if (!error) {
+            [_newMsgs removeAllObjects];
+            currentQCBDataPage += 1;
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_newMsgs insertObjects:data atIndexes:indexes];
+            [_tableView reloadData];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+        }
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView headerEndRefreshing];
+        
+        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:0] boolValue]) {
+            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
+        }
+        
+    }];
+}
+
+- (void)loadingMoreQCBData
+{
+    __block NSUInteger currentQCBDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:0] unsignedIntegerValue];
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBDataPage + 1) type:3 identifier:[NSString stringWithFormat:@"%lu",(currentQCBDataPage + 1)] block:^(id data, NSError *error) {
+        
+        
+        
+        if (!error) {
+            
+            currentQCBDataPage += 1;
+            
+            [_tableView beginUpdates];
+            
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                [_newMsgs addObject:obj];
+                
+                [_tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_newMsgs.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+                
+            }];
+            
+            [_tableView endUpdates];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:0 withObject:[NSNumber numberWithUnsignedInteger:currentQCBDataPage]];
+            
+        }
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_tableView footerEndRefreshing];
+        
+    }];
+}
+
+- (void)refreshQCBHotData
+{
+    __block NSUInteger currentQCBHotDataPage = 0;
+    
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_hotTableView headerEndRefreshing];
+        
+        if (!error) {
+            
+            currentQCBHotDataPage += 1;
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
+            
+             
+            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
+                                   NSMakeRange(0,[(NSArray *)data count])];
+            [_hotMsgs removeAllObjects];
+            [_hotMsgs insertObjects:data atIndexes:indexes];
+            
+            [_hotTableView reloadData];
+            
+        }
+        
+        if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:1] boolValue]) {
+            [_tableViewFirstLoadingStatuss replaceObjectAtIndex:1 withObject:[NSNumber numberWithBool:YES]];
+        }
+        
+    }];
+
+}
+
+- (void)loadingMoreQCBHotData
+{
+    __block NSUInteger currentQCBHotDataPage = [(NSNumber *)[_tableViewCurrentPages objectAtIndex:1] unsignedIntegerValue];
+    
+    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%lu",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
+        
+        // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+        [_hotTableView footerEndRefreshing];
+        
+        if (!error) {
+            
+            currentQCBHotDataPage += 1;
+            
+            [_hotTableView beginUpdates];
+            
+            [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                
+                [_hotMsgs addObject:obj];
+                
+                [_hotTableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_hotMsgs.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationRight];
+                
+            }];
+            
+            [_hotTableView endUpdates];
+            
+            [_tableViewCurrentPages replaceObjectAtIndex:1 withObject:[NSNumber numberWithUnsignedInteger:currentQCBHotDataPage]];
+            
+        }
+        
+    }];
 }
 
 
 -(void)initializationData
 {
     //Here initialization your data parameters
+    _currentTableViewIndex = 0;
     _currentPage = 30;//The default value
     _newMsgs = [NSMutableArray array];
     _hotMsgs = [NSMutableArray array];
-
-    [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(_currentPage + 1) type:1 identifier:[NSString stringWithFormat:@"%d",(_currentPage + 1)] block:^(id data, NSError *error) {
-        
-        if (!error) {
-            _currentPage += 1;
-            NSIndexSet *indexes = [NSIndexSet indexSetWithIndexesInRange:
-                                   NSMakeRange(0,[(NSArray *)data count])];
-            [_newMsgs insertObjects:data atIndexes:indexes];
-            [_tableView reloadData];
-        }
     
-     }];
+    _tableViewFirstLoadingStatuss = [NSMutableArray arrayWithObjects:[NSNumber numberWithBool:YES],[NSNumber numberWithBool:NO], nil];
+    _tableViewCurrentPages = [NSMutableArray arrayWithObjects:[NSNumber numberWithUnsignedInteger:0],[NSNumber numberWithUnsignedInteger:0], nil];
+    
+    //开始刷新第一个UITableView数据
+    [_tableView headerBeginRefreshing];
 }
 
 - (IBAction)sendMessage:(id)sender
 {
 
 }
-
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
-
-- (void)reloadTableViewDataSource{
-    
-    //  should be calling your tableviews data source model to reload
-    //  put here just for demo
-    _reloading = YES;
-    
-}
-
-- (void)doneLoadingTableViewData{
-    
-    //  model should call this when its done loading
-    _reloading = NO;
-    [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
-    
-}
-
-
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
-
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
-    [_refreshHeaderView egoRefreshScrollViewWillBeginScroll:scrollView];
-}
-
+#pragma mark - UIScrollViewDelegate methods
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-    [_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
+    //Selected index's color changed.
+    if (scrollView.contentSize.height <= CGRectGetHeight(scrollView.bounds)-50) {
+        [self hideToolBar:NO];
+        return;
+    }
+    static float newY = 0;
+    static float oldY = 0;
+    newY= scrollView.contentOffset.y;
+    if (ABS(newY - oldY) > 50) {
+        if (newY > oldY && newY > 1) {
+            [self hideToolBar:YES];
+        }else if(newY < oldY ){
+            [self hideToolBar:NO];
+        }
+        oldY = newY;
+    }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
-    
-    [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-    
-}
-
-
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
-
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view
+- (void)hideToolBar:(BOOL)hide
 {
+    if (hide == self.tabBarController.tabBar.hidden) return;
     
-    [self reloadTableViewDataSource];
-    [self performSelector:@selector(doneLoadingTableViewData) withObject:nil afterDelay:3.0];
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake((hide ? 0.0:64.0), 0.0, (hide ? 0.0:-44.0), 0.0);
     
+    CGFloat apha = (hide ? 0.0:1.0);
+    
+    [UIView animateWithDuration:0.25 animations:^{
+        
+        _tableView.contentInset = contentInsets;
+        _tableView.scrollIndicatorInsets = contentInsets;
+        
+        _hotTableView.contentInset = contentInsets;
+        _hotTableView.scrollIndicatorInsets = contentInsets;
+        
+        self.navigationController.navigationBar.alpha = apha;
+        
+    } completion:^(BOOL finished) {
+        
+        [self.tabBarController.tabBar setHidden:hide];
+        
+    }];
 }
 
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view
-{
-    
-    return _reloading; // should return if data source model is reloading
-    
-}
 
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view
-{
-    
-    return [NSDate date]; // should return date data source was last changed
-    
-}
-
-//#pragma mark - iCarousel
 #pragma mark iCarouselDataSource methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
@@ -334,8 +471,6 @@
     return result;
 }
 
-
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageDisplayCell *cell = [tableView dequeueReusableCellWithIdentifier:[MessageDisplayCell cellIdentifier] forIndexPath:indexPath];
@@ -368,6 +503,9 @@
     
     return height;
 }
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
