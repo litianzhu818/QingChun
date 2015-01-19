@@ -265,7 +265,7 @@
     [_progressView setProgressViewStyle:UIProgressViewStyleDefault];
     [_progressView setHidden:YES];
     
-    _permissions = [[NSArray arrayWithObjects:
+    _permissions = [[NSMutableArray arrayWithObjects:
                      kOPEN_PERMISSION_GET_USER_INFO,
                      kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
                      kOPEN_PERMISSION_ADD_ALBUM,

@@ -64,6 +64,8 @@
 		E73858311A6A23F7003D864D /* WeiBoManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858301A6A23F7003D864D /* WeiBoManager.m */; };
 		E73858481A6A4290003D864D /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858471A6A4290003D864D /* UserInfoModel.m */; };
 		E738584C1A6A5093003D864D /* LoginHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E738584B1A6A5093003D864D /* LoginHelper.m */; };
+		E73858511A6D30E2003D864D /* LTZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858501A6D30E2003D864D /* LTZLocationManager.m */; };
+		E73858531A6D30F3003D864D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73858521A6D30F3003D864D /* MapKit.framework */; };
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
@@ -352,6 +354,9 @@
 		E73858471A6A4290003D864D /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
 		E738584A1A6A5093003D864D /* LoginHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginHelper.h; sourceTree = "<group>"; };
 		E738584B1A6A5093003D864D /* LoginHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginHelper.m; sourceTree = "<group>"; };
+		E738584F1A6D30E2003D864D /* LTZLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTZLocationManager.h; sourceTree = "<group>"; };
+		E73858501A6D30E2003D864D /* LTZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTZLocationManager.m; sourceTree = "<group>"; };
+		E73858521A6D30F3003D864D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E74176531A5544570068F0E7 /* NSObject+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Description.h"; sourceTree = "<group>"; };
 		E74176541A5544570068F0E7 /* NSObject+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Description.m"; sourceTree = "<group>"; };
 		E74176571A5545510068F0E7 /* DescriptionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionBuilder.h; sourceTree = "<group>"; };
@@ -668,6 +673,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E73858531A6D30F3003D864D /* MapKit.framework in Frameworks */,
 				E7E4EC0C1A681AB1003A2E1F /* libz.dylib in Frameworks */,
 				E7E4EC0A1A681AA5003A2E1F /* libstdc++.dylib in Frameworks */,
 				E7E4EC081A681A98003A2E1F /* CoreTelephony.framework in Frameworks */,
@@ -1014,6 +1020,15 @@
 			path = LoginHelper;
 			sourceTree = "<group>";
 		};
+		E738584E1A6D30E2003D864D /* LTZLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				E738584F1A6D30E2003D864D /* LTZLocationManager.h */,
+				E73858501A6D30E2003D864D /* LTZLocationManager.m */,
+			);
+			path = LTZLocationManager;
+			sourceTree = "<group>";
+		};
 		E74176521A55442C0068F0E7 /* NSObject+Description */ = {
 			isa = PBXGroup;
 			children = (
@@ -1298,6 +1313,7 @@
 			isa = PBXGroup;
 			children = (
 				E7E4EC0B1A681AB1003A2E1F /* libz.dylib */,
+				E73858521A6D30F3003D864D /* MapKit.framework */,
 				E7E4EC091A681AA5003A2E1F /* libstdc++.dylib */,
 				E7E4EC071A681A98003A2E1F /* CoreTelephony.framework */,
 				E7E4EC051A681A8C003A2E1F /* libsqlite3.dylib */,
@@ -1527,6 +1543,7 @@
 		E7B8B2FA1A519CBC0015CE40 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				E738584E1A6D30E2003D864D /* LTZLocationManager */,
 				E738582E1A6A23E0003D864D /* WeiBoManager */,
 				E73858191A6A0302003D864D /* TencentManagers */,
 				E738580F1A6A02E5003D864D /* HttpRequestManagers */,
@@ -2066,6 +2083,7 @@
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E7FC67C31A45646500AF45A6 /* CircleView.m in Sources */,
 				E7B9E4591A46963F00D7775C /* UITabBar+BackgroundImage.m in Sources */,
+				E73858511A6D30E2003D864D /* LTZLocationManager.m in Sources */,
 				E75EB0211A5C07CC00755972 /* MJRefreshBaseView.m in Sources */,
 				E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */,
 				E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */,
