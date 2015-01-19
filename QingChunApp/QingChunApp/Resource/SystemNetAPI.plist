@@ -8,5 +8,7 @@
 	<string>http://api.qcd.me</string>
 	<key>QCD_REQUEST_MSG_URL</key>
 	<string>api/readlist</string>
+	<key>QCB_LOGIN_URL</key>
+	<string>api/runLogin</string>
 </dict>
 </plist>

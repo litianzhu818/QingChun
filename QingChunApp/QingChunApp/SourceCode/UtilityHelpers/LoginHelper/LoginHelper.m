@@ -9,6 +9,7 @@
 #import "LoginHelper.h"
 #import "WeiBoManager.h"
 #import "TencentManager.h"
+#import "LTZLocationManager.h"
 #import "OtherSDKInfo.h"
 
 @interface LoginHelper ()<WeiBoManagerDelegate, TencentManagerDelage>
@@ -213,10 +214,12 @@ static LoginHelper *sharedInstance = nil;
 //登录失败
 - (void)tencentManager:(TencentManager *)tencentManager didLoginFailedWithTencentOAuth:(TencentOAuth *)tencentOAuth
 {
+    
 }
 //没有网络
 - (void)tencentManager:(TencentManager *)tencentManager didHasNoNetworkWithTencentOAuth:(TencentOAuth *)tencentOAuth
 {
+    
 }
 //用户取消了登录过程
 - (void)tencentManager:(TencentManager *)tencentManager didUserCancelLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth
@@ -226,6 +229,7 @@ static LoginHelper *sharedInstance = nil;
 //获取到用户的基本信息
 - (void)tencentManager:(TencentManager *)tencentManager didGetUserInfoWithTencentOAuth:(TencentOAuth *)tencentOAuth dictionary:(NSDictionary *)userInfoDictionary
 {
+    
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - WeiBoManagerDelegate methods

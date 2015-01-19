@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "TPKeyboardAvoidingScrollView.h"
 #import "LoginHelper.h"
+#import "LTZLocationManager.h"
 
 @implementation LoginViewController
 
@@ -100,7 +101,9 @@
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
-    
+    [LTZLocationManager locationWithBlock:^(NSString *state, NSString *city, NSString *address, CLLocationCoordinate2D locationCorrrdinate, NSError *error) {
+        
+    }];
 }
 - (IBAction)ClikedOnBackPwdButton:(id)sender
 {

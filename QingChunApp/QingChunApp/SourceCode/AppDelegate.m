@@ -218,6 +218,7 @@
         [[SystemConfig sharedInstance] SetBaseURLStr:[systemAPIDic objectForKey:@"QCD_BASE_URL"]];
         [[SystemConfig sharedInstance] SetMessageURLStr:[systemAPIDic objectForKey:@"QCD_REQUEST_MSG_URL"]];
         [[SystemConfig sharedInstance] SetCheckSumSecret:[systemAPIDic objectForKey:@"CHECKSUM_SECRET"]];
+        [[SystemConfig sharedInstance] SetLoginURLStr:[systemAPIDic objectForKey:@"QCB_LOGIN_URL"]];
         [[UserConfig sharedInstance] SetAutoLogin:YES];
     });
     

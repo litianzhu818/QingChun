@@ -7,16 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <MapKit/MapKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-typedef void (^LocationBlock)(CLLocationCoordinate2D locationCorrrdinate);
-typedef void (^LocationErrorBlock) (NSError *error);
-typedef void(^NSStringBlock)(NSString *cityString);
-typedef void(^NSStringBlock)(NSString *addressString);
+typedef void (^LocationBlock)(NSString *state, NSString *city, NSString *address, CLLocationCoordinate2D locationCorrrdinate, NSError *error);
 
-@interface LTZLocationManager : NSObject<MKMapViewDelegate>
+@interface LTZLocationManager : NSObject
 
-@property(nonatomic,strong, readonly) CLLocationManager *locationManager;
+@property(nonatomic, strong, readonly) CLLocationManager *locationManager;
 
 @property(nonatomic, assign, readonly) double latitude;
 @property(nonatomic, assign, readonly) double longitude;
@@ -29,37 +26,13 @@ typedef void(^NSStringBlock)(NSString *addressString);
  *
  *  @param locaiontBlock locaiontBlock description
  */
-- (void) getLocationCoordinate:(LocationBlock) locaiontBlock ;
++ (void)locationWithBlock:(LocationBlock)locaiontBlock;
 
 /**
- *  获取坐标和地址
+ *  获取坐标
  *
  *  @param locaiontBlock locaiontBlock description
- *  @param addressBlock  addressBlock description
  */
-- (void) getLocationCoordinate:(LocationBlock) locaiontBlock  withAddress:(NSStringBlock) addressBlock;
-
-/**
- *  获取地址
- *
- *  @param addressBlock addressBlock description
- */
-- (void) getAddress:(NSStringBlock)addressBlock;
-
-/**
- *  获取城市
- *
- *  @param cityBlock cityBlock description
- */
-- (void) getCity:(NSStringBlock)cityBlock;
-
-/**
- *  获取城市和定位失败
- *
- *  @param cityBlock  cityBlock description
- *  @param errorBlock errorBlock description
- */
-- (void) getCity:(NSStringBlock)cityBlock error:(LocationErrorBlock) errorBlock;
-
+- (void)locationWithBlock:(LocationBlock)locaiontBlock;
 
 @end

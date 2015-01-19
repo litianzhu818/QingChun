@@ -16,5 +16,8 @@
                              type:(NSUInteger)type
                        identifier:(NSString *)identifier
                             block:(void (^)(id data, NSError *error))block;
+- (void)loginWithIdentifier:(NSString *)identifier
+                     params:(NSDictionary*)params
+                      block:(void (^)(id data, NSError *error))block;
 
 @end

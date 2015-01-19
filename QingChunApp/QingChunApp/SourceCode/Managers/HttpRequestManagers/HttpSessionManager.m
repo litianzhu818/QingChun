@@ -25,6 +25,13 @@
     return _sharedManager;
 }
 
+- (void)loginWithIdentifier:(NSString *)identifier
+                     params:(NSDictionary*)params
+                      block:(void (^)(id data, NSError *error))block
+{
+    NSString *path = [[SystemConfig sharedInstance] GetLoginURLStr];
+}
+
 - (void)requestQCDMessageWithPage:(NSUInteger)page
                              type:(NSUInteger)type
                        identifier:(NSString *)identifier
@@ -32,7 +39,7 @@
 {
     NSString *path = [[SystemConfig sharedInstance] GetMessageURLStr];
   
-    NSString *checksumStr = [NSString stringWithFormat:@"%@%ld%ld%@",identifier,page,type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
+    NSString *checksumStr = [NSString stringWithFormat:@"%@%ld%ld%@",identifier,(unsigned long)page,(unsigned long)type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
     
     NSDictionary *params = @{@"page":[NSNumber numberWithUnsignedInteger:page],
                              @"type":[NSNumber numberWithUnsignedInteger:type],

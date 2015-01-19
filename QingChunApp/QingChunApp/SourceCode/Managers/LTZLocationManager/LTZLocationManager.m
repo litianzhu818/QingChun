@@ -8,19 +8,18 @@
 
 #import "LTZLocationManager.h"
 
-@interface LTZLocationManager ()<CLLocationManagerDelegate>
+@interface LTZLocationManager ()<CLLocationManagerDelegate, UIAlertViewDelegate>
 {
     CLLocationManager   *_locationManager;
     CLGeocoder          *_geocoder;
     
     double              _latitude;
     double              _longitude;
+    
+    UIAlertView         *_locationAlert;
 }
 
 @property (nonatomic, strong) LocationBlock locationBlock;
-@property (nonatomic, strong) LocationErrorBlock errorBlock;
-@property (nonatomic, strong) NSStringBlock cityBlock;
-@property (nonatomic, strong) NSStringBlock addressBlock;
 
 @end
 
@@ -39,6 +38,11 @@
     return _sharedObject;
 }
 
++ (void)locationWithBlock:(LocationBlock)locaiontBlock
+{
+    [[LTZLocationManager shareLocation] locationWithBlock:locaiontBlock];
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -49,54 +53,44 @@
 
 -(void)initLocationInfo
 {
+    _locationAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"定位不可用，您可以在\"设置\"->\"隐私\"->\"定位服务\"中打开设置" delegate:self cancelButtonTitle:@"知道了" otherButtonTitles:nil,nil];
+    
     if (![CLLocationManager locationServicesEnabled]){
-        UIAlertView *locationServiceAlert = [[UIAlertView alloc] initWithTitle:nil message:@"定位不可用" delegate:nil cancelButtonTitle:@"知道了" otherButtonTitles:nil];
-        [locationServiceAlert show];
+        [_locationAlert show];
     }else{
+
         if (_locationManager == nil) {
             _locationManager = [[CLLocationManager alloc] init];
             _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+            //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             _locationManager.distanceFilter = 1000.0f;
         }
+
     }
 }
 
-- (void) getLocationCoordinate:(LocationBlock) locaiontBlock
+- (void)locationWithBlock:(LocationBlock)locaiontBlock
 {
     self.locationBlock = [locaiontBlock copy];
-    [self startLocation];
-}
-
-- (void) getLocationCoordinate:(LocationBlock) locaiontBlock  withAddress:(NSStringBlock) addressBlock
-{
-    self.locationBlock = [locaiontBlock copy];
-    self.addressBlock = [addressBlock copy];
-    [self startLocation];
-}
-
-- (void) getAddress:(NSStringBlock)addressBlock
-{
-    self.addressBlock = [addressBlock copy];
-    [self startLocation];
-}
-
-- (void) getCity:(NSStringBlock)cityBlock
-{
-    self.cityBlock = [cityBlock copy];
-    [self startLocation];
-}
-
-- (void) getCity:(NSStringBlock)cityBlock error:(LocationErrorBlock) errorBlock
-{
-    self.cityBlock = [cityBlock copy];
-    self.errorBlock = [errorBlock copy];
     [self startLocation];
 }
 
 - (void)startLocation
 {
-    [self.locationManager startUpdatingLocation];
+    if (![CLLocationManager locationServicesEnabled]){
+        [_locationAlert show];
+    }else{
+        if (_locationManager != nil) {//重新初始化，防止关闭服务后重开导致的CLLocationManager不能用
+            _locationManager = nil;
+            _locationManager = [[CLLocationManager alloc] init];
+            _locationManager.delegate = self;
+            _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+            //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            _locationManager.distanceFilter = 1000.0f;
+        }
+        [self.locationManager startUpdatingLocation];
+    }
 }
 
 - (void)stopLocation
@@ -114,63 +108,58 @@
         _geocoder = [[CLGeocoder alloc] init];
     }
     
-    [_geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray *array, NSError *error) {
-        
-        if (array.count > 0) {
+    [_geocoder reverseGeocodeLocation:[locations firstObject] completionHandler:^(NSArray *array, NSError *error) {@autoreleasepool {
             
-            NSString *countryCode = nil;
-            NSString *country = nil;
-            NSString *state = nil;
-            NSString *city = nil;
-            NSString *subLocality = nil;
-            NSString *street = nil;
-            CLLocationCoordinate2D coordinate = [(CLLocation *)[locations firstObject] coordinate];
-            
-            CLPlacemark *placeMark = [array firstObject];
-            
-            if (placeMark){
+            if (array.count > 0) {
                 
-                NSDictionary *addressDic = placeMark.addressDictionary;
-                country     =   placeMark.country;//国家名称
-                countryCode =   placeMark.ISOcountryCode;//国家代码
-                state       =   [addressDic objectForKey:@"State"];
-                city        =   [addressDic objectForKey:@"City"];
-                subLocality =   [addressDic objectForKey:@"SubLocality"];
-                street      =   [addressDic objectForKey:@"Street"];
+                NSString *countryCode = nil;
+                NSString *country = nil;
+                NSString *state = nil;
+                NSString *city = nil;
+                NSString *subLocality = nil;
+                NSString *street = nil;
+                CLLocationCoordinate2D coordinate = [(CLLocation *)[locations firstObject] coordinate];
                 
-                [self stopLocation];
+                CLPlacemark *placeMark = [array firstObject];
+                
+                if (placeMark){
+                    
+                    NSDictionary *addressDic = placeMark.addressDictionary;
+                    country     =   placeMark.country;//国家名称
+                    countryCode =   placeMark.ISOcountryCode;//国家代码
+                    state       =   [addressDic objectForKey:@"State"];
+                    city        =   [addressDic objectForKey:@"City"];
+                    subLocality =   [addressDic objectForKey:@"SubLocality"];
+                    street      =   [addressDic objectForKey:@"Street"];
+                    
+                    [self stopLocation];
+                }
+                
+                if (_locationBlock) {
+                    _locationBlock(state,city,[NSString stringWithFormat:@"%@%@%@%@",state,city,subLocality,street],coordinate,nil);
+                    _locationBlock = NULL;
+                }
+                
+            }else if (error == nil && [array count] == 0){
+                
+                NSLog(@"No results were returned.");
+                
+                NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"No results were returned."                                                                      forKey:NSLocalizedDescriptionKey];
+                NSError *error = [NSError errorWithDomain:@"com.qcd.me" code:100 userInfo:userInfo];
+                
+                if (self.locationBlock) {
+                    self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
+                }
+                
+            }else if (error != nil){
+                
+                NSLog(@"An error occurred = %@", error);
+                
+                if (self.locationBlock) {
+                    self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
+                }
             }
-            
-            if (_cityBlock) {
-                _cityBlock(city);
-                _cityBlock = nil;
-            }
-            
-            if (_locationBlock) {
-                _locationBlock(coordinate);
-                _locationBlock = nil;
-            }
-            
-            if (_addressBlock) {
-                _addressBlock([NSString stringWithFormat:@"%@%@%@%@",state,city,subLocality,street]);
-                _addressBlock = nil;
-            }
-            
-        }else if (error == nil && [array count] == 0){
-            
-            NSLog(@"No results were returned.");
-            
-            NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"No results were returned."                                                                      forKey:NSLocalizedDescriptionKey];
-            NSError *error = [NSError errorWithDomain:@"com.qcd.me" code:100 userInfo:userInfo];
-            self.errorBlock(error);
-            
-        }else if (error != nil){
-            
-            NSLog(@"An error occurred = %@", error);
-            
-            self.errorBlock(error);
-        }
-    }];
+        }}];
     
     [self stopLocation];
 
@@ -179,7 +168,18 @@
 - (void)locationManager:(CLLocationManager *)manager
     didFailWithError:(NSError *)error
 {
-    self.errorBlock(error);
+    if (self.locationBlock) {
+        self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
+    }
+}
+#pragma mark - UIAlertViewDelegate methods
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        
+    }else if (buttonIndex == 1){
+        
+    }
 }
 
 @end
