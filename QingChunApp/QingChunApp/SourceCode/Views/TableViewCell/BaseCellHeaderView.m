@@ -306,8 +306,8 @@
     CGRect textLabelFrame = _textLabel.frame;
     
      _textHeight = [contentText sizeWithWidth:_textWidth
-                                                                     font:TEXT_FONT
-                                                            lineBreakMode:NSLineBreakByWordWrapping].height;
+                                         font:TEXT_FONT
+                                lineBreakMode:NSLineBreakByWordWrapping].height;
     
     textLabelFrame.size.height = _textHeight;
     
