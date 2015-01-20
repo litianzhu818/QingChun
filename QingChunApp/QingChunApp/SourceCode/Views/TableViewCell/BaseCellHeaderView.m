@@ -161,11 +161,13 @@
     //_textLabel.backgroundColor = [UIColor lightGrayColor];
     _textLabel.linkAttributes = @{
                                   (__bridge NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],
-                                  (NSString *)kCTForegroundColorAttributeName : (__bridge id)[UIColor blueColor].CGColor
+                                  (NSString *)kCTFontAttributeName : [UIFont italicSystemFontOfSize:15],
+                                  (NSString *)kCTForegroundColorAttributeName : (__bridge id)UIColorFromRGB(0x61a653).CGColor
                                   };
     _textLabel.activeLinkAttributes = @{
-                                        (NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],
-                                        (NSString *)kCTForegroundColorAttributeName : (__bridge id)[[UIColor blueColor] CGColor]
+                                        (__bridge NSString *)kCTUnderlineStyleAttributeName : [NSNumber numberWithBool:NO],
+                                        (NSString *)kCTFontAttributeName : [UIFont italicSystemFontOfSize:15],
+                                        (NSString *)kCTForegroundColorAttributeName : (__bridge id)UIColorFromRGB(0x61a653).CGColor
                                         };
     _textLabel.delegate = self;
     
@@ -245,7 +247,7 @@
         //url链接
         NSRegularExpression *regexp = URLRegularExpression();
         [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
-            
+            /*
             UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
             CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
             if (italicFont) {
@@ -257,14 +259,14 @@
                 [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)UIColorFromRGB(0x61a653).CGColor range:result.range];
             }
 
-            
+            */
             [urlLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
         }];
         
         //电话号码链接
         regexp = PhoneRegularExpression();
         [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
-            
+            /*
             UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
             CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
             if (italicFont) {
@@ -275,14 +277,14 @@
                 [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
                 [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)UIColorFromRGB(0x61a653).CGColor range:result.range];
             }
-
+             */
             [phoneLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
         }];
         
         //email链接
         regexp = EmailRegularExpression();
         [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
-            
+            /*
             UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
             CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
             if (italicFont) {
@@ -293,7 +295,7 @@
                 [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
                 [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)TEXT_COLOR.CGColor range:result.range];
             }
-
+             */
             [emailLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
         }];
 
@@ -330,8 +332,12 @@
     
     [emailLinks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         
-        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", obj]];
-        [_textLabel addLinkToURL:url withRange:[contentText rangeOfString:obj]];
+        //NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"mailto://%@", obj]];
+        NSDictionary *dic = @{@"type":@"email",
+                              @"value":obj
+                              };
+        [_textLabel addLinkToTransitInformation:dic withRange:[contentText rangeOfString:obj]];
+
     }];
     
     [phoneLinks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -339,6 +345,8 @@
         [_textLabel addLinkToPhoneNumber:obj withRange:[contentText rangeOfString:obj]];
         
     }];
+    
+    //[_textLabel sizeToFit];
 }
 /*
 - (CGSize)headerViewSize
@@ -443,16 +451,25 @@ static inline NSRegularExpression * PhoneRegularExpression() {
 
 #pragma mark - TTAtributuedLabelDelegate methods
 
-- (void)attributedLabel:(TTTAttributedLabel *)label
-   didSelectLinkWithURL:(NSURL *)url
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
 {
     [[UIApplication sharedApplication] openURL:url];
 }
 
-- (void)attributedLabel:(TTTAttributedLabel *)label
-didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
 {
-    NSString *telUrl = [NSString stringWithFormat:@"telprompt:%@",phoneNumber];
+    NSString *telUrl = [NSString stringWithFormat:@"telprompt://%@",phoneNumber];
+    NSURL *url = [[NSURL alloc] initWithString:telUrl];
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithTransitInformation:(NSDictionary *)components
+{
+    NSString *telUrl = nil;
+    if ([[components objectForKey:@"type"] isEqualToString:@"email"]) {
+        telUrl = [NSString stringWithFormat:@"mailto://%@",[components objectForKey:@"value"]];
+    }
+    
     NSURL *url = [[NSURL alloc] initWithString:telUrl];
     [[UIApplication sharedApplication] openURL:url];
 }
