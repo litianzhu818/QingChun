@@ -27,6 +27,10 @@
 #define TEXT_FONT               [UIFont systemFontOfSize:15]                    // 微博正文字号
 #define TEXT_COLOR              [UIColor darkGrayColor]
 
+#define REGEX_URL_STRING        @"(https?|ftp|file)+://[^\\s]*"
+#define REGEX_EMAIL_STRING      @"\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*.\\w+([-.]\\w+)*"
+#define REGEX_PHONE_STRING      @"\\d{3}-\\d{8}|\\d{3}-\\d{7}|\\d{4}-\\d{8}|\\d{4}-\\d{7}|1+[358]+\\d{9}|\\d{8}|\\d{7}"
+
 
 @interface BaseCellHeaderView ()<TTTAttributedLabelDelegate>
 {
@@ -39,8 +43,8 @@
     CGFloat                         _textWidth;
     CGFloat                         _textHeight;
     CellHeaderViewType              _cellHeaderViewType;
+    
 }
-
 @end
 
 @implementation BaseCellHeaderView
@@ -223,17 +227,83 @@
     if (!_cellDisplayModel) {
         return;
     }
+
     [_photoButton sd_setImageWithURL:[NSURL URLWithString:_cellDisplayModel.cellDisplayUserModel.imgUrlStr] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"default"]];
     [_nameLabel setText:_cellDisplayModel.cellDisplayUserModel.name];
     [_timeLabel setText:_cellDisplayModel.cellContentModel.time];
-    [_textLabel setText:_cellDisplayModel.cellContentModel.text afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+    
+    __block NSMutableArray *urlLinks = [NSMutableArray array];
+    __block NSMutableArray *emailLinks = [NSMutableArray array];
+    __block NSMutableArray *phoneLinks = [NSMutableArray array];
+    
+    NSString *contentText = _cellDisplayModel.cellContentModel.text;
+    
+    [_textLabel setText:contentText afterInheritingLabelAttributesAndConfiguringWithBlock:^NSMutableAttributedString *(NSMutableAttributedString *mutableAttributedString) {
+        //字符串的全位置
+        NSRange stringRange = NSMakeRange(0, [mutableAttributedString length]);
+        
+        //url链接
+        NSRegularExpression *regexp = URLRegularExpression();
+        [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
+            
+            UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
+            CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
+            if (italicFont) {
+                [mutableAttributedString removeAttribute:(NSString *)kCTFontAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)italicFont range:result.range];
+                CFRelease(italicFont);
+                
+                [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)UIColorFromRGB(0x61a653).CGColor range:result.range];
+            }
+
+            
+            [urlLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
+        }];
+        
+        //电话号码链接
+        regexp = PhoneRegularExpression();
+        [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
+            
+            UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
+            CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
+            if (italicFont) {
+                [mutableAttributedString removeAttribute:(NSString *)kCTFontAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)italicFont range:result.range];
+                CFRelease(italicFont);
+                
+                [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)UIColorFromRGB(0x61a653).CGColor range:result.range];
+            }
+
+            [phoneLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
+        }];
+        
+        //email链接
+        regexp = EmailRegularExpression();
+        [regexp enumerateMatchesInString:[mutableAttributedString string] options:0 range:stringRange usingBlock:^(NSTextCheckingResult *result, __unused NSMatchingFlags flags, __unused BOOL * stop) {
+            
+            UIFont *italicSystemFont = [UIFont italicSystemFontOfSize:15];
+            CTFontRef italicFont = CTFontCreateWithName((__bridge CFStringRef)italicSystemFont.fontName, italicSystemFont.pointSize, NULL);
+            if (italicFont) {
+                [mutableAttributedString removeAttribute:(NSString *)kCTFontAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString *)kCTFontAttributeName value:(__bridge id)italicFont range:result.range];
+                CFRelease(italicFont);
+                
+                [mutableAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:result.range];
+                [mutableAttributedString addAttribute:(NSString*)kCTForegroundColorAttributeName value:(id)TEXT_COLOR.CGColor range:result.range];
+            }
+
+            [emailLinks addObject:[[mutableAttributedString string] substringWithRange:result.range]];
+        }];
+
         //这里配置显示字体的属性
         return mutableAttributedString;
     }];
     
     CGRect textLabelFrame = _textLabel.frame;
     
-     _textHeight = [_cellDisplayModel.cellContentModel.text sizeWithWidth:_textWidth
+     _textHeight = [contentText sizeWithWidth:_textWidth
                                                                      font:TEXT_FONT
                                                             lineBreakMode:NSLineBreakByWordWrapping].height;
     
@@ -251,6 +321,24 @@
     }
     
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, height);
+    
+    [urlLinks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", obj]];
+        [_textLabel addLinkToURL:url withRange:[contentText rangeOfString:obj]];
+    }];
+    
+    [emailLinks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@", obj]];
+        [_textLabel addLinkToURL:url withRange:[contentText rangeOfString:obj]];
+    }];
+    
+    [phoneLinks enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        
+        [_textLabel addLinkToPhoneNumber:obj withRange:[contentText rangeOfString:obj]];
+        
+    }];
 }
 /*
 - (CGSize)headerViewSize
@@ -284,6 +372,51 @@
         [self.delegate baseCellHeaderView:self clikedOnMoreButton:sender];
     }
 }
+
+#pragma mark - NSRegularExpression objects
+
+//The url link
+static inline NSRegularExpression * URLRegularExpression() {
+    static NSRegularExpression *_urlRegularExpression = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _urlRegularExpression = [[NSRegularExpression alloc] initWithPattern:REGEX_URL_STRING
+                                                                     options:NSRegularExpressionCaseInsensitive
+                                                                       error:nil];
+    });
+    
+    return _urlRegularExpression;
+}
+
+//The email link
+static inline NSRegularExpression * EmailRegularExpression() {
+    static NSRegularExpression *_emailRegularExpression = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _emailRegularExpression = [[NSRegularExpression alloc] initWithPattern:REGEX_EMAIL_STRING
+                                                                       options:NSRegularExpressionCaseInsensitive
+                                                                         error:nil];
+    });
+    
+    return _emailRegularExpression;
+}
+
+//The phone number link
+static inline NSRegularExpression * PhoneRegularExpression() {
+    static NSRegularExpression *_phoneRegularExpression = nil;
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _phoneRegularExpression = [[NSRegularExpression alloc] initWithPattern:REGEX_PHONE_STRING
+                                                                       options:NSRegularExpressionCaseInsensitive
+                                                                         error:nil];
+    });
+    
+    return _phoneRegularExpression;
+}
+
 /*
 - (CGSize)sizeWithString:(NSString *)string
                    width:(CGFloat)width
@@ -307,5 +440,21 @@
                                  context:nil].size;
 }
  */
+
+#pragma mark - TTAtributuedLabelDelegate methods
+
+- (void)attributedLabel:(TTTAttributedLabel *)label
+   didSelectLinkWithURL:(NSURL *)url
+{
+    [[UIApplication sharedApplication] openURL:url];
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label
+didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+{
+    NSString *telUrl = [NSString stringWithFormat:@"telprompt:%@",phoneNumber];
+    NSURL *url = [[NSURL alloc] initWithString:telUrl];
+    [[UIApplication sharedApplication] openURL:url];
+}
 
 @end
