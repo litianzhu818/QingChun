@@ -155,7 +155,19 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
         [tableView setDelegate:self];
         [tableView setDataSource:self];
+        //要么没有分割线，要么风格线是和屏幕一样宽的
+        //设置没有分割线
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        /*
+        //风格线是和屏幕一样宽
+        if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [tableView setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [tableView setLayoutMargins:UIEdgeInsetsZero];
+        }
+        */
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         
@@ -183,7 +195,19 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         UITableView *tableView = [[UITableView alloc] initWithFrame:_icarousel.bounds style:UITableViewStylePlain];
         [tableView setDelegate:self];
         [tableView setDataSource:self];
+        //要么没有分割线，要么风格线是和屏幕一样宽的
+        //设置没有分割线
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+        /*
+        //风格线是和屏幕一样宽
+        if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+            [tableView setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+            [tableView setLayoutMargins:UIEdgeInsetsZero];
+        }
+        */
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView registerClass:[MessageDisplayCell class] forCellReuseIdentifier:[MessageDisplayCell cellIdentifier]];
         

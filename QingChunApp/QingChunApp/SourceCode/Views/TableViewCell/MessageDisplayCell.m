@@ -33,6 +33,7 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    //默认没有选中颜色
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -40,6 +41,7 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    //默认没有选中颜色
     self.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
@@ -64,6 +66,7 @@
 
 - (void)setupUINormal
 {
+    //[self setBackgroundColor:[UIColor whiteColor]];
     //头部视图
     _cellHeaderView = ({
         BaseCellHeaderView *cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];

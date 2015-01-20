@@ -50,13 +50,13 @@
     
 }
 */
+
 #pragma mark 控制状态栏的样式
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;//浅色背景
     //return UIStatusBarStyleDefault;//深色背景
 }
-
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -95,6 +95,8 @@
                           landscapeBackgroundImage:nil
                                     withShadowLine:NO];
     self.navigationBar.tintColor = UIColorFromRGB(0x757575);
+    //这里设置为NO时，所有UIViewController的view的frame的Y轴起点都为navigationBar下面
+    //self.navigationBar.translucent = NO;
 
     /*
     [self.navigationBar setTitleTextAttributes:@{

@@ -28,7 +28,7 @@
     
     if (!shadowLine && [self respondsToSelector:@selector(setShadowImage:)]){
         
-        [self setShadowImage:[UIImage imageWithColor:[ UIColor clearColor ] size: CGSizeMake (320 , 3)]];
+        [self setShadowImage:[UIImage imageWithColor:[ UIColor clearColor ] size:CGSizeMake (320 , 3)]];
     }
 }
 
