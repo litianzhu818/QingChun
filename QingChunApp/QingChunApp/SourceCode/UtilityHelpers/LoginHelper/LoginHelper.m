@@ -17,8 +17,7 @@
     WeiBoManager                *_weiBoManager;
     TencentManager              *_tencentManager;
     
-    LoginSuccessHandler         _loginSuccessHandler;
-    LoginFailureHandler         _loginFailureHandler;
+    CompleteHandler             _completeHandler;
 }
 @end
 
@@ -104,8 +103,7 @@ static LoginHelper *sharedInstance = nil;
     [self.tencentManager removeDelegate:self];
     [self.weiBoManager removeDelegate:self];
     
-    _loginFailureHandler = NULL;
-    _loginSuccessHandler = NULL;
+    _completeHandler = NULL;
     
     _tencentManager = nil;
     _weiBoManager = nil;
@@ -176,17 +174,33 @@ static LoginHelper *sharedInstance = nil;
     }
     
 }
+
+static inline NSError *ErrorFactory(LoginErrorCode loginErrorCode, NSString *description) {
+    
+    NSError *error = nil;
+    
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:description                                                                      forKey:NSLocalizedDescriptionKey];
+    error = [NSError errorWithDomain:CustomLoginErrorDomain code:loginErrorCode userInfo:userInfo];
+    
+    return error;
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - object public methods
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)authorizeWithID:(NSString *)loginID
+               password:(NSString *)password
+        completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler
+{
+
+}
 - (void)authorizeWithLoginType:(LoginType)loginType
-                       success:(void (^)(LoginType loginType, NSDictionary *userInfoDictionary))success
-                       failure:(void (^)(LoginType loginType, NSError *error))failure
+               completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler
 {
     dispatch_block_t block = ^{ @autoreleasepool {
         
-        _loginSuccessHandler = success;
-        _loginFailureHandler = failure;
+        _completeHandler = completeHandler;
         
         if (loginType == LoginTypeTencent) {
             [self.tencentManager authorize];
@@ -214,22 +228,28 @@ static LoginHelper *sharedInstance = nil;
 //登录失败
 - (void)tencentManager:(TencentManager *)tencentManager didLoginFailedWithTencentOAuth:(TencentOAuth *)tencentOAuth
 {
+    NSError *error = ErrorFactory(LoginErrorCodeFailed, @"login with no token information.");
     
+    _completeHandler(LoginTypeTencent,nil,error);
 }
 //没有网络
 - (void)tencentManager:(TencentManager *)tencentManager didHasNoNetworkWithTencentOAuth:(TencentOAuth *)tencentOAuth
 {
+    NSError *error = ErrorFactory(LoginErrorCodeNoNetwork, @"login with no network.");
     
+    _completeHandler(LoginTypeTencent,nil,error);
 }
 //用户取消了登录过程
 - (void)tencentManager:(TencentManager *)tencentManager didUserCancelLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth
 {
+    NSError *error = ErrorFactory(LoginErrorCodeUserCancel, @"login paused with user's cancel.");
     
+    _completeHandler(LoginTypeTencent,nil,error);
 }
 //获取到用户的基本信息
-- (void)tencentManager:(TencentManager *)tencentManager didGetUserInfoWithTencentOAuth:(TencentOAuth *)tencentOAuth dictionary:(NSDictionary *)userInfoDictionary
+- (void)tencentManager:(TencentManager *)tencentManager didGetUserInfoWithTencentOAuth:(TencentOAuth *)tencentOAuth dictionary:(id)userInfo
 {
-    
+    _completeHandler(LoginTypeTencent, userInfo, nil);
 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - WeiBoManagerDelegate methods

@@ -174,6 +174,31 @@
 		E7B8B3391A51A3AF0015CE40 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3261A51A3AF0015CE40 /* UIProgressView+AFNetworking.m */; };
 		E7B8B33A1A51A3AF0015CE40 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B3281A51A3AF0015CE40 /* UIRefreshControl+AFNetworking.m */; };
 		E7B8B33B1A51A3AF0015CE40 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B8B32A1A51A3AF0015CE40 /* UIWebView+AFNetworking.m */; };
+		E7B96D551A6FE8A10066A913 /* ADBackFadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D241A6FE8A10066A913 /* ADBackFadeTransition.m */; };
+		E7B96D561A6FE8A10066A913 /* ADCarrouselTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D261A6FE8A10066A913 /* ADCarrouselTransition.m */; };
+		E7B96D571A6FE8A10066A913 /* ADCrossTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D281A6FE8A10066A913 /* ADCrossTransition.m */; };
+		E7B96D581A6FE8A10066A913 /* ADCubeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D2A1A6FE8A10066A913 /* ADCubeTransition.m */; };
+		E7B96D591A6FE8A10066A913 /* ADDualTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D2C1A6FE8A10066A913 /* ADDualTransition.m */; };
+		E7B96D5A1A6FE8A10066A913 /* ADFadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D2E1A6FE8A10066A913 /* ADFadeTransition.m */; };
+		E7B96D5B1A6FE8A10066A913 /* ADFlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D301A6FE8A10066A913 /* ADFlipTransition.m */; };
+		E7B96D5C1A6FE8A10066A913 /* ADFoldTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D321A6FE8A10066A913 /* ADFoldTransition.m */; };
+		E7B96D5D1A6FE8A10066A913 /* ADGhostTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D341A6FE8A10066A913 /* ADGhostTransition.m */; };
+		E7B96D5E1A6FE8A10066A913 /* ADGlueTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D361A6FE8A10066A913 /* ADGlueTransition.m */; };
+		E7B96D5F1A6FE8A10066A913 /* ADModernPushTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D381A6FE8A10066A913 /* ADModernPushTransition.m */; };
+		E7B96D601A6FE8A10066A913 /* ADNavigationControllerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D3A1A6FE8A10066A913 /* ADNavigationControllerDelegate.m */; };
+		E7B96D611A6FE8A10066A913 /* ADPushRotateTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D3C1A6FE8A10066A913 /* ADPushRotateTransition.m */; };
+		E7B96D621A6FE8A10066A913 /* ADScaleTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D3E1A6FE8A10066A913 /* ADScaleTransition.m */; };
+		E7B96D631A6FE8A10066A913 /* ADSlideTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D401A6FE8A10066A913 /* ADSlideTransition.m */; };
+		E7B96D641A6FE8A10066A913 /* ADSwapTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D421A6FE8A10066A913 /* ADSwapTransition.m */; };
+		E7B96D651A6FE8A10066A913 /* ADSwipeFadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D441A6FE8A10066A913 /* ADSwipeFadeTransition.m */; };
+		E7B96D661A6FE8A10066A913 /* ADSwipeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D461A6FE8A10066A913 /* ADSwipeTransition.m */; };
+		E7B96D671A6FE8A10066A913 /* ADTransformTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D481A6FE8A10066A913 /* ADTransformTransition.m */; };
+		E7B96D681A6FE8A10066A913 /* ADTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D4A1A6FE8A10066A913 /* ADTransition.m */; };
+		E7B96D691A6FE8A10066A913 /* ADTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D4C1A6FE8A10066A913 /* ADTransitionController.m */; };
+		E7B96D6A1A6FE8A10066A913 /* ADTransitioningDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D4E1A6FE8A10066A913 /* ADTransitioningDelegate.m */; };
+		E7B96D6B1A6FE8A10066A913 /* ADTransitioningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D501A6FE8A10066A913 /* ADTransitioningViewController.m */; };
+		E7B96D6C1A6FE8A10066A913 /* ADZoomTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D521A6FE8A10066A913 /* ADZoomTransition.m */; };
+		E7B96D6D1A6FE8A10066A913 /* UIViewController+ADTransitionController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B96D541A6FE8A10066A913 /* UIViewController+ADTransitionController.m */; };
 		E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */; };
 		E7B9E4591A46963F00D7775C /* UITabBar+BackgroundImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B9E4581A46963F00D7775C /* UITabBar+BackgroundImage.m */; };
 		E7B9E45E1A46A78C00D7775C /* like@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B9E45A1A46A78C00D7775C /* like@2x.png */; };
@@ -542,6 +567,56 @@
 		E7B8B32A1A51A3AF0015CE40 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		E7B8B33C1A51AF970015CE40 /* SystemConfigKeyValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemConfigKeyValue.h; sourceTree = "<group>"; };
 		E7B8B33D1A51B2920015CE40 /* UserConfigKeyValue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserConfigKeyValue.h; sourceTree = "<group>"; };
+		E7B96D231A6FE8A10066A913 /* ADBackFadeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADBackFadeTransition.h; sourceTree = "<group>"; };
+		E7B96D241A6FE8A10066A913 /* ADBackFadeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADBackFadeTransition.m; sourceTree = "<group>"; };
+		E7B96D251A6FE8A10066A913 /* ADCarrouselTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADCarrouselTransition.h; sourceTree = "<group>"; };
+		E7B96D261A6FE8A10066A913 /* ADCarrouselTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADCarrouselTransition.m; sourceTree = "<group>"; };
+		E7B96D271A6FE8A10066A913 /* ADCrossTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADCrossTransition.h; sourceTree = "<group>"; };
+		E7B96D281A6FE8A10066A913 /* ADCrossTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADCrossTransition.m; sourceTree = "<group>"; };
+		E7B96D291A6FE8A10066A913 /* ADCubeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADCubeTransition.h; sourceTree = "<group>"; };
+		E7B96D2A1A6FE8A10066A913 /* ADCubeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADCubeTransition.m; sourceTree = "<group>"; };
+		E7B96D2B1A6FE8A10066A913 /* ADDualTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADDualTransition.h; sourceTree = "<group>"; };
+		E7B96D2C1A6FE8A10066A913 /* ADDualTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADDualTransition.m; sourceTree = "<group>"; };
+		E7B96D2D1A6FE8A10066A913 /* ADFadeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFadeTransition.h; sourceTree = "<group>"; };
+		E7B96D2E1A6FE8A10066A913 /* ADFadeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADFadeTransition.m; sourceTree = "<group>"; };
+		E7B96D2F1A6FE8A10066A913 /* ADFlipTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFlipTransition.h; sourceTree = "<group>"; };
+		E7B96D301A6FE8A10066A913 /* ADFlipTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADFlipTransition.m; sourceTree = "<group>"; };
+		E7B96D311A6FE8A10066A913 /* ADFoldTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADFoldTransition.h; sourceTree = "<group>"; };
+		E7B96D321A6FE8A10066A913 /* ADFoldTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADFoldTransition.m; sourceTree = "<group>"; };
+		E7B96D331A6FE8A10066A913 /* ADGhostTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADGhostTransition.h; sourceTree = "<group>"; };
+		E7B96D341A6FE8A10066A913 /* ADGhostTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADGhostTransition.m; sourceTree = "<group>"; };
+		E7B96D351A6FE8A10066A913 /* ADGlueTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADGlueTransition.h; sourceTree = "<group>"; };
+		E7B96D361A6FE8A10066A913 /* ADGlueTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADGlueTransition.m; sourceTree = "<group>"; };
+		E7B96D371A6FE8A10066A913 /* ADModernPushTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModernPushTransition.h; sourceTree = "<group>"; };
+		E7B96D381A6FE8A10066A913 /* ADModernPushTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModernPushTransition.m; sourceTree = "<group>"; };
+		E7B96D391A6FE8A10066A913 /* ADNavigationControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADNavigationControllerDelegate.h; sourceTree = "<group>"; };
+		E7B96D3A1A6FE8A10066A913 /* ADNavigationControllerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADNavigationControllerDelegate.m; sourceTree = "<group>"; };
+		E7B96D3B1A6FE8A10066A913 /* ADPushRotateTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADPushRotateTransition.h; sourceTree = "<group>"; };
+		E7B96D3C1A6FE8A10066A913 /* ADPushRotateTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADPushRotateTransition.m; sourceTree = "<group>"; };
+		E7B96D3D1A6FE8A10066A913 /* ADScaleTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADScaleTransition.h; sourceTree = "<group>"; };
+		E7B96D3E1A6FE8A10066A913 /* ADScaleTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADScaleTransition.m; sourceTree = "<group>"; };
+		E7B96D3F1A6FE8A10066A913 /* ADSlideTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSlideTransition.h; sourceTree = "<group>"; };
+		E7B96D401A6FE8A10066A913 /* ADSlideTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSlideTransition.m; sourceTree = "<group>"; };
+		E7B96D411A6FE8A10066A913 /* ADSwapTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSwapTransition.h; sourceTree = "<group>"; };
+		E7B96D421A6FE8A10066A913 /* ADSwapTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSwapTransition.m; sourceTree = "<group>"; };
+		E7B96D431A6FE8A10066A913 /* ADSwipeFadeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSwipeFadeTransition.h; sourceTree = "<group>"; };
+		E7B96D441A6FE8A10066A913 /* ADSwipeFadeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSwipeFadeTransition.m; sourceTree = "<group>"; };
+		E7B96D451A6FE8A10066A913 /* ADSwipeTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSwipeTransition.h; sourceTree = "<group>"; };
+		E7B96D461A6FE8A10066A913 /* ADSwipeTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSwipeTransition.m; sourceTree = "<group>"; };
+		E7B96D471A6FE8A10066A913 /* ADTransformTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTransformTransition.h; sourceTree = "<group>"; };
+		E7B96D481A6FE8A10066A913 /* ADTransformTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTransformTransition.m; sourceTree = "<group>"; };
+		E7B96D491A6FE8A10066A913 /* ADTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTransition.h; sourceTree = "<group>"; };
+		E7B96D4A1A6FE8A10066A913 /* ADTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTransition.m; sourceTree = "<group>"; };
+		E7B96D4B1A6FE8A10066A913 /* ADTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTransitionController.h; sourceTree = "<group>"; };
+		E7B96D4C1A6FE8A10066A913 /* ADTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTransitionController.m; sourceTree = "<group>"; };
+		E7B96D4D1A6FE8A10066A913 /* ADTransitioningDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTransitioningDelegate.h; sourceTree = "<group>"; };
+		E7B96D4E1A6FE8A10066A913 /* ADTransitioningDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTransitioningDelegate.m; sourceTree = "<group>"; };
+		E7B96D4F1A6FE8A10066A913 /* ADTransitioningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADTransitioningViewController.h; sourceTree = "<group>"; };
+		E7B96D501A6FE8A10066A913 /* ADTransitioningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADTransitioningViewController.m; sourceTree = "<group>"; };
+		E7B96D511A6FE8A10066A913 /* ADZoomTransition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADZoomTransition.h; sourceTree = "<group>"; };
+		E7B96D521A6FE8A10066A913 /* ADZoomTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADZoomTransition.m; sourceTree = "<group>"; };
+		E7B96D531A6FE8A10066A913 /* UIViewController+ADTransitionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+ADTransitionController.h"; sourceTree = "<group>"; };
+		E7B96D541A6FE8A10066A913 /* UIViewController+ADTransitionController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+ADTransitionController.m"; sourceTree = "<group>"; };
 		E7B9E4541A46757C00D7775C /* UINavigationBar+ImageBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+ImageBackground.h"; sourceTree = "<group>"; };
 		E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+ImageBackground.m"; sourceTree = "<group>"; };
 		E7B9E4571A46963F00D7775C /* UITabBar+BackgroundImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITabBar+BackgroundImage.h"; sourceTree = "<group>"; };
@@ -790,6 +865,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E7B96D221A6FE8A10066A913 /* ADTransitionController */,
 				E7BB83471A6BFCB600230EF4 /* EGOCache */,
 				E73858241A6A1951003D864D /* CoreDataStorage */,
 				E73858291A6A1951003D864D /* GCDMulticastDelegate */,
@@ -1656,6 +1732,63 @@
 			path = UIKit;
 			sourceTree = "<group>";
 		};
+		E7B96D221A6FE8A10066A913 /* ADTransitionController */ = {
+			isa = PBXGroup;
+			children = (
+				E7B96D231A6FE8A10066A913 /* ADBackFadeTransition.h */,
+				E7B96D241A6FE8A10066A913 /* ADBackFadeTransition.m */,
+				E7B96D251A6FE8A10066A913 /* ADCarrouselTransition.h */,
+				E7B96D261A6FE8A10066A913 /* ADCarrouselTransition.m */,
+				E7B96D271A6FE8A10066A913 /* ADCrossTransition.h */,
+				E7B96D281A6FE8A10066A913 /* ADCrossTransition.m */,
+				E7B96D291A6FE8A10066A913 /* ADCubeTransition.h */,
+				E7B96D2A1A6FE8A10066A913 /* ADCubeTransition.m */,
+				E7B96D2B1A6FE8A10066A913 /* ADDualTransition.h */,
+				E7B96D2C1A6FE8A10066A913 /* ADDualTransition.m */,
+				E7B96D2D1A6FE8A10066A913 /* ADFadeTransition.h */,
+				E7B96D2E1A6FE8A10066A913 /* ADFadeTransition.m */,
+				E7B96D2F1A6FE8A10066A913 /* ADFlipTransition.h */,
+				E7B96D301A6FE8A10066A913 /* ADFlipTransition.m */,
+				E7B96D311A6FE8A10066A913 /* ADFoldTransition.h */,
+				E7B96D321A6FE8A10066A913 /* ADFoldTransition.m */,
+				E7B96D331A6FE8A10066A913 /* ADGhostTransition.h */,
+				E7B96D341A6FE8A10066A913 /* ADGhostTransition.m */,
+				E7B96D351A6FE8A10066A913 /* ADGlueTransition.h */,
+				E7B96D361A6FE8A10066A913 /* ADGlueTransition.m */,
+				E7B96D371A6FE8A10066A913 /* ADModernPushTransition.h */,
+				E7B96D381A6FE8A10066A913 /* ADModernPushTransition.m */,
+				E7B96D391A6FE8A10066A913 /* ADNavigationControllerDelegate.h */,
+				E7B96D3A1A6FE8A10066A913 /* ADNavigationControllerDelegate.m */,
+				E7B96D3B1A6FE8A10066A913 /* ADPushRotateTransition.h */,
+				E7B96D3C1A6FE8A10066A913 /* ADPushRotateTransition.m */,
+				E7B96D3D1A6FE8A10066A913 /* ADScaleTransition.h */,
+				E7B96D3E1A6FE8A10066A913 /* ADScaleTransition.m */,
+				E7B96D3F1A6FE8A10066A913 /* ADSlideTransition.h */,
+				E7B96D401A6FE8A10066A913 /* ADSlideTransition.m */,
+				E7B96D411A6FE8A10066A913 /* ADSwapTransition.h */,
+				E7B96D421A6FE8A10066A913 /* ADSwapTransition.m */,
+				E7B96D431A6FE8A10066A913 /* ADSwipeFadeTransition.h */,
+				E7B96D441A6FE8A10066A913 /* ADSwipeFadeTransition.m */,
+				E7B96D451A6FE8A10066A913 /* ADSwipeTransition.h */,
+				E7B96D461A6FE8A10066A913 /* ADSwipeTransition.m */,
+				E7B96D471A6FE8A10066A913 /* ADTransformTransition.h */,
+				E7B96D481A6FE8A10066A913 /* ADTransformTransition.m */,
+				E7B96D491A6FE8A10066A913 /* ADTransition.h */,
+				E7B96D4A1A6FE8A10066A913 /* ADTransition.m */,
+				E7B96D4B1A6FE8A10066A913 /* ADTransitionController.h */,
+				E7B96D4C1A6FE8A10066A913 /* ADTransitionController.m */,
+				E7B96D4D1A6FE8A10066A913 /* ADTransitioningDelegate.h */,
+				E7B96D4E1A6FE8A10066A913 /* ADTransitioningDelegate.m */,
+				E7B96D4F1A6FE8A10066A913 /* ADTransitioningViewController.h */,
+				E7B96D501A6FE8A10066A913 /* ADTransitioningViewController.m */,
+				E7B96D511A6FE8A10066A913 /* ADZoomTransition.h */,
+				E7B96D521A6FE8A10066A913 /* ADZoomTransition.m */,
+				E7B96D531A6FE8A10066A913 /* UIViewController+ADTransitionController.h */,
+				E7B96D541A6FE8A10066A913 /* UIViewController+ADTransitionController.m */,
+			);
+			path = ADTransitionController;
+			sourceTree = "<group>";
+		};
 		E7B9E4641A46B94700D7775C /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
@@ -2074,6 +2207,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7B96D621A6FE8A10066A913 /* ADScaleTransition.m in Sources */,
 				E7B8B3341A51A3AF0015CE40 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				E7BB834A1A6BFCCF00230EF4 /* EGOCache.m in Sources */,
 				E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */,
@@ -2091,6 +2225,7 @@
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */,
+				E7B96D6D1A6FE8A10066A913 /* UIViewController+ADTransitionController.m in Sources */,
 				E7B6EA741A50548F009CF7D1 /* CellDisplayUserModel.m in Sources */,
 				E75E90C319F74643000F2CE9 /* NotificationView.m in Sources */,
 				E7FC67C31A45646500AF45A6 /* CircleView.m in Sources */,
@@ -2100,8 +2235,11 @@
 				E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */,
 				E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */,
 				E7B8B33B1A51A3AF0015CE40 /* UIWebView+AFNetworking.m in Sources */,
+				E7B96D591A6FE8A10066A913 /* ADDualTransition.m in Sources */,
+				E7B96D5D1A6FE8A10066A913 /* ADGhostTransition.m in Sources */,
 				E7DD1C3C1A412F7200FAA24A /* MJPhotoView.m in Sources */,
 				E7B725691A09212700882998 /* TestObjectModel.m in Sources */,
+				E7B96D581A6FE8A10066A913 /* ADCubeTransition.m in Sources */,
 				E7B8B3331A51A3AF0015CE40 /* AFURLResponseSerialization.m in Sources */,
 				E725A2981A07CDA900FCE03D /* UIImageView+WebCache.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
@@ -2119,6 +2257,7 @@
 				E7B8B3381A51A3AF0015CE40 /* UIImageView+AFNetworking.m in Sources */,
 				E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */,
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
+				E7B96D6A1A6FE8A10066A913 /* ADTransitioningDelegate.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
 				E7F1C98C1A527D7700E8DF67 /* NSString+Hashes.m in Sources */,
 				E738584C1A6A5093003D864D /* LoginHelper.m in Sources */,
@@ -2130,33 +2269,42 @@
 				E7AF3D1F1A0BA0A00073116D /* MyPostsViewController.m in Sources */,
 				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
 				E7B6EA701A503209009CF7D1 /* SystemConfig.m in Sources */,
+				E7B96D641A6FE8A10066A913 /* ADSwapTransition.m in Sources */,
 				E77C30061A4D570800D12DBB /* TPKeyboardAvoidingTableView.m in Sources */,
 				E75EB0241A5C07CC00755972 /* MJRefreshHeaderView.m in Sources */,
 				E7DD1C391A412F7200FAA24A /* MJPhotoLoadingView.m in Sources */,
 				E7B6EA711A503209009CF7D1 /* UserConfig.m in Sources */,
 				E7AF3D181A0B9EFE0073116D /* NAMenuViewController.m in Sources */,
 				E77C30071A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
+				E7B96D5F1A6FE8A10066A913 /* ADModernPushTransition.m in Sources */,
 				E77C30041A4D570800D12DBB /* TPKeyboardAvoidingCollectionView.m in Sources */,
 				E7B8B3361A51A3AF0015CE40 /* UIAlertView+AFNetworking.m in Sources */,
+				E7B96D661A6FE8A10066A913 /* ADSwipeTransition.m in Sources */,
+				E7B96D561A6FE8A10066A913 /* ADCarrouselTransition.m in Sources */,
 				E7B8B33A1A51A3AF0015CE40 /* UIRefreshControl+AFNetworking.m in Sources */,
 				E725A28D1A07CDA900FCE03D /* SDWebImageCompat.m in Sources */,
 				E75EB0251A5C07CC00755972 /* UIScrollView+MJExtension.m in Sources */,
+				E7B96D5C1A6FE8A10066A913 /* ADFoldTransition.m in Sources */,
 				E7B9E46A1A46B94700D7775C /* iCarousel.m in Sources */,
 				E7B8B32C1A51A3AF0015CE40 /* AFHTTPRequestOperationManager.m in Sources */,
 				E725A28F1A07CDA900FCE03D /* SDWebImageDownloader.m in Sources */,
 				E7DC9EED1A5FDA4700578647 /* QCBellDataModel.m in Sources */,
+				E7B96D551A6FE8A10066A913 /* ADBackFadeTransition.m in Sources */,
 				E7B8B3311A51A3AF0015CE40 /* AFSecurityPolicy.m in Sources */,
 				E725A2901A07CDA900FCE03D /* SDWebImageDownloaderOperation.m in Sources */,
 				E725A28E1A07CDA900FCE03D /* SDWebImageDecoder.m in Sources */,
 				E7AF3D151A0B9EFE0073116D /* NAMenuItemView.m in Sources */,
 				E725A2911A07CDA900FCE03D /* SDWebImageManager.m in Sources */,
 				E7B8B32F1A51A3AF0015CE40 /* AFURLSessionManager.m in Sources */,
+				E7B96D5A1A6FE8A10066A913 /* ADFadeTransition.m in Sources */,
 				E7AF3D171A0B9EFE0073116D /* NAMenuView.m in Sources */,
 				E7063F8D19E67A6A00CC3CE0 /* main.m in Sources */,
 				E7BB17341A65864F0036D495 /* QCGroupViewController.m in Sources */,
 				E7FC67C41A45646500AF45A6 /* EGORefreshTableHeaderView.m in Sources */,
+				E7B96D6B1A6FE8A10066A913 /* ADTransitioningViewController.m in Sources */,
 				E738582D1A6A1951003D864D /* GCDMulticastDelegate.m in Sources */,
 				E75E90B019F743E5000F2CE9 /* ProgressHUD.m in Sources */,
+				E7B96D5B1A6FE8A10066A913 /* ADFlipTransition.m in Sources */,
 				E7DD1C8B1A41AC3600FAA24A /* BaseCellButtonView.m in Sources */,
 				E73858311A6A23F7003D864D /* WeiBoManager.m in Sources */,
 				E7AE66F419F9F84C008546EA /* TestViewController.m in Sources */,
@@ -2167,12 +2315,14 @@
 				E7261BB119F0B33100492D98 /* QingChunApp.xcdatamodeld in Sources */,
 				E7FC67CC1A45688600AF45A6 /* NSString+SA.m in Sources */,
 				E738581C1A6A031D003D864D /* TencentManager.m in Sources */,
+				E7B96D601A6FE8A10066A913 /* ADNavigationControllerDelegate.m in Sources */,
 				E7DD1C3B1A412F7200FAA24A /* MJPhotoToolbar.m in Sources */,
 				E7DD1C3A1A412F7200FAA24A /* MJPhotoProgressView.m in Sources */,
 				E7BAD1531A0DECEA00D27F4B /* PullingRefreshTableView.m in Sources */,
 				E725A2991A07CDA900FCE03D /* UIView+WebCacheOperation.m in Sources */,
 				E7B6EA671A4FCE31009CF7D1 /* NSObject+AutoProperties.m in Sources */,
 				E7DD1C4D1A418E6E00FAA24A /* BaseCellImageView.m in Sources */,
+				E7B96D6C1A6FE8A10066A913 /* ADZoomTransition.m in Sources */,
 				E75EB0261A5C07CC00755972 /* UIScrollView+MJRefresh.m in Sources */,
 				E7B8B3321A51A3AF0015CE40 /* AFURLRequestSerialization.m in Sources */,
 				E75E90E719F7479C000F2CE9 /* NetStatusManager.m in Sources */,
@@ -2182,8 +2332,10 @@
 				E75E90D219F746D1000F2CE9 /* UICustomAlertView.m in Sources */,
 				E725A28A1A07CDA900FCE03D /* MKAnnotationView+WebCache.m in Sources */,
 				E77C2FC81A4AC0FD00D12DBB /* HMSegmentedControl.m in Sources */,
+				E7B96D681A6FE8A10066A913 /* ADTransition.m in Sources */,
 				E7DD1C471A41333400FAA24A /* BaseCellHeaderView.m in Sources */,
 				E7B8B3351A51A3AF0015CE40 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				E7B96D571A6FE8A10066A913 /* ADCrossTransition.m in Sources */,
 				E725A2951A07CDA900FCE03D /* UIImage+MultiFormat.m in Sources */,
 				E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */,
 				E7B6EA6A1A5030B0009CF7D1 /* CellDisplayModel.m in Sources */,
@@ -2193,6 +2345,7 @@
 				E73858181A6A02E5003D864D /* HttpSessionManager.m in Sources */,
 				E725A2961A07CDA900FCE03D /* UIImage+WebP.m in Sources */,
 				E73858171A6A02E5003D864D /* HttpSessionClient.m in Sources */,
+				E7B96D671A6FE8A10066A913 /* ADTransformTransition.m in Sources */,
 				E73858481A6A4290003D864D /* UserInfoModel.m in Sources */,
 				E7B8B32E1A51A3AF0015CE40 /* AFHTTPSessionManager.m in Sources */,
 				E79FB2D919FB61C100FBC703 /* QCBTableViewController.m in Sources */,
@@ -2205,8 +2358,13 @@
 				E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */,
 				E7BA492F1A6815A8000B5983 /* OtherSDKInfo.m in Sources */,
 				E712AA4A1A0BD30D000648C4 /* LoginViewController.m in Sources */,
+				E7B96D611A6FE8A10066A913 /* ADPushRotateTransition.m in Sources */,
 				E7063F9E19E68EAE00CC3CE0 /* JSONKit.m in Sources */,
+				E7B96D631A6FE8A10066A913 /* ADSlideTransition.m in Sources */,
+				E7B96D651A6FE8A10066A913 /* ADSwipeFadeTransition.m in Sources */,
+				E7B96D691A6FE8A10066A913 /* ADTransitionController.m in Sources */,
 				E7DD1C381A412F7200FAA24A /* MJPhotoBrowser.m in Sources */,
+				E7B96D5E1A6FE8A10066A913 /* ADGlueTransition.m in Sources */,
 				E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */,
 				E71943761A58103E00680664 /* TTTAttributedLabel.m in Sources */,
 				E7B8B3371A51A3AF0015CE40 /* UIButton+AFNetworking.m in Sources */,

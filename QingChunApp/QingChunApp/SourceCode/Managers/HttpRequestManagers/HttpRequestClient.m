@@ -206,12 +206,13 @@
 
 -(id)handleResponse:(id)responseJSON{
     NSError *error = nil;
+    
     //code为200时，表示正常
     NSNumber *resultCode = [responseJSON valueForKeyPath:@"code"];
     
     if (resultCode.intValue != 200) {
         error = [NSError errorWithDomain:[[SystemConfig sharedInstance] GetBaseURLStr] code:resultCode.intValue userInfo:responseJSON];
-        LOG(@"GET Data Error:%@",error.description);
+        LOG(@"PSOT Response Data Error:%@",error.description);
         /*
         if (resultCode.intValue == 1000) {//用户未登录
             [self loginOutToLoginVC];

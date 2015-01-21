@@ -26,10 +26,29 @@
 }
 
 - (void)loginWithIdentifier:(NSString *)identifier
-                     params:(NSDictionary*)params
+                     params:(id)params
                       block:(void (^)(id data, NSError *error))block
 {
     NSString *path = [[SystemConfig sharedInstance] GetLoginURLStr];
+//    NSString *checksumStr = [NSString stringWithFormat:@"%@%@%@%@%@",identifier,[params objectForKey:@"openid"],[params objectForKey:@"token"],[params objectForKey:@"userName"],[[SystemConfig sharedInstance] GetCheckSumSecret]];
+    
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@%@",identifier,[params objectForKey:@"openid"],[params objectForKey:@"token"],[params objectForKey:@"userName"],[[SystemConfig sharedInstance] GetCheckSumSecret]]) forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (data) {
+                                                             
+                                                             block(data,nil);
+                                                             
+                                                         }else{
+                                                             block(nil,error);
+                                                         }
+                                                         
+                                                     }];
 }
 
 - (void)requestQCDMessageWithPage:(NSUInteger)page
@@ -39,12 +58,12 @@
 {
     NSString *path = [[SystemConfig sharedInstance] GetMessageURLStr];
   
-    NSString *checksumStr = [NSString stringWithFormat:@"%@%ld%ld%@",identifier,(unsigned long)page,(unsigned long)type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
+//    NSString *checksumStr = [NSString stringWithFormat:@"%@%ld%ld%@",identifier,(unsigned long)page,(unsigned long)type,[[SystemConfig sharedInstance] GetCheckSumSecret]];
     
     NSDictionary *params = @{@"page":[NSNumber numberWithUnsignedInteger:page],
                              @"type":[NSNumber numberWithUnsignedInteger:type],
                              @"identifier":identifier,
-                             @"checksum":[checksumStr sha1]
+                             @"checksum":SHA1StringWith([NSString stringWithFormat:@"%@%ld%ld%@",identifier,(unsigned long)page,(unsigned long)type,[[SystemConfig sharedInstance] GetCheckSumSecret]])
                              };
     [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
                                                    withParams:params
@@ -70,7 +89,12 @@
                                                      }];
 }
 
+#pragma mark - private tool methods
 
+static inline NSString *SHA1StringWith(NSString *string)
+{
+    return [string sha1];
+}
 
 
 @end

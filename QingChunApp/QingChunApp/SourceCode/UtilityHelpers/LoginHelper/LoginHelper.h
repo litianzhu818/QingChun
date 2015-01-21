@@ -8,14 +8,21 @@
 
 #import "LTZManager.h"
 
-typedef void (^LoginSuccessHandler)(NSUInteger loginType, NSDictionary *userInfoDictionary);
-typedef void (^LoginFailureHandler)(NSUInteger loginType, NSError *error);
+typedef void (^CompleteHandler)(NSUInteger loginType, id userInfo, NSError *error);
 
 typedef NS_ENUM(NSUInteger, LoginType) {
     LoginTypeDefault = 0,
     LoginTypeTencent,
     LoginTypeWeibo
 };
+
+typedef NS_ENUM(NSUInteger, LoginErrorCode) {
+    LoginErrorCodeNoNetwork = -1000,
+    LoginErrorCodeUserCancel,
+    LoginErrorCodeFailed
+};
+
+#define CustomLoginErrorDomain @"com.qcd.login.error"
 
 @class WeiBoManager;
 @class TencentManager;
@@ -36,8 +43,11 @@ typedef NS_ENUM(NSUInteger, LoginType) {
 + (BOOL)HandleOpenURL:(NSURL *)url;
 
 - (void)authorizeWithLoginType:(LoginType)loginType
-                       success:(void (^)(LoginType loginType, NSDictionary *userInfoDictionary))success
-                       failure:(void (^)(LoginType loginType, NSError *error))failure;
+completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler;
+
+- (void)authorizeWithID:(NSString *)loginID
+               password:(NSString *)password
+        completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler;
 
 @end
 

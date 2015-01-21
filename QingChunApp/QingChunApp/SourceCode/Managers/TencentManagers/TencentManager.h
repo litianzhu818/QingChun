@@ -45,6 +45,6 @@
 //用户取消了登录过程
 - (void)tencentManager:(TencentManager *)tencentManager didUserCancelLoginWithTencentOAuth:(TencentOAuth *)tencentOAuth;
 //获取到用户的基本信息
-- (void)tencentManager:(TencentManager *)tencentManager didGetUserInfoWithTencentOAuth:(TencentOAuth *)tencentOAuth dictionary:(NSDictionary *)userInfoDictionary;
+- (void)tencentManager:(TencentManager *)tencentManager didGetUserInfoWithTencentOAuth:(TencentOAuth *)tencentOAuth dictionary:(id)userInfo;
 
 @end

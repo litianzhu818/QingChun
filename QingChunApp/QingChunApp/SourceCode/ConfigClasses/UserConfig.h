@@ -40,5 +40,9 @@ Single_interface(UserConfig);
 -(void)SetWeiboToken:(NSString *)value;
 -(NSString *)GetWeiboToken;
 
+//存取用户Key的值
+-(void)SetUserKey:(NSString *)value;
+-(NSString *)GetUserKey;
+
 
 @end

@@ -81,14 +81,15 @@
     if (![CLLocationManager locationServicesEnabled]){
         [_locationAlert show];
     }else{
-        if (_locationManager != nil) {//重新初始化，防止关闭服务后重开导致的CLLocationManager不能用
-            _locationManager = nil;
-            _locationManager = [[CLLocationManager alloc] init];
-            _locationManager.delegate = self;
-            _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-            //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-            _locationManager.distanceFilter = 1000.0f;
-        }
+    
+        //重新初始化，防止关闭服务后重开导致的CLLocationManager不能用
+        _locationManager = nil;
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+        _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
+        //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        _locationManager.distanceFilter = 1000.0f;
+        
         [self.locationManager startUpdatingLocation];
     }
 }
@@ -145,7 +146,7 @@
                 NSLog(@"No results were returned.");
                 
                 NSDictionary *userInfo = [NSDictionary dictionaryWithObject:@"No results were returned."                                                                      forKey:NSLocalizedDescriptionKey];
-                NSError *error = [NSError errorWithDomain:@"com.qcd.me" code:100 userInfo:userInfo];
+                NSError *error = [NSError errorWithDomain:CustomLocationErrorDomain code:LocationErrorCodeFailed userInfo:userInfo];
                 
                 if (self.locationBlock) {
                     self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
@@ -168,6 +169,8 @@
 - (void)locationManager:(CLLocationManager *)manager
     didFailWithError:(NSError *)error
 {
+    [self stopLocation];
+    
     if (self.locationBlock) {
         self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
     }

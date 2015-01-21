@@ -10,6 +10,7 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "LoginHelper.h"
 #import "LTZLocationManager.h"
+#import "HttpSessionManager.h"
 
 @implementation LoginViewController
 
@@ -84,20 +85,23 @@
 - (IBAction)ClikedWeiBoButton:(id)sender
 {
     [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeWeibo
-                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
-                                                     
-                                                 } failure:^(LoginType loginType, NSError *error) {
-                                                     
-                                                 }];
+                                         completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
+                                             
+                                         }];
 }
 - (IBAction)ClikedOnQQButton:(id)sender
 {
     [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeTencent
-                                                 success:^(LoginType loginType, NSDictionary *userInfoDictionary) {
-                                                     
-                                                 } failure:^(LoginType loginType, NSError *error) {
-                                                     
-                                                 }];
+                                         completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
+                                             
+                                             if (!error) {//QQ获取到信息
+                                                 
+                                                 [self locationWithUserInfo:userInfo loginType:LoginTypeTencent];
+                                                 
+                                             }else{//第三方登录不成功
+                                             
+                                             }
+                                         }];
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
@@ -124,6 +128,55 @@
     }
     
     return YES;
+}
+
+- (void)locationWithUserInfo:(id)userInfo loginType:(LoginType)loginType
+{
+    MAIN_GCD((^{
+        
+        //开始获取定位信息
+        [LTZLocationManager locationWithBlock:^(NSString *state, NSString *city, NSString *address, CLLocationCoordinate2D locationCorrrdinate, NSError *error) {
+            
+            if (!error) {
+                [userInfo setObject:[NSString stringWithFormat:@"%lf",locationCorrrdinate.longitude] forKey:@"longitude"];
+                [userInfo setObject:[NSString stringWithFormat:@"%lf",locationCorrrdinate.latitude] forKey:@"latitude"];
+                [userInfo setObject:[NSString stringWithFormat:@"%@,%@",state,city] forKey:@"address"];
+                
+                [self loginWithUserInfo:userInfo loginType:loginType];
+                
+            }else{//定位不成功
+                
+            }
+            
+        }];
+        
+    }));
+}
+
+- (void)loginWithUserInfo:(id)userInfo loginType:(LoginType)loginType
+{
+    //调用登录方法
+    [[HttpSessionManager sharedInstance] loginWithIdentifier:[NSString stringWithFormat:@"%d",loginType]
+                                                      params:userInfo
+                                                       block:^(id data, NSError *error) {
+                                                           
+                                                           if (!error) {//登录成功
+                                                               NSDictionary *userInfoDic = [data objectForKey:@"data"];
+                                                               [[UserConfig sharedInstance] SetUserKey:[userInfo objectForKey:@"userKey"]];
+                                                               //这里是用户的基本信息，登录成功跳转界面
+                                                               //code...
+                                                               
+                                                           }else{//登录失败
+                                                              LOG(@"Error:%@",[error.userInfo objectForKey:@"msg"]);
+                                                               if (error.code == 2001) {//未绑定邮箱，需绑定邮箱
+                                                                   NSString *userKey = [[error.userInfo objectForKey:@"data"] objectForKey:@"userKey"];
+                                                                   [[UserConfig sharedInstance] SetUserKey:userKey];
+                                                                   //跳转到绑定邮箱界面
+                                                                   //code...
+                                                                   
+                                                               }
+                                                           }
+                                                       }];
 }
 
 #pragma mark - UITextFiledDelegate Methods

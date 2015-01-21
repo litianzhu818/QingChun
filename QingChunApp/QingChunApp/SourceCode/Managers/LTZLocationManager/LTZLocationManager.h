@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
 
+typedef NS_ENUM(NSUInteger, LocationErrorCode) {
+    LocationErrorCodeFailed = -1000
+};
+
+#define CustomLocationErrorDomain @"com.qcd.location.error"
+
 typedef void (^LocationBlock)(NSString *state, NSString *city, NSString *address, CLLocationCoordinate2D locationCorrrdinate, NSError *error);
 
 @interface LTZLocationManager : NSObject

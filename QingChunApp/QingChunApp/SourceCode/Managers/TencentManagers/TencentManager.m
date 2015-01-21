@@ -14,6 +14,7 @@
 {
     TencentOAuth            *_tencentOAuth;
     NSArray                 *_permissions;
+    NSMutableDictionary     *_loginUserInfo;
 }
 @end
 
@@ -170,6 +171,10 @@ static TencentManager *sharedInstance = nil;
                                      nil];
             permissions;
         });
+        
+        if (!_loginUserInfo) {
+            _loginUserInfo = [NSMutableDictionary dictionary];
+        }
     }
 }
 
@@ -184,7 +189,9 @@ static TencentManager *sharedInstance = nil;
     
     if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length]){
         //记录登录用户的OpenID、Token以及过期时间
-        LOG(@"Token===>%@",_tencentOAuth.accessToken);
+        LOG(@"Token===>%@\nOpneid===>%@",_tencentOAuth.accessToken,_tencentOAuth.openId);
+        [_loginUserInfo setObject:_tencentOAuth.accessToken forKey:@"token"];
+        [_loginUserInfo setObject:_tencentOAuth.openId forKey:@"openid"];
         //获取用户基本信息
         [self.tencentOAuth getUserInfo];
         [multicastDelegate tencentManager:self didLoginSucceedWithTencentOAuth:self.tencentOAuth];
@@ -215,10 +222,13 @@ static TencentManager *sharedInstance = nil;
 //Get the user sample info
 - (void)getUserInfoResponse:(APIResponse*) response
 {
-    @autoreleasepool {
-        NSDictionary *tempDic = [response.jsonResponse copy];
-        [multicastDelegate tencentManager:self didGetUserInfoWithTencentOAuth:self.tencentOAuth dictionary:tempDic];
-    }
+    NSDictionary *tempDic = response.jsonResponse;
+    [_loginUserInfo setObject:[NSNumber numberWithInteger:[[tempDic objectForKey:@"gender"] isEqualToString:@"男"] ? 1:2] forKey:@"sex"];
+    [_loginUserInfo setObject:[tempDic objectForKey:@"figureurl_qq_2"] forKey:@"img"];
+    [_loginUserInfo setObject:[tempDic objectForKey:@"nickname"] forKey:@"userName"];
+    [_loginUserInfo  setObject:[NSNumber numberWithInteger:2] forKey:@"type"];
+    [_loginUserInfo  setObject:@"http://www.qcd.me" forKey:@"url"];
+    [multicastDelegate tencentManager:self didGetUserInfoWithTencentOAuth:self.tencentOAuth dictionary:_loginUserInfo];
 }
 
 @end

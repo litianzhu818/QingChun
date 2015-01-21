@@ -89,5 +89,16 @@ Single_implementation(UserConfig);
     return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserWeiboTokenStr];
 }
 
+//存取用户Key的值
+-(void)SetUserKey:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserKey];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetUserKey
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserKey];
+}
+
 
 @end

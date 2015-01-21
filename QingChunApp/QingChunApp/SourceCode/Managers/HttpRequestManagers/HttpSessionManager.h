@@ -17,7 +17,7 @@
                        identifier:(NSString *)identifier
                             block:(void (^)(id data, NSError *error))block;
 - (void)loginWithIdentifier:(NSString *)identifier
-                     params:(NSDictionary*)params
+                     params:(id)params
                       block:(void (^)(id data, NSError *error))block;
 
 @end

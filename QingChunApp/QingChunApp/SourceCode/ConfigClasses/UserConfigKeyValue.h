@@ -19,4 +19,6 @@ NSString *const qcdImageURLPrefix = @"QCD_IMAGE_URL_PREFIX_STRING_IOS";
 NSString *const qcdUserTencentTokenStr = @"QCD_USER_TENCENT_TOKEN_STRING_IOS";
 NSString *const qcdUserWeiboTokenStr = @"QCD_USER_WEIBO_TOKEN_STRING_IOS";
 
+NSString *const qcdUserKey = @"QCD_USER_KEY_STRING_IOS";
+
 #endif
