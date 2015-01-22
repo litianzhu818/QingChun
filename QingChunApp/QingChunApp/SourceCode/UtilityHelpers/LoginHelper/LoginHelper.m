@@ -255,5 +255,36 @@ static inline NSError *ErrorFactory(LoginErrorCode loginErrorCode, NSString *des
 #pragma mark - WeiBoManagerDelegate methods
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//登录成功
+- (void)weiBoManager:(WeiBoManager *)weiBoManager didLoginSucceedWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response
+{
+    
+}
+//登录失败
+- (void)weiBoManager:(WeiBoManager *)weiBoManager didLoginFailedWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response
+{
+    NSError *error = ErrorFactory(LoginErrorCodeFailed, @"login with no token information.");
+    
+    _completeHandler(LoginTypeWeibo,nil,error);
+}
+//没有网络
+- (void)weiBoManager:(WeiBoManager *)weiBoManager didHasNoNetworkWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response
+{
+    NSError *error = ErrorFactory(LoginErrorCodeNoNetwork, @"login with no network.");
+    
+    _completeHandler(LoginTypeWeibo,nil,error);
+}
+//用户取消了登录过程
+- (void)weiBoManager:(WeiBoManager *)weiBoManager didUserCancelLoginWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response
+{
+    NSError *error = ErrorFactory(LoginErrorCodeUserCancel, @"login paused with user's cancel.");
+    
+    _completeHandler(LoginTypeWeibo,nil,error);
+}
+//获取到用户的基本信息
+- (void)weiBoManager:(WeiBoManager *)weiBoManager didGetUserInfoWithWithWeiboUser:(WeiboUser *)user dictionary:(id)userInfo
+{
+    _completeHandler(LoginTypeWeibo, userInfo, nil);
+}
 
 @end

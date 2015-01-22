@@ -8,11 +8,15 @@
 
 #import "WeiBoManager.h"
 #import "WeiboSDK.h"
+#import "WeiboUser.h"
 #import "OtherSDKInfo.h"
+#import "WBHttpRequest+WeiboUser.h"
 
 @interface WeiBoManager () <WeiboSDKDelegate>
 {
-    WeiboSDK *_weiboSDK;
+    WeiboSDK                *_weiboSDK;
+    NSMutableDictionary     *_loginUserInfo;
+    
 }
 @end
 
@@ -110,6 +114,10 @@ static WeiBoManager *sharedInstance = nil;
 {
     if (!dispatch_get_specific(managerQueueTag)) return;
     
+    if (!_loginUserInfo) {
+        _loginUserInfo = [NSMutableDictionary dictionary];
+    }
+    
     [WeiboSDK enableDebugMode:YES];
     [WeiboSDK registerApp:WeiBoAppID];
     
@@ -133,6 +141,9 @@ static WeiBoManager *sharedInstance = nil;
                              @"Other_Info_1": [NSNumber numberWithInt:123],
                              @"Other_Info_2": @[@"obj1", @"obj2"],
                              @"Other_Info_3": @{@"key1": @"obj1", @"key2": @"obj2"}};
+        
+        [multicastDelegate weiBoManager:self willAuthorizeWithWBAuthorizeRequest:request];
+        
         [WeiboSDK sendRequest:request];
     };
     
@@ -193,11 +204,45 @@ static WeiBoManager *sharedInstance = nil;
          
          */
     }else if ([response isKindOfClass:WBAuthorizeResponse.class]){
-        NSString *title = NSLocalizedString(@"认证结果", nil);
-        NSString *message = [NSString stringWithFormat:@"%@: %d\nresponse.userId: %@\nresponse.accessToken: %@\n%@: %@\n%@: %@", NSLocalizedString(@"响应状态", nil), (int)response.statusCode,[(WBAuthorizeResponse *)response userID], [(WBAuthorizeResponse *)response accessToken],  NSLocalizedString(@"响应UserInfo数据", nil), response.userInfo, NSLocalizedString(@"原请求UserInfo数据", nil), response.requestUserInfo];
         
-        //[(WBAuthorizeResponse *)response accessToken];
-        //[(WBAuthorizeResponse *)response userID];
+        if (response.statusCode == WeiboSDKResponseStatusCodeSuccess){//成功
+            
+            //[(WBAuthorizeResponse *)response accessToken];
+            //[(WBAuthorizeResponse *)response userID];
+            
+            [_loginUserInfo setObject:[(WBAuthorizeResponse *)response accessToken] forKey:@"token"];
+            [_loginUserInfo setObject:[(WBAuthorizeResponse *)response userID] forKey:@"openid"];
+            
+            //请求用户信息
+            [WBHttpRequest requestForUserProfile:[(WBAuthorizeResponse *)response userID]
+                                 withAccessToken:[(WBAuthorizeResponse *)response accessToken]
+                              andOtherProperties:nil
+                                           queue:nil
+                           withCompletionHandler:^(WBHttpRequest *httpRequest, id result, NSError *error) {
+                               
+                               if (!error) {
+                                   
+                                    WeiboUser *user = result;
+                                   
+                                   [_loginUserInfo setObject:[NSNumber numberWithInteger:[user.gender isEqualToString:@"m"] ? 1:2] forKey:@"sex"];
+                                   [_loginUserInfo setObject:user.avatarLargeUrl forKey:@"img"];
+                                   [_loginUserInfo setObject:user.screenName forKey:@"userName"];
+                                   [_loginUserInfo  setObject:[NSNumber numberWithInteger:4] forKey:@"type"];
+                                   [_loginUserInfo  setObject:user.profileUrl forKey:@"url"];
+                                   [multicastDelegate weiBoManager:self didGetUserInfoWithWithWeiboUser:user dictionary:_loginUserInfo];
+                               }
+                            
+                           }];
+            
+        }else if (response.statusCode == WeiboSDKResponseStatusCodeAuthDeny){//授权失败
+            [multicastDelegate weiBoManager:self didLoginFailedWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response];
+        }else if (response.statusCode == WeiboSDKResponseStatusCodeUserCancel){//用户取消发送
+            [multicastDelegate weiBoManager:self didUserCancelLoginWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response];
+        }else if (response.statusCode == WeiboSDKResponseStatusCodeSentFail){//发送失败
+            [multicastDelegate weiBoManager:self didLoginFailedWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response];
+        }else if (response.statusCode == WeiboSDKResponseStatusCodeUserCancelInstall){//用户取消安装微博客户端
+            [multicastDelegate weiBoManager:self didUserCancelLoginWithWithWBAuthorizeResponse:(WBAuthorizeResponse *)response];
+        }
         
     }else if ([response isKindOfClass:WBPaymentResponse.class]){
         /*

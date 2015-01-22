@@ -87,6 +87,14 @@
     [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeWeibo
                                          completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
                                              
+                                             if (!error) {//微博获取到信息
+                                                 
+                                                 [self locationWithUserInfo:userInfo loginType:LoginTypeWeibo];
+                                                 
+                                             }else{//第三方登录不成功
+                                                 
+                                             }
+
                                          }];
 }
 - (IBAction)ClikedOnQQButton:(id)sender
@@ -105,9 +113,7 @@
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
-    [LTZLocationManager locationWithBlock:^(NSString *state, NSString *city, NSString *address, CLLocationCoordinate2D locationCorrrdinate, NSError *error) {
-        
-    }];
+    
 }
 - (IBAction)ClikedOnBackPwdButton:(id)sender
 {
