@@ -96,6 +96,8 @@
             #define LOG(FORMAT,...) nil
 
     #endif
+
+    #define LTZLocalizedString(Key) NSLocalizedStringFromTable((Key),@"QingChunApp", nil)
 /*************************************启动信息和页面跳转***************************************/
     #define EMAIL_REGISTER_SUCCEED @"email_register_succeed"
     #define KISSNAPP_QR_HEADER @"http://www.kissnapp.com/mobile?"

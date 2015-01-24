@@ -1,0 +1,14 @@
+/* 
+  QingChunApp.strings
+  QingChunApp
+
+  Created by  李天柱 on 15/1/24.
+  Copyright (c) 2015年 Peter Lee. All rights reserved.
+*/
+//LoginViewController
+"login_title" = "登录";
+"login_bar_button_title" = "取消";
+
+
+//RegisterViewController
+"register_title" = "注册";

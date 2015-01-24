@@ -1,33 +1,27 @@
 //
-//  SuperViewController.m
-//  FindLocationDemo
+//  BaseTableViewController.m
+//  QingChunApp
 //
-//  Created by 李天柱 on 14-4-15.
-//  Copyright (c) 2014年 Peter Lee. All rights reserved.
+//  Created by  李天柱 on 15/1/25.
+//  Copyright (c) 2015年 Peter Lee. All rights reserved.
 //
-#import "BaseViewController.h"
 
-@interface BaseViewController ()
+#import "BaseTableViewController.h"
+
+@interface BaseTableViewController ()
 
 @end
 
-
-@implementation BaseViewController
-
-
-//init方法最终还是要执行initWithNibName:bundle:方法，所以公共代码只需在该方法里添加即可
-//Stortyboard中初始化不执行init和initWithNibName:bundle:方法，所以初始化全放viewDidLoad中
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-    }
-    return self;
-}
+@implementation BaseTableViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Uncomment the following line to preserve selection between presentations.
+    // self.clearsSelectionOnViewWillAppear = NO;
+    
+    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     _netWorkStatusNotice = [NotificationView sharedInstance];
     _netWorkStatusNotice.delegate = self;
@@ -48,7 +42,7 @@
 #if !__has_feature(objc_arc)
     
 #endif
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -121,9 +115,6 @@
     }
 }
 
-/*******************************Public方法***********************************************/
-
-
 - (void)dealloc
 {
     
@@ -166,5 +157,74 @@
     [alertView show];
 }
 
+#pragma mark - Table view data source
+/*
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Potentially incomplete method implementation.
+    // Return the number of sections.
+    return 0;
+}
+*/
+/*
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+#warning Incomplete method implementation.
+    // Return the number of rows in the section.
+    return 0;
+}
+ */
+
+/*
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    return cell;
+}
+*/
+
+/*
+// Override to support conditional editing of the table view.
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the specified item to be editable.
+    return YES;
+}
+*/
+
+/*
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+    }   
+}
+*/
+
+/*
+// Override to support rearranging the table view.
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+}
+*/
+
+/*
+// Override to support conditional rearranging of the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Return NO if you do not want the item to be re-orderable.
+    return YES;
+}
+*/
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

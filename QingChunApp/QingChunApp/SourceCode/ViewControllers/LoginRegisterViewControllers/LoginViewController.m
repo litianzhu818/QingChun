@@ -11,6 +11,7 @@
 #import "LoginHelper.h"
 #import "LTZLocationManager.h"
 #import "HttpSessionManager.h"
+#import "MBProgressHUD.h"
 
 @implementation LoginViewController
 
@@ -64,6 +65,15 @@
     //Here initialization your UI parameters
     
     self.defaultImageView.image = [UIImage imageNamed:@"login_bg"];
+    self.navigationItem.title = LTZLocalizedString(@"login_title");
+    UIButton *cancelButton = ({
+        UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+        [btn addTarget:self action:@selector(cancelLogin) forControlEvents:UIControlEventTouchUpInside];
+        [btn setTitle:LTZLocalizedString(@"login_bar_button_title") forState:UIControlStateNormal];
+        btn.frame = CGRectMake(0, 0, 60, 40);
+        btn;
+    });
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:cancelButton];
     
     [_weiboButton setTitleColor:[UIColor blackColor] forState:UIControlStateHighlighted];
     [_weiboButton setBackgroundImage:[UIImage imageNamed:@"weibo_se"] forState:UIControlStateSelected];
@@ -82,34 +92,20 @@
     //Here initialization your data parameters
 }
 
+- (void)cancelLogin
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
 - (IBAction)ClikedWeiBoButton:(id)sender
 {
-    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeWeibo
-                                         completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
-                                             
-                                             if (!error) {//微博获取到信息
-                                                 
-                                                 [self locationWithUserInfo:userInfo loginType:LoginTypeWeibo];
-                                                 
-                                             }else{//第三方登录不成功
-                                                 
-                                             }
-
-                                         }];
+    [self loginWithOtherSDK:LoginTypeWeibo];
 }
 - (IBAction)ClikedOnQQButton:(id)sender
 {
-    [[LoginHelper sharedInstance] authorizeWithLoginType:LoginTypeTencent
-                                         completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
-                                             
-                                             if (!error) {//QQ获取到信息
-                                                 
-                                                 [self locationWithUserInfo:userInfo loginType:LoginTypeTencent];
-                                                 
-                                             }else{//第三方登录不成功
-                                             
-                                             }
-                                         }];
+    [self loginWithOtherSDK:LoginTypeTencent];
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
@@ -136,6 +132,38 @@
     return YES;
 }
 
+- (void)loginWithOtherSDK:(LoginType)loginType
+{
+    //添加UI
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[LoginHelper sharedInstance] authorizeWithLoginType:loginType
+                                         completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
+                                             
+                                             if (!error) {//QQ获取到信息
+                                                 
+                                                 [self locationWithUserInfo:userInfo loginType:loginType];
+                                                 
+                                             }else{//第三方登录不成功
+                                                 
+                                                 MAIN_GCD(^{
+                                                     [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                     [self showMessage:@"登录失败！" title:@"提示" cancelButtonTitle:@"知道了" cancleBlock:^{
+                                                         
+                                                     }];
+                                                 });
+                                                 
+                                             }
+                                            
+                                         }];
+    /*
+     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.01 * NSEC_PER_SEC);
+     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        // 定时执行
+    
+     });
+     */
+}
+
 - (void)locationWithUserInfo:(id)userInfo loginType:(LoginType)loginType
 {
     MAIN_GCD((^{
@@ -151,6 +179,14 @@
                 [self loginWithUserInfo:userInfo loginType:loginType];
                 
             }else{//定位不成功
+                
+                MAIN_GCD(^{
+                    [MBProgressHUD hideHUDForView:self.view animated:YES];
+                    [self showMessage:@"定位失败！" title:@"提示" cancelButtonTitle:@"知道了" cancleBlock:^{
+                        
+                    }];
+
+                });
                 
             }
             
@@ -182,6 +218,13 @@
                                                                    
                                                                }
                                                            }
+                                                           
+                                                           MAIN_GCD(^{
+                                                               [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                                               [self showMessage:@"登录失败！" title:@"提示" cancelButtonTitle:@"知道了" cancleBlock:^{
+                                                                   
+                                                               }];
+                                                           });
                                                        }];
 }
 

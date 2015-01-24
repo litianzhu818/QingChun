@@ -1,11 +1,9 @@
 //
-//  SuperViewController.h
-//  FindLocationDemo
+//  BaseTableViewController.h
+//  QingChunApp
 //
-//  Created by 李天柱 on 14-4-15.
-//  Copyright (c) 2014年 Peter Lee. All rights reserved.
-//
-//  自定义父类，用于从消息中心接收消息通知
+//  Created by  李天柱 on 15/1/25.
+//  Copyright (c) 2015年 Peter Lee. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -14,7 +12,7 @@
 #import "NotificationView.h"
 #import "UICustomAlertView.h"
 
-@interface BaseViewController : UIViewController<NotificationViewDelegate>
+@interface BaseTableViewController : UITableViewController<NotificationViewDelegate>
 @property (strong, nonatomic) NotificationView *netWorkStatusNotice;
 @property (strong, nonatomic) UIImageView *defaultImageView;
 
@@ -28,4 +26,5 @@
        cancleBlock:(void (^)(void))cancleBlock
   otherButtonTitle:(NSString *)otherButtonTitle
         otherBlock:(void (^)(void))otherBlock;
+
 @end

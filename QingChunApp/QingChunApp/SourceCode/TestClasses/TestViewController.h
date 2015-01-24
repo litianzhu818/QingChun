@@ -8,7 +8,7 @@
 
 #import "BaseViewController.h"
 
-@interface TestViewController : BaseViewController
+@interface TestViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UIButton *okButton;
 

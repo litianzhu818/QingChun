@@ -10,10 +10,11 @@
 #import "NAMenuView.h"
 #import "UserHeaderView.h"
 #import "MyPostsViewController.h"
-#import "LoginViewController.h"
+#import "BaseNavigationController.h"
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
 #import <objc/runtime.h>
+#import "ADTransitionController.h"
 
 #define MARGIN_WIDTH 8.0f
 
@@ -159,10 +160,20 @@
     if (menuItem.storyboardName) {
         UIStoryboard *sb = [UIStoryboard storyboardWithName:menuItem.storyboardName  bundle:nil];
         viewController = [sb instantiateInitialViewController];
+        
     } else {
         Class class = [menuItem targetViewControllerClass];
         viewController = [[class alloc] init];
     }
+    /*
+    CGRect sourceRect = [sender frame];
+    sourceRect.origin.y = sourceRect.origin.y - self.tableView.contentOffset.y;
+    
+    ADTransition * transition = [[ADZoomTransition alloc] initWithSourceRect:CGRectMake(100, 100, 100, 100) andTargetRect:self.view.frame forDuration:0.25];
+    ADTransitioningDelegate * transitioningDelegate = [[ADTransitioningDelegate alloc] initWithTransition:transition];
+    
+    viewController.transitioningDelegate = transitioningDelegate;
+    */
     [self.navigationController pushViewController:viewController animated:YES];
 }
 
@@ -170,8 +181,11 @@
 - (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button
 {
     UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"login_register" bundle:nil];
-    LoginViewController *loginViewController = [loginStory instantiateInitialViewController];
-    [self.navigationController pushViewController:loginViewController animated:YES];
+    BaseNavigationController *loginViewController = [loginStory instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:loginViewController animated:YES completion:^{
+        
+    }];
 }
 
 /*
