@@ -112,7 +112,7 @@
                                         </state>
                                         <connections>
                                             <action selector="ClikedOnRegisterButton:" destination="63r-2y-w8U" eventType="touchUpInside" id="RAi-7D-POH"/>
-                                            <segue destination="04H-ma-w4j" kind="push" id="hWf-aM-Ov6"/>
+                                            <segue destination="04H-ma-w4j" kind="push" identifier="login_register" id="hWf-aM-Ov6"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="青春逗账号登录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Xpf-Qm-WhL">

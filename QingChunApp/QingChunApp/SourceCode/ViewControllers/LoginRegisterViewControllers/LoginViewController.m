@@ -12,6 +12,7 @@
 #import "LTZLocationManager.h"
 #import "HttpSessionManager.h"
 #import "MBProgressHUD.h"
+#import "UserInfoModel.h"
 
 @implementation LoginViewController
 
@@ -203,10 +204,13 @@
                                                        block:^(id data, NSError *error) {
                                                            
                                                            if (!error) {//登录成功
-                                                               NSDictionary *userInfoDic = [data objectForKey:@"data"];
+                                                               NSDictionary *userInfoDic = [data valueForKeyPath:@"data"];
                                                                [[UserConfig sharedInstance] SetUserKey:[userInfo objectForKey:@"userKey"]];
                                                                //这里是用户的基本信息，登录成功跳转界面
                                                                //code...
+                                                            
+                                                               UserInfoModel *userInfo = [[UserInfoModel alloc] init];
+                                                               //userInfo.
                                                                
                                                            }else{//登录失败
                                                               LOG(@"Error:%@",[error.userInfo objectForKey:@"msg"]);
@@ -215,15 +219,23 @@
                                                                    [[UserConfig sharedInstance] SetUserKey:userKey];
                                                                    //跳转到绑定邮箱界面
                                                                    //code...
+                                                                   MAIN_GCD(^{
+                                                                   
+                                                                       [self showMessage:@"第一次登录，需要绑定邮箱何设置用户名，是否去设置？"
+                                                                                   title:@"提示"
+                                                                       cancelButtonTitle:@"拒绝"
+                                                                             cancleBlock:^{
+                                                                                 
+                                                                             } otherButtonTitle:@"去设置"
+                                                                              otherBlock:^{
+                                                                                  [self performSegueWithIdentifier:@"login_register" sender:nil];
+                                                                              }];
+                                                                   });
                                                                    
                                                                }
                                                            }
-                                                           
                                                            MAIN_GCD(^{
                                                                [MBProgressHUD hideHUDForView:self.view animated:YES];
-                                                               [self showMessage:@"登录失败！" title:@"提示" cancelButtonTitle:@"知道了" cancleBlock:^{
-                                                                   
-                                                               }];
                                                            });
                                                        }];
 }
@@ -249,7 +261,7 @@
     return YES;
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -258,6 +270,5 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 }
-*/
 
 @end

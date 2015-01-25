@@ -72,9 +72,8 @@
     NSError *error = nil;
     //code为200时，表示正常
     NSNumber *resultCode = [responseJSON valueForKeyPath:@"code"];
-    NSString *msgStatus = [responseJSON valueForKeyPath:@"msg"];
-    
-    if (resultCode.intValue != 200 || ![msgStatus isEqualToString:@"success"]) {
+
+    if (resultCode.intValue != 200) {
         error = [NSError errorWithDomain:[[SystemConfig sharedInstance] GetBaseURLStr] code:resultCode.intValue userInfo:responseJSON];
         NSLog(@"get Data Error:%@",error.description);
         /*

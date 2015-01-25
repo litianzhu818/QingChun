@@ -73,15 +73,12 @@
         [self alertTitle:@"提示" message:@"您素填写的邮箱格式有误，请检查后重新填写..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
         return NO;
     }
-    if (!self.userNameTextField.text || [self.userNameTextField.text isEqualToString:@""]) {
+    if (![self isValidateUserName:self.userNameTextField.text]) {
         [self alertTitle:@"提示" message:@"用户名为必须填写项，请补全信息..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
         return NO;
     }
     
-    if (!self.userPwdTextField.text ||
-        [self.userPwdTextField.text isEqualToString:@""] ||
-        !self.userPwdConfirmTextField.text ||
-        [self.userPwdConfirmTextField.text isEqualToString:@""] ||
+    if (![self isValidatePassword:self.userPwdTextField.text] ||
         ![self.userPwdTextField.text isEqualToString:self.userPwdConfirmTextField.text]) {
         [self alertTitle:@"提示" message:@"密码填写不完整，或者两次填写的密码不一致，请检查后重新填写..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
         return NO;
@@ -154,11 +151,27 @@
 //利用正则表达式验证邮箱的合法性
 - (BOOL)isValidateEmail:(NSString *)email
 {
-    
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSString *emailRegex = @"^[A-Za-z\\d]+([-_.][A-Za-z\\d]+)*@([A-Za-z\\d]+[-.])+[A-Za-z\\d]{2,5}$";//[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
     return [emailTest evaluateWithObject:email];
+}
+
+//利用正则表达式验证用户名的合法性
+- (BOOL)isValidateUserName:(NSString *)userName
+{
     
+    NSString *userRegex = @"^[\\p{Han}\\w-]{1,10}$";
+    NSPredicate *userTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", userRegex];
+    return [userTest evaluateWithObject:userName];
+}
+
+//利用正则表达式验证密码的合法性
+- (BOOL)isValidatePassword:(NSString *)password
+{
+    
+    NSString *passwordRegex = @"^[\\p{Han}\\w-]{1,10}$";
+    NSPredicate *passwordTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", passwordRegex];
+    return [passwordTest evaluateWithObject:password];
 }
 
 #pragma mark - UITableViewDelegate
