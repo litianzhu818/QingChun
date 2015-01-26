@@ -129,7 +129,7 @@
                                                 
                                             }else{//登录失败
                                                 LOG(@"Error:%@",[error.userInfo objectForKey:@"msg"]);
-                                                if (error.code == 2202) {//未绑定邮箱，需绑定邮箱
+                                                if (error.code == 2202) {//登录失败
                                                     NSString *userKey = [[error.userInfo objectForKey:@"data"] objectForKey:@"userKey"];
                                                     [[UserConfig sharedInstance] SetUserKey:userKey];
                                                     //跳转到绑定邮箱界面
