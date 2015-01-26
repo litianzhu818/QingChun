@@ -110,7 +110,43 @@
 }
 - (IBAction)ClikedOnLoginButton:(id)sender
 {
-    
+    if ([self checkData]) {
+        //添加UI
+        [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [[LoginHelper sharedHelper] authorizeWithID:self.nameTextField.text
+                                           password:self.pwdTextField.text
+                                    completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
+                                        if (loginType == LoginTypeDefault) {
+                                            
+                                            if (!error) {//登录成功
+                                                NSDictionary *userInfoDic = [userInfo valueForKeyPath:@"data"];
+                                                [[UserConfig sharedInstance] SetUserKey:[userInfoDic objectForKey:@"userKey"]];
+                                                //这里是用户的基本信息，登录成功跳转界面
+                                                //code...
+                                                //初始化用户基本信息
+                                                UserInfoModel *userInfo = [UserInfoModel userInfoModelWithDictionary:userInfoDic];
+                                                [self loginSuccessWithUserInfo:userInfo];
+                                                
+                                            }else{//登录失败
+                                                LOG(@"Error:%@",[error.userInfo objectForKey:@"msg"]);
+                                                if (error.code == 2202) {//未绑定邮箱，需绑定邮箱
+                                                    NSString *userKey = [[error.userInfo objectForKey:@"data"] objectForKey:@"userKey"];
+                                                    [[UserConfig sharedInstance] SetUserKey:userKey];
+                                                    //跳转到绑定邮箱界面
+                                                    //code...
+                                                    MAIN_GCD(^{
+                                                        [self showMessage:@"邮箱或者密码错误，请检查后重新输入..." title:LTZLocalizedString(@"alert_title") cancelButtonTitle:LTZLocalizedString(@"alert_custom_btn_title")
+                                                    cancleBlock:^{}];
+                                                    });
+                                                    
+                                                }
+                                            }
+                                            MAIN_GCD(^{
+                                                [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                            });
+                                        }
+                                    }];
+    }
 }
 - (IBAction)ClikedOnBackPwdButton:(id)sender
 {
@@ -137,12 +173,13 @@
 {
     //添加UI
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    [[LoginHelper sharedInstance] authorizeWithLoginType:loginType
+    [[LoginHelper sharedHelper] authorizeWithLoginType:loginType
                                          completeHandler:^(LoginType loginType, id userInfo, NSError *error) {
                                              
                                              if (!error) {//QQ获取到信息
                                                  
                                                  [self locationWithUserInfo:userInfo loginType:loginType];
+                                                 [[UserConfig sharedInstance] SetUserTempOtherSDKImageUrl:[userInfo objectForKey:@"img"]];
                                                  
                                              }else{//第三方登录不成功
                                                  
@@ -205,12 +242,12 @@
                                                            
                                                            if (!error) {//登录成功
                                                                NSDictionary *userInfoDic = [data valueForKeyPath:@"data"];
-                                                               [[UserConfig sharedInstance] SetUserKey:[userInfo objectForKey:@"userKey"]];
+                                                               [[UserConfig sharedInstance] SetUserKey:[userInfoDic objectForKey:@"userKey"]];
                                                                //这里是用户的基本信息，登录成功跳转界面
                                                                //code...
-                                                            
-                                                               UserInfoModel *userInfo = [[UserInfoModel alloc] init];
-                                                               //userInfo.
+                                                               //初始化用户基本信息
+                                                               UserInfoModel *userInfo = [UserInfoModel userInfoModelWithDictionary:userInfoDic];
+                                                               [self loginSuccessWithUserInfo:userInfo];
                                                                
                                                            }else{//登录失败
                                                               LOG(@"Error:%@",[error.userInfo objectForKey:@"msg"]);
@@ -238,6 +275,15 @@
                                                                [MBProgressHUD hideHUDForView:self.view animated:YES];
                                                            });
                                                        }];
+}
+
+- (void)loginSuccessWithUserInfo:(UserInfoModel *)userInfo
+{
+    //保存用户基本信息
+    [[UserConfig sharedInstance] SetUserInfo:userInfo];
+    [[UserConfig sharedInstance] SetAlreadyLogin:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_login_success" object:userInfo];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{}];
 }
 
 #pragma mark - UITextFiledDelegate Methods

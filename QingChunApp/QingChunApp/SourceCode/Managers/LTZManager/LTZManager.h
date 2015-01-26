@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GCDMulticastDelegate.h"
 
+#define RETURN_WITH_QUEUE_TAG(managerQueueTag) if (!dispatch_get_specific(managerQueueTag)) return;
+
 @interface LTZManager : NSObject
 {
     dispatch_queue_t            managerQueue;

@@ -23,6 +23,9 @@
 @property (assign, nonatomic) NSUInteger userBean;
 @property (assign, nonatomic) NSUInteger userGrade;
 
++ (UserInfoModel *)userInfoModel;
++ (UserInfoModel *)userInfoModelWithDictionary:(NSDictionary *)userInfoDictionary;
+
 - (instancetype)initWithDictionary:(NSDictionary *)userInfoDictionary;
 
 @end

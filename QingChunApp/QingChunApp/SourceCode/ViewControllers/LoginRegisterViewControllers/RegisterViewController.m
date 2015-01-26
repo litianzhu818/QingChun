@@ -7,7 +7,9 @@
 //
 
 #import "RegisterViewController.h"
-#import "TPKeyboardAvoidingTableView.h"
+#import "RegisterHelper.h"
+#import "MBProgressHUD.h"
+#import "UserInfoModel.h"
 
 @interface RegisterViewController ()
 {
@@ -65,26 +67,64 @@
 - (BOOL)checkData
 {
     if (!_isRead) {
-        [self alertTitle:@"提示" message:@"请接受服务条款同意后方可加入青春逗..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
+        [self alertTitle:LTZLocalizedString(@"alert_title") message:LTZLocalizedString(@"notice_accepet_service_agreement") delegate:nil cancelBtn:LTZLocalizedString(@"alert_custom_btn_title") otherBtnName:nil];
         return NO;
     }
     
     if (![self isValidateEmail:self.emailTextField.text]) {
-        [self alertTitle:@"提示" message:@"您素填写的邮箱格式有误，请检查后重新填写..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
+        [self alertTitle:LTZLocalizedString(@"alert_title") message:LTZLocalizedString(@"notice_error_email_formal") delegate:nil cancelBtn:LTZLocalizedString(@"alert_custom_btn_title") otherBtnName:nil];
         return NO;
     }
     if (![self isValidateUserName:self.userNameTextField.text]) {
-        [self alertTitle:@"提示" message:@"用户名为必须填写项，请补全信息..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
+        [self alertTitle:LTZLocalizedString(@"alert_title") message:LTZLocalizedString(@"notice_error_no_nickname") delegate:nil cancelBtn:LTZLocalizedString(@"alert_custom_btn_title") otherBtnName:nil];
         return NO;
     }
     
     if (![self isValidatePassword:self.userPwdTextField.text] ||
         ![self.userPwdTextField.text isEqualToString:self.userPwdConfirmTextField.text]) {
-        [self alertTitle:@"提示" message:@"密码填写不完整，或者两次填写的密码不一致，请检查后重新填写..." delegate:nil cancelBtn:@"知道了" otherBtnName:nil];
+        [self alertTitle:LTZLocalizedString(@"alert_title") message:LTZLocalizedString(@"notice_error_pwd_not_same") delegate:nil cancelBtn:LTZLocalizedString(@"alert_custom_btn_title")otherBtnName:nil];
         return NO;
     }
     
     return YES;
+}
+
+- (void)registerAction
+{
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [[RegisterHelper sharedHelper] registerWithUseKey:[[UserConfig sharedInstance] GetUserKey]
+                                             userName:_userNameTextField.text
+                                             password:_userPwdTextField.text
+                                                email:_emailTextField.text
+                                                  img:[[UserConfig sharedInstance] GetUserTempOtherSDKImageUrl]
+                                      completeHandler:^(id userInfo, NSError *error) {
+                                          
+                                          MAIN_GCD(^{
+                                              [MBProgressHUD hideHUDForView:self.view animated:YES];
+                                          });
+                                          
+                                          if (error) {
+                                              NSString *errorMessage = [NSString stringWithFormat:@"%@%@",LTZLocalizedString(@"notice_error_register_failture"),[error.userInfo objectForKey:NSLocalizedDescriptionKey]];
+                                              MAIN_GCD(^{
+                                                  [self alertTitle:LTZLocalizedString(@"alert_title") message:errorMessage delegate:nil cancelBtn:LTZLocalizedString(@"alert_custom_btn_title") otherBtnName:nil];
+                                              });
+
+                                          }else{
+                                              UserInfoModel *userInfo = [UserInfoModel userInfoModelWithDictionary:[userInfo valueForKeyPath:@"data"]];
+                                              [self registerSuccessWithUserInfo:userInfo];
+                                          }
+                                      }];
+}
+
+- (void)registerSuccessWithUserInfo:(UserInfoModel *)userInfo
+{
+    //保存用户基本信息
+    [[UserConfig sharedInstance] SetUserInfo:userInfo];
+    [[UserConfig sharedInstance] SetAlreadyLogin:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"user_login_success" object:userInfo];
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark - UIButtonClicked Method
@@ -97,6 +137,7 @@
             //登录
             if ([self checkData]) {
                 //开始登录
+                [self registerAction];
             }
         }
             break;
@@ -118,13 +159,13 @@
         case 102:
         {
             //服务协议
-            [self alertTitle:@"提示" message:@"您点击了服务协议" delegate:nil cancelBtn:@"取消" otherBtnName:nil];
+            [self alertTitle:LTZLocalizedString(@"alert_title") message:@"您点击了服务协议" delegate:nil cancelBtn:LTZLocalizedString(@"alert_cancel_btn_title") otherBtnName:nil];
         }
             break;
         case 103:
         {
             //隐私协议
-            [self alertTitle:@"提示" message:@"您点击了隐私协议" delegate:nil cancelBtn:@"取消" otherBtnName:nil];
+            [self alertTitle:LTZLocalizedString(@"alert_title") message:@"您点击了隐私协议" delegate:nil cancelBtn:LTZLocalizedString(@"alert_cancel_btn_title") otherBtnName:nil];
         }
             break;
             
@@ -133,7 +174,6 @@
     }
     
 }
-
 
 //alertView
 - (UIAlertView *)alertTitle:(NSString *)title
@@ -189,7 +229,7 @@
         
         UILabel *label = ({
             UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 0.f, 300.f, 21.f)];
-            _label.text = @"注册后不可更改，3~20位字符，可包含英文、数字和“_”";
+            _label.text = LTZLocalizedString(@"remark_nickname_formal");
             _label.font = [UIFont systemFontOfSize:10.f];
             _label.textColor = [UIColor blackColor];
             _label.backgroundColor = [UIColor clearColor];
@@ -211,7 +251,7 @@
         
         UILabel *label = ({
             UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 0.f, 300.f, 21.f)];
-            _label.text = @"6位字符以上，可包含数字、字母（区分大小写）";
+            _label.text = LTZLocalizedString(@"remark_pwd_formal");
             _label.font = [UIFont systemFontOfSize:10.f];
             _label.textColor = [UIColor blackColor];
             _label.backgroundColor = [UIColor clearColor];
@@ -241,7 +281,7 @@
         
         UILabel *label1 = ({
             UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(35.f, 10.f, 70.f, 21.f)];
-            _label.text = @"我已阅读并同意";
+            _label.text = LTZLocalizedString(@"remark_service_agreement1");
             _label.font = [UIFont systemFontOfSize:10.f];
             _label.textColor = [UIColor blackColor];
             _label.backgroundColor = [UIColor clearColor];
@@ -254,7 +294,7 @@
         UIButton *servicesBtn = ({
             UIButton *_servicesBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             _servicesBtn.frame = CGRectMake(110.f, 10.f, 40.f, 21.f);
-            [_servicesBtn setTitle:@"服务协议" forState:UIControlStateNormal];
+            [_servicesBtn setTitle:LTZLocalizedString(@"remark_service_agreement2") forState:UIControlStateNormal];
             [_servicesBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             _servicesBtn.titleLabel.font = [UIFont systemFontOfSize:10.f];
             [_servicesBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -266,7 +306,7 @@
         
         UILabel *label2 = ({
             UILabel *_label = [[UILabel alloc] initWithFrame:CGRectMake(155.f, 10.f, 10.f, 21.f)];
-            _label.text = @"和";
+            _label.text = LTZLocalizedString(@"remark_service_agreement3");
             _label.font = [UIFont systemFontOfSize:10.f];
             _label.textColor = [UIColor blackColor];
             _label.backgroundColor = [UIColor clearColor];
@@ -279,7 +319,7 @@
         UIButton *privacyBtn = ({
             UIButton *_privacyBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             _privacyBtn.frame = CGRectMake(170.f, 10.f, 40.f, 21.f);
-            [_privacyBtn setTitle:@"隐私协议" forState:UIControlStateNormal];
+            [_privacyBtn setTitle:LTZLocalizedString(@"remark_service_agreement4") forState:UIControlStateNormal];
             [_privacyBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
             _privacyBtn.titleLabel.font = [UIFont systemFontOfSize:10.f];
             [_privacyBtn setContentHorizontalAlignment:UIControlContentHorizontalAlignmentLeft];
@@ -320,10 +360,6 @@
 {
     return [[UIView alloc] initWithFrame:CGRectZero];
 }
-
-
-
-
 
 /*
 #pragma mark - Navigation

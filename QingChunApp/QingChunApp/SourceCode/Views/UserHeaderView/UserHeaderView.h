@@ -8,22 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class UserInfoModel;
 @protocol UserHeaderViewDelegate;
 
 @interface UserHeaderView : UIView
-{
-    id<UserHeaderViewDelegate> delegate;
-}
+
+@property (strong, nonatomic, readonly) UserInfoModel *userInfo;
 @property (assign, nonatomic) id<UserHeaderViewDelegate> delegate;
-@property (strong, nonatomic) IBOutlet UIButton *backButton;
-@property (weak, nonatomic) IBOutlet UIImageView *headerImageView;
-@property (weak, nonatomic) IBOutlet UILabel *infoLabel;
-@property (weak, nonatomic) IBOutlet UIButton *accessoryButton;
 
 + (instancetype)instanceFromNib;
 
--(IBAction)clikedOnHeaderView:(id)sender;
--(IBAction)clikedOnAccessroyView:(id)sender;
+- (void)updateWithUserInfoModel:(UserInfoModel *)userInfo;
 
 @end
 
@@ -31,6 +26,6 @@
 
 @optional
 
-- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button;
+- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button hasUserInfo:(BOOL)hasUserInfo;
 
 @end

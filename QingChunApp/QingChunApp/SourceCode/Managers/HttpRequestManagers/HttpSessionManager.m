@@ -10,6 +10,7 @@
 #import "NSObject+AutoProperties.h"
 #import "NSString+Hashes.h"
 #import "HttpSessionClient.h"
+#import "QingChunServerAPIs.h"
 
 @implementation HttpSessionManager
 
@@ -33,9 +34,45 @@
 //    NSString *checksumStr = [NSString stringWithFormat:@"%@%@%@%@%@",identifier,[params objectForKey:@"openid"],[params objectForKey:@"token"],[params objectForKey:@"userName"],[[SystemConfig sharedInstance] GetCheckSumSecret]];
     
     [params setObject:identifier forKey:@"identifier"];
-    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@%@",identifier,[params objectForKey:@"openid"],[params objectForKey:@"token"],[params objectForKey:@"userName"],[[SystemConfig sharedInstance] GetCheckSumSecret]]) forKey:@"checksum"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@%@",
+                                      identifier,
+                                      [params objectForKey:@"openid"],
+                                      [params objectForKey:@"token"],
+                                      [params objectForKey:@"userName"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
     
     [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (data) {
+                                                             
+                                                             block(data,nil);
+                                                             
+                                                         }else{
+                                                             block(nil,error);
+                                                         }
+                                                         
+                                                     }];
+}
+
+- (void)login2WithIdentifier:(NSString *)identifier
+                      params:(id)params
+                       block:(void (^)(id data, NSError *error))block
+{
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@",
+                                      identifier,
+                                      [params objectForKey:@"email"],
+                                      [params objectForKey:@"password"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_LOGIN_2_PATH_STRING_IOS
                                                    withParams:params
                                                withMethodType:HttpSessionTypePOST
                                                      andBlock:^(id data, NSError *error) {
@@ -63,7 +100,12 @@
     NSDictionary *params = @{@"page":[NSNumber numberWithUnsignedInteger:page],
                              @"type":[NSNumber numberWithUnsignedInteger:type],
                              @"identifier":identifier,
-                             @"checksum":SHA1StringWith([NSString stringWithFormat:@"%@%ld%ld%@",identifier,(unsigned long)page,(unsigned long)type,[[SystemConfig sharedInstance] GetCheckSumSecret]])
+                             @"checksum":SHA1StringWith([NSString stringWithFormat:@"%@%ld%ld%@",
+                                                         identifier,
+                                                         (unsigned long)page,
+                                                         (unsigned long)type,
+                                                         [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                                        )
                              };
     [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
                                                    withParams:params
@@ -86,6 +128,70 @@
                                                          }else{
                                                              block(nil, error);
                                                          }
+                                                     }];
+}
+
+//第三方注册接口
+- (void)registerWithIdentifier:(NSString *)identifier
+                        params:(id)params
+                         block:(void (^)(id data, NSError *error))block
+{
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@%@",
+                                      identifier,
+                                      [params objectForKey:@"userName"],
+                                      [params objectForKey:@"email"],
+                                      [params objectForKey:@"password"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_REGISTER_PATH_STRING_IOS
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (data) {
+                                                             
+                                                             block(data,nil);
+                                                             
+                                                         }else{
+                                                             block(nil,error);
+                                                         }
+                                                         
+                                                     }];
+}
+
+//自己注册接口
+- (void)register2WithIdentifier:(NSString *)identifier
+                         params:(id)params
+                          block:(void (^)(id data, NSError *error))block
+{
+    NSString *path = [[SystemConfig sharedInstance] GetLoginURLStr];
+    
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@%@%@",
+                                      identifier,
+                                      [params objectForKey:@"openid"],
+                                      [params objectForKey:@"token"],
+                                      [params objectForKey:@"userName"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:path
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (data) {
+                                                             
+                                                             block(data,nil);
+                                                             
+                                                         }else{
+                                                             block(nil,error);
+                                                         }
+                                                         
                                                      }];
 }
 

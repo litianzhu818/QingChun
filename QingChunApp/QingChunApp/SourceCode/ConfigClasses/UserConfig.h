@@ -24,6 +24,10 @@ Single_interface(UserConfig);
 -(void)SetAutoLogin:(BOOL)value;
 -(BOOL)GetAutoLogin;
 
+//存取是否已经登录的值
+-(void)SetAlreadyLogin:(BOOL)value;
+-(BOOL)GetAlreadyLogin;
+
 //存取用户head_url_prefix的值
 -(void)SetHeadURLPrefix:(NSString *)value;
 -(NSString *)GetHeadURLPrefix;
@@ -44,5 +48,12 @@ Single_interface(UserConfig);
 -(void)SetUserKey:(NSString *)value;
 -(NSString *)GetUserKey;
 
+//存取用户临时的第三方头像的url的值
+-(void)SetUserTempOtherSDKImageUrl:(NSString *)value;
+-(NSString *)GetUserTempOtherSDKImageUrl;
+
+//存取用户基本信息的值
+-(void)SetUserInfo:(id)value;
+-(id)GetUserInfo;
 
 @end

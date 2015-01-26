@@ -12,13 +12,17 @@
 NSString *const qcdUserName = @"QCD_USER_NAME_STRING_IOS";
 NSString *const qcdUserPassword = @"QCD_USER_PASSWORD_STRING_IOS";
 NSString *const qcdUserAutoLogin = @"QCD_USER_AUTO_LOGIN_IOS";
+NSString *const qcdUserAlreadyLogin = @"QCD_USER_ALREADY_LOGIN_IOS";
 
 NSString *const qcdUserHeadURLPrefix = @"QCD_USER_HEAD_URL_PREFIX_STRING_IOS";
 NSString *const qcdImageURLPrefix = @"QCD_IMAGE_URL_PREFIX_STRING_IOS";
 
 NSString *const qcdUserTencentTokenStr = @"QCD_USER_TENCENT_TOKEN_STRING_IOS";
 NSString *const qcdUserWeiboTokenStr = @"QCD_USER_WEIBO_TOKEN_STRING_IOS";
+NSString *const qcdUserTempOtherSDKImageUrl = @"QCD_USER_TEMP_OTHER_SDK_IMAGE_URL_STRING_IOS";
 
 NSString *const qcdUserKey = @"QCD_USER_KEY_STRING_IOS";
+
+NSString *const qcdUserInfo = @"QCD_USER_INFO_STRING_IOS";
 
 #endif

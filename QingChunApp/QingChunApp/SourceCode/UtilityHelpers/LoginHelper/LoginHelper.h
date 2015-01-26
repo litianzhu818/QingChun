@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, LoginErrorCode) {
     LoginErrorCodeFailed
 };
 
-#define CustomLoginErrorDomain @"com.qcd.login.error"
+FOUNDATION_EXTERN NSString *const CustomLoginErrorDomain;
 
 @class WeiBoManager;
 @class TencentManager;
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, LoginErrorCode) {
 @property (strong, nonatomic, readonly) TencentManager *tencentManager;
 
 
-+ (LoginHelper *)sharedInstance;
++ (LoginHelper *)sharedHelper;
 + (id)allocWithZone:(NSZone *)zone;
 
 - (id)copyWithZone:(NSZone *)zone;
@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, LoginErrorCode) {
 + (BOOL)HandleOpenURL:(NSURL *)url;
 
 - (void)authorizeWithLoginType:(LoginType)loginType
-completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler;
+               completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler;
 
 - (void)authorizeWithID:(NSString *)loginID
                password:(NSString *)password

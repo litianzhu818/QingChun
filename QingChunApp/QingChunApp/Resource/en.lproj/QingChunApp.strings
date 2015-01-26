@@ -6,6 +6,13 @@
   Copyright (c) 2015年 Peter Lee. All rights reserved.
 */
 
+//UIAlertView
+"alert_title" = "notice";
+"alert_custom_btn_title" = "YES,I know it";
+"alert_cancel_btn_title" = "Cancel";
+"alert_ok_btn_title" = "Ok";
+
+
 //LoginViewController
 "login_title" = "Login";
 "login_bar_button_title" = "Cancel";
@@ -13,3 +20,25 @@
 
 //RegisterViewController
 "register_title" = "Register";
+
+//RegisterHelper
+"email_existing" = "this email is existing";
+"email_formal_error" = "email formal error";
+
+"user_name_existing" = "this user name  email is existing";
+"user_name_formal_error" = "user name formal error";
+
+"user_pwd__formal_error" = "password formal error";
+
+"notice_accepet_service_agreement" = "Please accept the terms of service agreement before joining us...";
+"notice_error_email_formal" = "The mailbox format which you inputted is incorrect, please check the formatter...";
+"notice_error_no_nickname" = "The user name must not been void in the item, please complete the information...";
+"notice_error_pwd_not_same" = "Password to fill in incomplete, or fill in the password two inconsistencies, please check the re fill...";
+"notice_error_register_failture" = "Registration failed, reason:";
+
+"remark_nickname_formal" = "Can not be changed after registration, 3~20 characters, can contain English, digital and \"_\"";
+"remark_pwd_formal" = "6 or more characters, may contain numbers, letters (case sensitive)";
+"remark_service_agreement1" = "I have read and agree";
+"remark_service_agreement2" = "Service agreement";
+"remark_service_agreement3" = "and";
+"remark_service_agreement4" = "Privacy protocol";

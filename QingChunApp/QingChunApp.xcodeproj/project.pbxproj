@@ -75,6 +75,10 @@
 		E73858511A6D30E2003D864D /* LTZLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858501A6D30E2003D864D /* LTZLocationManager.m */; };
 		E73858531A6D30F3003D864D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73858521A6D30F3003D864D /* MapKit.framework */; };
 		E73858591A6E3CC4003D864D /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E73858581A6E3CC4003D864D /* CoreText.framework */; };
+		E73858D21A75E4FC003D864D /* QingChunServerAPIs.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858D11A75E4FC003D864D /* QingChunServerAPIs.m */; };
+		E73858D81A75FED5003D864D /* RegisterHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858D71A75FED5003D864D /* RegisterHelper.m */; };
+		E73858DB1A76338D003D864D /* qcd_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E73858D91A76338D003D864D /* qcd_nor@2x.png */; };
+		E73858DC1A76338D003D864D /* qcd_se@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E73858DA1A76338D003D864D /* qcd_se@2x.png */; };
 		E74176551A5544570068F0E7 /* NSObject+Description.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176541A5544570068F0E7 /* NSObject+Description.m */; };
 		E74176591A5545510068F0E7 /* DescriptionBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = E74176581A5545510068F0E7 /* DescriptionBuilder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
@@ -403,6 +407,12 @@
 		E73858501A6D30E2003D864D /* LTZLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTZLocationManager.m; sourceTree = "<group>"; };
 		E73858521A6D30F3003D864D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		E73858581A6E3CC4003D864D /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		E73858D01A75E4FC003D864D /* QingChunServerAPIs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QingChunServerAPIs.h; sourceTree = "<group>"; };
+		E73858D11A75E4FC003D864D /* QingChunServerAPIs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QingChunServerAPIs.m; sourceTree = "<group>"; };
+		E73858D61A75FED5003D864D /* RegisterHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterHelper.h; sourceTree = "<group>"; };
+		E73858D71A75FED5003D864D /* RegisterHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterHelper.m; sourceTree = "<group>"; };
+		E73858D91A76338D003D864D /* qcd_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qcd_nor@2x.png"; sourceTree = "<group>"; };
+		E73858DA1A76338D003D864D /* qcd_se@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qcd_se@2x.png"; sourceTree = "<group>"; };
 		E74176531A5544570068F0E7 /* NSObject+Description.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Description.h"; sourceTree = "<group>"; };
 		E74176541A5544570068F0E7 /* NSObject+Description.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Description.m"; sourceTree = "<group>"; };
 		E74176571A5545510068F0E7 /* DescriptionBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DescriptionBuilder.h; sourceTree = "<group>"; };
@@ -1083,6 +1093,8 @@
 				E73858131A6A02E5003D864D /* HttpSessionClient.m */,
 				E73858141A6A02E5003D864D /* HttpSessionManager.h */,
 				E73858151A6A02E5003D864D /* HttpSessionManager.m */,
+				E73858D01A75E4FC003D864D /* QingChunServerAPIs.h */,
+				E73858D11A75E4FC003D864D /* QingChunServerAPIs.m */,
 			);
 			path = HttpRequestManagers;
 			sourceTree = "<group>";
@@ -1146,6 +1158,8 @@
 			children = (
 				E738584A1A6A5093003D864D /* LoginHelper.h */,
 				E738584B1A6A5093003D864D /* LoginHelper.m */,
+				E73858D61A75FED5003D864D /* RegisterHelper.h */,
+				E73858D71A75FED5003D864D /* RegisterHelper.m */,
 			);
 			path = LoginHelper;
 			sourceTree = "<group>";
@@ -1565,6 +1579,8 @@
 		E7AF3D201A0BA17A0073116D /* Me */ = {
 			isa = PBXGroup;
 			children = (
+				E73858D91A76338D003D864D /* qcd_nor@2x.png */,
+				E73858DA1A76338D003D864D /* qcd_se@2x.png */,
 				E7B9E4731A46F9BE00D7775C /* came_center@2x.png */,
 				E7B9E4741A46F9BE00D7775C /* me_setting_highlighted@2x.png */,
 				E7B9E4751A46F9BE00D7775C /* me_setting@2x.png */,
@@ -2204,6 +2220,7 @@
 				E7E4EC021A681A01003A2E1F /* WeiboSDK.bundle in Resources */,
 				E7BB172F1A6576260036D495 /* message_private@2x.png in Resources */,
 				E7B9E47F1A46F9BE00D7775C /* came_center@2x.png in Resources */,
+				E73858DC1A76338D003D864D /* qcd_se@2x.png in Resources */,
 				E72B097C1A0B419000109658 /* cell_bg@2x.png in Resources */,
 				E7FC67A71A3D2DDF00AF45A6 /* qingchunbell_selected@2x.png in Resources */,
 				E7261BAA19F0B1E300492D98 /* start.storyboard in Resources */,
@@ -2219,6 +2236,7 @@
 				E79FB2E619FB79EC00FBC703 /* jinghua_selected@2x.png in Resources */,
 				E72B097F1A0B419000109658 /* more_btn_nor@2x.png in Resources */,
 				E7B9E4851A46F9BE00D7775C /* my_feedback@2x.png in Resources */,
+				E73858DB1A76338D003D864D /* qcd_nor@2x.png in Resources */,
 				E7CF62DF19F8980E009A9A20 /* qingchunba_normal@2x.png in Resources */,
 				E7E4EC001A681A01003A2E1F /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				E79FD99E19FFE65300625BA8 /* share_highlighted@2x.png in Resources */,
@@ -2279,6 +2297,7 @@
 				E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */,
 				E7DD1C431A412F8D00FAA24A /* CellImageView.m in Sources */,
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
+				E73858D21A75E4FC003D864D /* QingChunServerAPIs.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
 				E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */,
 				E7B96D6D1A6FE8A10066A913 /* UIViewController+ADTransitionController.m in Sources */,
@@ -2314,6 +2333,7 @@
 				E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */,
 				E725A2941A07CDA900FCE03D /* UIImage+GIF.m in Sources */,
 				E7B96D6A1A6FE8A10066A913 /* ADTransitioningDelegate.m in Sources */,
+				E73858D81A75FED5003D864D /* RegisterHelper.m in Sources */,
 				E725A2921A07CDA900FCE03D /* SDWebImagePrefetcher.m in Sources */,
 				E7F1C98C1A527D7700E8DF67 /* NSString+Hashes.m in Sources */,
 				E738584C1A6A5093003D864D /* LoginHelper.m in Sources */,

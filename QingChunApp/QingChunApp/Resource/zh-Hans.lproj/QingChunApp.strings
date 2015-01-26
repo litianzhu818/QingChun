@@ -5,10 +5,38 @@
   Created by  李天柱 on 15/1/24.
   Copyright (c) 2015年 Peter Lee. All rights reserved.
 */
+
+//UIAlertView
+"alert_title" = "提示";
+"alert_custom_btn_title" = "我知道了";
+"alert_cancel_btn_title" = "取消";
+"alert_ok_btn_title" = "确定";
+
 //LoginViewController
 "login_title" = "登录";
 "login_bar_button_title" = "取消";
 
-
 //RegisterViewController
 "register_title" = "注册";
+
+//RegisterHelper
+"email_existing" = "该邮箱已经被注册";
+"email_formal_error" = "邮箱格式填写有误";
+
+"user_name_existing" = "用户名已经存在";
+"user_name_formal_error" = "用户名格式填写有误";
+
+"user_pwd__formal_error" = "密码格式填写有误";
+
+"notice_accepet_service_agreement" = "请接受服务条款同意后方可加入青春逗...";
+"notice_error_email_formal" = "您素填写的邮箱格式有误，请检查后重新填写...";
+"notice_error_no_nickname" = "用户名为必须填写项，请补全信息...";
+"notice_error_pwd_not_same" = "密码填写不完整，或者两次填写的密码不一致，请检查后重新填写...";
+"notice_error_register_failture" = "注册失败，原因:";
+
+"remark_nickname_formal" = "注册后不可更改，3~20位字符，可包含英文、数字和“_”";
+"remark_pwd_formal" = "6位字符以上，可包含数字、字母（区分大小写）";
+"remark_service_agreement1" = "我已阅读并同意";
+"remark_service_agreement2" = "服务协议";
+"remark_service_agreement3" = "和";
+"remark_service_agreement4" = "隐私协议";

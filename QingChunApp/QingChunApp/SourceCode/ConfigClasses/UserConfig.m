@@ -45,6 +45,17 @@ Single_implementation(UserConfig);
     return [[[NSUserDefaults standardUserDefaults] objectForKey:qcdUserAutoLogin] boolValue];
 }
 
+//存取是否已经登录的值
+-(void)SetAlreadyLogin:(BOOL)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:value] forKey:qcdUserAlreadyLogin];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(BOOL)GetAlreadyLogin
+{
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:qcdUserAlreadyLogin] boolValue];
+}
+
 //存取用户head_url_prefix的值
 -(void)SetHeadURLPrefix:(NSString *)value
 {
@@ -100,5 +111,28 @@ Single_implementation(UserConfig);
     return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserKey];
 }
 
+//存取用户临时的第三方头像的url的值
+-(void)SetUserTempOtherSDKImageUrl:(NSString *)value
+{
+    [[NSUserDefaults standardUserDefaults] setObject:value forKey:qcdUserTempOtherSDKImageUrl];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(NSString *)GetUserTempOtherSDKImageUrl
+{
+    return [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserTempOtherSDKImageUrl];
+}
+
+//存取用户基本信息的值
+-(void)SetUserInfo:(id)value
+{
+    NSData *object = [NSKeyedArchiver archivedDataWithRootObject:value];
+    [[NSUserDefaults standardUserDefaults] setObject:object forKey:qcdUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+-(id)GetUserInfo
+{
+    NSData *data  = [[NSUserDefaults standardUserDefaults] objectForKey:qcdUserInfo];
+    return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+}
 
 @end

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6245" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <objects>
@@ -20,14 +21,14 @@
                     </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="headerImage.png" translatesAutoresizingMaskIntoConstraints="NO" id="X3A-lH-qGq">
-                    <rect key="frame" x="4" y="4" width="36" height="36"/>
+                    <rect key="frame" x="2" y="2" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="36" id="V5g-2M-bJC"/>
-                        <constraint firstAttribute="height" constant="36" id="bnc-tF-5Au"/>
+                        <constraint firstAttribute="height" constant="40" id="PIq-jh-Mjx"/>
+                        <constraint firstAttribute="width" constant="40" id="j6F-aG-NjO"/>
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="注册/登录" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HA0-S6-9gk">
-                    <rect key="frame" x="48" y="4" width="145" height="36"/>
+                    <rect key="frame" x="48" y="4" width="198" height="36"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="36" id="SMq-HE-0y4"/>
                     </constraints>
@@ -48,36 +49,75 @@
                         <action selector="clikedOnAccessroyView:" destination="HqH-I0-vW4" eventType="touchUpInside" id="T7n-or-UKG"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="用户名称" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NUC-hs-4M2">
+                    <rect key="frame" x="48" y="4" width="180" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="qcd_nor.png" translatesAutoresizingMaskIntoConstraints="NO" id="H4f-zs-24X">
+                    <rect key="frame" x="48" y="26" width="16" height="16"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10000000" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d6w-w2-YOT">
+                    <rect key="frame" x="71" y="26" width="60" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="qcd_nor.png" translatesAutoresizingMaskIntoConstraints="NO" id="w0H-jS-yem">
+                    <rect key="frame" x="230" y="6" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="2gW-c7-6mC"/>
+                        <constraint firstAttribute="height" constant="20" id="KyH-xh-uxz"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="zoa-0z-R2P" secondAttribute="trailing" id="0Wj-if-HfH"/>
                 <constraint firstItem="gDh-c7-1Nb" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="12" id="0ip-SQ-CUS"/>
                 <constraint firstAttribute="bottom" secondItem="HA0-S6-9gk" secondAttribute="bottom" constant="4" id="7q7-x7-CQP"/>
-                <constraint firstItem="HA0-S6-9gk" firstAttribute="leading" secondItem="X3A-lH-qGq" secondAttribute="trailing" constant="8" id="F5w-wS-nI0"/>
-                <constraint firstAttribute="bottom" secondItem="X3A-lH-qGq" secondAttribute="bottom" constant="4" id="G24-bk-d84"/>
+                <constraint firstItem="w0H-jS-yem" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="2" id="ACs-7F-uoh"/>
+                <constraint firstItem="NUC-hs-4M2" firstAttribute="leading" secondItem="X3A-lH-qGq" secondAttribute="trailing" constant="4" id="DBU-UE-Cgs"/>
+                <constraint firstItem="HA0-S6-9gk" firstAttribute="leading" secondItem="X3A-lH-qGq" secondAttribute="trailing" constant="4" id="F5w-wS-nI0"/>
+                <constraint firstAttribute="bottom" secondItem="X3A-lH-qGq" secondAttribute="bottom" constant="2" id="G24-bk-d84"/>
+                <constraint firstItem="gDh-c7-1Nb" firstAttribute="leading" secondItem="HA0-S6-9gk" secondAttribute="trailing" constant="30" id="NO0-k8-ndA"/>
                 <constraint firstAttribute="bottom" secondItem="gDh-c7-1Nb" secondAttribute="bottom" constant="12" id="PMf-Dc-hgF"/>
                 <constraint firstItem="zoa-0z-R2P" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" id="RLw-SS-98y"/>
+                <constraint firstItem="d6w-w2-YOT" firstAttribute="top" secondItem="NUC-hs-4M2" secondAttribute="bottom" constant="2" id="U1c-ux-m0b"/>
                 <constraint firstItem="HA0-S6-9gk" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="4" id="Vsq-Si-6TH"/>
                 <constraint firstAttribute="trailing" secondItem="gDh-c7-1Nb" secondAttribute="trailing" constant="8" id="W5k-9c-Qb5"/>
+                <constraint firstItem="w0H-jS-yem" firstAttribute="leading" secondItem="NUC-hs-4M2" secondAttribute="trailing" constant="8" id="Y2i-X0-pVI"/>
+                <constraint firstItem="d6w-w2-YOT" firstAttribute="leading" secondItem="H4f-zs-24X" secondAttribute="trailing" constant="4" id="bZc-U0-CEg"/>
                 <constraint firstAttribute="bottom" secondItem="zoa-0z-R2P" secondAttribute="bottom" id="cce-nk-7ji"/>
-                <constraint firstItem="X3A-lH-qGq" firstAttribute="leading" secondItem="HqH-I0-vW4" secondAttribute="leading" constant="4" id="nvp-mb-fDc"/>
-                <constraint firstItem="X3A-lH-qGq" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="4" id="w8D-zl-AeO"/>
+                <constraint firstItem="H4f-zs-24X" firstAttribute="leading" secondItem="X3A-lH-qGq" secondAttribute="trailing" constant="4" id="etr-0A-nQP"/>
+                <constraint firstItem="X3A-lH-qGq" firstAttribute="leading" secondItem="HqH-I0-vW4" secondAttribute="leading" constant="2" id="nvp-mb-fDc"/>
+                <constraint firstItem="H4f-zs-24X" firstAttribute="top" secondItem="NUC-hs-4M2" secondAttribute="bottom" constant="2" id="uNn-Jv-2W9"/>
+                <constraint firstItem="X3A-lH-qGq" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="2" id="w8D-zl-AeO"/>
                 <constraint firstItem="zoa-0z-R2P" firstAttribute="leading" secondItem="HqH-I0-vW4" secondAttribute="leading" id="zTD-id-qE4"/>
+                <constraint firstItem="NUC-hs-4M2" firstAttribute="top" secondItem="HqH-I0-vW4" secondAttribute="top" constant="2" id="zb1-V4-SXe"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="accessoryButton" destination="gDh-c7-1Nb" id="638-93-rUW"/>
                 <outlet property="backButton" destination="zoa-0z-R2P" id="wW0-jc-rnQ"/>
+                <outlet property="beanCountLabel" destination="d6w-w2-YOT" id="cOq-NW-keB"/>
+                <outlet property="beanImageView" destination="H4f-zs-24X" id="NgO-A0-UAA"/>
+                <outlet property="gradeImageView" destination="w0H-jS-yem" id="BCC-mq-c2a"/>
                 <outlet property="headerImageView" destination="X3A-lH-qGq" id="9AM-sf-K4k"/>
                 <outlet property="infoLabel" destination="HA0-S6-9gk" id="uvy-hO-Wsb"/>
+                <outlet property="userNameLabel" destination="NUC-hs-4M2" id="MGI-R7-0mY"/>
             </connections>
             <point key="canvasLocation" x="220" y="441"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="y7P-FI-zAO">
+            <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
     </objects>
     <resources>
         <image name="headerImage.png" width="41" height="41"/>
         <image name="header_ac_nor.png" width="21" height="20"/>
+        <image name="qcd_nor.png" width="19" height="19"/>
     </resources>
 </document>

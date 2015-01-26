@@ -10,7 +10,10 @@
 #import "WeiBoManager.h"
 #import "TencentManager.h"
 #import "LTZLocationManager.h"
+#import "HttpSessionManager.h"
 #import "OtherSDKInfo.h"
+
+NSString *const CustomLoginErrorDomain = @"com.qcd.login.error";
 
 @interface LoginHelper ()<WeiBoManagerDelegate, TencentManagerDelage>
 {
@@ -26,35 +29,35 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Singleton class methods
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-static LoginHelper *sharedInstance = nil;
+static LoginHelper *_sharedHelper = nil;
 
-+ (LoginHelper *)sharedInstance
++ (LoginHelper *)sharedHelper
 {
     @synchronized (self){
-        if (sharedInstance == nil) {
-            sharedInstance = [[self alloc] init];
+        if (_sharedHelper == nil) {
+            _sharedHelper = [[self alloc] init];
         }
     }
-    return sharedInstance;
+    return _sharedHelper;
 }
 
 + (id)allocWithZone:(NSZone *)zone
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedInstance = [super allocWithZone:zone];
+        _sharedHelper = [super allocWithZone:zone];
     });
-    return sharedInstance;
+    return _sharedHelper;
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
     @synchronized (self){
-        if (sharedInstance == nil) {
-            sharedInstance = [[LoginHelper alloc] init];
+        if (_sharedHelper == nil) {
+            _sharedHelper = [[LoginHelper alloc] init];
         }
     }
-    return sharedInstance;
+    return _sharedHelper;
 }
 + (BOOL)HandleOpenURL:(NSURL *)url
 {
@@ -179,7 +182,8 @@ static inline NSError *ErrorFactory(LoginErrorCode loginErrorCode, NSString *des
     
     NSError *error = nil;
     
-    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:description                                                                      forKey:NSLocalizedDescriptionKey];
+    NSDictionary *userInfo = [NSDictionary dictionaryWithObject:description
+                                                         forKey:NSLocalizedDescriptionKey];
     error = [NSError errorWithDomain:CustomLoginErrorDomain code:loginErrorCode userInfo:userInfo];
     
     return error;
@@ -193,8 +197,27 @@ static inline NSError *ErrorFactory(LoginErrorCode loginErrorCode, NSString *des
                password:(NSString *)password
         completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler
 {
-
+    dispatch_block_t block = ^{ @autoreleasepool {
+        
+        _completeHandler = completeHandler;
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionary];
+        [params setObject:loginID forKey:@"email"];
+        [params setObject:password forKey:@"password"];
+        [[HttpSessionManager sharedInstance] login2WithIdentifier:@"login2"
+                                                           params:params
+                                                            block:^(id data, NSError *error) {
+                                                                _completeHandler(LoginTypeDefault, data, error);
+                                                            }];
+        
+    }};
+    
+    if (dispatch_get_specific(managerQueueTag))
+        block();
+    else
+        dispatch_async(managerQueue, block);
 }
+
 - (void)authorizeWithLoginType:(LoginType)loginType
                completeHandler:(void (^)(LoginType loginType, id userInfo, NSError *error))completeHandler
 {

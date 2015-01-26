@@ -221,6 +221,7 @@
         [[SystemConfig sharedInstance] SetLoginURLStr:[systemAPIDic objectForKey:@"QCB_LOGIN_URL"]];
         [[UserConfig sharedInstance] SetAutoLogin:YES];
     });
+    [[UserConfig sharedInstance] SetAlreadyLogin:YES];
     
 }
 
@@ -245,14 +246,20 @@
  */
 -(id)currentViewController
 {
+    MainTabBarController *mainViewController = [self instantiateInitialViewControllerWithStroryboardName:@"Main"];
+    //[mainViewController setNeedLogin:YES];
+    return mainViewController;
+    /*
     if ([[UserConfig sharedInstance] GetAutoLogin]) {
         //自动登录并跳转到主页面
         MainTabBarController *mainViewController = [self instantiateInitialViewControllerWithStroryboardName:@"Main"];
         //[mainViewController setNeedLogin:YES];
         return mainViewController;
     }
+     
     //跳转到登录页面
     return [self instantiateInitialViewControllerWithStroryboardName:@"login_register"];
+     */
 }
 /**
  *  根据storyboard获取开始的viewcontroller对象

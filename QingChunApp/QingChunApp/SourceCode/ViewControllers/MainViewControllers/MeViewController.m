@@ -24,9 +24,12 @@
 @property (nonatomic, strong) NAMenuView *menuView;
 @property (nonatomic, strong) UserHeaderView *userHeaderView;
 
+@property (nonatomic, strong) UserInfoModel *userInfo;
+
 @end
 
 @implementation MeViewController
+@synthesize userInfo;
 @synthesize menuView;
 @synthesize menuItems;
 @synthesize userHeaderView;
@@ -45,13 +48,11 @@
     [super viewWillAppear:animated];
     [self.tabBarController.tabBar setHidden:NO];
 }
-/*
-- (void)viewWillDisappear:(BOOL)animated
+
+- (void)viewDidDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    [self.tabBarController.tabBar setHidden:YES];
+    [super viewDidDisappear:animated];
 }
- */
 
 - (void)viewDidLoad
 {
@@ -67,11 +68,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [self removeNotifications];
+}
+
 -(void)initializationParameters
 {
     //Here initialization your parameters
-    [self initializationData];
     [self initializationUI];
+    [self initializationData];
 }
 
 -(void)initializationUI
@@ -108,7 +114,33 @@
 {
     //Here initialization your data parameters
     [self setMenuItems:[self createMenuItems]];
+    
+    BOOL alreadyLogin = [[UserConfig sharedInstance] GetAlreadyLogin];
+    
+    if (alreadyLogin) {
+        userInfo = [[UserConfig sharedInstance] GetUserInfo];
+        [self.userHeaderView updateWithUserInfoModel:userInfo];
+    }
+    
+    [self addNotifications];
 }
+
+- (void)addNotifications
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification:) name:@"user_login_success" object:nil];
+}
+
+- (void)removeNotifications
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"user_login_success" object:nil];
+}
+
+- (void)receiveNotification:(NSNotification *)notification
+{
+    userInfo = [notification object] ? :[[UserConfig sharedInstance] GetUserInfo];
+    [self.userHeaderView updateWithUserInfoModel:userInfo];
+}
+
 #pragma mark - Local Methods
 
 - (NSArray *)createMenuItems
@@ -178,14 +210,16 @@
 }
 
 #pragma mark - UserHeaderViewDelegate methods below
-- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button
+- (void)userHeaderView:(UserHeaderView *)userHeaderView didClikedOnButton:(UIButton *)button  hasUserInfo:(BOOL)hasUserInfo
 {
-    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"login_register" bundle:nil];
-    BaseNavigationController *loginViewController = [loginStory instantiateInitialViewController];
-    
-    [self.navigationController presentViewController:loginViewController animated:YES completion:^{
+    if (!hasUserInfo) {
+        UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"login_register" bundle:nil];
+        BaseNavigationController *loginViewController = [loginStory instantiateInitialViewController];
         
-    }];
+        [self.navigationController presentViewController:loginViewController animated:YES completion:^{
+            
+        }];
+    }
 }
 
 /*
