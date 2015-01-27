@@ -9,10 +9,16 @@
 #import "QCBellViewController.h"
 #import "QCBellTableViewCell.h"
 #import "QCBellDataModel.h"
+#import "QingChunBellModel.h"
+#import "UserInfoModel.h"
+#import "MJRefresh.h"
+#import "HttpSessionManager.h"
 
 @interface QCBellViewController ()<UITableViewDelegate, UITableViewDataSource>
 {
     NSMutableArray *_dateSources;
+    UserInfoModel *_userInfo;
+    QingChunBellModel *_qingChunBellModel;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -73,6 +79,16 @@
         [self clearUnusedCellWithTableView:tableView];
         
         [self.view addSubview:tableView];
+        
+        //添加上拉下拉操作
+        [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"qingchun_bell_tableview_refresh_time_tag"];
+        [tableView addFooterWithTarget:self action:@selector(refreshNumberData)];
+        
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        tableView.headerPullToRefreshText = @"下拉刷新青春风铃数据";
+        tableView.headerReleaseToRefreshText = @"松开立即刷新";
+        tableView.headerRefreshingText = @"刷新青春风铃数据中...";
+        
         tableView;
     });
 }
@@ -80,10 +96,36 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
+    _qingChunBellModel = [QingChunBellModel qingChunBellModel];
     _dateSources = [self createDataSources];
     
 }
 
+- (void)refreshNumberData
+{
+    _userInfo = [[UserConfig sharedInstance] GetUserInfo];
+    if (_userInfo) {
+        
+        
+        NSMutableDictionary *dic = [NSDictionary dictionary];
+        [dic setObject:_userInfo.userID forKey:@"infoId"];
+        [dic setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey "];
+        
+        [[HttpSessionManager sharedInstance] requsetBellNumberWithIdentifier:@"qcd_bell"
+                                                                      params:dic
+                                                                       block:^(id data, NSError *error) {
+                                                                           
+                                                                           if (!error) {
+                                                                               [_qingChunBellModel updateWithDictionary:data];
+                                                                               [self createDataSources];
+                                                                               MAIN_GCD(^{
+                                                                                   [self.tableView reloadData];
+                                                                               });
+                                                                           }
+                                                                           
+                                                                       }];
+    }
+}
 
 - (NSMutableArray *)createDataSources
 {
@@ -92,6 +134,35 @@
     NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"QCBellInfoMsg" ofType:@"plist"];
     NSArray *dataArray = [[NSArray alloc] initWithContentsOfFile:plistPath];
     
+    NSDictionary *dic0 = [dataArray firstObject];
+    QCBellDataModel *item0 = [QCBellDataModel qcbellDataModelWithImage:[UIImage imageNamed:[dic0 objectForKey:@"image"]]
+                                                                title:[dic0 objectForKey:@"title"]
+                                                               number:_qingChunBellModel.atNumber
+                                                                  tag:[[dic0 objectForKey:@"tag"] unsignedIntegerValue]];
+    [items addObject:item0];
+    
+    NSDictionary *dic1 = [dataArray objectAtIndex:1];
+    QCBellDataModel *item1 = [QCBellDataModel qcbellDataModelWithImage:[UIImage imageNamed:[dic1 objectForKey:@"image"]]
+                                                                 title:[dic1 objectForKey:@"title"]
+                                                                number:_qingChunBellModel.atNumber
+                                                                   tag:[[dic1 objectForKey:@"tag"] unsignedIntegerValue]];
+    [items addObject:item1];
+    
+    NSDictionary *dic2 = [dataArray objectAtIndex:2];
+    QCBellDataModel *item2 = [QCBellDataModel qcbellDataModelWithImage:[UIImage imageNamed:[dic2 objectForKey:@"image"]]
+                                                                 title:[dic2 objectForKey:@"title"]
+                                                                number:_qingChunBellModel.atNumber
+                                                                   tag:[[dic2 objectForKey:@"tag"] unsignedIntegerValue]];
+    [items addObject:item2];
+    
+    NSDictionary *dic3 = [dataArray objectAtIndex:3];
+    QCBellDataModel *item3 = [QCBellDataModel qcbellDataModelWithImage:[UIImage imageNamed:[dic3 objectForKey:@"image"]]
+                                                                 title:[dic3 objectForKey:@"title"]
+                                                                number:_qingChunBellModel.atNumber
+                                                                   tag:[[dic3 objectForKey:@"tag"] unsignedIntegerValue]];
+    [items addObject:item3];
+    
+    /*
     [dataArray enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dic = obj;
         QCBellDataModel *item = [QCBellDataModel qcbellDataModelWithImage:[UIImage imageNamed:[dic objectForKey:@"image"]]
@@ -100,6 +171,7 @@
                                                                       tag:[[dic objectForKey:@"tag"] unsignedIntegerValue]];
         [items addObject:item];
     }];
+     */
     
     return items;
 }

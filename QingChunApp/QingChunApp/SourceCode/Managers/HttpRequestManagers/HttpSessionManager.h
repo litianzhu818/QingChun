@@ -32,5 +32,9 @@
 - (void)register2WithIdentifier:(NSString *)identifier
                         params:(id)params
                          block:(void (^)(id data, NSError *error))block;
+//读取青春风铃的信息数字
+- (void)requsetBellNumberWithIdentifier:(NSString *)identifier
+                                 params:(id)params
+                                  block:(void (^)(id data, NSError *error))block;
 
 @end

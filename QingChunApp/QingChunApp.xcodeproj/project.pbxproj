@@ -235,6 +235,7 @@
 		E7B9E4881A46F9BE00D7775C /* my_post@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B9E47C1A46F9BE00D7775C /* my_post@2x.png */; };
 		E7B9E4891A46F9BE00D7775C /* send_msg_highlighted@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B9E47D1A46F9BE00D7775C /* send_msg_highlighted@2x.png */; };
 		E7B9E48A1A46F9BE00D7775C /* send_msg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7B9E47E1A46F9BE00D7775C /* send_msg@2x.png */; };
+		E7BA1D3C1A77DFF3007134E4 /* QingChunBellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA1D3B1A77DFF3007134E4 /* QingChunBellModel.m */; };
 		E7BA492F1A6815A8000B5983 /* OtherSDKInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BA492E1A6815A8000B5983 /* OtherSDKInfo.m */; };
 		E7BAD14D1A0DE53B00D27F4B /* TTUITableViewZoomController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7BAD14C1A0DE53B00D27F4B /* TTUITableViewZoomController.m */; };
 		E7BAD14F1A0DE5E700D27F4B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7BAD14E1A0DE5E700D27F4B /* QuartzCore.framework */; };
@@ -676,6 +677,8 @@
 		E7B9E47C1A46F9BE00D7775C /* my_post@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "my_post@2x.png"; sourceTree = "<group>"; };
 		E7B9E47D1A46F9BE00D7775C /* send_msg_highlighted@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_msg_highlighted@2x.png"; sourceTree = "<group>"; };
 		E7B9E47E1A46F9BE00D7775C /* send_msg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send_msg@2x.png"; sourceTree = "<group>"; };
+		E7BA1D3A1A77DFF3007134E4 /* QingChunBellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QingChunBellModel.h; sourceTree = "<group>"; };
+		E7BA1D3B1A77DFF3007134E4 /* QingChunBellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QingChunBellModel.m; sourceTree = "<group>"; };
 		E7BA492D1A6815A8000B5983 /* OtherSDKInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherSDKInfo.h; sourceTree = "<group>"; };
 		E7BA492E1A6815A8000B5983 /* OtherSDKInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherSDKInfo.m; sourceTree = "<group>"; };
 		E7BAD14B1A0DE53B00D27F4B /* TTUITableViewZoomController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTUITableViewZoomController.h; sourceTree = "<group>"; };
@@ -1427,6 +1430,7 @@
 		E79F599E19F7F621001CB6F2 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				E7BA1D391A77DFD5007134E4 /* QingChunBell */,
 				E73858451A6A426F003D864D /* UserInfoModel */,
 				E7904AC71A4EAE3900B47110 /* CellButtonViewModel.h */,
 				E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */,
@@ -1876,6 +1880,15 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		E7BA1D391A77DFD5007134E4 /* QingChunBell */ = {
+			isa = PBXGroup;
+			children = (
+				E7BA1D3A1A77DFF3007134E4 /* QingChunBellModel.h */,
+				E7BA1D3B1A77DFF3007134E4 /* QingChunBellModel.m */,
+			);
+			path = QingChunBell;
+			sourceTree = "<group>";
+		};
 		E7BAD14A1A0DE53B00D27F4B /* MainTableView */ = {
 			isa = PBXGroup;
 			children = (
@@ -2316,6 +2329,7 @@
 				E7B725691A09212700882998 /* TestObjectModel.m in Sources */,
 				E7B96D581A6FE8A10066A913 /* ADCubeTransition.m in Sources */,
 				E7B8B3331A51A3AF0015CE40 /* AFURLResponseSerialization.m in Sources */,
+				E7BA1D3C1A77DFF3007134E4 /* QingChunBellModel.m in Sources */,
 				E725A2981A07CDA900FCE03D /* UIImageView+WebCache.m in Sources */,
 				E7063F9019E67AB000CC3CE0 /* AppDelegate.m in Sources */,
 				E75E90C219F74643000F2CE9 /* GradientView.m in Sources */,
