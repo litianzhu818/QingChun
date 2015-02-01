@@ -56,9 +56,11 @@
 - (void)loadViews
 {
     _customBackgroundColor = self.backgroundColor;
+    /*
     if (_hasUserInfo) {
         self.backgroundColor = [UIColor clearColor];
     }
+     */
     
     [_accessoryButton setBackgroundImage:[UIImage imageNamed:@"header_ac_nor"] forState:UIControlStateNormal];
     [_accessoryButton setBackgroundImage:[UIImage imageNamed:@"header_ac_se"] forState:UIControlStateSelected];
@@ -140,7 +142,7 @@
     [self displayUserInfo:_hasUserInfo];
     
     //设置背景颜色
-    self.backgroundColor = _hasUserInfo ? [UIColor clearColor]:_customBackgroundColor;
+    //self.backgroundColor = _hasUserInfo ? [UIColor clearColor]:_customBackgroundColor;
 }
 
 - (NSString *)gradeImageWithGrade:(NSUInteger)grade

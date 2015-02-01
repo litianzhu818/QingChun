@@ -81,8 +81,8 @@
         [self.view addSubview:tableView];
         
         //添加上拉下拉操作
-        [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"qingchun_bell_tableview_refresh_time_tag"];
-        [tableView addFooterWithTarget:self action:@selector(refreshNumberData)];
+        [tableView addHeaderWithTarget:self action:@selector(refreshNumberData) dateKey:@"qingchun_bell_tableview_refresh_time_tag"];
+        //[tableView addFooterWithTarget:self action:@selector(refreshNumberData)];
         
         // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
         tableView.headerPullToRefreshText = @"下拉刷新青春风铃数据";
@@ -107,13 +107,16 @@
     if (_userInfo) {
         
         
-        NSMutableDictionary *dic = [NSDictionary dictionary];
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:_userInfo.userID forKey:@"infoId"];
         [dic setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey "];
         
         [[HttpSessionManager sharedInstance] requsetBellNumberWithIdentifier:@"qcd_bell"
                                                                       params:dic
                                                                        block:^(id data, NSError *error) {
+                                                                           
+                                                                           // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
+                                                                           [_tableView headerEndRefreshing];
                                                                            
                                                                            if (!error) {
                                                                                [_qingChunBellModel updateWithDictionary:data];
