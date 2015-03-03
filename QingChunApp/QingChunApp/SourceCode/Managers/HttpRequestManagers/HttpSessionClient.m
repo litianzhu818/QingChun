@@ -205,12 +205,12 @@
 }
 
 - (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
-               path:(NSString *)path
+                                   path:(NSString *)path
                                    name:(NSString *)name
+                             withParams:(NSDictionary*)params
                                progress:(NSProgress * __autoreleasing *)progress
-       successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
-       failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure
-      progerssBlock:(void (^)(CGFloat progressValue))progress
+                           successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
+                           failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure
 {
     NSData *data = UIImageJPEGRepresentation(image, 1.0);
     if ((float)data.length/1024 > 1000) {
@@ -237,10 +237,9 @@
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
     
-    NSProgress *_progress = nil;
     
     NSURLSessionUploadTask *uploadTask = [manager uploadTaskWithStreamedRequest:request
-                                                                       progress:&_progress
+                                                                       progress:progress
                                                               completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error) {
             failure(uploadTask,error);
