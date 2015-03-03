@@ -63,7 +63,6 @@
 		E72B097D1A0B419000109658 /* more_btn_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B09791A0B419000109658 /* more_btn_sel@2x.png */; };
 		E72B097F1A0B419000109658 /* more_btn_nor@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B097B1A0B419000109658 /* more_btn_nor@2x.png */; };
 		E72B09811A0B462200109658 /* default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E72B09801A0B462200109658 /* default@2x.png */; };
-		E73858161A6A02E5003D864D /* HttpRequestClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858111A6A02E5003D864D /* HttpRequestClient.m */; };
 		E73858171A6A02E5003D864D /* HttpSessionClient.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858131A6A02E5003D864D /* HttpSessionClient.m */; };
 		E73858181A6A02E5003D864D /* HttpSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E73858151A6A02E5003D864D /* HttpSessionManager.m */; };
 		E738581C1A6A031D003D864D /* TencentManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E738581B1A6A031D003D864D /* TencentManager.m */; };
@@ -385,8 +384,6 @@
 		E72B09791A0B419000109658 /* more_btn_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_btn_sel@2x.png"; sourceTree = "<group>"; };
 		E72B097B1A0B419000109658 /* more_btn_nor@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more_btn_nor@2x.png"; sourceTree = "<group>"; };
 		E72B09801A0B462200109658 /* default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "default@2x.png"; sourceTree = "<group>"; };
-		E73858101A6A02E5003D864D /* HttpRequestClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpRequestClient.h; sourceTree = "<group>"; };
-		E73858111A6A02E5003D864D /* HttpRequestClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpRequestClient.m; sourceTree = "<group>"; };
 		E73858121A6A02E5003D864D /* HttpSessionClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpSessionClient.h; sourceTree = "<group>"; };
 		E73858131A6A02E5003D864D /* HttpSessionClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpSessionClient.m; sourceTree = "<group>"; };
 		E73858141A6A02E5003D864D /* HttpSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpSessionManager.h; sourceTree = "<group>"; };
@@ -1090,8 +1087,6 @@
 		E738580F1A6A02E5003D864D /* HttpRequestManagers */ = {
 			isa = PBXGroup;
 			children = (
-				E73858101A6A02E5003D864D /* HttpRequestClient.h */,
-				E73858111A6A02E5003D864D /* HttpRequestClient.m */,
 				E73858121A6A02E5003D864D /* HttpSessionClient.h */,
 				E73858131A6A02E5003D864D /* HttpSessionClient.m */,
 				E73858141A6A02E5003D864D /* HttpSessionManager.h */,
@@ -2300,7 +2295,6 @@
 				E7B780EF1A5995E4009ECFCE /* NSDateTimeAgo.bundle in Sources */,
 				E7B8B32B1A51A3AF0015CE40 /* AFHTTPRequestOperation.m in Sources */,
 				E771B9F81A5FD5230087F14F /* QCBellViewController.m in Sources */,
-				E73858161A6A02E5003D864D /* HttpRequestClient.m in Sources */,
 				E7904ACB1A4EAE3900B47110 /* CellButtonViewModel.m in Sources */,
 				E7AF3D1B1A0B9FAF0073116D /* MeViewController.m in Sources */,
 				E7DD1C361A412F7200FAA24A /* MJPhoto.m in Sources */,
