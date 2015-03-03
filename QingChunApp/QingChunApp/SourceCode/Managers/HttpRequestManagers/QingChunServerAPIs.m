@@ -12,3 +12,4 @@
 NSString *const QCD_REGISTER_PATH_STRING_IOS = @"user/register";
 NSString *const QCD_LOGIN_2_PATH_STRING_IOS = @"user/login";
 NSString *const QCD_BELL_NUMBER_PATH_STRING_IOS = @"user/msgNum";
+NSString *const QCD_MSG_ACTION_PATH_STRING_IOS = @"api/addNum";
