@@ -102,7 +102,6 @@
 
 + (id)uploadImage:(UIImage *)image
              path:(NSString *)path
-             name:(NSString *)name
        withParams:(NSDictionary*)params
          progress:(NSProgress * __autoreleasing *)progress
      successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
@@ -110,7 +109,6 @@
 {
     return [[HttpSessionClient sharedClient] uploadImage:image
                                                     path:path
-                                                    name:name
                                               withParams:params
                                                 progress:progress
                                             successBlock:success
@@ -223,7 +221,6 @@
 
 - (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
                                    path:(NSString *)path
-                                   name:(NSString *)name
                              withParams:(NSDictionary*)params
                                progress:(NSProgress * __autoreleasing *)progress
                            successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
@@ -237,13 +234,13 @@
     if (((float)imageData.length / SIZE_PER_K_BIT) > maxSizeOfImage) {
         imageData = UIImageJPEGRepresentation(image, ((SIZE_PER_K_BIT * maxSizeOfImage) / (float)imageData.length));
     }
-    /*
+    
     // init a temp file name accord to the user name and system time
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyyMMddHHmmss";
     NSString *timeStr = [formatter stringFromDate:[NSDate date]];
     NSString *fileName = [NSString stringWithFormat:@"%@_%@.jpg", [[UserConfig sharedInstance] GetUserName], timeStr];
-     */
+    
     NSLog(@"uploadImageSize: %.0f", ((float)imageData.length / SIZE_PER_K_BIT));
     
     
@@ -252,8 +249,8 @@
                                                                                              parameters:params
                                                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                                                                                   [formData appendPartWithFileData:imageData
-                                                                                                              name:@"upfile"
-                                                                                                          fileName:name
+                                                                                                              name:@"fileData"
+                                                                                                          fileName:fileName
                                                                                                           mimeType:@"image/jpeg"];
                                                                                   
                                                                               } error:nil];

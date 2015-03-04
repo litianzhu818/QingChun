@@ -37,6 +37,14 @@
                                  params:(id)params
                                   block:(void (^)(id data, NSError *error))block;
 
+//发送说说
+- (void)sendTweetWithIdentifier:(NSString *)identifier
+                         params:(id)params
+                          block:(void (^)(id data, NSError *error))block;
+
+// 上传说说图片
+//- (void)uploadTweetImage
+
 
 
 @end

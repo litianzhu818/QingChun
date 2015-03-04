@@ -20,7 +20,6 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
 
 + (id)sharedClient;
 
-// operate the cookie data
 + (void)saveCookieData;
 + (void)removeCookieData;
 
@@ -31,12 +30,10 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
 
 + (id)uploadImage:(UIImage *)image
              path:(NSString *)path
-             name:(NSString *)name
        withParams:(NSDictionary*)params
          progress:(NSProgress * __autoreleasing *)progress
      successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
      failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure;
-
 
 - (NSURLSessionDataTask *)requestJsonDataWithPath:(NSString *)aPath
                      withParams:(NSDictionary*)params
@@ -45,7 +42,6 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
 
 - (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
                                    path:(NSString *)path
-                                   name:(NSString *)name
                              withParams:(NSDictionary*)params
                                progress:(NSProgress * __autoreleasing *)progress
                            successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
