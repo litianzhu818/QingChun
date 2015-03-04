@@ -20,6 +20,7 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
 
 + (id)sharedClient;
 
+// operate the cookie data
 + (void)saveCookieData;
 + (void)removeCookieData;
 
@@ -28,24 +29,27 @@ typedef NS_ENUM(NSUInteger, HttpSessionType) {
                  withMethodType:(HttpSessionType)sessionType
                        andBlock:(void (^)(id data, NSError *error))block;
 
-+ (void)uploadImage:(UIImage *)image
-               path:(NSString *)path
-               name:(NSString *)name
-       successBlock:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-       failureBlock:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
-      progerssBlock:(void (^)(CGFloat progressValue))progress;
++ (id)uploadImage:(UIImage *)image
+             path:(NSString *)path
+             name:(NSString *)name
+       withParams:(NSDictionary*)params
+         progress:(NSProgress * __autoreleasing *)progress
+     successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
+     failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure;
+
 
 - (NSURLSessionDataTask *)requestJsonDataWithPath:(NSString *)aPath
                      withParams:(NSDictionary*)params
                  withMethodType:(HttpSessionType)sessionType
                        andBlock:(void (^)(id data, NSError *error))block;
 
-- (void)uploadImage:(UIImage *)image
-               path:(NSString *)path
-               name:(NSString *)name
-       successBlock:(void (^)(NSURLSessionDataTask *task, id responseObject))success
-       failureBlock:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
-      progerssBlock:(void (^)(CGFloat progressValue))progress;
+- (NSURLSessionUploadTask *)uploadImage:(UIImage *)image
+                                   path:(NSString *)path
+                                   name:(NSString *)name
+                             withParams:(NSDictionary*)params
+                               progress:(NSProgress * __autoreleasing *)progress
+                           successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
+                           failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure;
 
 
 @end

@@ -100,6 +100,23 @@
                                                             andBlock:block];
 }
 
++ (id)uploadImage:(UIImage *)image
+             path:(NSString *)path
+             name:(NSString *)name
+       withParams:(NSDictionary*)params
+         progress:(NSProgress * __autoreleasing *)progress
+     successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
+     failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure
+{
+    return [[HttpSessionClient sharedClient] uploadImage:image
+                                                    path:path
+                                                    name:name
+                                              withParams:params
+                                                progress:progress
+                                            successBlock:success
+                                            failureBlock:failure];
+}
+
 
 #pragma mark - public request method
 
@@ -212,25 +229,31 @@
                            successBlock:(void (^)(NSURLSessionUploadTask *task, id responseObject))success
                            failureBlock:(void (^)(NSURLSessionUploadTask *task, NSError *error))failure
 {
-    NSData *data = UIImageJPEGRepresentation(image, 1.0);
-    if ((float)data.length/1024 > 1000) {
-        data = UIImageJPEGRepresentation(image, (1024*1000.0)/(float)data.length);
-    }
+    float maxSizeOfImage = 500.0;// 允许上传到图片的最大的质量大小
+    NSUInteger SIZE_PER_K_BIT = 1024;// 每一KB所用字节数
     
+    // 如果图片占用的内存太大，就压缩，让其小于500k
+    NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
+    if (((float)imageData.length / SIZE_PER_K_BIT) > maxSizeOfImage) {
+        imageData = UIImageJPEGRepresentation(image, ((SIZE_PER_K_BIT * maxSizeOfImage) / (float)imageData.length));
+    }
+    /*
+    // init a temp file name accord to the user name and system time
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyyMMddHHmmss";
     NSString *timeStr = [formatter stringFromDate:[NSDate date]];
     NSString *fileName = [NSString stringWithFormat:@"%@_%@.jpg", [[UserConfig sharedInstance] GetUserName], timeStr];
-    NSLog(@"\nuploadImageSize\n%@ : %.0f", fileName, (float)data.length/1024);
+     */
+    NSLog(@"uploadImageSize: %.0f", ((float)imageData.length / SIZE_PER_K_BIT));
     
     
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST"
-                                                                                              URLString:@"图片上传地址"
-                                                                                             parameters:nil
+                                                                                              URLString:path
+                                                                                             parameters:params
                                                                               constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                                                                                  [formData appendPartWithFileData:data
+                                                                                  [formData appendPartWithFileData:imageData
                                                                                                               name:@"upfile"
-                                                                                                          fileName:fileName
+                                                                                                          fileName:name
                                                                                                           mimeType:@"image/jpeg"];
                                                                                   
                                                                               } error:nil];
