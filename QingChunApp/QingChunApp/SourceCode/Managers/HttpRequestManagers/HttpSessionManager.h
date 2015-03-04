@@ -43,7 +43,9 @@
                           block:(void (^)(id data, NSError *error))block;
 
 // 上传说说图片
-//- (void)uploadTweetImage
+- (void)uploadTweetImageIdentifier:(NSString *)identifier
+                            params:(id)params
+                             block:(void (^)(id data, NSError *error))block;
 
 
 
