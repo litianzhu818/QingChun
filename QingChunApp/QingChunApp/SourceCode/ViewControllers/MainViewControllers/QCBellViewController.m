@@ -41,7 +41,15 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self initializationParameters];
-    
+    /*
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:bt
+                                                     attribute:NSLayoutAttributeCenterX
+                                                     relatedBy:NSLayoutRelationEqual
+                                                        toItem:self
+                                                     attribute:NSLayoutAttributeCenterX
+                                                    multiplier:1
+                                                      constant:0]];
+     */
 }
 
 - (void)didReceiveMemoryWarning
