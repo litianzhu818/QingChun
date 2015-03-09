@@ -163,6 +163,7 @@
 		E7B6EA701A503209009CF7D1 /* SystemConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA6D1A503209009CF7D1 /* SystemConfig.m */; };
 		E7B6EA711A503209009CF7D1 /* UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA6F1A503209009CF7D1 /* UserConfig.m */; };
 		E7B6EA741A50548F009CF7D1 /* CellDisplayUserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */; };
+		E7B6ECF31AADE6F100E353DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E7B6ECF51AADE6F100E353DA /* InfoPlist.strings */; };
 		E7B725691A09212700882998 /* TestObjectModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B725681A09212700882998 /* TestObjectModel.m */; };
 		E7B7683F1A6D4CB000FB53D5 /* LTZManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B7683E1A6D4CB000FB53D5 /* LTZManager.m */; };
 		E7B780ED1A5993E9009ECFCE /* NSDate+TimeAgo.m in Sources */ = {isa = PBXBuildFile; fileRef = E7B780EB1A5993E8009ECFCE /* NSDate+TimeAgo.m */; };
@@ -551,6 +552,8 @@
 		E7B6EA6F1A503209009CF7D1 /* UserConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserConfig.m; sourceTree = "<group>"; };
 		E7B6EA721A50548F009CF7D1 /* CellDisplayUserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDisplayUserModel.h; sourceTree = "<group>"; };
 		E7B6EA731A50548F009CF7D1 /* CellDisplayUserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDisplayUserModel.m; sourceTree = "<group>"; };
+		E7B6ECF41AADE6F100E353DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7B6ECF61AADE6F200E353DA /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		E7B725671A09212700882998 /* TestObjectModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObjectModel.h; sourceTree = "<group>"; };
 		E7B725681A09212700882998 /* TestObjectModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObjectModel.m; sourceTree = "<group>"; };
 		E7B7683D1A6D4CB000FB53D5 /* LTZManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTZManager.h; sourceTree = "<group>"; };
@@ -893,6 +896,7 @@
 				E7063F9119E67BFC00CC3CE0 /* Info.plist */,
 				E7063F8519E67A6A00CC3CE0 /* Images.xcassets */,
 				E7063F8719E67A6A00CC3CE0 /* main.m */,
+				E7B6ECF51AADE6F100E353DA /* InfoPlist.strings */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -2241,6 +2245,7 @@
 				E721EC4C1A73ED00007EE30D /* isRead_waiting_selectButton@2x.png in Resources */,
 				E7261BAC19F0B27400492D98 /* welcome.storyboard in Resources */,
 				E7063F8B19E67A6A00CC3CE0 /* Images.xcassets in Resources */,
+				E7B6ECF31AADE6F100E353DA /* InfoPlist.strings in Resources */,
 				E79FB2E619FB79EC00FBC703 /* jinghua_selected@2x.png in Resources */,
 				E72B097F1A0B419000109658 /* more_btn_nor@2x.png in Resources */,
 				E7B9E4851A46F9BE00D7775C /* my_feedback@2x.png in Resources */,
@@ -2471,6 +2476,15 @@
 				E79B09DA1A73A5E500357DEE /* zh-Hans */,
 			);
 			name = QingChunApp.strings;
+			sourceTree = "<group>";
+		};
+		E7B6ECF51AADE6F100E353DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E7B6ECF41AADE6F100E353DA /* en */,
+				E7B6ECF61AADE6F200E353DA /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
