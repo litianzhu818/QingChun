@@ -22,6 +22,10 @@
 
 #import "TTUITableViewZoomController.h"
 
+@interface TTUITableViewZoomController ()<UITableViewDelegate, UITableViewDataSource>
+
+@end
+
 @implementation TTUITableViewZoomController
 
 @synthesize cellZoomXScaleFactor = _xZoomFactor;
@@ -46,6 +50,8 @@
 }
 
 #pragma mark - UITableViewDelegate methods below
+/*
+// 这里是开启缩放模式
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     
     if ((indexPath.section == 0 && currentMaxDisplayedCell == 0) || indexPath.section > currentMaxDisplayedSection){ //first item in a new section, reset the max row count
@@ -74,7 +80,7 @@
         currentMaxDisplayedSection = indexPath.section;
     }
 }
-
+*/
 -(void)resetViewedCells{
     currentMaxDisplayedSection = 0;
     currentMaxDisplayedCell = 0;

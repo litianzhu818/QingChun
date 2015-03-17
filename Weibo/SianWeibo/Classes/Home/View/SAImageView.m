@@ -36,8 +36,8 @@
 -(void)setPicUrl:(NSString *)picUrl
 {
     _picUrl = picUrl;
-    
-    [SAStatusTool statusToolInsteadView:self setImageWithURLString:picUrl placeholderImage:[UIImage imageNamed:@"timeline_image_loading"]];
+    UIImage *image = [UIImage imageNamed:@"timeline_image_loading"];
+    [SAStatusTool statusToolInsteadView:self setImageWithURLString:picUrl placeholderImage:[image resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10) resizingMode:UIImageResizingModeStretch]];
     
     // 在设置图片url同时判断该图是否为GIF图片，如果是则显示Gif图标
     _gifView.hidden = ![picUrl.lowercaseString hasSuffix:@".gif"];

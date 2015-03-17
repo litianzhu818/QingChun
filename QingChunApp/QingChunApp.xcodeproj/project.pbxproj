@@ -83,6 +83,11 @@
 		E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E741765B1A5552640068F0E7 /* MessageDisplayCell.m */; };
 		E75763A71A59327200A8E077 /* MJPhotoBrowser.bundle in Sources */ = {isa = PBXBuildFile; fileRef = E7DD1C271A412F7200FAA24A /* MJPhotoBrowser.bundle */; };
 		E75763AB1A5AAEE000A8E077 /* LTZButtonActionView.m in Sources */ = {isa = PBXBuildFile; fileRef = E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */; };
+		E7599E5B1AB1704300D53D1D /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7599E5A1AB1704300D53D1D /* UIPlaceHolderTextView.m */; };
+		E7599E5F1AB170E900D53D1D /* TweetSendTextCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7599E5E1AB170E900D53D1D /* TweetSendTextCell.m */; };
+		E7599E621AB1766F00D53D1D /* UIView+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = E7599E611AB1766F00D53D1D /* UIView+Custom.m */; };
+		E7599E651AB1774A00D53D1D /* TweetSendImagesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E7599E641AB1774A00D53D1D /* TweetSendImagesCell.m */; };
+		E7599F101AB7DAFE00D53D1D /* CommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7599F0F1AB7DAFE00D53D1D /* CommentViewController.m */; };
 		E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907719F74389000F2CE9 /* BaseNavigationController.m */; };
 		E75E907C19F7438F000F2CE9 /* BaseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E907B19F7438F000F2CE9 /* BaseTableViewCell.m */; };
 		E75E909C19F743B1000F2CE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E75E908519F743B1000F2CE9 /* BaseViewController.m */; };
@@ -421,6 +426,16 @@
 		E7419EE519E675D900B5B764 /* QingChunApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QingChunApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E75763A91A5AAEE000A8E077 /* LTZButtonActionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LTZButtonActionView.h; sourceTree = "<group>"; };
 		E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LTZButtonActionView.m; sourceTree = "<group>"; };
+		E7599E591AB1704300D53D1D /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		E7599E5A1AB1704300D53D1D /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		E7599E5D1AB170E900D53D1D /* TweetSendTextCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSendTextCell.h; sourceTree = "<group>"; };
+		E7599E5E1AB170E900D53D1D /* TweetSendTextCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSendTextCell.m; sourceTree = "<group>"; };
+		E7599E601AB1766F00D53D1D /* UIView+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Custom.h"; sourceTree = "<group>"; };
+		E7599E611AB1766F00D53D1D /* UIView+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Custom.m"; sourceTree = "<group>"; };
+		E7599E631AB1774A00D53D1D /* TweetSendImagesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TweetSendImagesCell.h; sourceTree = "<group>"; };
+		E7599E641AB1774A00D53D1D /* TweetSendImagesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TweetSendImagesCell.m; sourceTree = "<group>"; };
+		E7599F0E1AB7DAFE00D53D1D /* CommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentViewController.h; sourceTree = "<group>"; };
+		E7599F0F1AB7DAFE00D53D1D /* CommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentViewController.m; sourceTree = "<group>"; };
 		E75E907619F74389000F2CE9 /* BaseNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseNavigationController.h; sourceTree = "<group>"; };
 		E75E907719F74389000F2CE9 /* BaseNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseNavigationController.m; sourceTree = "<group>"; };
 		E75E907A19F7438F000F2CE9 /* BaseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewCell.h; sourceTree = "<group>"; };
@@ -845,6 +860,7 @@
 		E7063F7E19E67A6A00CC3CE0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				E7599F0D1AB7DACF00D53D1D /* CommentViewController */,
 				E712AA471A0BD270000648C4 /* LoginRegisterViewControllers */,
 				E7AF3D1C1A0BA0890073116D /* MyPostsViewControllers */,
 				E79F599A19F7F40D001CB6F2 /* StartViewControllers */,
@@ -856,6 +872,8 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7599E5C1AB170B600D53D1D /* Cells */,
+				E7599E581AB1701600D53D1D /* UIPlaceHolderTextView */,
 				E7DC9EE71A5FD66000578647 /* QCBellTableViewCell */,
 				E75763A81A5AAEA900A8E077 /* ButtonActionView */,
 				E7FC67BE1A45646500AF45A6 /* RefreshTableHeaderView */,
@@ -1227,6 +1245,35 @@
 				E75763AA1A5AAEE000A8E077 /* LTZButtonActionView.m */,
 			);
 			path = ButtonActionView;
+			sourceTree = "<group>";
+		};
+		E7599E581AB1701600D53D1D /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E7599E591AB1704300D53D1D /* UIPlaceHolderTextView.h */,
+				E7599E5A1AB1704300D53D1D /* UIPlaceHolderTextView.m */,
+			);
+			path = UIPlaceHolderTextView;
+			sourceTree = "<group>";
+		};
+		E7599E5C1AB170B600D53D1D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				E7599E5D1AB170E900D53D1D /* TweetSendTextCell.h */,
+				E7599E5E1AB170E900D53D1D /* TweetSendTextCell.m */,
+				E7599E631AB1774A00D53D1D /* TweetSendImagesCell.h */,
+				E7599E641AB1774A00D53D1D /* TweetSendImagesCell.m */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		E7599F0D1AB7DACF00D53D1D /* CommentViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E7599F0E1AB7DAFE00D53D1D /* CommentViewController.h */,
+				E7599F0F1AB7DAFE00D53D1D /* CommentViewController.m */,
+			);
+			path = CommentViewController;
 			sourceTree = "<group>";
 		};
 		E75E907519F74389000F2CE9 /* BaseNavigationController */ = {
@@ -2100,6 +2147,8 @@
 				E7B9E4551A46757C00D7775C /* UINavigationBar+ImageBackground.m */,
 				E7B9E4571A46963F00D7775C /* UITabBar+BackgroundImage.h */,
 				E7B9E4581A46963F00D7775C /* UITabBar+BackgroundImage.m */,
+				E7599E601AB1766F00D53D1D /* UIView+Custom.h */,
+				E7599E611AB1766F00D53D1D /* UIView+Custom.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -2318,6 +2367,7 @@
 				E7FC67C31A45646500AF45A6 /* CircleView.m in Sources */,
 				E7B9E4591A46963F00D7775C /* UITabBar+BackgroundImage.m in Sources */,
 				E73858511A6D30E2003D864D /* LTZLocationManager.m in Sources */,
+				E7599E5F1AB170E900D53D1D /* TweetSendTextCell.m in Sources */,
 				E75EB0211A5C07CC00755972 /* MJRefreshBaseView.m in Sources */,
 				E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */,
 				E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */,
@@ -2341,6 +2391,7 @@
 				E741765C1A5552640068F0E7 /* MessageDisplayCell.m in Sources */,
 				E7CF629319F7A359009A9A20 /* MainTabBarController.m in Sources */,
 				E725A2651A07C52A00FCE03D /* MainCellView.m in Sources */,
+				E7599E5B1AB1704300D53D1D /* UIPlaceHolderTextView.m in Sources */,
 				E7B8B3301A51A3AF0015CE40 /* AFNetworkReachabilityManager.m in Sources */,
 				E7B8B3381A51A3AF0015CE40 /* UIImageView+AFNetworking.m in Sources */,
 				E7B9E4561A46757C00D7775C /* UINavigationBar+ImageBackground.m in Sources */,
@@ -2352,6 +2403,7 @@
 				E738584C1A6A5093003D864D /* LoginHelper.m in Sources */,
 				E7B7FCE01A5D889D00E49FE3 /* UIViewController+ScrollingNavbar.m in Sources */,
 				E7DD1C3D1A412F7200FAA24A /* SDWebImageManager+MJ.m in Sources */,
+				E7599E621AB1766F00D53D1D /* UIView+Custom.m in Sources */,
 				E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */,
 				E7FC67B11A3D5A1D00AF45A6 /* UINavigationItem+Offset.m in Sources */,
 				E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */,
@@ -2429,6 +2481,7 @@
 				E725A2951A07CDA900FCE03D /* UIImage+MultiFormat.m in Sources */,
 				E7FC67BD1A4556F400AF45A6 /* CellButtonView.m in Sources */,
 				E7B6EA6A1A5030B0009CF7D1 /* CellDisplayModel.m in Sources */,
+				E7599F101AB7DAFE00D53D1D /* CommentViewController.m in Sources */,
 				E725A28B1A07CDA900FCE03D /* NSData+ImageContentType.m in Sources */,
 				E7FC67CD1A45688600AF45A6 /* UIBarButtonItem+SA.m in Sources */,
 				E75E90D319F746D1000F2CE9 /* AlertView.m in Sources */,
@@ -2455,6 +2508,7 @@
 				E7B96D651A6FE8A10066A913 /* ADSwipeFadeTransition.m in Sources */,
 				E7B96D691A6FE8A10066A913 /* ADTransitionController.m in Sources */,
 				E7DD1C381A412F7200FAA24A /* MJPhotoBrowser.m in Sources */,
+				E7599E651AB1774A00D53D1D /* TweetSendImagesCell.m in Sources */,
 				E7B96D5E1A6FE8A10066A913 /* ADGlueTransition.m in Sources */,
 				E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */,
 				E71943761A58103E00680664 /* TTTAttributedLabel.m in Sources */,

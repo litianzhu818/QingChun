@@ -93,8 +93,12 @@
         BaseCellImageView *singleImageView = [[BaseCellImageView alloc] initWithFrame:CGRectMake(0, 0, imageWith, imageHeight) delegate:self imageUrl:[cellDisplayImageModel urlStr]];
         
         singleImageView.autoresizingMask = UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin;
-        //singleImageView.clipsToBounds = YES;
-        singleImageView.contentMode = UIViewContentModeScaleToFill;
+        /*
+         //singleImageView.clipsToBounds = YES;
+         singleImageView.contentMode = UIViewContentModeScaleToFill;
+         */
+        singleImageView.clipsToBounds = YES;
+        singleImageView.contentMode = UIViewContentModeScaleAspectFill;
         singleImageView.userInteractionEnabled = YES;
         singleImageView.delegate = self;
         singleImageView.tag = 0;
