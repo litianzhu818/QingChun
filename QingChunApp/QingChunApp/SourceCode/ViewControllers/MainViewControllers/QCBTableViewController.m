@@ -470,6 +470,8 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         [self.tabBarController.tabBar setHidden:hide];
         
     }];
+    
+    //self.navigationController.hidesBarsOnSwipe = !hide;
 }
 
 

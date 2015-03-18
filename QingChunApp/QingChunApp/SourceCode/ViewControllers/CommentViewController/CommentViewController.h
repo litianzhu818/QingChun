@@ -8,8 +8,11 @@
 
 #import "BaseViewController.h"
 
+@class CellDisplayModel;
 @interface CommentViewController : BaseViewController
 
-//@property (strong,nonatomic) (^void)
+//@property (strong,nonatomic) (^block)(CellDisplayModel *cellDisplayModel);
+
+
 
 @end

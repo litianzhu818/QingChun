@@ -122,6 +122,8 @@
 		E77C30061A4D570800D12DBB /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C30011A4D570800D12DBB /* TPKeyboardAvoidingTableView.m */; };
 		E77C30071A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = E77C30031A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m */; };
 		E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78A03D21A50581500DA1DA3 /* CellContentModel.m */; };
+		E78EEFA41AB92EB100C902C3 /* CommentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E78EEFA31AB92EB100C902C3 /* CommentTableViewCell.m */; };
+		E78EEFA71AB92F3F00C902C3 /* CellCommentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E78EEFA61AB92F3F00C902C3 /* CellCommentModel.m */; };
 		E7904AC31A4EABD100B47110 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7904AC21A4EABD100B47110 /* UIKit.framework */; };
 		E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */; };
 		E7904ACB1A4EAE3900B47110 /* CellButtonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E7904AC81A4EAE3900B47110 /* CellButtonViewModel.m */; };
@@ -499,6 +501,10 @@
 		E77C30031A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+TPKeyboardAvoidingAdditions.m"; sourceTree = "<group>"; };
 		E78A03D11A50581500DA1DA3 /* CellContentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellContentModel.h; sourceTree = "<group>"; };
 		E78A03D21A50581500DA1DA3 /* CellContentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellContentModel.m; sourceTree = "<group>"; };
+		E78EEFA21AB92EB100C902C3 /* CommentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentTableViewCell.h; sourceTree = "<group>"; };
+		E78EEFA31AB92EB100C902C3 /* CommentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentTableViewCell.m; sourceTree = "<group>"; };
+		E78EEFA51AB92F3F00C902C3 /* CellCommentModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellCommentModel.h; sourceTree = "<group>"; };
+		E78EEFA61AB92F3F00C902C3 /* CellCommentModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellCommentModel.m; sourceTree = "<group>"; };
 		E7904AC21A4EABD100B47110 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		E7904AC41A4EAD2B00B47110 /* CellDisplayImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CellDisplayImageModel.h; sourceTree = "<group>"; };
 		E7904AC51A4EAD2B00B47110 /* CellDisplayImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CellDisplayImageModel.m; sourceTree = "<group>"; };
@@ -1263,6 +1269,8 @@
 				E7599E5E1AB170E900D53D1D /* TweetSendTextCell.m */,
 				E7599E631AB1774A00D53D1D /* TweetSendImagesCell.h */,
 				E7599E641AB1774A00D53D1D /* TweetSendImagesCell.m */,
+				E78EEFA21AB92EB100C902C3 /* CommentTableViewCell.h */,
+				E78EEFA31AB92EB100C902C3 /* CommentTableViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1492,6 +1500,8 @@
 				E78A03D21A50581500DA1DA3 /* CellContentModel.m */,
 				E7DC9EEB1A5FDA4700578647 /* QCBellDataModel.h */,
 				E7DC9EEC1A5FDA4700578647 /* QCBellDataModel.m */,
+				E78EEFA51AB92F3F00C902C3 /* CellCommentModel.h */,
+				E78EEFA61AB92F3F00C902C3 /* CellCommentModel.m */,
 			);
 			path = DataModel;
 			sourceTree = "<group>";
@@ -2360,6 +2370,7 @@
 				E7AF3D141A0B9EFE0073116D /* NAMenuItem.m in Sources */,
 				E73858D21A75E4FC003D864D /* QingChunServerAPIs.m in Sources */,
 				E75E90D819F746D1000F2CE9 /* NoticeAlertView.m in Sources */,
+				E78EEFA71AB92F3F00C902C3 /* CellCommentModel.m in Sources */,
 				E78A03D31A50581500DA1DA3 /* CellContentModel.m in Sources */,
 				E7B96D6D1A6FE8A10066A913 /* UIViewController+ADTransitionController.m in Sources */,
 				E7B6EA741A50548F009CF7D1 /* CellDisplayUserModel.m in Sources */,
@@ -2416,6 +2427,7 @@
 				E7DD1C391A412F7200FAA24A /* MJPhotoLoadingView.m in Sources */,
 				E7B6EA711A503209009CF7D1 /* UserConfig.m in Sources */,
 				E7AF3D181A0B9EFE0073116D /* NAMenuViewController.m in Sources */,
+				E78EEFA41AB92EB100C902C3 /* CommentTableViewCell.m in Sources */,
 				E77C30071A4D570800D12DBB /* UIScrollView+TPKeyboardAvoidingAdditions.m in Sources */,
 				E7B96D5F1A6FE8A10066A913 /* ADModernPushTransition.m in Sources */,
 				E77C30041A4D570800D12DBB /* TPKeyboardAvoidingCollectionView.m in Sources */,
