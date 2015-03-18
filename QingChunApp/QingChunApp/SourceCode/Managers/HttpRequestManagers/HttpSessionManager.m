@@ -229,6 +229,40 @@
                                                      }];
 }
 
+- (void)readTweetCommentWithIdentifier:(NSString *)identifier
+                                params:(id)params
+                                 block:(void (^)(id data, NSError *error))block
+{
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%d%@",
+                                      identifier,
+                                      [params objectForKey:@"infoId"],
+                                      (NSUInteger)[params objectForKey:@"page"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_BELL_NUMBER_PATH_STRING_IOS
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (data) {
+                                                             
+                                                             id resultData = [data valueForKeyPath:@"data"];
+                                                             id tempData = [resultData valueForKeyPath:@"msgInfo"];
+                                                             
+                                                             block(tempData,nil);
+                                                             
+                                                         }else{
+                                                             
+                                                             block(nil,error);
+                                                             
+                                                         }
+                                                         
+                                                     }];
+}
+
 #pragma mark - private tool methods
 
 static inline NSString *SHA1StringWith(NSString *string)

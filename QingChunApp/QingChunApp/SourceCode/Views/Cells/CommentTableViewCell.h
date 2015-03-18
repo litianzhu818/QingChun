@@ -13,13 +13,14 @@
 
 @interface CommentTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) UIImageView *headImageView;
+@property (strong, nonatomic) UIButton *headImageView;
 @property (strong, nonatomic) TTTAttributedLabel *nameLabel;
 @property (strong, nonatomic) TTTAttributedLabel *commentContentLabel;
 @property (strong, nonatomic) TTTAttributedLabel *floorNumberLabel;
 
 @property (strong, nonatomic) CellCommentModel *commentModel;
 
++ (NSString *)cellIdentifier;
 + (CGFloat)cellHeightWithModel:(CellCommentModel *)model;
 
 @end

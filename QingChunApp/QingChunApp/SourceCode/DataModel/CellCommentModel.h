@@ -10,5 +10,12 @@
 
 @interface CellCommentModel : NSObject
 
+@property (strong, nonatomic) NSString *ID;
+@property (strong, nonatomic) NSString *userID;
+@property (strong, nonatomic) NSString *message;
+
+@property (strong, nonatomic) NSString *userName;
+@property (strong, nonatomic) NSString *headImageUrl;
+@property (assign, nonatomic) NSString *floors;
 
 @end

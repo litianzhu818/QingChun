@@ -8,7 +8,12 @@
 
 #import "CommentViewController.h"
 
-@interface CommentViewController ()
+#import "CommentTableViewCell.h"
+
+@interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *allComments;
 
 @end
 
@@ -47,6 +52,21 @@
 -(void)initializationUI
 {
     //Here initialization your UI parameters
+    
+    self.allComments = [NSMutableArray array];
+    
+    if (!self.tableView) {
+        self.tableView = ({
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-44) style:UITableViewStylePlain];
+            
+            tableView.delegate = self;
+            tableView.dataSource = self;
+            
+            [tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:[CommentTableViewCell cellIdentifier]];
+            
+            tableView;
+        });
+    }
 }
 
 -(void)initializationData
