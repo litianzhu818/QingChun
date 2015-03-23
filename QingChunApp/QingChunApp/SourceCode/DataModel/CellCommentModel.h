@@ -18,4 +18,11 @@
 @property (strong, nonatomic) NSString *headImageUrl;
 @property (assign, nonatomic) NSString *floors;
 
+@property (strong, nonatomic) NSString *status;
+@property (strong, nonatomic) NSString *uid;
+
+- (id)initWithDictionary:(NSDictionary *)dic;
+- (void)updateWithDictionary:(NSDictionary *)dic;
+
+
 @end

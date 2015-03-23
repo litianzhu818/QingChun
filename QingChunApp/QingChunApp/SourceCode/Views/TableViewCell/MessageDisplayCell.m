@@ -189,4 +189,44 @@
     [browser show];
 }
 
+#pragma mark - CellButtonViewDelegate method
+- (void)cellButtonView:(CellButtonView *)cellButtonView didTouchUpInsideOnButtonIndex:(NSUInteger)index
+{
+    switch (index) {
+        case 0:
+        {
+            if (self.likeBlock) {
+                self.likeBlock(_cellDisPlayModel);
+            }
+            if ([self.delegate respondsToSelector:@selector(messageDisplayCell:didLikeCellDisplayModel:)]) {
+                [self.delegate messageDisplayCell:self didLikeCellDisplayModel:_cellDisPlayModel];
+            }
+        }
+            break;
+        case 1:
+        {
+            if (self.shareBlock) {
+                self.shareBlock(_cellDisPlayModel);
+            }
+            if ([self.delegate respondsToSelector:@selector(messageDisplayCell:didShareCellDisplayModel:)]) {
+                [self.delegate messageDisplayCell:self didShareCellDisplayModel:_cellDisPlayModel];
+            }
+        }
+            break;
+        case 2:
+        {
+            if (self.commentBlock) {
+                self.commentBlock(_cellDisPlayModel);
+            }
+            
+            if ([self.delegate respondsToSelector:@selector(messageDisplayCell:didCommentCellDisplayModel:)]) {
+                [self.delegate messageDisplayCell:self didCommentCellDisplayModel:_cellDisPlayModel];
+            }
+        }
+            break;
+        default:
+            break;
+    }
+}
+
 @end

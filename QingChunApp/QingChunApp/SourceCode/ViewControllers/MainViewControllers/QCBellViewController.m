@@ -117,7 +117,7 @@
         
         NSMutableDictionary *dic = [NSMutableDictionary dictionary];
         [dic setObject:_userInfo.userID forKey:@"infoId"];
-        [dic setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey "];
+        [dic setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey"];
         
         [[HttpSessionManager sharedInstance] requsetBellNumberWithIdentifier:@"qcd_bell"
                                                                       params:dic

@@ -237,7 +237,7 @@
     [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%d%@",
                                       identifier,
                                       [params objectForKey:@"infoId"],
-                                      (NSUInteger)[params objectForKey:@"page"],
+                                      [(NSNumber *)[params objectForKey:@"page"] unsignedIntegerValue],
                                       [[SystemConfig sharedInstance] GetCheckSumSecret]]
                                      )
                forKey:@"checksum"];

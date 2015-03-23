@@ -9,11 +9,18 @@
 #import "CommentViewController.h"
 
 #import "CommentTableViewCell.h"
+#import "HttpSessionManager.h"
+#import "CellDisplayModel.h"
+#import "CellCommentModel.h"
+
+static const NSString *identifier = @"1";
 
 @interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *allComments;
+@property (assign, nonatomic) NSUInteger currentPage;
+@property (strong, nonatomic) CellDisplayModel *displayModel;
 
 @end
 
@@ -25,6 +32,18 @@
     if (self) {
         // Custom initialization
     }
+    return self;
+}
+
+- (id)initWithModel:(id)model block:(void(^)(id object))block
+{
+    self = [super init];
+    
+    if (self) {
+        self.displayModel = model;
+        self.block = block;
+    }
+    
     return self;
 }
 
@@ -72,6 +91,24 @@
 -(void)initializationData
 {
     //Here initialization your data parameters
+    self.currentPage = 0;
+    
+    [self refreshAllData];
+
+}
+
+- (void)refreshAllData
+{
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //[params setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey"];
+    [params setObject:self.displayModel.cellContentModel.ID forKey:@"infoId"];
+    [params setObject:[NSNumber numberWithUnsignedInteger:(self.currentPage + 1)] forKey:@"page"];
+    
+    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",identifier]
+                                                                 params:params
+                                                                  block:^(id data, NSError *error) {
+                                                                      
+                                                                  }];
 }
 
 /*

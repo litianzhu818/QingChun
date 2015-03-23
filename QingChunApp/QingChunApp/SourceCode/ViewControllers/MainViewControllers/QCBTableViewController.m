@@ -17,6 +17,8 @@
 #import "MessageDisplayCell.h"
 #import "CellDisplayModel.h"
 
+#import "CommentViewController.h"
+
 #import "EGOCache.h"
 
 #define QCB_NEW_DATA_CACHE_KEY_STRING @"QCBTableViewNewSourceKey"
@@ -545,6 +547,13 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         
         // Configure the cell...
         cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]];
+        cell.commentBlock =  ^(id model){
+            CommentViewController *commentController = [[CommentViewController alloc] initWithModel:model
+                                                                                              block:^(id object) {
+                                                                                                  
+                                                                                              }];
+            [self.navigationController pushViewController:commentController animated:YES];
+        };
 
     }else if ([tableView isEqual:_hotTableView]){
         

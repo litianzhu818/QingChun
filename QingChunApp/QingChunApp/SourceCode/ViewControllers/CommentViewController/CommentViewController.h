@@ -11,8 +11,8 @@
 @class CellDisplayModel;
 @interface CommentViewController : BaseViewController
 
-//@property (strong,nonatomic) (^block)(CellDisplayModel *cellDisplayModel);
+@property (strong,nonatomic) void (^block)(id model);
 
-
+- (id)initWithModel:(id)model block:(void(^)(id object))block;
 
 @end
