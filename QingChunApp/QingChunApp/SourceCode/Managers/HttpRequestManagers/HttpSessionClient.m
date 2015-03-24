@@ -62,6 +62,8 @@
         [self.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
         
         self.securityPolicy.allowInvalidCertificates = YES;
+        
+        [self.reachabilityManager startMonitoring];
     }
     
     return self;
