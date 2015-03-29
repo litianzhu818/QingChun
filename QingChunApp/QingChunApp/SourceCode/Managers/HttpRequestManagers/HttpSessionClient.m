@@ -10,6 +10,8 @@
 #import "SystemConfig.h"
 #import "UserConfig.h"
 
+static const NSInteger NO_INERNET_ERROR_CODE = -1099;
+
 @implementation HttpSessionClient
 
 + (id)sharedClient
@@ -85,6 +87,8 @@
          [self loginOutToLoginVC];
          }
          */
+    }else if (resultCode.intValue == NO_INERNET_ERROR_CODE){
+        LOG(@"断网了");
     }
     
     return error;

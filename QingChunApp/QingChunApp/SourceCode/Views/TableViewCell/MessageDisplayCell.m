@@ -69,7 +69,7 @@
     //[self setBackgroundColor:[UIColor whiteColor]];
     //头部视图
     _cellHeaderView = ({
-        BaseCellHeaderView *cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, self.contentView.frame.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
+        BaseCellHeaderView *cellHeaderView = [[BaseCellHeaderView alloc] initWithNormalTypeFrame:CGRectMake(0, 0, bound.size.width, 80) cellDisplayModel:self.cellDisPlayModel];
         cellHeaderView.delegate = self;
         [self.contentView addSubview:cellHeaderView];
         cellHeaderView;
@@ -89,7 +89,7 @@
     
     //按钮视图
     _cellButtonView = ({
-        CellButtonView *cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellImageView)+10, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
+        CellButtonView *cellButtonView = [[CellButtonView alloc] initWithFrame:CGRectMake(DAFAULT_MARGIN_WIDTH, VIEW_BY(_cellImageView)+10, bound.size.width - 2*DAFAULT_MARGIN_WIDTH, 30) cellButtonViewModel:self.cellDisPlayModel.cellButtonViewModel];
         cellButtonView.delegate = self;
         [self.contentView addSubview:cellButtonView];
         cellButtonView;
@@ -148,7 +148,7 @@
     }
     
     //调整按钮视图的位置frame
-    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, tempHeight, self.contentView.frame.size.width - 2*DAFAULT_MARGIN_WIDTH, 30);
+    _cellButtonView.frame = CGRectMake(DAFAULT_MARGIN_WIDTH, tempHeight, bound.size.width - 2*DAFAULT_MARGIN_WIDTH, 30);
 }
 
 #pragma mark - class public methods

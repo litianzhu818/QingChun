@@ -242,7 +242,7 @@
                                      )
                forKey:@"checksum"];
     
-    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_BELL_NUMBER_PATH_STRING_IOS
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_MSG_READ_COMMENT_PATH_STRING_IOS
                                                    withParams:params
                                                withMethodType:HttpSessionTypePOST
                                                      andBlock:^(id data, NSError *error) {
@@ -250,7 +250,7 @@
                                                          if (data) {
                                                              
                                                              id resultData = [data valueForKeyPath:@"data"];
-                                                             id tempData = [resultData valueForKeyPath:@"msgInfo"];
+                                                             id tempData = [resultData valueForKeyPath:@"list"];
                                                              
                                                              block(tempData,nil);
                                                              

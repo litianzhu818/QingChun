@@ -65,7 +65,7 @@
     _badgeButton = ({
         UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
         
-        [button setFrame:CGRectMake(self.contentView.frame.size.width-6*DEFAULT_MARGIN_WIDTH, (self.contentView.frame.size.height-2*DEFAULT_MARGIN_WIDTH)/2, 2*DEFAULT_MARGIN_WIDTH, 2*DEFAULT_MARGIN_WIDTH)];
+        [button setFrame:CGRectMake(bound.size.width-6*DEFAULT_MARGIN_WIDTH, (bound.size.height-2*DEFAULT_MARGIN_WIDTH)/2, 2*DEFAULT_MARGIN_WIDTH, 2*DEFAULT_MARGIN_WIDTH)];
         
         //竖直居中显示
         CGPoint buttonCenterPoint = button.center;
@@ -88,7 +88,7 @@
     
     _titleLabel = ({
     
-        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(2*DEFAULT_MARGIN_WIDTH+_imageView.frame.size.width, DEFAULT_MARGIN_HEIGHT, (self.contentView.frame.size.width-4*DEFAULT_MARGIN_WIDTH)-3*DEFAULT_MARGIN_WIDTH-DEFAULT_IMAGE_VIEW_HEIGHT, DEFAULT_IMAGE_VIEW_HEIGHT)];
+        UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(2*DEFAULT_MARGIN_WIDTH+_imageView.frame.size.width, DEFAULT_MARGIN_HEIGHT, (bound.size.width-4*DEFAULT_MARGIN_WIDTH)-3*DEFAULT_MARGIN_WIDTH-DEFAULT_IMAGE_VIEW_HEIGHT, DEFAULT_IMAGE_VIEW_HEIGHT)];
         [titleLabel setFont:F1];
         [self.contentView addSubview:titleLabel];
         titleLabel;

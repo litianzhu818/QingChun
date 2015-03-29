@@ -548,19 +548,22 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         
         // Configure the cell...
         cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_newMsgs objectAtIndex:indexPath.row]];
-        cell.commentBlock =  ^(id model){
-            CommentViewController *commentController = [[CommentViewController alloc] initWithModel:model
-                                                                                              block:^(id object) {
-                                                                                                  
-                                                                                              }];
-            [self.navigationController pushViewController:commentController animated:YES];
-        };
 
     }else if ([tableView isEqual:_hotTableView]){
         
         // Configure the cell...
         cell.cellDisPlayModel = [CellDisplayModel cellDisplayModelWithDictionary:[_hotMsgs objectAtIndex:indexPath.row]];
     }
+    
+    __weak typeof(self) weakSelf = self;
+    cell.commentBlock =  ^(id model){
+        CommentViewController *commentController = [[CommentViewController alloc] initWithModel:model
+                                                                                          block:^(id object) {
+                                                                                              
+                                                                                          }];
+        [weakSelf.navigationController pushViewController:commentController animated:YES];
+    };
+
     
     return cell;
 }

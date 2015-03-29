@@ -12,6 +12,7 @@
 #import "HttpSessionManager.h"
 #import "CellDisplayModel.h"
 #import "CellCommentModel.h"
+#import "MJRefresh.h"
 
 static const NSString *identifier = @"1";
 
@@ -60,6 +61,7 @@ static const NSString *identifier = @"1";
     [super viewWillAppear:animated];
     
     [self.tabBarController.tabBar setHidden:YES];
+    self.navigationController.navigationBar.alpha = 1.0;
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,39 +85,155 @@ static const NSString *identifier = @"1";
     
     if (!self.tableView) {
         self.tableView = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.navigationController.navigationBar.frame.size.height, self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-44) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
             
             tableView.delegate = self;
             tableView.dataSource = self;
             
-            [tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:[CommentTableViewCell cellIdentifier]];
+            if ([tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+                [tableView setSeparatorInset:UIEdgeInsetsZero];
+            }
             
+            if ([tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+                [tableView setLayoutMargins:UIEdgeInsetsZero];
+            }
+
+            [self clearUnusedCellWithTableView:tableView];
+            //[tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+            [tableView setBackgroundColor:[UIColor clearColor]];
+            
+            //添加上拉下拉操作
+            [tableView addHeaderWithTarget:self action:@selector(refreshAllData)];
+            [tableView addFooterWithTarget:self action:@selector(loadingMoreData)];
+            
+            // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+            tableView.headerPullToRefreshText = @"下拉刷新";
+            tableView.headerReleaseToRefreshText = @"松开立即刷新";
+            tableView.headerRefreshingText = @"获取留言数据中...";
+            
+            tableView.footerPullToRefreshText = @"上拉浏览更多数据";
+            tableView.footerReleaseToRefreshText = @"松开立即加载";
+            tableView.footerRefreshingText = @"数据加载中...";
+            
+            [tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:[CommentTableViewCell cellIdentifier]];
+            [self.view addSubview:tableView];
             tableView;
         });
     }
 }
 
+- (void)clearUnusedCellWithTableView:(UITableView *)tableView
+{
+    UIView *view = [UIView new];
+    view.backgroundColor = [UIColor clearColor];
+    [tableView setTableFooterView:view];
+}
+
+
 -(void)initializationData
 {
     //Here initialization your data parameters
-    self.currentPage = 0;
     
     [self refreshAllData];
-
 }
 
 - (void)refreshAllData
+{
+    self.currentPage = 0;
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    //[params setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey"];
+    [params setObject:self.displayModel.cellContentModel.ID forKey:@"infoId"];
+    [params setObject:[NSNumber numberWithUnsignedInteger:(self.currentPage + 1)] forKey:@"page"];
+    
+    __weak typeof(self) weakSelf = self;
+    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",identifier]
+                                                                 params:params
+                                                                  block:^(id data, NSError *error) {
+                                                                      if (!error) {
+                                                                          
+                                                                          [weakSelf.allComments removeAllObjects];
+                                                                          [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                              CellCommentModel *model = [[CellCommentModel alloc] initWithDictionary:obj];
+                                                                              [weakSelf.allComments addObject:model];
+                                                                          }];
+                                                                          
+                                                                          ++_currentPage;
+                                                                          [weakSelf.tableView reloadData];
+                                                                      }else{
+                                                                      
+                                                                      }
+                                                                      
+                                                                      [weakSelf.tableView headerEndRefreshing];
+                                                                  }];
+}
+- (void)loadingMoreData
 {
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     //[params setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey"];
     [params setObject:self.displayModel.cellContentModel.ID forKey:@"infoId"];
     [params setObject:[NSNumber numberWithUnsignedInteger:(self.currentPage + 1)] forKey:@"page"];
     
+    __weak typeof(self) weakSelf = self;
     [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",identifier]
                                                                  params:params
                                                                   block:^(id data, NSError *error) {
+                                                                      if (!error) {
+                                                                          
+                                                                          [weakSelf.tableView beginUpdates];
+                                                                          
+                                                                          [data enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+                                                                              
+                                                                                                                                    [weakSelf.allComments addObject:obj];
+                                                                              
+                                                                              [weakSelf.tableView insertRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:weakSelf.allComments.count-1 inSection:0]] withRowAnimation:UITableViewRowAnimationBottom];
+                                                                              
+                                                                          }];
+                                                                          
+                                                                          [weakSelf.tableView endUpdates];
+                                                                          ++_currentPage;
+                                                                          
+                                                                      }else{
                                                                       
+                                                                      }
+                                                                      
+                                                                      [weakSelf.tableView footerEndRefreshing];
                                                                   }];
+}
+
+#pragma mark - <UITableViewDelegate> methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGFloat height = 0.0f;
+    CellCommentModel *model = [self.allComments objectAtIndex:indexPath.row];
+    height += [CommentTableViewCell cellHeightWithModel:model];
+    return height;
+}
+
+#pragma mark - <UITableViewDataSource> methods
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
+    
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.allComments count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    CommentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[CommentTableViewCell cellIdentifier] forIndexPath:indexPath];
+    cell.commentModel = [self.allComments objectAtIndex:indexPath.row];
+    
+    return cell;
 }
 
 /*
