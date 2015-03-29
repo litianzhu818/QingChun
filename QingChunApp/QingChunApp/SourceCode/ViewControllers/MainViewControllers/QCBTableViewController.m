@@ -70,9 +70,10 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    
+    /*
     [self.navigationController.navigationBar setHidden:NO];
     [self.tabBarController.tabBar setHidden:NO];
+     */
 }
 
 - (void)viewDidLoad
