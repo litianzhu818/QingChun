@@ -1,0 +1,2 @@
+platform :ios,'7.0'
+pod 'RDRStickyKeyboardView','~> 0.0.1.1'
