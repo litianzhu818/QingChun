@@ -131,6 +131,8 @@
 		E7947A361ACA7E7A007119F4 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A281ACA7E7A007119F4 /* UIScrollView+MJExtension.m */; };
 		E7947A371ACA7E7A007119F4 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A2A1ACA7E7A007119F4 /* UIScrollView+MJRefresh.m */; };
 		E7947A381ACA7E7A007119F4 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A2C1ACA7E7A007119F4 /* UIView+MJExtension.m */; };
+		E7947A631ACAB12D007119F4 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A601ACAB12D007119F4 /* HPGrowingTextView.m */; };
+		E7947A641ACAB12D007119F4 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A621ACAB12D007119F4 /* HPTextViewInternal.m */; };
 		E79B09D31A739DD200357DEE /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79B09D21A739DD200357DEE /* RegisterViewController.m */; };
 		E79B09D61A73A5B800357DEE /* QingChunApp.strings in Resources */ = {isa = PBXBuildFile; fileRef = E79B09D81A73A5B800357DEE /* QingChunApp.strings */; };
 		E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F599C19F7F40D001CB6F2 /* StartViewController.m */; };
@@ -522,6 +524,10 @@
 		E7947A2A1ACA7E7A007119F4 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
 		E7947A2B1ACA7E7A007119F4 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
 		E7947A2C1ACA7E7A007119F4 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		E7947A5F1ACAB12D007119F4 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		E7947A601ACAB12D007119F4 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		E7947A611ACAB12D007119F4 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		E7947A621ACAB12D007119F4 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		E79B09D11A739DD200357DEE /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		E79B09D21A739DD200357DEE /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		E79B09D91A73A5BC00357DEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QingChunApp.strings; sourceTree = "<group>"; };
@@ -940,6 +946,7 @@
 		E7063F9419E67CA300CC3CE0 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E7947A5E1ACAB12D007119F4 /* HPGrowingTextView */,
 				E7947A141ACA7E7A007119F4 /* MJRefresh */,
 				E7B96D221A6FE8A10066A913 /* ADTransitionController */,
 				E7BB83471A6BFCB600230EF4 /* EGOCache */,
@@ -1490,6 +1497,17 @@
 				E7947A2C1ACA7E7A007119F4 /* UIView+MJExtension.m */,
 			);
 			path = MJRefresh;
+			sourceTree = "<group>";
+		};
+		E7947A5E1ACAB12D007119F4 /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E7947A5F1ACAB12D007119F4 /* HPGrowingTextView.h */,
+				E7947A601ACAB12D007119F4 /* HPGrowingTextView.m */,
+				E7947A611ACAB12D007119F4 /* HPTextViewInternal.h */,
+				E7947A621ACAB12D007119F4 /* HPTextViewInternal.m */,
+			);
+			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
 		E79F599A19F7F40D001CB6F2 /* StartViewControllers */ = {
@@ -2404,6 +2422,7 @@
 				E7DD1C3E1A412F7200FAA24A /* UIImageView+MJWebCache.m in Sources */,
 				E7B8B33B1A51A3AF0015CE40 /* UIWebView+AFNetworking.m in Sources */,
 				E7B96D591A6FE8A10066A913 /* ADDualTransition.m in Sources */,
+				E7947A631ACAB12D007119F4 /* HPGrowingTextView.m in Sources */,
 				E7947A381ACA7E7A007119F4 /* UIView+MJExtension.m in Sources */,
 				E7B96D5D1A6FE8A10066A913 /* ADGhostTransition.m in Sources */,
 				E7DD1C3C1A412F7200FAA24A /* MJPhotoView.m in Sources */,
@@ -2546,6 +2565,7 @@
 				E7DD1C381A412F7200FAA24A /* MJPhotoBrowser.m in Sources */,
 				E7599E651AB1774A00D53D1D /* TweetSendImagesCell.m in Sources */,
 				E7B96D5E1A6FE8A10066A913 /* ADGlueTransition.m in Sources */,
+				E7947A641ACAB12D007119F4 /* HPTextViewInternal.m in Sources */,
 				E77C30051A4D570800D12DBB /* TPKeyboardAvoidingScrollView.m in Sources */,
 				E71943761A58103E00680664 /* TTTAttributedLabel.m in Sources */,
 				E7B8B3371A51A3AF0015CE40 /* UIButton+AFNetworking.m in Sources */,
