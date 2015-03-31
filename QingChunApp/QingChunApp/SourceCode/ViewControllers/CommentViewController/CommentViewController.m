@@ -103,17 +103,17 @@ static const NSString *identifier = @"1";
             [tableView setBackgroundColor:[UIColor clearColor]];
             
             //添加上拉下拉操作
-            [tableView addHeaderWithTarget:self action:@selector(refreshAllData)];
-            [tableView addFooterWithTarget:self action:@selector(loadingMoreData)];
+            [tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshAllData)];
+            [tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadingMoreData)];
             
             // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-            tableView.headerPullToRefreshText = @"下拉刷新";
-            tableView.headerReleaseToRefreshText = @"松开立即刷新";
-            tableView.headerRefreshingText = @"获取留言数据中...";
-            
-            tableView.footerPullToRefreshText = @"上拉浏览更多数据";
-            tableView.footerReleaseToRefreshText = @"松开立即加载";
-            tableView.footerRefreshingText = @"数据加载中...";
+            [tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+            [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
+            [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
+        
+            [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
+            [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
+            [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
             
             [tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:[CommentTableViewCell cellIdentifier]];
             [self.view addSubview:tableView];
@@ -163,7 +163,7 @@ static const NSString *identifier = @"1";
                                                                       
                                                                       }
                                                                       
-                                                                      [weakSelf.tableView headerEndRefreshing];
+                                                                      [weakSelf.tableView.header endRefreshing];
                                                                   }];
 }
 - (void)loadingMoreData
@@ -196,7 +196,7 @@ static const NSString *identifier = @"1";
                                                                       
                                                                       }
                                                                       
-                                                                      [weakSelf.tableView footerEndRefreshing];
+                                                                      [weakSelf.tableView.footer endRefreshing];
                                                                   }];
 }
 

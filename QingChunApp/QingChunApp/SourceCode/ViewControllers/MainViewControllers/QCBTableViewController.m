@@ -178,17 +178,18 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
         
         //添加上拉下拉操作
-        [tableView addHeaderWithTarget:self action:@selector(refreshQCBData) dateKey:@"QCB_tableview_refresh_time_tag"];
-        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBData)];
+        [tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshQCBData) dateKey:@"QCB_tableview_refresh_time_tag"];
+        [tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadingMoreQCBData)];
         
         // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-        tableView.headerPullToRefreshText = @"下拉刷新青春吧数据";
-        tableView.headerReleaseToRefreshText = @"松开立即刷新";
-        tableView.headerRefreshingText = @"刷新青春吧数据中...";
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        [tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+        [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
+        [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
         
-        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
-        tableView.footerReleaseToRefreshText = @"松开立即加载";
-        tableView.footerRefreshingText = @"数据加载中...";
+        [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
+        [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
+        [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
         
         tableView;
     });
@@ -218,17 +219,18 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         tableView.scrollIndicatorInsets = UIEdgeInsetsMake(64, 0, -44, 0);
         
         //添加上拉下拉操作
-        [tableView addHeaderWithTarget:self action:@selector(refreshQCBHotData) dateKey:@"QCB_hot_tableview_refresh_time_tag"];
-        [tableView addFooterWithTarget:self action:@selector(loadingMoreQCBHotData)];
+        [tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshQCBHotData) dateKey:@"QCB_hot_tableview_refresh_time_tag"];
+        [tableView addLegendFooterWithRefreshingTarget:self refreshingAction:@selector(loadingMoreQCBHotData)];
         
         // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-        tableView.headerPullToRefreshText = @"下拉浏览最热的数据";
-        tableView.headerReleaseToRefreshText = @"松开立即获取数据";
-        tableView.headerRefreshingText = @"正在获取最热的数据...";
+        // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
+        [tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+        [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
+        [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
         
-        tableView.footerPullToRefreshText = @"上拉浏览更多数据";
-        tableView.footerReleaseToRefreshText = @"松开立即加载";
-        tableView.footerRefreshingText = @"数据加载中...";
+        [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
+        [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
+        [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
         
         tableView;
     });
@@ -298,7 +300,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         }
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_tableView headerEndRefreshing];
+        [_tableView.header endRefreshing];
         
         if (![(NSNumber *)[_tableViewFirstLoadingStatuss objectAtIndex:0] boolValue]) {
             [_tableViewFirstLoadingStatuss replaceObjectAtIndex:0 withObject:[NSNumber numberWithBool:YES]];
@@ -336,7 +338,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         }
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_tableView footerEndRefreshing];
+        [_tableView.footer endRefreshing];
         
     }];
 }
@@ -349,7 +351,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%u",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_hotTableView headerEndRefreshing];
+        [_hotTableView.header endRefreshing];
         
         if (!error) {
             
@@ -386,7 +388,7 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
     [[HttpSessionManager sharedInstance] requestQCDMessageWithPage:(currentQCBHotDataPage + 1) type:1 identifier:[NSString stringWithFormat:@"%u",(currentQCBHotDataPage + 1)] block:^(id data, NSError *error) {
         
         // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-        [_hotTableView footerEndRefreshing];
+        [_hotTableView.footer endRefreshing];
         
         if (!error) {
             

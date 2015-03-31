@@ -89,13 +89,21 @@
         [self.view addSubview:tableView];
         
         //添加上拉下拉操作
-        [tableView addHeaderWithTarget:self action:@selector(refreshNumberData) dateKey:@"qingchun_bell_tableview_refresh_time_tag"];
+        [tableView addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(refreshNumberData) dateKey:@"qingchun_bell_tableview_refresh_time_tag"];
+        
         //[tableView addFooterWithTarget:self action:@selector(refreshNumberData)];
         
+
         // 设置文字(也可以不设置,默认的文字在MJRefreshConst中修改)
-        tableView.headerPullToRefreshText = @"下拉刷新青春风铃数据";
-        tableView.headerReleaseToRefreshText = @"松开立即刷新";
-        tableView.headerRefreshingText = @"刷新青春风铃数据中...";
+        [tableView.header setTitle:@"下拉刷新" forState:MJRefreshHeaderStateIdle];
+        [tableView.header setTitle:@"松开刷新" forState:MJRefreshHeaderStatePulling];
+        [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
+        /*
+         [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
+         [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
+         [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
+         */
+
         
         tableView;
     });
@@ -124,7 +132,7 @@
                                                                        block:^(id data, NSError *error) {
                                                                            
                                                                            // (最好在刷新表格后调用)调用endRefreshing可以结束刷新状态
-                                                                           [_tableView headerEndRefreshing];
+                                                                           [_tableView.header endRefreshing];
                                                                            
                                                                            if (!error) {
                                                                                [_qingChunBellModel updateWithDictionary:data];
