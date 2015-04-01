@@ -65,6 +65,12 @@
             _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
             //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
             _locationManager.distanceFilter = 1000.0f;
+            
+            if (CURRENT_IOS_SYSTEM_VERSION >= 8.0) {
+                
+                self.locationManager.distanceFilter = kCLDistanceFilterNone;
+                [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+            }
         }
 
     }
@@ -183,14 +189,35 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    
     switch (status) {
+            
         case kCLAuthorizationStatusNotDetermined:
-            if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+            
+            if([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]){
+                
                 [_locationManager requestWhenInUseAuthorization];
+                
             }
+            
             break;
+            
+        case kCLAuthorizationStatusDenied:
+            
+            NSLog(@"请在设置-隐私-定位服务中开启定位功能！");
+            [_locationAlert show];
+            
+            break;
+            
+        case kCLAuthorizationStatusRestricted:
+            
+            NSLog(@"定位服务无法使用！");
+            [_locationAlert show];
+            
         default:
+            
             break;
+            
     }
 }
 
