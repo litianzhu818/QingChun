@@ -8,6 +8,7 @@
 
 #import "CommentViewController.h"
 
+#import "BaseNavigationController.h"
 #import "CommentTableViewCell.h"
 #import "HttpSessionManager.h"
 #import "CellDisplayModel.h"
@@ -15,7 +16,8 @@
 #import "MJRefresh.h"
 #import "CommentInputBar.h"
 
-static const NSString *identifier = @"1";
+static const NSString *readIdentifier = @"1";
+static const NSString *addIdentifier = @"2";
 
 @interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -122,6 +124,8 @@ static const NSString *identifier = @"1";
         });
     }
     
+    __weak typeof(self) weakSelf = self;
+    
     if (!self.inputBar) {
         self.inputBar = ({
             CommentInputBar *inputBar = [[CommentInputBar alloc] initWithPanGesture:self.tableView.panGestureRecognizer
@@ -132,8 +136,9 @@ static const NSString *identifier = @"1";
                                                                            btnTitle:nil
                                                                      btnNormalImage:[UIImage imageNamed:@"send-btn-bg"] btnhighlightedImage:nil
                                                                           sendBlock:^(NSString *messgae) {
-                                                                              
+                                                    
                                                                               // 发送信息
+                                                                              [weakSelf sendMessageWithContent:messgae];
                                                                               
                                                                           }];
             [self.view addSubview:inputBar];
@@ -167,7 +172,7 @@ static const NSString *identifier = @"1";
     [params setObject:[NSNumber numberWithUnsignedInteger:(self.currentPage + 1)] forKey:@"page"];
     
     __weak typeof(self) weakSelf = self;
-    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",identifier]
+    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",readIdentifier]
                                                                  params:params
                                                                   block:^(id data, NSError *error) {
                                                                       if (!error) {
@@ -195,7 +200,7 @@ static const NSString *identifier = @"1";
     [params setObject:[NSNumber numberWithUnsignedInteger:(self.currentPage + 1)] forKey:@"page"];
     
     __weak typeof(self) weakSelf = self;
-    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",identifier]
+    [[HttpSessionManager sharedInstance] readTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",readIdentifier]
                                                                  params:params
                                                                   block:^(id data, NSError *error) {
                                                                       if (!error) {
@@ -219,6 +224,59 @@ static const NSString *identifier = @"1";
                                                                       
                                                                       [weakSelf.tableView.footer endRefreshing];
                                                                   }];
+}
+
+- (void)sendMessageWithContent:(NSString *)content
+{
+    // 如果未登录，必须先登录
+    if (![self queryLoginState]) return;
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+    [params setObject:self.displayModel.cellContentModel.ID forKey:@"infoId"];
+    [params setObject:[[UserConfig sharedInstance] GetUserKey] forKey:@"userKey"];
+    [params setObject:content forKey:@"content"];
+    
+    __weak typeof(self) weakSelf = self;
+    
+    [[HttpSessionManager sharedInstance] addTweetCommentWithIdentifier:[NSString stringWithFormat:@"%@",addIdentifier]
+                                                                params:params
+                                                                 block:^(id data, NSError *error) {
+                                                                     if (error) {
+                                                                         if (error.code == 2002) {
+                                                                             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                                                                                             message:@"您留言太频繁，请稍后再留言..."
+                                                                                                                            delegate:nil
+                                                                                                                   cancelButtonTitle:@"知道了"
+                                                                                                                   otherButtonTitles:nil, nil];
+                                                                             [alert show];
+                                                                         }
+                                                                     }else{
+                                                                         // 插入新的cell
+                                                                         
+                                                                     }
+                                                                 }];
+}
+
+// 查询登录状态，未登录就跳出登录选项
+- (BOOL)queryLoginState
+{
+    BOOL hasLogin = NO;
+    
+    if ([[UserConfig sharedInstance] GetAlreadyLogin] && [[UserConfig sharedInstance] GetUserKey] != nil) {
+        
+        hasLogin = YES;
+        
+        return hasLogin;
+    }
+    
+    UIStoryboard *loginStory = [UIStoryboard storyboardWithName:@"login_register" bundle:nil];
+    BaseNavigationController *loginViewController = [loginStory instantiateInitialViewController];
+    
+    [self.navigationController presentViewController:loginViewController animated:YES completion:^{
+        
+    }];
+    
+    return hasLogin;
 }
 
 #pragma mark - <UITableViewDelegate> methods

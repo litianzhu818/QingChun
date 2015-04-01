@@ -89,6 +89,12 @@ static const NSInteger NO_INERNET_ERROR_CODE = -1099;
          */
     }else if (resultCode.intValue == NO_INERNET_ERROR_CODE){
         LOG(@"断网了");
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"您的网络状况很不好，请检查网络设置！"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"知道了"
+                                              otherButtonTitles:nil, nil];
+        [alert show];
     }
     
     return error;

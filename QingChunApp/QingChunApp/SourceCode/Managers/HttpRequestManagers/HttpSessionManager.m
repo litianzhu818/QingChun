@@ -263,6 +263,35 @@
                                                      }];
 }
 
+- (void)addTweetCommentWithIdentifier:(NSString *)identifier
+                               params:(id)params
+                                block:(void (^)(id data, NSError *error))block
+{
+    [params setObject:identifier forKey:@"identifier"];
+    [params setObject:SHA1StringWith([NSString stringWithFormat:@"%@%@%@",
+                                      identifier,
+                                      [params objectForKey:@"infoId"],
+                                      [[SystemConfig sharedInstance] GetCheckSumSecret]]
+                                     )
+               forKey:@"checksum"];
+    
+    [[HttpSessionClient sharedClient] requestJsonDataWithPath:QCD_MSG_ADD_COMMENT_PATH_STRING_IOS
+                                                   withParams:params
+                                               withMethodType:HttpSessionTypePOST
+                                                     andBlock:^(id data, NSError *error) {
+                                                         
+                                                         if (!error) {
+                
+                                                             block(data,nil);
+                                                             
+                                                         }else{
+                                                             
+                                                             block(nil,error);
+                                                         }
+                                                         
+                                                     }];
+}
+
 #pragma mark - private tool methods
 
 static inline NSString *SHA1StringWith(NSString *string)

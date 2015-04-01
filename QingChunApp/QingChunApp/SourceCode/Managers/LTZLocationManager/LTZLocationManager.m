@@ -78,17 +78,23 @@
 
 - (void)startLocation
 {
-    if (![CLLocationManager locationServicesEnabled]){
+    if (![CLLocationManager locationServicesEnabled] && [CLLocationManager authorizationStatus] != kCLAuthorizationStatusDenied){
         [_locationAlert show];
     }else{
     
         //重新初始化，防止关闭服务后重开导致的CLLocationManager不能用
         _locationManager = nil;
         _locationManager = [[CLLocationManager alloc] init];
-        _locationManager.delegate = self;
         _locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
         //_locationManager.desiredAccuracy = kCLLocationAccuracyBest;
         _locationManager.distanceFilter = 1000.0f;
+        _locationManager.delegate = self;
+        
+        if (CURRENT_IOS_SYSTEM_VERSION >= 8.0) {
+            
+            self.locationManager.distanceFilter = kCLDistanceFilterNone;
+            [self.locationManager setDesiredAccuracy:kCLLocationAccuracyNearestTenMeters];
+        }
         
         [self.locationManager startUpdatingLocation];
     }
@@ -175,6 +181,19 @@
         self.locationBlock(nil,nil,nil,CLLocationCoordinate2DMake(0.0, 0.0),error);
     }
 }
+
+- (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+    switch (status) {
+        case kCLAuthorizationStatusNotDetermined:
+            if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
+                [_locationManager requestWhenInUseAuthorization];
+            }
+            break;
+        default:
+            break;
+    }
+}
+
 #pragma mark - UIAlertViewDelegate methods
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

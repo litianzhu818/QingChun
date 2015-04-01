@@ -14,7 +14,7 @@
 #import "UINavigationItem+Offset.h"
 #import "UIBarButtonItem+SA.h"
 #import <objc/runtime.h>
-#import "ADTransitionController.h"
+//#import "ADTransitionController.h"
 
 #define MARGIN_WIDTH 8.0f
 

@@ -46,6 +46,10 @@
 - (void)readTweetCommentWithIdentifier:(NSString *)identifier
                                 params:(id)params
                                  block:(void (^)(id data, NSError *error))block;
+//增加评论信息
+- (void)addTweetCommentWithIdentifier:(NSString *)identifier
+                               params:(id)params
+                                block:(void (^)(id data, NSError *error))block;
 
 // 上传说说图片
 - (void)uploadTweetImageIdentifier:(NSString *)identifier
