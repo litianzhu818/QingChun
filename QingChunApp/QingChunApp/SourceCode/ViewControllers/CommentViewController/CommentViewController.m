@@ -252,7 +252,9 @@ static const NSString *addIdentifier = @"2";
                                                                          }
                                                                      }else{
                                                                          // 插入新的cell
+                                                                         //[weakSelf.tableView beginUpdates];
                                                                          
+                                                                         //[weakSelf.tableView endUpdates];
                                                                      }
                                                                  }];
 }
