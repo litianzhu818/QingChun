@@ -133,6 +133,9 @@
 		E7947A381ACA7E7A007119F4 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A2C1ACA7E7A007119F4 /* UIView+MJExtension.m */; };
 		E7947A631ACAB12D007119F4 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A601ACAB12D007119F4 /* HPGrowingTextView.m */; };
 		E7947A641ACAB12D007119F4 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A621ACAB12D007119F4 /* HPTextViewInternal.m */; };
+		E7947A681ACAB262007119F4 /* CommentInputBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E7947A671ACAB262007119F4 /* CommentInputBar.m */; };
+		E7947A6C1ACABB17007119F4 /* commnet-bar-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7947A6A1ACABB17007119F4 /* commnet-bar-bg@2x.png */; };
+		E7947A6D1ACABB17007119F4 /* send-btn-bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E7947A6B1ACABB17007119F4 /* send-btn-bg@2x.png */; };
 		E79B09D31A739DD200357DEE /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79B09D21A739DD200357DEE /* RegisterViewController.m */; };
 		E79B09D61A73A5B800357DEE /* QingChunApp.strings in Resources */ = {isa = PBXBuildFile; fileRef = E79B09D81A73A5B800357DEE /* QingChunApp.strings */; };
 		E79F599D19F7F40D001CB6F2 /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E79F599C19F7F40D001CB6F2 /* StartViewController.m */; };
@@ -528,6 +531,10 @@
 		E7947A601ACAB12D007119F4 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
 		E7947A611ACAB12D007119F4 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
 		E7947A621ACAB12D007119F4 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
+		E7947A661ACAB262007119F4 /* CommentInputBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentInputBar.h; sourceTree = "<group>"; };
+		E7947A671ACAB262007119F4 /* CommentInputBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentInputBar.m; sourceTree = "<group>"; };
+		E7947A6A1ACABB17007119F4 /* commnet-bar-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "commnet-bar-bg@2x.png"; sourceTree = "<group>"; };
+		E7947A6B1ACABB17007119F4 /* send-btn-bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "send-btn-bg@2x.png"; sourceTree = "<group>"; };
 		E79B09D11A739DD200357DEE /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		E79B09D21A739DD200357DEE /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		E79B09D91A73A5BC00357DEE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/QingChunApp.strings; sourceTree = "<group>"; };
@@ -896,6 +903,7 @@
 		E7063F8119E67A6A00CC3CE0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7947A651ACAB225007119F4 /* CommentInputBar */,
 				E7599E5C1AB170B600D53D1D /* Cells */,
 				E7599E581AB1701600D53D1D /* UIPlaceHolderTextView */,
 				E7DC9EE71A5FD66000578647 /* QCBellTableViewCell */,
@@ -1510,6 +1518,24 @@
 			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
+		E7947A651ACAB225007119F4 /* CommentInputBar */ = {
+			isa = PBXGroup;
+			children = (
+				E7947A661ACAB262007119F4 /* CommentInputBar.h */,
+				E7947A671ACAB262007119F4 /* CommentInputBar.m */,
+			);
+			path = CommentInputBar;
+			sourceTree = "<group>";
+		};
+		E7947A691ACABB17007119F4 /* CommentInpuBar */ = {
+			isa = PBXGroup;
+			children = (
+				E7947A6A1ACABB17007119F4 /* commnet-bar-bg@2x.png */,
+				E7947A6B1ACABB17007119F4 /* send-btn-bg@2x.png */,
+			);
+			path = CommentInpuBar;
+			sourceTree = "<group>";
+		};
 		E79F599A19F7F40D001CB6F2 /* StartViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -2043,6 +2069,7 @@
 		E7CF62D219F89616009A9A20 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				E7947A691ACABB17007119F4 /* CommentInpuBar */,
 				E721EC451A73ED00007EE30D /* RegisterViewController */,
 				E7BB17251A6576260036D495 /* QCFLViewController */,
 				E7B7FCE11A60D8FE00E49FE3 /* new@2x.png */,
@@ -2327,6 +2354,7 @@
 				E7B9E48A1A46F9BE00D7775C /* send_msg@2x.png in Resources */,
 				E7BB17311A6576260036D495 /* prise_me@2x.png in Resources */,
 				E7E4EC021A681A01003A2E1F /* WeiboSDK.bundle in Resources */,
+				E7947A6C1ACABB17007119F4 /* commnet-bar-bg@2x.png in Resources */,
 				E7BB172F1A6576260036D495 /* message_private@2x.png in Resources */,
 				E7B9E47F1A46F9BE00D7775C /* came_center@2x.png in Resources */,
 				E73858DC1A76338D003D864D /* qcd_se@2x.png in Resources */,
@@ -2354,6 +2382,7 @@
 				E72B097D1A0B419000109658 /* more_btn_sel@2x.png in Resources */,
 				E7AF3D3C1A0BA17A0073116D /* headerImage@2x.png in Resources */,
 				E721EC531A73F3B9007EE30D /* register_bg@2x.png in Resources */,
+				E7947A6D1ACABB17007119F4 /* send-btn-bg@2x.png in Resources */,
 				E75E90D519F746D1000F2CE9 /* btn_close_normal@2x.png in Resources */,
 				E75E90D719F746D1000F2CE9 /* btn_close_selected@2x.png in Resources */,
 				E712AA5E1A0BD44F000648C4 /* 分割线.png in Resources */,
@@ -2461,6 +2490,7 @@
 				E7904AC61A4EAD2B00B47110 /* CellDisplayImageModel.m in Sources */,
 				E7FC67B11A3D5A1D00AF45A6 /* UINavigationItem+Offset.m in Sources */,
 				E75E907819F74389000F2CE9 /* BaseNavigationController.m in Sources */,
+				E7947A681ACAB262007119F4 /* CommentInputBar.m in Sources */,
 				E7AF3D1F1A0BA0A00073116D /* MyPostsViewController.m in Sources */,
 				E75E90E119F74718000F2CE9 /* Reachability.m in Sources */,
 				E7B6EA701A503209009CF7D1 /* SystemConfig.m in Sources */,

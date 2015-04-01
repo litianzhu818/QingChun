@@ -187,7 +187,6 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
         [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
         
-        [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
         [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
         [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
         
@@ -228,7 +227,6 @@ typedef NS_ENUM(NSUInteger, CacheDataType) {
         [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
         [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
         
-        [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
         [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
         [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
         

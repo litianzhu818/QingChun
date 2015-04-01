@@ -13,12 +13,14 @@
 #import "CellDisplayModel.h"
 #import "CellCommentModel.h"
 #import "MJRefresh.h"
+#import "CommentInputBar.h"
 
 static const NSString *identifier = @"1";
 
 @interface CommentViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) CommentInputBar *inputBar;
 @property (strong, nonatomic) NSMutableArray *allComments;
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) CellDisplayModel *displayModel;
@@ -85,7 +87,7 @@ static const NSString *identifier = @"1";
     
     if (!self.tableView) {
         self.tableView = ({
-            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height) style:UITableViewStylePlain];
+            UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, VIEW_BY(self.navigationController.navigationBar), self.view.frame.size.width, self.view.frame.size.height-self.navigationController.navigationBar.frame.size.height-[CommentInputBar barHeight]) style:UITableViewStylePlain];
             
             tableView.delegate = self;
             tableView.dataSource = self;
@@ -111,13 +113,32 @@ static const NSString *identifier = @"1";
             [tableView.header setTitle:@"松开立即刷新" forState:MJRefreshHeaderStatePulling];
             [tableView.header setTitle:@"获取数据中..." forState:MJRefreshHeaderStateRefreshing];
         
-            [tableView.footer setTitle:@"上提刷新" forState:MJRefreshFooterStateIdle];
             [tableView.footer setTitle:@"加载数据中..." forState:MJRefreshFooterStateRefreshing];
             [tableView.footer setTitle:@"没有数据了..." forState:MJRefreshFooterStateNoMoreData];
             
             [tableView registerClass:[CommentTableViewCell class] forCellReuseIdentifier:[CommentTableViewCell cellIdentifier]];
             [self.view addSubview:tableView];
             tableView;
+        });
+    }
+    
+    if (!self.inputBar) {
+        self.inputBar = ({
+            CommentInputBar *inputBar = [[CommentInputBar alloc] initWithPanGesture:self.tableView.panGestureRecognizer
+                                                                             inView:self.view
+                                                                            bgImage:[UIImage imageNamed:@"commnet-bar-bg"]
+                                                                        placeHolder:@"说点什么吧..."
+                                                                         hasSendBtn:YES
+                                                                           btnTitle:nil
+                                                                     btnNormalImage:[UIImage imageNamed:@"send-btn-bg"] btnhighlightedImage:nil
+                                                                          sendBlock:^(NSString *messgae) {
+                                                                              
+                                                                              // 发送信息
+                                                                              
+                                                                          }];
+            [self.view addSubview:inputBar];
+
+            inputBar;
         });
     }
 }
